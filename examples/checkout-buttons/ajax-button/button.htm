@@ -1,0 +1,37 @@
+<!doctype html>
+<!--
+MercadoPago SDK
+Checkout button with MD5 hash, using AJAX - Form
+@date 2012/10/23	
+@author mnaranda
+-->
+<html>
+    <head>
+        <title>Checkout button with MD5 hash, using AJAX - Form</title>
+    </head>
+	<body>
+		<form action="http://localhost:9000/md5" method="post" enctype="application/x-www-form-urlencoded" target="">
+			<!--
+			Required authentication. Get the CLIENT_ID: 
+			Argentina: https://www.mercadopago.com/mla/herramientas/aplicaciones 
+			Brasil: https://www.mercadopago.com/mlb/ferramentas/aplicacoes
+			-->
+			<input type="hidden" name="client_id" value="CLIENT_ID"/>
+			
+			<!-- Required -->
+			<input type="hidden" name="item_title" value="Title"/>
+			<input type="hidden" name="item_quantity" value="1"/>
+			<input type="hidden" name="item_currency_id" value="ARS"/>
+			<input type="hidden" name="item_unit_price" value="10"/>
+			
+			<!-- Checkout Button -->
+			<button type="submit" class="lightblue-rn-m-tr-arall" name="MP-Checkout">Pay</button>
+		</form>
+		
+		<!-- AJAX functionality requires JQuery -->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<!-- More info about render.js: https://developers.mercadopago.com -->
+		<script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
+
+	</body>
+</html>
