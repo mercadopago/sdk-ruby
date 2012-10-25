@@ -25,7 +25,7 @@ class MD5
 				<title>Checkout button with MD5 hash - Form</title>
 			</head>
 				<body>
-				<form action="https://www.mercadopago.com/beta/checkout/md5" method="post" enctype="application/x-www-form-urlencoded" target="">
+				<form action="https://www.mercadopago.com/checkout/init" method="post" enctype="application/x-www-form-urlencoded" target="">
 				<input type="hidden" name="client_id" value="' + client_id + '"/>
 				<input type="hidden" name="md5" value="' + md5 + '"/>
 				
