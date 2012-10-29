@@ -39,7 +39,7 @@ class MD5
 			</form>
 			
 			<!-- More info about render.js: https://developers.mercadopago.com -->
-			<script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.beta.js"></script>
+			<script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
 			
 			</body>
 			</html>'
