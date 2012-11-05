@@ -17,7 +17,6 @@ class Button
 				</head>
 			<body>
 				<a href="' + preference['response']['init_point'] + '" name="MP-Checkout" class="orange-ar-m-sq-arall">Pay</a>
-				<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 				<script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
 			</body>
 			</html>'

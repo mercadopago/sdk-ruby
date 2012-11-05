@@ -28,23 +28,23 @@ class MercadoPago
 		
         if @access_data['status'] == "200"
 			@access_data = @access_data["response"]
-        else
-            @access_data = nil
-        end
-		
-	    if @access_data != nil && @access_data.include?("access_token")
 			return @access_data['access_token']
         else
-            return nil
-		end
+			raise @access_data.inspect
+        end
 	end
 	
 	# Get information for specific payment
     def get_payment_info(id)
         
-		accessToken = get_access_token()
-        paymentInfo = @restClient.get("/collections/notifications/" + id + "?access_token=" + accessToken)
-        
+        begin
+			accessToken = get_access_token()
+		rescue => e
+			return e.message
+		end
+		
+		paymentInfo = @restClient.get("/collections/notifications/" + id + "?access_token=" + accessToken)
+
 		return paymentInfo
 
 	end
@@ -52,36 +52,43 @@ class MercadoPago
 	# Refund accredited payment
     def refund_payment(id)
         
-		accessToken = get_access_token()
-
-		refund_status = {
-					"status"=> "refunded"
-					}
-
-        response = @restClient.put("/collections/" + id + "?access_token=" + accessToken, refund_status)
-        
+        begin
+			accessToken = get_access_token()
+		rescue => e
+			return e.message
+		end
+		
+		refund_status = {"status"=> "refunded"}
+		response = @restClient.put("/collections/" + id + "?access_token=" + accessToken, refund_status)
+			
 		return response
-
+		
 	end
 	
 	# Cancel pending payment
     def cancel_payment(id)
         
-		accessToken = get_access_token()
-
-		cancel_status = {
-					"status"=> "cancelled"
-					}
-
-        response = @restClient.put("/collections/" + id + "?access_token=" + accessToken, cancel_status)
-        
+		begin
+			accessToken = get_access_token()
+		rescue => e
+			return e.message
+		end
+		
+		cancel_status = {"status"=> "cancelled"}
+		response = @restClient.put("/collections/" + id + "?access_token=" + accessToken, cancel_status)
+		
 		return response
 
 	end
 	
 	# Search payments according to filters, with pagination
     def search_payment(filters, offset=0, limit=0)
-		accessToken = get_access_token()
+		
+		begin
+			accessToken = get_access_token()
+		rescue => e
+			return e.message
+		end
 
 		filters["offset"] = offset
 		filters["limit"] = limit
@@ -97,17 +104,26 @@ class MercadoPago
 	# Create a checkout preference
     def create_preference (preference)
     
-		accessToken = get_access_token()
-        preferenceResult = @restClient.post("/checkout/preferences?access_token=" + accessToken, preference)
+		begin
+			accessToken = get_access_token()
+		rescue => e
+			return e.message
+		end
+		
+		preferenceResult = @restClient.post("/checkout/preferences?access_token=" + accessToken, preference)
 		
 		return preferenceResult
-	
 	end
 	
 	# Update a checkout preference
     def update_preference (id,preference)
     
-		accessToken = get_access_token()
+		begin
+			accessToken = get_access_token()
+		rescue => e
+			return e.message
+		end
+			
         preferenceResult = @restClient.put("/checkout/preferences/" + id + "?access_token=" + accessToken, preference)
 
 		return preferenceResult
@@ -117,7 +133,12 @@ class MercadoPago
 	# Get a checkout preference
     def get_preference (id)
     
-		accessToken = get_access_token()
+		begin
+			accessToken = get_access_token()
+		rescue => e
+			return e.message
+		end
+			
         preferenceResult = @restClient.get("/checkout/preferences/" + id + "?access_token=" + accessToken)
 		
 		return preferenceResult
