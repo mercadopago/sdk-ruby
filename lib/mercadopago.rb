@@ -9,6 +9,10 @@ class MercadoPago
 	require 'uri'
 	require 'net/https'
 
+	def self.version 
+		"0.1.5"
+	end
+
 	def initialize(client_id, client_secret)
 		@client_id = client_id
 		@client_secret = client_secret
@@ -181,10 +185,11 @@ class MercadoPago
 				end
 				
 				headers = {
+					'User-Agent' => "MercadoPago Ruby SDK v"+MercadoPago.version,
 					'Content-type' => contentType, 
 					'Accept' => @MIME_JSON
 				}
-				
+
 				apiResult = @http.send_request(method, uri, data, headers)
 
 				response = {

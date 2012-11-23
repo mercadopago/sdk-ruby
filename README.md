@@ -20,6 +20,14 @@ require 'mercadopago.rb'
 $mp = MercadoPago.new('CLIENT_ID', 'CLIENT_SECRET')
 ```
 
+### Get your Access Token:
+
+```ruby
+$accessToken = $mp.getAccessToken()
+
+puts (accessToken)
+```
+
 <a name="checkout"></a>
 ## Using MercadoPago Checkout
 

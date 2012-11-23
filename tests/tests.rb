@@ -1,6 +1,6 @@
 require "test/unit"
 
-$LOAD_PATH << '../lib'
+$LOAD_PATH << '../project/src'
 require 'mercadopago.rb'
  
 class TestUnit < Test::Unit::TestCase
