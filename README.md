@@ -48,6 +48,7 @@ preference = $mp.create_preference(preferenceData)
 
 puts preference
 ```
+<a href="http://developers.mercadopago.com/documentacion/recibir-pagos#glossary">Others items to use</a>
 
 ### Update an existent Checkout preference:
 
@@ -71,6 +72,7 @@ searchResult = $mp.search_payment(filters)
 
 puts searchResult
 ```
+<a href="http://developers.mercadopago.com/documentacion/busqueda-de-pagos-recibidos">More search examples</a>
 
 ### Receiving IPN notification:
 
@@ -102,3 +104,4 @@ result = $mp.refund_payment("ID");
 // Show result
 puts result
 ```
+<a href=http://developers.mercadopago.com/documentacion/devolucion-y-cancelacion>About Cancel & Refund</a>
