@@ -1,0 +1,4 @@
+.bundle/
+bin/
+config/*yml
+*.log

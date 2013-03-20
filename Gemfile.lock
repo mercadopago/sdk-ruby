@@ -1,0 +1,18 @@
+PATH
+  remote: .
+  specs:
+    mercadopago-sdk (0.1.5)
+      json
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    json (1.7.7)
+    rake (10.0.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  mercadopago-sdk!
+  rake

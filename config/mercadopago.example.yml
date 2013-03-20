@@ -1,0 +1,4 @@
+---
+# put real credentials here, rename to mercadopago.yml
+client_id: 111
+client_secret: aaaaaaaaaaaaaaaaaaaaa
