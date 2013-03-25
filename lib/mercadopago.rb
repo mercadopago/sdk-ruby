@@ -10,7 +10,7 @@ class MercadoPago
 	require 'net/https'
 
 	def self.version 
-		"0.1.5"
+		"0.1.8"
 	end
 
 	def initialize(client_id, client_secret)
@@ -18,7 +18,14 @@ class MercadoPago
 		@client_secret = client_secret
 		@restClient = RestClient.new()
 		@access_data
+		@sandbox = false
 	end
+
+	def sandbox_mode(enable=nil)
+		if not enable.nil?
+			@sandbox = enable
+
+		return @sandbox
 
 	# Get Access Token for API use
 	def get_access_token()
@@ -46,8 +53,10 @@ class MercadoPago
 		rescue => e
 			return e.message
 		end
+
+		uriPrefix = @sandbox ? "/sandbox" : ""
 		
-		paymentInfo = @restClient.get("/collections/notifications/" + id + "?access_token=" + accessToken)
+		paymentInfo = @restClient.get(uriPrefix + "/collections/notifications/" + id + "?access_token=" + accessToken)
 
 		return paymentInfo
 
@@ -99,7 +108,9 @@ class MercadoPago
 
 		filters = build_query(filters)
 
-		paymentResult = @restClient.get("/collections/search?" + filters + "&access_token=" + accessToken)
+		uriPrefix = @sandbox ? "/sandbox" : ""
+		
+		paymentResult = @restClient.get(uriPrefix + "/collections/search?" + filters + "&access_token=" + accessToken)
 		
 		return paymentResult
 
