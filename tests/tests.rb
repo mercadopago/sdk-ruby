@@ -1,43 +1,37 @@
-require "test/unit"
+require 'test/unit'
+require 'mercadopago'
+require 'logger'
 
-$LOAD_PATH << '../project/src'
-require 'mercadopago.rb'
- 
-class TestUnit < Test::Unit::TestCase
- 
-	$mp = MercadoPago.new('CLIENT_ID', 'CLIENT_SECRET')
-	
-	# Call preference added through button flow
-	def test_get_preference
-		preference = $mp.get_preference('ID')
-		
-		assert_equal("#{preference['status']}","200")
-	end
+class MercadoPagoTest < Test::Unit::TestCase
+  def setup
+	  @mp = MercadoPago.load_from_config
+    # @mp.set_debug_logger(Logger.new(File.join(File.dirname(__FILE__), 'debug.log')))
+  end
 	
 	# Create a new preference and verify that data result are ok
 	def test_create_preference
-		preferenceData = Hash["items" => Array(Array["title"=>"testCreate", "quantity"=>1, "unit_price"=>10.2, "currency_id"=>"ARS"])]
+		preference_data = {"items" => ["title"=>"testCreate", "quantity"=>1, "unit_price"=>10.2, "currency_id"=>"ARS"]}
 	
-		preference = $mp.create_preference(preferenceData)
-		assert_equal("#{preference['status']}","201")
-		assert_equal("#{preference['response']["items"][0]["title"]}","testCreate")
+		preference = @mp.create_preference(preference_data)
+		assert_equal "201", "#{preference['status']}"
+		assert_equal "testCreate", "#{preference['response']["items"][0]["title"]}"
 	end
 	
 	# We create a new preference, we modify this one and then we verify that data are ok.
 	def test_update_preference
-		preferenceData = Hash["items" => Array(Array["title"=>"testUpdate", "quantity"=>1, "unit_price"=>10.2, "currency_id"=>"ARS"])]
-		preferenceCreated = $mp.create_preference(preferenceData)
-		preferenceToUpdate = $mp.get_preference("#{preferenceCreated['response']['id']}")
+		preference_data = {"items" => ["title"=>"testUpdate", "quantity"=>1, "unit_price"=>10.2, "currency_id"=>"ARS"]}
+		preference_created = @mp.create_preference(preference_data)
+		preference_to_update = @mp.get_preference("#{preference_created['response']['id']}")
 		
-		preferenceDataToUpdate = Hash["items" => Array(Array["title"=>"testUpdated", "quantity"=>1, "unit_price"=>2])]
-		preferenceUpdate = $mp.update_preference("#{preferenceCreated['response']['id']}", preferenceDataToUpdate)
-		assert_equal("#{preferenceUpdate['status']}","200")
+		preference_data_to_update = {"items" => ["title"=>"testUpdated", "quantity"=>1, "unit_price"=>2]}
+		preference_update = @mp.update_preference("#{preference_created['response']['id']}", preference_data_to_update)
+		assert_equal "200", "#{preference_update['status']}"
 		
-		preferenceToUpdate = $mp.get_preference("#{preferenceCreated['response']['id']}")
+		preference_to_update = @mp.get_preference("#{preference_created['response']['id']}")
 		
-		assert_equal("#{preferenceToUpdate['response']["items"][0]["title"]}","testUpdated")
-		assert_equal("#{preferenceToUpdate['response']["items"][0]["unit_price"]}","2")
-		assert_equal("#{preferenceToUpdate['response']["items"][0]["quantity"]}","1")
-		assert_equal("#{preferenceToUpdate['response']["items"][0]["currency_id"]}","ARS")
+		assert_equal "testUpdated", "#{preference_to_update['response']["items"][0]["title"]}"
+		assert_equal "2", "#{preference_to_update['response']["items"][0]["unit_price"]}"
+		assert_equal "1", "#{preference_to_update['response']["items"][0]["quantity"]}"
+		assert_equal "ARS", "#{preference_to_update['response']["items"][0]["currency_id"]}"
 	end
 end
