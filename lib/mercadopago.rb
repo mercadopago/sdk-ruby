@@ -20,19 +20,14 @@ class MercadoPago
     File.join(File.dirname(__FILE__), '..', 'config', 'mercadopago.yml')
   end
 
+  attr_accessor :sandbox
+
   def initialize(client_id, client_secret, debug_logger=nil)
     @client_id = client_id
     @client_secret = client_secret
     @rest_client = RestClient.new(debug_logger)
     @sandbox = false
   end
-
-	def sandbox_mode(enable=nil)
-		if not enable.nil?
-			@sandbox = enable
-
-		return @sandbox
-end
 
   def set_debug_logger(debug_logger)
     @rest_client.set_debug_logger(debug_logger)
