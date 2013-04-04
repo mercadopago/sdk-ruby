@@ -16,5 +16,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'json'
 
+  gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rake'
 end

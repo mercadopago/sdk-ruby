@@ -1,4 +1,5 @@
 .bundle/
 bin/
 config/*yml
+pkg/
 *.log

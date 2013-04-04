@@ -8,6 +8,7 @@ require 'json/add/core'
 require 'uri'
 require 'net/https'
 require 'yaml'
+require 'version'
 
 class MercadoPago
   def self.load_from_config(config_fn=self.default_config_fn)
