@@ -2,6 +2,7 @@
 #Access MercadoPago for payments integration
 #
 #@author @maticompiano
+#@contributors @chrismo
 
 require 'rubygems'
 require 'json/add/core'
