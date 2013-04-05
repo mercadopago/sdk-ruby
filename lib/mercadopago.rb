@@ -24,8 +24,10 @@ class MercadoPago
 	def sandbox_mode(enable=nil)
 		if not enable.nil?
 			@sandbox = enable
+		end
 
 		return @sandbox
+	end
 
 	# Get Access Token for API use
 	def get_access_token()
@@ -191,7 +193,7 @@ class MercadoPago
 
 			def exec(method, uri, data, contentType)
 	 
-				if contentType == @MIME_JSON
+				if not data.nil? and contentType == @MIME_JSON
 					data = data.to_json
 				end
 				
@@ -214,17 +216,17 @@ class MercadoPago
 
 			def get(uri, contentType=@MIME_JSON)
 
-				return exec("GET", uri, "", contentType)
+				return exec("GET", uri, nil, contentType)
 			
 			end
 
-			def post(uri, data = "", contentType=@MIME_JSON)
+			def post(uri, data = nil, contentType=@MIME_JSON)
 
 				return exec("POST", uri, data, contentType)
 			
 			end
 		
-			def put(uri, data = "", contentType=@MIME_JSON)
+			def put(uri, data = nil, contentType=@MIME_JSON)
 			
 				return exec("PUT", uri, data, contentType)
 			

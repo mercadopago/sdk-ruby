@@ -1,15 +1,19 @@
 require "test/unit"
 
-$LOAD_PATH << '../project/src'
+$LOAD_PATH << '../lib'
 require 'mercadopago.rb'
  
 class TestUnit < Test::Unit::TestCase
  
-	$mp = MercadoPago.new('CLIENT_ID', 'CLIENT_SECRET')
+	$mp = MercadoPago.new("CLIENT_ID", "CLIENT_SECRET")
 	
 	# Call preference added through button flow
 	def test_get_preference
-		preference = $mp.get_preference('ID')
+		preferenceData = Hash["items" => Array(Array["title"=>"testCreate", "quantity"=>1, "unit_price"=>10.2, "currency_id"=>"ARS"])]
+	
+		preference = $mp.create_preference(preferenceData)
+
+		preference = $mp.get_preference(preference['response']['id']);
 		
 		assert_equal("#{preference['status']}","200")
 	end
