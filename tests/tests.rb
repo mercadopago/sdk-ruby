@@ -6,7 +6,7 @@ require 'logger'
 
 class MercadoPagoTest < Test::Unit::TestCase
 	def setup
-		@mp = MercadoPago.new("2872", "MpVkF902XmJ6HnU6YsgZOkNlbCKRML99")
+		@mp = MercadoPago.new("CLIENT_ID", "CLIENT_SECRET")
 	end
 
 	# Call preference added through button flow
