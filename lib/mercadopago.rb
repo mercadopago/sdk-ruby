@@ -9,7 +9,7 @@ require 'json/add/core'
 require 'uri'
 require 'net/https'
 require 'yaml'
-require 'version'
+require File.dirname(__FILE__) + '/version'
 
 class MercadoPago
 	def initialize(client_id, client_secret, debug_logger=nil)
