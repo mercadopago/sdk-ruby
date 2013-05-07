@@ -50,7 +50,7 @@ class MercadoPago
 	end
 
 	# Get information for specific payment
-	def get_payment_info(id)
+	def get_payment(id)
 		begin
 			access_token = get_access_token
 		rescue => e
@@ -59,6 +59,21 @@ class MercadoPago
 
 		uri_prefix = @sandbox ? "/sandbox" : ""
 		@rest_client.get(uri_prefix + "/collections/notifications/" + id + "?access_token=" + access_token)
+	end
+
+	def get_payment_info(id)
+		get_payment(id)
+	end
+
+	# Get information for specific authorized payment
+	def get_authorized_payment(id)
+		begin
+			access_token = get_access_token
+		rescue => e
+			return e.message
+		end
+
+		@rest_client.get("/authorized_payments/" + id + "?access_token=" + access_token)
 	end
 
 	# Refund accredited payment
@@ -83,6 +98,18 @@ class MercadoPago
 
 		cancel_status = {"status" => "cancelled"}
 		@rest_client.put("/collections/" + id + "?access_token=" + access_token, cancel_status)
+	end
+
+	# Cancel preapproval payment
+	def cancel_preapproval_payment(id)
+		begin
+			access_token = get_access_token
+		rescue => e
+			return e.message
+		end
+
+		cancel_status = {"status" => "cancelled"}
+		@rest_client.put("/preapproval/" + id + "?access_token=" + access_token, cancel_status)
 	end
 
 	# Search payments according to filters, with pagination
@@ -133,6 +160,28 @@ class MercadoPago
 		end
 
 		@rest_client.get("/checkout/preferences/" + id + "?access_token=" + access_token)
+	end
+
+	# Create a preapproval payment
+	def create_preapproval_payment(preapproval_payment)
+		begin
+			access_token = get_access_token
+		rescue => e
+			return e.message
+		end
+
+		@rest_client.post("/preapproval?access_token=" + access_token, preapproval_payment)
+	end
+
+	# Get a preapproval payment
+	def get_preapproval_payment(id)
+		begin
+			access_token = get_access_token
+		rescue => e
+			return e.message
+		end
+
+		@rest_client.get("/preapproval/" + id + "?access_token=" + access_token)
 	end
 
 	def build_query(params)
