@@ -26,7 +26,7 @@ $mp = MercadoPago.new('CLIENT_ID', 'CLIENT_SECRET')
 ### Get your Access Token:
 
 ```ruby
-$accessToken = $mp.getAccessToken()
+$accessToken = $mp.get_access_token()
 
 puts (accessToken)
 ```
