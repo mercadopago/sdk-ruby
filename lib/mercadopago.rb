@@ -184,6 +184,71 @@ class MercadoPago
 		@rest_client.get("/preapproval/" + id + "?access_token=" + access_token)
 	end
 
+	# Generic resource get
+	def get(uri, params = nil, authenticate = true)
+		if not params.class == Hash
+			params = Hash.new
+		end
+
+		if authenticate
+			begin
+				access_token = get_access_token
+			rescue => e
+				return e.message
+			end
+
+			params["access_token"] = access_token
+		end
+
+		if not params.empty?
+			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
+		end
+
+		@rest_client.get(uri)
+	end
+
+	# Generic resource post
+	def post(uri, data, params = nil)
+		if not params.class == Hash
+			params = Hash.new
+		end
+
+		begin
+			access_token = get_access_token
+		rescue => e
+			return e.message
+		end
+
+		params["access_token"] = access_token
+
+		if not params.empty?
+			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
+		end
+
+		@rest_client.post(uri, data)
+	end
+
+	# Generic resource put
+	def put(uri, data, params = nil)
+		if not params.class == Hash
+			params = Hash.new
+		end
+
+		begin
+			access_token = get_access_token
+		rescue => e
+			return e.message
+		end
+
+		params["access_token"] = access_token
+
+		if not params.empty?
+			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
+		end
+
+		@rest_client.put(uri, data)
+	end
+
 	def build_query(params)
 		URI.escape(params.collect { |k, v| "#{k}=#{v}" }.join('&'))
 	end
