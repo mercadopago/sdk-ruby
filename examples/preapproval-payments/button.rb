@@ -7,7 +7,7 @@ class Button
 	
   def call(env)
 	mp = MercadoPago.new('CLIENT_ID', 'CLIENT_SECRET')
-	preapprovalPayment = Hash[
+	preapprovalPayment_data = Hash[
 		"payer_email" => "my_customer@my_site.com",
 	    "back_url" => "http://www.my_site.com",
 	    "reason" => "Monthly subscription to premium package",
@@ -22,7 +22,7 @@ class Button
 	    ]
 	]
 
-	preapprovalPaymentResult = mp.create_preference(preapprovalPayment)
+	preapprovalPayment = mp.create_preapproval_payment(preapprovalPayment_data)
 	
 	html =  '<!doctype html>
 			<html>
@@ -30,7 +30,7 @@ class Button
 					<title>MercadoPago SDK - Create Preapproval Payment and Show Subscription Example</title>
 				</head>
 			<body>
-				<a href="' + preapprovalPaymentResult['response']['init_point'] + '" name="MP-Checkout" class="orange-ar-m-sq-arall">Pay</a>
+				<a href="' + preapprovalPayment['response']['init_point'] + '" name="MP-Checkout" class="orange-ar-m-sq-arall">Pay</a>
 				<script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
 			</body>
 			</html>'
