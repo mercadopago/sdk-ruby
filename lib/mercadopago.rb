@@ -249,6 +249,27 @@ class MercadoPago
 		@rest_client.put(uri, data)
 	end
 
+	# Generic resource delete
+	def delete(uri, params = nil)
+		if not params.class == Hash
+			params = Hash.new
+		end
+
+		begin
+			access_token = get_access_token
+		rescue => e
+			return e.message
+		end
+
+		params["access_token"] = access_token
+
+		if not params.empty?
+			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
+		end
+
+		@rest_client.delete(uri)
+	end
+
 	def build_query(params)
 		URI.escape(params.collect { |k, v| "#{k}=#{v}" }.join('&'))
 	end
@@ -266,9 +287,9 @@ class MercadoPago
 
 			if API_BASE_URL.scheme == "https" # enable SSL/TLS
 				@http.use_ssl = true
-				@http.ssl_version = :SSLv3 if @http.respond_to? :ssl_version
-				@http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-				@http.ca_file = File.join(File.dirname(__FILE__), "cacert.pem")
+				# @http.ssl_version = :SSLv3 if @http.respond_to? :ssl_version
+				# @http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+				# @http.ca_file = File.join(File.dirname(__FILE__), "cacert.pem")
 			end
 
 			@http.set_debug_output debug_logger if debug_logger
@@ -307,6 +328,10 @@ class MercadoPago
 
 		def put(uri, data = nil, content_type=MIME_JSON)
 			exec("PUT", uri, data, content_type)
+		end
+		
+		def delete(uri, content_type=MIME_JSON)
+			exec("DELETE", uri, nil, content_type)
 		end
 	end
 end
