@@ -125,6 +125,9 @@ $mp.post ("/resource/uri", data, [params])
 
 // Update a resource with "data" and optional URL params.
 $mp.put ("/resource/uri", data, [params])
+
+// Delete a resource with optional URL params.
+$mp.delete ("/resource/uri", [params])
 ```
 
  For example, if you want to get the Sites list (no params and no authentication):
