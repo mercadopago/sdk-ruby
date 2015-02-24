@@ -8,7 +8,8 @@
 ## Usage:
 
 1. Copy lib/mercadopago.rb to your project desired folder.
-2. Copy lib/cacert.pem to the same folder (for SSL access to MercadoPago APIs).
+
+### ...with your credentials:
 
 * Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
     * Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
@@ -21,6 +22,14 @@
 require 'mercadopago.rb'
 
 $mp = MercadoPago.new('CLIENT_ID', 'CLIENT_SECRET')
+```
+
+### ...with your long live access token:
+
+```ruby
+require 'mercadopago.rb'
+
+$mp = MercadoPago.new('LL_ACCESS_TOKEN')
 ```
 
 ### Get your Access Token:
