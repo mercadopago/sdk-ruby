@@ -12,10 +12,16 @@ require 'yaml'
 require 'version'
 
 class MercadoPago
-	def initialize(client_id, client_secret, debug_logger=nil)
-		@client_id = client_id
-		@client_secret = client_secret
-		@rest_client = RestClient.new(debug_logger)
+	def initialize(*args)
+		if args.size < 1 or args.size > 2
+			raise "Invalid arguments. Use CLIENT_ID and CLIENT SECRET, or ACCESS_TOKEN"
+		end
+
+		@client_id = args.at(0) if args.size == 2
+		@client_secret = args.at(1) if args.size == 2
+		@ll_access_token = args.at(0) if args.size == 1
+
+		@rest_client = RestClient.new()
 		@sandbox = false
 	end
 
@@ -33,19 +39,23 @@ class MercadoPago
 
 	# Get Access Token for API use
 	def get_access_token
-		app_client_values = {
-			'grant_type' => 'client_credentials',
-			'client_id' => @client_id,
-			'client_secret' => @client_secret
-		}
-
-		@access_data = @rest_client.post("/oauth/token", build_query(app_client_values), RestClient::MIME_FORM)
-
-		if @access_data['status'] == "200"
-			@access_data = @access_data["response"]
-			@access_data['access_token']
+		if @ll_access_token
+			@ll_access_token
 		else
-			raise @access_data.inspect
+			app_client_values = {
+				'grant_type' => 'client_credentials',
+				'client_id' => @client_id,
+				'client_secret' => @client_secret
+			}
+
+			@access_data = @rest_client.post("/oauth/token", build_query(app_client_values), RestClient::MIME_FORM)
+
+			if @access_data['status'] == "200"
+				@access_data = @access_data["response"]
+				@access_data['access_token']
+			else
+				raise @access_data.inspect
+			end
 		end
 	end
 
@@ -249,6 +259,27 @@ class MercadoPago
 		@rest_client.put(uri, data)
 	end
 
+	# Generic resource delete
+	def delete(uri, params = nil)
+		if not params.class == Hash
+			params = Hash.new
+		end
+
+		begin
+			access_token = get_access_token
+		rescue => e
+			return e.message
+		end
+
+		params["access_token"] = access_token
+
+		if not params.empty?
+			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
+		end
+
+		@rest_client.delete(uri)
+	end
+
 	def build_query(params)
 		URI.escape(params.collect { |k, v| "#{k}=#{v}" }.join('&'))
 	end
@@ -259,16 +290,13 @@ class MercadoPago
 
 		MIME_JSON = 'application/json'
 		MIME_FORM = 'application/x-www-form-urlencoded'
-		API_BASE_URL = URI.parse('https://api.mercadolibre.com')
+		API_BASE_URL = URI.parse('https://api.mercadopago.com')
 
 		def initialize(debug_logger=nil)
 			@http = Net::HTTP.new(API_BASE_URL.host, API_BASE_URL.port)
 
 			if API_BASE_URL.scheme == "https" # enable SSL/TLS
 				@http.use_ssl = true
-				@http.ssl_version = :SSLv3 if @http.respond_to? :ssl_version
-				@http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-				@http.ca_file = File.join(File.dirname(__FILE__), "cacert.pem")
 			end
 
 			@http.set_debug_output debug_logger if debug_logger
@@ -307,6 +335,10 @@ class MercadoPago
 
 		def put(uri, data = nil, content_type=MIME_JSON)
 			exec("PUT", uri, data, content_type)
+		end
+		
+		def delete(uri, content_type=MIME_JSON)
+			exec("DELETE", uri, nil, content_type)
 		end
 	end
 end
