@@ -7,7 +7,9 @@
 <a name="usage"></a>
 ## Usage:
 
-1. Copy lib/mercadopago.rb to your project desired folder.
+```gem install mercadopago-sdk```
+
+Then, instantiate the SDK...
 
 ### ...with your credentials:
 
