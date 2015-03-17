@@ -10,6 +10,7 @@ require 'uri'
 require 'net/https'
 require 'yaml'
 require 'version'
+require 'ssl_options_patch'
 
 class MercadoPago
 	def initialize(*args)
@@ -297,6 +298,7 @@ class MercadoPago
 
 			if API_BASE_URL.scheme == "https" # enable SSL/TLS
 				@http.use_ssl = true
+				@http.ssl_options = OpenSSL::SSL::OP_NO_SSLv3
 			end
 
 			@http.set_debug_output debug_logger if debug_logger
