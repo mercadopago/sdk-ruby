@@ -5,7 +5,7 @@
 #@contributors @chrismo
 
 require 'rubygems'
-require 'json/add/core'
+require 'json'
 require 'uri'
 require 'net/https'
 require 'yaml'
