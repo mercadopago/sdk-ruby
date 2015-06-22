@@ -9,7 +9,7 @@ require 'json'
 require 'uri'
 require 'net/https'
 require 'yaml'
-require 'version'
+require File.dirname(__FILE__) + '/version'
 require 'ssl_options_patch'
 
 class MercadoPago
