@@ -1,14 +1,14 @@
 PATH
   remote: .
   specs:
-    mercadopago-sdk (0.2.0)
+    mercadopago-sdk (0.3.3)
       json
 
 GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.0.9)
-    json (1.7.7)
+    json (1.8.3)
     method_source (0.8.1)
     pry (0.9.12)
       coderay (~> 1.0.5)
