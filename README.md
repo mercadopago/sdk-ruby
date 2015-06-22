@@ -42,9 +42,18 @@ puts $preferenceResult
 #### Create a Checkout preference
 
 ```ruby
-preferenceData = Hash["items" => Array(Array["title"=>"testCreate", "quantity"=>1, "unit_price"=>10.2, "currency_id"=>"ARS"])]
-    
-preference = $mp.create_preference(preferenceData)
+
+preference_data = {
+			"items": [
+				{
+					"title": "testCreate", 
+					"quantity": 1, 
+					"unit_price": 10.2, 
+					"currency_id": "ARS"
+				}
+			]
+		}
+preference = $mp.create_preference(preference_data)
 
 puts preference
 ```
