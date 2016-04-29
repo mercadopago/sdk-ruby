@@ -3,4 +3,4 @@ language: ruby
 rvm:
   - 2.2.3
 script:
-  bundle exec rake ./tests/tests.rb
+  bundle exec rake test ./tests/tests.rb
