@@ -233,10 +233,11 @@ class MercadoPago
 		params["access_token"] = access_token
 
 		if not params.empty?
-			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
+                  new_uri = uri.dup
+		  new_uri << (if new_uri.include? "?" then "&" else "?" end) << build_query(params)
 		end
 
-		@rest_client.post(uri, data)
+		@rest_client.post(new_uri, data)
 	end
 
 	# Generic resource put
