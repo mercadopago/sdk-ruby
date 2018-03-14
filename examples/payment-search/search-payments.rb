@@ -8,7 +8,7 @@ class IPN
 	mp = MercadoPago.new('CLIENT_ID', 'CLIENT_SECRET')
 	
 	# Sets the filters you want
-	filters = Hash["site_id" => "MLA", "external_reference"=>"Bill001"]
+	filters = Hash["external_reference"=>"Bill001"]
 	
 	# Search payment data according to filters
 	searchResult = mp.search_payment(filters)

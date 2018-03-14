@@ -69,7 +69,7 @@ class MercadoPago
 		end
 
 		uri_prefix = @sandbox ? "/sandbox" : ""
-		@rest_client.get(uri_prefix + "/collections/notifications/" + id + "?access_token=" + access_token)
+		@rest_client.get("/v1/payments/" + id + "?access_token=" + access_token)
 	end
 
 	def get_payment_info(id)
@@ -95,8 +95,8 @@ class MercadoPago
 			return e.message
 		end
 
-		refund_status = {"status" => "refunded"}
-		@rest_client.put("/collections/" + id + "?access_token=" + access_token, refund_status)
+		refund_status = {}
+		@rest_client.post("/v1/payments/" + id + "/refunds?access_token=" + access_token, refund_status)
 	end
 
 	# Cancel pending payment
@@ -108,7 +108,7 @@ class MercadoPago
 		end
 
 		cancel_status = {"status" => "cancelled"}
-		@rest_client.put("/collections/" + id + "?access_token=" + access_token, cancel_status)
+		@rest_client.put("/v1/payments/" + id + "?access_token=" + access_token, cancel_status)
 	end
 
 	# Cancel preapproval payment
@@ -137,7 +137,7 @@ class MercadoPago
 		filters = build_query(filters)
 
 		uri_prefix = @sandbox ? "/sandbox" : ""
-		@rest_client.get(uri_prefix + "/collections/search?" + filters + "&access_token=" + access_token)
+		@rest_client.get("/v1/payments/search?" + filters + "&access_token=" + access_token)
 	end
 
 	# Create a checkout preference
