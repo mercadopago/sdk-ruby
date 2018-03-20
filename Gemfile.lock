@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mercadopago-sdk (0.3.3)
+    mercadopago-sdk (0.3.5)
       json
 
 GEM
