@@ -300,7 +300,7 @@ class MercadoPago
 				@http.use_ssl = true
 				@http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 				@http.ssl_options = OpenSSL::SSL::OP_NO_SSLv3 # explicitly tell OpenSSL not to use SSL3
-        @http.ssl_version = :TLSv1_2
+				@http.ssl_version = :TLSv1_2
 			end
 
 			@http.set_debug_output debug_logger if debug_logger
