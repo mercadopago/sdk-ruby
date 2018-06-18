@@ -299,8 +299,9 @@ class MercadoPago
 			if API_BASE_URL.scheme == "https" # enable SSL/TLS
 				@http.use_ssl = true
 				@http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-				@http.ssl_options = OpenSSL::SSL::OP_NO_SSLv3 # explicitly tell OpenSSL not to use SSL3
-				@http.ssl_version = :TLSv1_2
+
+				# explicitly tell OpenSSL not to use SSL3 nor TLS 1.0
+				@http.ssl_options = OpenSSL::SSL::OP_NO_SSLv3 + OpenSSL::SSL::OP_NO_TLSv1
 			end
 
 			@http.set_debug_output debug_logger if debug_logger
@@ -340,7 +341,7 @@ class MercadoPago
 		def put(uri, data = nil, content_type=MIME_JSON)
 			exec("PUT", uri, data, content_type)
 		end
-		
+
 		def delete(uri, content_type=MIME_JSON)
 			exec("DELETE", uri, nil, content_type)
 		end
