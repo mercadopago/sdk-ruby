@@ -10,12 +10,15 @@ GEM
     coderay (1.0.9)
     json (1.8.3)
     method_source (0.8.1)
+    power_assert (0.3.0)
     pry (0.9.12)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
     rake (10.0.3)
     slop (3.4.4)
+    test-unit (3.2.0)
+      power_assert
 
 PLATFORMS
   ruby
@@ -24,3 +27,7 @@ DEPENDENCIES
   mercadopago-sdk!
   pry
   rake
+  test-unit
+
+BUNDLED WITH
+   1.15.3
