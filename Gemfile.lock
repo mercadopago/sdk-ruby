@@ -7,7 +7,11 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.3.8)
     coderay (1.0.9)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
+    hashdiff (0.3.0)
     json (1.8.3)
     method_source (0.8.1)
     power_assert (0.3.0)
@@ -16,9 +20,14 @@ GEM
       method_source (~> 0.8)
       slop (~> 3.4)
     rake (10.0.3)
+    safe_yaml (1.0.4)
     slop (3.4.4)
     test-unit (3.2.0)
       power_assert
+    webmock (1.22.5)
+      addressable (< 2.4.0)
+      crack (>= 0.3.2)
+      hashdiff
 
 PLATFORMS
   ruby
@@ -28,6 +37,7 @@ DEPENDENCIES
   pry
   rake
   test-unit
+  webmock
 
 BUNDLED WITH
    1.15.3

@@ -10,9 +10,11 @@ require 'uri'
 require 'net/https'
 require 'yaml'
 require File.dirname(__FILE__) + '/version'
+require File.dirname(__FILE__) + '/helpers/queryable'
 require 'ssl_options_patch'
 
 class MercadoPago
+	include Queryable
 	def initialize(*args)
 		if args.size < 1 or args.size > 2
 			raise "Invalid arguments. Use CLIENT_ID and CLIENT SECRET, or ACCESS_TOKEN"
@@ -138,6 +140,24 @@ class MercadoPago
 
 		uri_prefix = @sandbox ? "/sandbox" : ""
 		@rest_client.get("/v1/payments/search?" + filters + "&access_token=" + access_token)
+	end
+
+	# Search customer according to filters, with pagination
+	def search_customer(filters, offset=0, limit=0)
+		begin
+			access_token = get_access_token
+		rescue => e
+			binding.pry
+			return e.message
+		end
+
+		filters["offset"] = offset
+		filters["limit"] = limit
+
+		query = sanitize_query(build_query(filters))
+
+		uri_prefix = @sandbox ? "/sandbox" : ""
+		@rest_client.get("/v1/customers/search?" + query + "&access_token=" + access_token)
 	end
 
 	# Create a checkout preference
@@ -279,10 +299,6 @@ class MercadoPago
 		end
 
 		@rest_client.delete(uri)
-	end
-
-	def build_query(params)
-		URI.escape(params.collect { |k, v| "#{k}=#{v}" }.join('&'))
 	end
 
 	private
