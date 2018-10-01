@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lucasgomide/sdk-ruby.svg?branch=master)](https://travis-ci.org/lucasgomide/sdk-ruby)
+
 # MercadoPago SDK module for Payments integration
 
 * [Install](#install)
