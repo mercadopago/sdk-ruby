@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'json'
 
+  gem.add_development_dependency 'webmock'
   gem.add_development_dependency 'test-unit'
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rake'
