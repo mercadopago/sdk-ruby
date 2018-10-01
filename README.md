@@ -1,27 +1,25 @@
 # MercadoPago SDK module for Payments integration
 
-* [Install](#install)
-* [Basic checkout](#basic-checkout)
-* [Customized checkout](#custom-checkout)
-* [Generic methods](#generic-methods)
+- [Install](#install)
+- [Basic checkout](#basic-checkout)
+- [Customized checkout](#custom-checkout)
+- [Generic methods](#generic-methods)
 
-<a name="install"></a>
 ## Install
 
-```gem install mercadopago-sdk```
+`gem install mercadopago-sdk`
 
-<a name="basic-checkout"></a>
 ## Basic checkout
 
-### Configure your credentials
+### Configure your credentials for basic checkout
 
-* Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
-    * Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
-    * Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
-    * México: [https://www.mercadopago.com/mlm/herramientas/aplicaciones](https://www.mercadopago.com/mlm/herramientas/aplicaciones)
-    * Venezuela: [https://www.mercadopago.com/mlv/herramientas/aplicaciones](https://www.mercadopago.com/mlv/herramientas/aplicaciones)
-    * Colombia: [https://www.mercadopago.com/mco/herramientas/aplicaciones](https://www.mercadopago.com/mco/herramientas/aplicaciones)
-    * Chile: [https://www.mercadopago.com/mlc/herramientas/aplicaciones](https://www.mercadopago.com/mlc/herramientas/aplicaciones)
+- Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
+  - Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
+  - Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
+  - México: [https://www.mercadopago.com/mlm/herramientas/aplicaciones](https://www.mercadopago.com/mlm/herramientas/aplicaciones)
+  - Venezuela: [https://www.mercadopago.com/mlv/herramientas/aplicaciones](https://www.mercadopago.com/mlv/herramientas/aplicaciones)
+  - Colombia: [https://www.mercadopago.com/mco/herramientas/aplicaciones](https://www.mercadopago.com/mco/herramientas/aplicaciones)
+  - Chile: [https://www.mercadopago.com/mlc/herramientas/aplicaciones](https://www.mercadopago.com/mlc/herramientas/aplicaciones)
 
 ```ruby
 require 'mercadopago.rb'
@@ -42,13 +40,12 @@ puts $preferenceResult
 #### Create a Checkout preference
 
 ```ruby
-
 preference_data = {
 			"items": [
 				{
-					"title": "testCreate", 
-					"quantity": 1, 
-					"unit_price": 10.2, 
+					"title": "testCreate",
+					"quantity": 1,
+					"unit_price": 10.2,
 					"currency_id": "ARS"
 				}
 			]
@@ -72,7 +69,7 @@ puts preferenceUpdate
 
 #### Search for payments
 
-```ruby    
+```ruby
 filters = Array["id"=>null, "external_reference"=>null]
 
 searchResult = $mp.search_payment(filters)
@@ -106,17 +103,16 @@ result = $mp.refund_payment("ID");
 puts result
 ```
 
-<a name="custom-checkout"></a>
 ## Customized checkout
 
-### Configure your credentials
+### Configure your credentials for customized checkout
 
-* Get your **ACCESS_TOKEN** in the following address:
-    * Argentina: [https://www.mercadopago.com/mla/account/credentials](https://www.mercadopago.com/mla/account/credentials)
-    * Brazil: [https://www.mercadopago.com/mlb/account/credentials](https://www.mercadopago.com/mlb/account/credentials)
-    * Mexico: [https://www.mercadopago.com/mlm/account/credentials](https://www.mercadopago.com/mlm/account/credentials)
-    * Venezuela: [https://www.mercadopago.com/mlv/account/credentials](https://www.mercadopago.com/mlv/account/credentials)
-    * Colombia: [https://www.mercadopago.com/mco/account/credentials](https://www.mercadopago.com/mco/account/credentials)
+- Get your **ACCESS_TOKEN** in the following address:
+  - Argentina: [https://www.mercadopago.com/mla/account/credentials](https://www.mercadopago.com/mla/account/credentials)
+  - Brazil: [https://www.mercadopago.com/mlb/account/credentials](https://www.mercadopago.com/mlb/account/credentials)
+  - Mexico: [https://www.mercadopago.com/mlm/account/credentials](https://www.mercadopago.com/mlm/account/credentials)
+  - Venezuela: [https://www.mercadopago.com/mlv/account/credentials](https://www.mercadopago.com/mlv/account/credentials)
+  - Colombia: [https://www.mercadopago.com/mco/account/credentials](https://www.mercadopago.com/mco/account/credentials)
 
 ```ruby
 require 'mercadopago.rb'
@@ -127,50 +123,50 @@ $mp = MercadoPago.new('ACCESS_TOKEN')
 ### Create payment
 
 ```ruby
-$mp.post ("/v1/payments", payment_data);
+$mp.post("/v1/payments", payment_data);
 ```
 
 ### Create customer
 
 ```ruby
-$mp.post ("/v1/customers", Hash["email" => "email@test.com"]);
+$mp.post("/v1/customers", Hash["email" => "email@test.com"]);
 ```
 
 ### Get customer
 
 ```ruby
-$mp.get ("/v1/customers/CUSTOMER_ID");
+$mp.get("/v1/customers/CUSTOMER_ID");
 ```
 
-* View more Custom checkout related APIs in Developers Site
-    * Argentina: [https://www.mercadopago.com.ar/developers](https://www.mercadopago.com.ar/developers)
-    * Brazil: [https://www.mercadopago.com.br/developers](https://www.mercadopago.com.br/developers)
-    * Mexico: [https://www.mercadopago.com.mx/developers](https://www.mercadopago.com.mx/developers)
-    * Venezuela: [https://www.mercadopago.com.ve/developers](https://www.mercadopago.com.ve/developers)
-    * Colombia: [https://www.mercadopago.com.co/developers](https://www.mercadopago.com.co/developers)
+- View more Custom checkout related APIs in Developers Site
+  - Argentina: [https://www.mercadopago.com.ar/developers](https://www.mercadopago.com.ar/developers)
+  - Brazil: [https://www.mercadopago.com.br/developers](https://www.mercadopago.com.br/developers)
+  - Mexico: [https://www.mercadopago.com.mx/developers](https://www.mercadopago.com.mx/developers)
+  - Venezuela: [https://www.mercadopago.com.ve/developers](https://www.mercadopago.com.ve/developers)
+  - Colombia: [https://www.mercadopago.com.co/developers](https://www.mercadopago.com.co/developers)
 
-<a name="generic-methods"></a>
 ## Generic methods
+
 You can access any other resource from the MercadoPago API using the generic methods:
 
 ```ruby
 // Get a resource, with optional URL params. Also you can disable authentication for public APIs
-$mp.get ("/resource/uri", [params], [authenticate=true])
+$mp.get("/resource/uri", [params], [authenticate=true])
 
 // Create a resource with "data" and optional URL params.
-$mp.post ("/resource/uri", data, [params])
+$mp.post("/resource/uri", data, [params])
 
 // Update a resource with "data" and optional URL params.
-$mp.put ("/resource/uri", data, [params])
+$mp.put("/resource/uri", data, [params])
 
 // Delete a resource with optional URL params.
-$mp.delete ("/resource/uri", [params])
+$mp.delete("/resource/uri", [params])
 ```
 
- For example, if you want to get the Sites list (no params and no authentication):
+For example, if you want to get the Sites list (no params and no authentication):
 
 ```ruby
-$sites = $mp.get ("/sites", null, false)
+$sites = $mp.get("/sites", null, false)
 
 puts $sites
 ```
