@@ -69,7 +69,9 @@ class MercadoPago
 		end
 
 		uri_prefix = @sandbox ? "/sandbox" : ""
+
 		@rest_client.get(uri_prefix + "/v1/payments/" + id + "?access_token=" + access_token)
+
 	end
 
 	def get_payment_info(id)
@@ -95,8 +97,10 @@ class MercadoPago
 			return e.message
 		end
 
-		refund_status = {"status" => "refunded"}
-		@rest_client.put("/v1/payments/" + id + "?access_token=" + access_token, refund_status)
+
+		refund_status = {}
+		@rest_client.post("/v1/payments/" + id + "/refunds?access_token=" + access_token, refund_status)
+
 	end
 
 	# Cancel pending payment
@@ -137,7 +141,9 @@ class MercadoPago
 		filters = build_query(filters)
 
 		uri_prefix = @sandbox ? "/sandbox" : ""
+
 		@rest_client.get(uri_prefix + "/v1/payments/search?" + filters + "&access_token=" + access_token)
+
 	end
 
 	# Create a checkout preference
@@ -299,7 +305,9 @@ class MercadoPago
 			if API_BASE_URL.scheme == "https" # enable SSL/TLS
 				@http.use_ssl = true
 				@http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-				@http.ssl_options = OpenSSL::SSL::OP_NO_SSLv3 # explicitly tell OpenSSL not to use SSL3
+
+				# explicitly tell OpenSSL not to use SSL3 nor TLS 1.0
+				@http.ssl_options = OpenSSL::SSL::OP_NO_SSLv3 + OpenSSL::SSL::OP_NO_TLSv1
 			end
 
 			@http.set_debug_output debug_logger if debug_logger
@@ -339,7 +347,7 @@ class MercadoPago
 		def put(uri, data = nil, content_type=MIME_JSON)
 			exec("PUT", uri, data, content_type)
 		end
-		
+
 		def delete(uri, content_type=MIME_JSON)
 			exec("DELETE", uri, nil, content_type)
 		end

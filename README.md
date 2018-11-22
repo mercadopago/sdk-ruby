@@ -73,7 +73,7 @@ puts preferenceUpdate
 #### Search for payments
 
 ```ruby    
-filters = Array["id"=>null, "site_id"=>null, "external_reference"=>null]
+filters = Array["id"=>null, "external_reference"=>null]
 
 searchResult = $mp.search_payment(filters)
 
