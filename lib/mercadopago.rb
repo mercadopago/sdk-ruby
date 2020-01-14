@@ -323,6 +323,8 @@ class MercadoPago
 			end
 
 			headers = {
+				'x-product-id' => PRODUCT_ID,
+				'x-tracking-id' => "platform:"+RUBY_VERSION+",type:SDK"+MERCADO_PAGO_VERSION+",so;",
 				'User-Agent' => "MercadoPago Ruby SDK v" + MERCADO_PAGO_VERSION,
 				'Content-type' => content_type,
 				'Accept' => MIME_JSON
