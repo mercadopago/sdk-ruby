@@ -3,3 +3,4 @@ bin/
 config/*yml
 pkg/
 *.log
+*.gem
