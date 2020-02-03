@@ -11,7 +11,7 @@ class IPN
 	filters = Hash["external_reference"=>"Bill001"]
 	
 	# Search payment data according to filters
-	searchResult = mp.search_payment(filters)
+	searchResult = mp.payment.search(filters)
 
 	# Show payment information
 	html = searchResult.inspect

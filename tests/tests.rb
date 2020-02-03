@@ -1,5 +1,11 @@
 $LOAD_PATH << '../lib'
+require 'mercadopago'
+@mp = MercadoPago.new("7763720103504202", "FLYvrjdiQl0njize4pMI2fCWo6f3ts9G")
+#puts @mp.preference.get_access_token()
+filters = Hash["external_reference"=>"Bill001"]
+puts @mp.payment.search(filters)
 
+=begin
 require 'test/unit'
 require 'mercadopago'
 require 'logger'
@@ -54,3 +60,4 @@ class MercadoPagoTest < Test::Unit::TestCase
 		assert_equal "ARS", "#{preference_to_update['response']["items"][0]["currency_id"]}"
 	end
 end
+=end

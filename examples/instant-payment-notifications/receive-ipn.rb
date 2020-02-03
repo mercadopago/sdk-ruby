@@ -8,7 +8,7 @@ class IPN
 	mp = MercadoPago.new('CLIENT_ID', 'CLIENT_SECRET')
 	
 	# Get the payment reported by the IPN. Glossary of attributes response in https://developers.mercadopago.com
-	payment_info = mp.get_payment_info('ID');
+	payment_info = mp.payment.get('ID');
 
 	html = ""
 	# Show payment information	

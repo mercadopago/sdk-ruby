@@ -22,7 +22,7 @@ class Button
 	    ]
 	]
 
-	preapprovalPayment = mp.create_preapproval_payment(preapprovalPayment_data)
+	preapprovalPayment = mp.preapproval.create(preapprovalPayment_data)
 	
 	html =  '<!doctype html>
 			<html>

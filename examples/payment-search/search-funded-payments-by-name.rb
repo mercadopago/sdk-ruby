@@ -11,7 +11,7 @@ class IPN
 	filters = Hash["installments" => 12, "description"=>"product_name", "operation_type"=>"regular_payment"]
 	
 	# Search payment data according to filters
-	searchResult = mp.search_payment(filters)
+	searchResult = mp.payment.search(filters)
 
 	# Show payment information
 	html = searchResult.inspect
