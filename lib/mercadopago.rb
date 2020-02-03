@@ -18,7 +18,7 @@ require 'preapproval'
 require 'preference'
 
 class MercadoPago
-	attr_reader :card, :cardtoken, :customer, :discountcampaign, :genericcall, :identificationtype, :merchantorder, :payment, :preapproval, :preference
+	attr_reader :card, :cardtoken, :customer, :discountcampaign, :genericcall, :identificationtype, :merchantorder, :payment, :preference
 	@@sandbox = false
 	def initialize(*args)
 		if args.size < 1 or args.size > 2
@@ -37,7 +37,6 @@ class MercadoPago
 		@identificationtype = IdentificationType.new(@client_id, @client_secret, @ll_access_token)
 		@merchantorder = MerchantOrder.new(@client_id, @client_secret, @ll_access_token)
 		@payment = Payment.new(@client_id, @client_secret, @ll_access_token)
-		@preapproval = PreApproval.new(@client_id, @client_secret, @ll_access_token)
 		@preference = Preference.new(@client_id, @client_secret, @ll_access_token)
 	end
 
