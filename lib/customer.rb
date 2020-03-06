@@ -26,9 +26,6 @@ class Customer < MercadoPagoRestClient
 
 		filters = build_query(filters)
 
-        #tem?
-		uri_prefix = MercadoPago.sandbox ? "/sandbox" : ""
-
 		@rest_client.get(uri_prefix + "/v1/customers/search?" + filters + "&access_token=" + access_token)
     end
 

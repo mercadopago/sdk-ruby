@@ -20,7 +20,7 @@ class Card < MercadoPagoRestClient
 			return e.message
 		end
 
-		@rest_client.get("/v1/customers/:customer_id/cards/" + id + "?access_token=" + access_token)
+		@rest_client.get("/v1/customers/" + id + "/cards?access_token=" + access_token)
 	end
 
 	def create(card)
@@ -30,7 +30,7 @@ class Card < MercadoPagoRestClient
 			return e.message
 		end
 
-		@rest_client.post("/v1/customers/:customer_id/cards/?access_token=" + access_token, card)
+		@rest_client.post("/v1/customers/" + id + "/cards?access_token=" + access_token, card)
 	end
 
 	def update(id, card)
@@ -40,7 +40,7 @@ class Card < MercadoPagoRestClient
 			return e.message
 		end
 
-		@rest_client.put("/v1/customers/:customer_id/cards/" + id + "?access_token=" + access_token, card)
+		@rest_client.put("/v1/customers/" + id + "/cards?access_token=" + access_token, card)
 	end
 
 	def delete(id)
@@ -50,6 +50,6 @@ class Card < MercadoPagoRestClient
 			return e.message
 		end
 
-		@rest_client.delete("/v1/customers/:customer_id/cards/" + id + "?access_token=" + access_token)
+		@rest_client.delete("/v1/customers/" + id + "/cards/?access_token=" + access_token)
 	end
 end

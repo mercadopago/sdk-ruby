@@ -26,9 +26,9 @@ class MercadoPagoTest < Test::Unit::TestCase
 	def test_get_preference
 		preferenceData = {"items" => ["title"=>"testCreate", "quantity"=>1, "unit_price"=>10.2, "currency_id"=>"ARS"]}
 
-		preference = @mp.create_preference(preferenceData)
+		preference = @mp.preference.create(preferenceData)
 
-		preference = @mp.get_preference(preference['response']['id']);
+		preference = @mp.preference.get(preference['response']['id']);
 
 		assert_equal("#{preference['status']}","200")
 	end
@@ -37,7 +37,7 @@ class MercadoPagoTest < Test::Unit::TestCase
 	def test_create_preference
 		preference_data = {"items" => ["title"=>"testCreate", "quantity"=>1, "unit_price"=>10.2, "currency_id"=>"ARS"]}
 
-		preference = @mp.create_preference(preference_data)
+		preference = @mp.preference.create(preference_data)
 		assert_equal "201", "#{preference['status']}"
 		assert_equal "testCreate", "#{preference['response']["items"][0]["title"]}"
 	end
@@ -45,14 +45,14 @@ class MercadoPagoTest < Test::Unit::TestCase
 	# We create a new preference, we modify this one and then we verify that data are ok.
 	def test_update_preference
 		preference_data = {"items" => ["title"=>"testUpdate", "quantity"=>1, "unit_price"=>10.2, "currency_id"=>"ARS"]}
-		preference_created = @mp.create_preference(preference_data)
-		preference_to_update = @mp.get_preference("#{preference_created['response']['id']}")
+		preference_created = @mp.preference.create(preference_data)
+		preference_to_update = @mp.preference.get("#{preference_created['response']['id']}")
 
 		preference_data_to_update = {"items" => ["title"=>"testUpdated", "quantity"=>1, "unit_price"=>2]}
-		preference_update = @mp.update_preference("#{preference_created['response']['id']}", preference_data_to_update)
+		preference_update = @mp.preference.update("#{preference_created['response']['id']}", preference_data_to_update)
 		assert_equal "200", "#{preference_update['status']}"
 
-		preference_to_update = @mp.get_preference("#{preference_created['response']['id']}")
+		preference_to_update = @mp.preference.get("#{preference_created['response']['id']}")
 
 		assert_equal "testUpdated", "#{preference_to_update['response']["items"][0]["title"]}"
 		assert_equal "2", "#{preference_to_update['response']["items"][0]["unit_price"]}"
