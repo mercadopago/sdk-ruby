@@ -14,7 +14,6 @@ require 'genericcall'
 require 'identificationtype'
 require 'merchantorder'
 require 'payment'
-require 'preapproval'
 require 'preference'
 
 class MercadoPago
