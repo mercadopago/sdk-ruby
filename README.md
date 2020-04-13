@@ -34,7 +34,7 @@ $mp = MercadoPago.new('CLIENT_ID', 'CLIENT_SECRET')
 #### Get an existent Checkout preference
 
 ```ruby
-preference = $mp.get_preference('PREFERENCE_ID')
+preference = $mp.preference.get('PREFERENCE_ID')
 
 puts $preferenceResult
 ```
@@ -53,7 +53,7 @@ preference_data = {
 				}
 			]
 		}
-preference = $mp.create_preference(preference_data)
+preference = $mp.preference.create(preference_data)
 
 puts preference
 ```
@@ -63,7 +63,7 @@ puts preference
 ```ruby
 preferenceDataToUpdate = Hash["items" => Array(Array["title"=>"testUpdated", "quantity"=>1, "unit_price"=>2])]
 
-preferenceUpdate = $mp.update_preference("PREFERENCE_ID", preferenceDataToUpdate)
+preferenceUpdate = $mp.preference.update("PREFERENCE_ID", preferenceDataToUpdate)
 
 puts preferenceUpdate
 ```
@@ -75,7 +75,7 @@ puts preferenceUpdate
 ```ruby    
 filters = Array["id"=>null, "external_reference"=>null]
 
-searchResult = $mp.search_payment(filters)
+searchResult = $mp.payment.search(filters)
 
 puts searchResult
 ```
@@ -83,7 +83,7 @@ puts searchResult
 #### Get payment data
 
 ```ruby
-paymentInfo = $mp.get_payment("ID")
+paymentInfo = $mp.payment.get("ID")
 
 puts paymentInfo
 ```
@@ -91,7 +91,7 @@ puts paymentInfo
 ### Cancel (only for pending payments)
 
 ```ruby
-result = $mp.cancel_payment("ID");
+result = $mp.payment.cancel("ID");
 
 // Show result
 puts result
@@ -100,7 +100,7 @@ puts result
 ### Refund (only for accredited payments)
 
 ```ruby
-result = $mp.refund_payment("ID");
+result = $mp.payment.refund("ID");
 
 // Show result
 puts result
@@ -127,19 +127,19 @@ $mp = MercadoPago.new('ACCESS_TOKEN')
 ### Create payment
 
 ```ruby
-$mp.post ("/v1/payments", payment_data);
+$mp.genericcall.post("/v1/payments", payment_data);
 ```
 
 ### Create customer
 
 ```ruby
-$mp.post ("/v1/customers", Hash["email" => "email@test.com"]);
+$mp.genericcall.post("/v1/customers", Hash["email" => "email@test.com"]);
 ```
 
 ### Get customer
 
 ```ruby
-$mp.get ("/v1/customers/CUSTOMER_ID");
+$mp.genericcall.get("/v1/customers/CUSTOMER_ID");
 ```
 
 * View more Custom checkout related APIs in Developers Site
@@ -155,22 +155,22 @@ You can access any other resource from the MercadoPago API using the generic met
 
 ```ruby
 // Get a resource, with optional URL params. Also you can disable authentication for public APIs
-$mp.get ("/resource/uri", [params], [authenticate=true])
+$mp.genericcall.get("/resource/uri", [params], [authenticate=true])
 
 // Create a resource with "data" and optional URL params.
-$mp.post ("/resource/uri", data, [params])
+$mp.genericcall.post("/resource/uri", data, [params])
 
 // Update a resource with "data" and optional URL params.
-$mp.put ("/resource/uri", data, [params])
+$mp.genericcall.put("/resource/uri", data, [params])
 
 // Delete a resource with optional URL params.
-$mp.delete ("/resource/uri", [params])
+$mp.genericcall.delete("/resource/uri", [params])
 ```
 
  For example, if you want to get the Sites list (no params and no authentication):
 
 ```ruby
-$sites = $mp.get ("/sites", null, false)
+$sites = $mp.genericcall.get("/sites", null, false)
 
 puts $sites
 ```
