@@ -4,6 +4,10 @@
 
 This library provides developers with a simple set of bindings to help you integrate Mercado Pago API to a website and start receiving payments.
 
+## 💡 Requirements
+
+The SDK Supports Ruby from version v0 
+
 ## 📲 Installation 
 
 First time using Mercado Pago? Create your [Mercado Pago account](https://www.mercadopago.com), if you don’t have one already.
