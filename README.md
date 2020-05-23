@@ -20,7 +20,7 @@ Thats all, you have Mercado Pago SDK installed.
 ```ruby
 require 'mercadopago.rb'
 
-$mp = MercadoPago.new('CLIENT_ID', 'CLIENT_SECRET')
+$mp = MercadoPago.new('YOUR_ACCESS_TOKEN')
 
 preference_data = {
 	"items": [
