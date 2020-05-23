@@ -1,5 +1,7 @@
 # Mercado Pago SDK for Ruby
 
+[![Gem](https://img.shields.io/gem/v/mercadopago-sdk)](https://rubygems.org/gems/mercadopago-sdk)
+[![Gem](https://img.shields.io/gem/dt/mercadopago-sdk)](https://rubygems.org/gems/mercadopago-sdk)
 [![APM](https://img.shields.io/apm/l/vim-mode)](https://github.com/mercadopago/sdk-ruby)
 
 This library provides developers with a simple set of bindings to help you integrate Mercado Pago API to a website and start receiving payments.
