@@ -11,7 +11,7 @@ class IPN
 	filters = Hash["payer.email" => "mail02@mail02.com", "begin_date"=>"2011-01-01T00:00:00Z", "end_date"=>"2011-02-01T00:00:00Z"]
 	
 	# Search payment data according to filters
-	searchResult = mp.payment.search(filters)
+	searchResult = mp.search_payment(filters)
 
 	# Show payment information
 	html = searchResult.inspect
