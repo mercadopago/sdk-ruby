@@ -11,7 +11,7 @@ class IPN
 	filters = Hash["range"=>"date_created", "begin_date"=>"NOW-1MONTH", "end_date"=>"NOW", "status"=>"approved", "operation_type"=>"regular_payment"]
 	
 	# Search payment data according to filters
-	searchResult = mp.payment.search(filters)
+	searchResult = mp.search_payment(filters)
 
 	# Show payment information
 	html = searchResult.inspect
