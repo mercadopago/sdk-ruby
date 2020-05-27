@@ -1,37 +1,24 @@
-# MercadoPago SDK module for Payments integration
+# Mercado Pago SDK for Ruby
 
-* [Install](#install)
-* [Basic checkout](#basic-checkout)
-* [Customized checkout](#custom-checkout)
-* [Generic methods](#generic-methods)
+[![Gem](https://img.shields.io/gem/v/mercadopago-sdk)](https://rubygems.org/gems/mercadopago-sdk)
+[![Gem](https://img.shields.io/gem/dt/mercadopago-sdk)](https://rubygems.org/gems/mercadopago-sdk)
+[![APM](https://img.shields.io/apm/l/vim-mode)](https://github.com/mercadopago/sdk-ruby)
 
-<a name="install"></a>
-## Install
+This library provides developers with a simple set of bindings to help you integrate Mercado Pago API to a website and start receiving payments.
 
-```gem install mercadopago-sdk```
+## 💡 Requirements
 
-<a name="basic-checkout"></a>
-## Basic checkout
+The SDK Supports Ruby from version v0 
 
-### Configure your credentials
+## 📲 Installation 
 
-* Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
-    * Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
-    * Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
-    * México: [https://www.mercadopago.com/mlm/herramientas/aplicaciones](https://www.mercadopago.com/mlm/herramientas/aplicaciones)
-    * Venezuela: [https://www.mercadopago.com/mlv/herramientas/aplicaciones](https://www.mercadopago.com/mlv/herramientas/aplicaciones)
-    * Colombia: [https://www.mercadopago.com/mco/herramientas/aplicaciones](https://www.mercadopago.com/mco/herramientas/aplicaciones)
-    * Chile: [https://www.mercadopago.com/mlc/herramientas/aplicaciones](https://www.mercadopago.com/mlc/herramientas/aplicaciones)
+First time using Mercado Pago? Create your [Mercado Pago account](https://www.mercadopago.com), if you don’t have one already.
 
-```ruby
-require 'mercadopago.rb'
+1. Run ```gem install mercadopago-sdk```
 
-$mp = MercadoPago.new('CLIENT_ID', 'CLIENT_SECRET')
-```
+2. Copy the access_token in the [credentials](https://www.mercadopago.com/mlb/account/credentials) section of the page and replace YOUR_ACCESS_TOKEN with it.
 
-### Preferences
-
-#### Get an existent Checkout preference
+Thats all, you have Mercado Pago SDK installed.
 
 ```ruby
 preference = $mp.get_preference('PREFERENCE_ID')
@@ -39,19 +26,22 @@ preference = $mp.get_preference('PREFERENCE_ID')
 puts $preferenceResult
 ```
 
-#### Create a Checkout preference
+## 🌟 Getting Started
+  
+  Simple usage looks like:
 
 ```ruby
+require 'mercadopago.rb'
+
+$mp = MercadoPago.new('YOUR_ACCESS_TOKEN')
 
 preference_data = {
-			"items": [
-				{
-					"title": "testCreate", 
-					"quantity": 1, 
-					"unit_price": 10.2, 
-					"currency_id": "ARS"
-				}
-			]
+	"items": [
+		{
+			"title": "testCreate", 
+			"quantity": 1, 
+			"unit_price": 10.2, 
+			"currency_id": "ARS"
 		}
 preference = $mp.create_preference(preference_data)
 
@@ -136,22 +126,15 @@ $mp.post ("/v1/payments", payment_data);
 $mp.post ("/v1/customers", Hash["email" => "email@test.com"]);
 ```
 
-### Get customer
+Check our official code reference to explore all available functionalities.
 
 ```ruby
 $mp.get ("/v1/customers/CUSTOMER_ID");
 ```
 
-* View more Custom checkout related APIs in Developers Site
-    * Argentina: [https://www.mercadopago.com.ar/developers](https://www.mercadopago.com.ar/developers)
-    * Brazil: [https://www.mercadopago.com.br/developers](https://www.mercadopago.com.br/developers)
-    * Mexico: [https://www.mercadopago.com.mx/developers](https://www.mercadopago.com.mx/developers)
-    * Venezuela: [https://www.mercadopago.com.ve/developers](https://www.mercadopago.com.ve/developers)
-    * Colombia: [https://www.mercadopago.com.co/developers](https://www.mercadopago.com.co/developers)
+If you require technical support, please contact our support team at [developers.mercadopago.com](https://developers.mercadopago.com)
 
-<a name="generic-methods"></a>
-## Generic methods
-You can access any other resource from the MercadoPago API using the generic methods:
+## 🏻 License 
 
 ```ruby
 // Get a resource, with optional URL params. Also you can disable authentication for public APIs
