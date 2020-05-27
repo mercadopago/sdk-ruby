@@ -30,6 +30,18 @@ class MercadoPago
 		@rest_client.set_debug_logger(debug_logger)
 	end
 
+	def set_platform_id(platform_id)
+		@rest_client.set_platform_id(platform_id)
+	end
+
+	def set_integrator_id(integrator_id)
+		@rest_client.set_integrator_id(integrator_id)
+	end
+
+	def set_corporation_id(corporation_id)
+		@rest_client.set_corporation_id(corporation_id)
+	end
+
 	def sandbox_mode(enable=nil)
 		if not enable.nil?
 			@sandbox = enable
@@ -311,10 +323,26 @@ class MercadoPago
 			end
 
 			@http.set_debug_output debug_logger if debug_logger
+
+			@platform_id = nil
+			@integrator_id = nil
+			@corporation_id = nil
 		end
 
 		def set_debug_logger(debug_logger)
 			@http.set_debug_output debug_logger
+		end
+
+		def set_platform_id(platform_id)
+			@platform_id = platform_id
+		end
+
+		def set_integrator_id(integrator_id)
+			@integrator_id = integrator_id
+		end
+
+		def set_corporation_id(corporation_id)
+			@corporation_id = corporation_id
 		end
 
 		def exec(method, uri, data, content_type)
@@ -329,6 +357,10 @@ class MercadoPago
 				'Content-type' => content_type,
 				'Accept' => MIME_JSON
 			}
+
+			headers['x-platform-id'] = @platform_id if @platform_id != nil
+			headers['x-integrator-id'] = @integrator_id if @integrator_id != nil
+			headers['x-corporation-id'] = @corporation_id if @corporation_id != nil
 
 			api_result = @http.send_request(method, uri, data, headers)
 
