@@ -1,8 +1,5 @@
-#MercadoPago Integration Library
-#Access MercadoPago for payments integration
-#
-#@author @maticompiano
-#@contributors @chrismo
+# MercadoPago Integration Library
+# Access MercadoPago for payments integration
 
 require 'rubygems'
 require 'json'
@@ -68,9 +65,7 @@ class MercadoPago
 			return e.message
 		end
 
-		uri_prefix = @sandbox ? "/sandbox" : ""
-
-		@rest_client.get(uri_prefix + "/v1/payments/" + id + "?access_token=" + access_token)
+		@rest_client.get("/v1/payments/" + id, access_token)
 
 	end
 
@@ -86,7 +81,7 @@ class MercadoPago
 			return e.message
 		end
 
-		@rest_client.get("/authorized_payments/" + id + "?access_token=" + access_token)
+		@rest_client.get("/authorized_payments/" + id, access_token)
 	end
 
 	# Refund accredited payment
@@ -99,7 +94,7 @@ class MercadoPago
 
 
 		refund_status = {}
-		@rest_client.post("/v1/payments/" + id + "/refunds?access_token=" + access_token, refund_status)
+		@rest_client.post("/v1/payments/" + id + "/refunds". access_token, refund_status)
 
 	end
 
@@ -112,7 +107,7 @@ class MercadoPago
 		end
 
 		cancel_status = {"status" => "cancelled"}
-		@rest_client.put("/v1/payments/" + id + "?access_token=" + access_token, cancel_status)
+		@rest_client.put("/v1/payments/" + id, access_token, cancel_status)
 	end
 
 	# Cancel preapproval payment
@@ -124,7 +119,7 @@ class MercadoPago
 		end
 
 		cancel_status = {"status" => "cancelled"}
-		@rest_client.put("/preapproval/" + id + "?access_token=" + access_token, cancel_status)
+		@rest_client.put("/preapproval/" + id, access_token, cancel_status)
 	end
 
 	# Search payments according to filters, with pagination
@@ -140,9 +135,7 @@ class MercadoPago
 
 		filters = build_query(filters)
 
-		uri_prefix = @sandbox ? "/sandbox" : ""
-
-		@rest_client.get(uri_prefix + "/v1/payments/search?" + filters + "&access_token=" + access_token)
+		@rest_client.get("/v1/payments/search?" + filters, access_token)
 
 	end
 
@@ -154,7 +147,7 @@ class MercadoPago
 			return e.message
 		end
 
-		@rest_client.post("/checkout/preferences?access_token=" + access_token, preference)
+		@rest_client.post("/checkout/preferences", access_token, preference)
 	end
 
 	# Update a checkout preference
@@ -165,7 +158,7 @@ class MercadoPago
 			return e.message
 		end
 
-		@rest_client.put("/checkout/preferences/" + id + "?access_token=" + access_token, preference)
+		@rest_client.put("/checkout/preferences/" + id, access_token, preference)
 	end
 
 	# Get a checkout preference
@@ -176,7 +169,7 @@ class MercadoPago
 			return e.message
 		end
 
-		@rest_client.get("/checkout/preferences/" + id + "?access_token=" + access_token)
+		@rest_client.get("/checkout/preferences/" + id, access_token)
 	end
 
 	# Create a preapproval payment
@@ -187,7 +180,7 @@ class MercadoPago
 			return e.message
 		end
 
-		@rest_client.post("/preapproval?access_token=" + access_token, preapproval_payment)
+		@rest_client.post("/preapproval", access_token, preapproval_payment)
 	end
 
 	# Get a preapproval payment
@@ -198,7 +191,7 @@ class MercadoPago
 			return e.message
 		end
 
-		@rest_client.get("/preapproval/" + id + "?access_token=" + access_token)
+		@rest_client.get("/preapproval/" + id, access_token)
 	end
 
 	# Generic resource get
@@ -207,21 +200,21 @@ class MercadoPago
 			params = Hash.new
 		end
 
+		access_token = nil
+
 		if authenticate
 			begin
 				access_token = get_access_token
 			rescue => e
 				return e.message
 			end
-
-			params["access_token"] = access_token
 		end
 
 		if not params.empty?
 			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
 		end
 
-		@rest_client.get(uri)
+		@rest_client.get(uri, access_token)
 	end
 
 	# Generic resource post
@@ -236,13 +229,11 @@ class MercadoPago
 			return e.message
 		end
 
-		params["access_token"] = access_token
-
 		if not params.empty?
 			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
 		end
 
-		@rest_client.post(uri, data)
+		@rest_client.post(uri, access_token, data)
 	end
 
 	# Generic resource put
@@ -257,13 +248,11 @@ class MercadoPago
 			return e.message
 		end
 
-		params["access_token"] = access_token
-
 		if not params.empty?
 			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
 		end
 
-		@rest_client.put(uri, data)
+		@rest_client.put(uri, access_token, data)
 	end
 
 	# Generic resource delete
@@ -278,13 +267,11 @@ class MercadoPago
 			return e.message
 		end
 
-		params["access_token"] = access_token
-
 		if not params.empty?
 			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
 		end
 
-		@rest_client.delete(uri)
+		@rest_client.delete(uri, access_token)
 	end
 
 	def build_query(params)
@@ -317,7 +304,7 @@ class MercadoPago
 			@http.set_debug_output debug_logger
 		end
 
-		def exec(method, uri, data, content_type)
+		def exec(method, uri, access_token, data, content_type)
 			if not data.nil? and content_type == MIME_JSON
 				data = data.to_json
 			end
@@ -327,7 +314,8 @@ class MercadoPago
 				'x-tracking-id' => "platform:"+RUBY_VERSION.split('.')[0]+"|"+RUBY_VERSION+",type:SDK"+MERCADO_PAGO_VERSION+",so;",
 				'User-Agent' => "MercadoPago Ruby SDK v" + MERCADO_PAGO_VERSION,
 				'Content-type' => content_type,
-				'Accept' => MIME_JSON
+				'Accept' => MIME_JSON,
+				'access_token' => access_token
 			}
 
 			api_result = @http.send_request(method, uri, data, headers)
@@ -338,20 +326,20 @@ class MercadoPago
 			}
 		end
 
-		def get(uri, content_type=MIME_JSON)
-			exec("GET", uri, nil, content_type)
+		def get(uri, access_token, content_type=MIME_JSON)
+			exec("GET", uri, access_token, nil, content_type)
 		end
 
-		def post(uri, data = nil, content_type=MIME_JSON)
-			exec("POST", uri, data, content_type)
+		def post(uri, access_token, data = nil, content_type=MIME_JSON)
+			exec("POST", uri, access_token, data, content_type)
 		end
 
-		def put(uri, data = nil, content_type=MIME_JSON)
-			exec("PUT", uri, data, content_type)
+		def put(uri, access_token, data = nil, content_type=MIME_JSON)
+			exec("PUT", uri, access_token, data, content_type)
 		end
 
-		def delete(uri, content_type=MIME_JSON)
-			exec("DELETE", uri, nil, content_type)
+		def delete(uri, access_token, content_type=MIME_JSON)
+			exec("DELETE", uri, access_token, nil, content_type)
 		end
 	end
 end
