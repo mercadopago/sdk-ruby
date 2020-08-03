@@ -94,7 +94,7 @@ class MercadoPago
 
 
 		refund_status = {}
-		@rest_client.post("/v1/payments/" + id + "/refunds". access_token, refund_status)
+		@rest_client.post("/v1/payments/" + id + "/refunds", access_token, refund_status)
 
 	end
 
