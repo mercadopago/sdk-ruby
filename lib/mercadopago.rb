@@ -23,6 +23,7 @@ class MercadoPago
 		@ll_access_token = args.at(0) if args.size == 1
 
 		@rest_client = RestClient.new()
+		@rest_client.set_access_token(get_access_token)
 		@sandbox = false
 	end
 
@@ -74,15 +75,9 @@ class MercadoPago
 
 	# Get information for specific payment
 	def get_payment(id)
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
 		uri_prefix = @sandbox ? "/sandbox" : ""
 
-		@rest_client.get(uri_prefix + "/v1/payments/" + id + "?access_token=" + access_token)
+		@rest_client.get(uri_prefix + "/v1/payments/" + id)
 
 	end
 
@@ -92,61 +87,30 @@ class MercadoPago
 
 	# Get information for specific authorized payment
 	def get_authorized_payment(id)
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
-		@rest_client.get("/authorized_payments/" + id + "?access_token=" + access_token)
+		@rest_client.get("/authorized_payments/" + id)
 	end
 
 	# Refund accredited payment
 	def refund_payment(id)
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
-
 		refund_status = {}
-		@rest_client.post("/v1/payments/" + id + "/refunds?access_token=" + access_token, refund_status)
+		@rest_client.post("/v1/payments/" + id, refund_status)
 
 	end
 
 	# Cancel pending payment
 	def cancel_payment(id)
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
 		cancel_status = {"status" => "cancelled"}
-		@rest_client.put("/v1/payments/" + id + "?access_token=" + access_token, cancel_status)
+		@rest_client.put("/v1/payments/" + id, cancel_status)
 	end
 
 	# Cancel preapproval payment
 	def cancel_preapproval_payment(id)
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
 		cancel_status = {"status" => "cancelled"}
-		@rest_client.put("/preapproval/" + id + "?access_token=" + access_token, cancel_status)
+		@rest_client.put("/preapproval/" + id, cancel_status)
 	end
 
 	# Search payments according to filters, with pagination
 	def search_payment(filters, offset=0, limit=0)
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
 		filters["offset"] = offset
 		filters["limit"] = limit
 
@@ -154,79 +118,39 @@ class MercadoPago
 
 		uri_prefix = @sandbox ? "/sandbox" : ""
 
-		@rest_client.get(uri_prefix + "/v1/payments/search?" + filters + "&access_token=" + access_token)
+		@rest_client.get(uri_prefix + "/v1/payments/search?" + filters)
 
 	end
 
 	# Create a checkout preference
 	def create_preference(preference)
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
-		@rest_client.post("/checkout/preferences?access_token=" + access_token, preference)
+		@rest_client.post("/checkout/preferences", preference)
 	end
 
 	# Update a checkout preference
 	def update_preference(id, preference)
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
-		@rest_client.put("/checkout/preferences/" + id + "?access_token=" + access_token, preference)
+		@rest_client.put("/checkout/preferences/" + id, preference)
 	end
 
 	# Get a checkout preference
 	def get_preference(id)
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
-		@rest_client.get("/checkout/preferences/" + id + "?access_token=" + access_token)
+		@rest_client.get("/checkout/preferences/" + id)
 	end
 
 	# Create a preapproval payment
 	def create_preapproval_payment(preapproval_payment)
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
-		@rest_client.post("/preapproval?access_token=" + access_token, preapproval_payment)
+		@rest_client.post("/preapproval", preapproval_payment)
 	end
 
 	# Get a preapproval payment
 	def get_preapproval_payment(id)
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
-		@rest_client.get("/preapproval/" + id + "?access_token=" + access_token)
+		@rest_client.get("/preapproval/" + id)
 	end
 
 	# Generic resource get
 	def get(uri, params = nil, authenticate = true)
 		if not params.class == Hash
 			params = Hash.new
-		end
-
-		if authenticate
-			begin
-				access_token = get_access_token
-			rescue => e
-				return e.message
-			end
-
-			params["access_token"] = access_token
 		end
 
 		if not params.empty?
@@ -242,14 +166,6 @@ class MercadoPago
 			params = Hash.new
 		end
 
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
-		params["access_token"] = access_token
-
 		if not params.empty?
 			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
 		end
@@ -263,14 +179,6 @@ class MercadoPago
 			params = Hash.new
 		end
 
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
-		params["access_token"] = access_token
-
 		if not params.empty?
 			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
 		end
@@ -283,14 +191,6 @@ class MercadoPago
 		if not params.class == Hash
 			params = Hash.new
 		end
-
-		begin
-			access_token = get_access_token
-		rescue => e
-			return e.message
-		end
-
-		params["access_token"] = access_token
 
 		if not params.empty?
 			uri << (if uri.include? "?" then "&" else "?" end) << build_query(params)
@@ -327,6 +227,7 @@ class MercadoPago
 			@platform_id = nil
 			@integrator_id = nil
 			@corporation_id = nil
+			@access_token = nil
 		end
 
 		def set_debug_logger(debug_logger)
@@ -345,6 +246,10 @@ class MercadoPago
 			@corporation_id = corporation_id
 		end
 
+		def set_access_token(access_token)
+			@access_token = access_token
+		end
+
 		def exec(method, uri, data, content_type)
 			if not data.nil? and content_type == MIME_JSON
 				data = data.to_json
@@ -358,6 +263,7 @@ class MercadoPago
 				'Accept' => MIME_JSON
 			}
 
+			headers['Authorization'] = "Bearer " + @access_token if @access_token != nil
 			headers['x-platform-id'] = @platform_id if @platform_id != nil
 			headers['x-integrator-id'] = @integrator_id if @integrator_id != nil
 			headers['x-corporation-id'] = @corporation_id if @corporation_id != nil
