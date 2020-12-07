@@ -1,18 +1,15 @@
-require_relative '../sdk'
 require 'rest-client'
 require 'json'
 
-include SDK  
-
-module HttpClient  
-
-    def get(uri, params)
-        result = RestClient::Request.execute(method: :get,  url: uri, headers: {params: {access_token: SDK::token, params: params} })
-        response = {
-            status: result.code,
-            body: JSON.parse(result.body)
-        }
-    end
+module Mercadopago
+    class HttpClient
+        def get(url, headers, filters=nil, timeout=nil, maxretries=nil)
+            result = RestClient::Request.execute(method: :get,  url: url, params: filters, headers: headers, timeout: timeout)
+            response = {
+                status: result.code,
+                body: JSON.parse(result.body)
+            }
+        end
 
     # def post(url, headers, data=nil, params=nil):
 
@@ -49,6 +46,5 @@ module HttpClient
 
     #     return response
     # end
-
+    end
 end
-
