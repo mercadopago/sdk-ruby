@@ -5,7 +5,7 @@ module Mercadopago
         end
 
         def get(request_options:nil)
-            _get(uri="/users/me", request_options:request_options)
+            _get(uri:"/users/me", request_options:request_options)
         end
     end
 end
