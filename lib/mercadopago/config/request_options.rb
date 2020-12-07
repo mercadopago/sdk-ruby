@@ -3,15 +3,16 @@ module Mercadopago
 
         attr_reader :access_token, :connection_timeout, :custom_headers, :corporation_id, :integrator_id, :platform_id, :max_retries
         
-        def initialize(access_token=nil, 
-                     connection_timeout=60.0, 
-                     custom_headers=nil, 
-                     corporation_id=nil, 
-                     integrator_id=nil, 
-                     platform_id=nil, 
-                     max_retries=3)
+        def initialize(access_token: nil, 
+                     connection_timeout: 60.0, 
+                     custom_headers: nil, 
+                     corporation_id: nil, 
+                     integrator_id: nil, 
+                     platform_id: nil, 
+                     max_retries: 3)
             self.access_token = access_token unless access_token.nil?
             self.connection_timeout = connection_timeout
+            self.custom_headers = custom_headers unless custom_headers.nil?
             self.corporation_id = corporation_id unless corporation_id.nil?
             self.integrator_id = integrator_id unless integrator_id.nil?
             self.platform_id = platform_id unless platform_id.nil?
@@ -21,13 +22,13 @@ module Mercadopago
         end
 
         def get_headers()
-            headers = {'Authorization': 'Bearer ' + self.access_token,
+            headers = {'Authorization': 'Bearer ' + @access_token,
                 'x-product-id': @config.product_id, 
                 'x-tracking-id': @config.tracking_id,
                 'User-Agent': @config.user_agent,
                 'Accept': @config.mime_json}
 
-            headers['x-corporation-id'] = self.corporation_id unless self.corporation_id.nil?
+            headers['x-corporation-id'] = @corporation_id unless @corporation_id.nil?
         
             headers
         end
@@ -35,6 +36,11 @@ module Mercadopago
         def access_token=(value)
             raise TypeError, 'Param access_token must be a String' unless value.kind_of?(String)
             @access_token = value
+        end
+
+        def custom_headers=(value)
+            raise TypeError, 'Param custom_headers must be a Hash' unless value.kind_of?(Hash)
+            @custom_headers = value
         end
 
         def connection_timeout=(value)

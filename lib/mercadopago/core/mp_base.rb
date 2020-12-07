@@ -17,9 +17,9 @@ module Mercadopago
             request_options
         end
 
-        def _get(uri, filters=nil, request_options=nil)
+        def _get(uri:, filters:nil, request_options:nil)
             raise TypeError, 'Filters must be a ' unless filters.nil? or filters.is_a?(Hash)
-            @http_client.get(url=@config.api_base_url + uri, headers=_check_request_options().get_headers(), filters=filters)
+            @http_client.get(url=@config.api_base_url + uri, headers=_check_request_options(request_options).get_headers(), filters=filters)
         end
     end
 end

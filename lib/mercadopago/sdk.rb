@@ -6,7 +6,7 @@ module Mercadopago
       def initialize(access_token, http_client=nil, request_options=nil)
         self.access_token = access_token
         self.http_client = http_client.nil? ? HttpClient.new : http_client
-        self.request_options = request_options.nil? ? RequestOptions.new(access_token) : request_options
+        self.request_options = request_options.nil? ? RequestOptions.new(access_token:access_token) : request_options
       end
 
       def card()
@@ -15,6 +15,10 @@ module Mercadopago
 
       def user()
         User.new(self.request_options, self.http_client)
+      end
+
+      def identification_type()
+        IdentificationType.new(self.request_options, self.http_client)
       end
 
       def access_token=(value)
