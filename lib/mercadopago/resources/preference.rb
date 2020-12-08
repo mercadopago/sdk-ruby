@@ -13,7 +13,6 @@ module Mercadopago
         end
 
         def put(preference_id, data, request_options:nil)
-            puts data
             _put(uri:"/checkout/preferences/#{preference_id}", data:data, request_options:request_options)
         end
 
