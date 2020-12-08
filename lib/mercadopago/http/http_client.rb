@@ -11,29 +11,21 @@ module Mercadopago
             }
         end
 
-    # def post(url, headers, data=nil, params=nil):
+        def post(url, data, headers, filters=nil, timeout=nil, maxretries=nil)
+            result = RestClient::Request.execute(method: :post,  url: url, payload: data, headers: headers, params: filters, timeout: timeout)
+            response = {
+                status: result.code,
+                body: JSON.parse(result.body)
+            }
+        end
 
-    #     result = RestClient.post(url, params=params, data=data, headers=headers)
-
-    #     response = {
-    #         status: result.code,
-    #         body: JSON.parse(result.body)
-    #     }
-
-    #     return response
-    # end
-
-    # def put(url, headers, data=nil, params=nil):
-
-    #     result = RestClient.put(url, params=params, data=data, headers=headers)
-
-    #     response = {
-    #         status: result.code,
-    #         body: JSON.parse(result.body)
-    #     }
-
-    #     return response
-    # end
+        def put(url, data, headers, filters=nil, timeout=nil, maxretries=nil)
+            result = RestClient::Request.execute(method: :put,  url: url, payload: data, headers: headers, params: filters, timeout: timeout)
+            response = {
+                status: result.code,
+                body: JSON.parse(result.body)
+            }
+        end
 
     # def delete(url, headers, params=nil):
 

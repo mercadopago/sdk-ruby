@@ -22,6 +22,18 @@ module Mercadopago
             request_options = _check_request_options(request_options)
             @http_client.get(url=@config.api_base_url + uri, headers=request_options.get_headers(), filters=filters, timeout=request_options.connection_timeout)
         end
+
+        def _post(uri:, data:, filters:nil, request_options:nil)
+            raise TypeError, 'Filters must be a ' unless filters.nil? or filters.is_a?(Hash) 
+            request_options = _check_request_options(request_options)
+            @http_client.post(url=@config.api_base_url + uri, data.to_json, headers=request_options.get_headers(),  filters=filters, timeout=request_options.connection_timeout)
+        end
+
+        def _put(uri:, data:, filters:nil, request_options:nil)
+            raise TypeError, 'Filters must be a ' unless filters.nil? or filters.is_a?(Hash) 
+            request_options = _check_request_options(request_options)
+            @http_client.put(url=@config.api_base_url + uri, data.to_json, headers=request_options.get_headers(),  filters=filters, timeout=request_options.connection_timeout)
+        end
     end
 end
 

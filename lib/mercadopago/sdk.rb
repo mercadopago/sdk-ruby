@@ -21,6 +21,10 @@ module Mercadopago
         IdentificationType.new(self.request_options, self.http_client)
       end
 
+      def preference()
+        Preference.new(self.request_options, self.http_client)
+      end
+
       def access_token=(value)
         raise TypeError, 'Param access_token must be a String' unless value.kind_of?(String)
         @access_token = value
