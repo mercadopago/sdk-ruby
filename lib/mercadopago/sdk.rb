@@ -13,6 +13,10 @@ module Mercadopago
         Card.new(self.request_options, self.http_client)
       end
 
+      def customer()
+        Customer.new(self.request_options, self.http_client)
+      end
+
       def user()
         User.new(self.request_options, self.http_client)
       end

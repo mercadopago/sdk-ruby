@@ -58,7 +58,7 @@ module Mercadopago
             request_options = _check_request_options(request_options)
             headers = _check_headers(request_options)
             
-            @http_client.delete(url=@config.api_base_url + uri, data.to_json, headers=headers,  params=params, timeout=request_options.connection_timeout, maxretries=request_options.max_retries)
+            @http_client.delete(url=@config.api_base_url + uri, headers=headers, params=params, timeout=request_options.connection_timeout, maxretries=request_options.max_retries)
         end
     end
 end

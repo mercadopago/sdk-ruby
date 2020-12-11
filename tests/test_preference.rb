@@ -29,7 +29,7 @@ class TestPreference < Minitest::Test
             }
          ]
       }
-       result = sdk.preference().post(data)
+       result = sdk.preference().create(data)
        assert_equal 201, result[:status]
     end
 
@@ -46,7 +46,7 @@ class TestPreference < Minitest::Test
                 }
             ]
          }
-        result = sdk.preference().put(preference_id="464842924-68bdeddf-5642-44ef-853c-e0d4df3a63f1", data)
+        result = sdk.preference().update(preference_id="464842924-68bdeddf-5642-44ef-853c-e0d4df3a63f1", data)
         assert_equal 200, result[:status]
     end
 end
