@@ -53,7 +53,7 @@ module Mercadopago
 
         def delete(url, headers, params=nil, timeout=nil, maxretries=nil)
             begin
-                result = RestClient::Request.execute(method: 'delete',  url: url, headers: headers, headers: params, timeout: timeout)
+                result = RestClient::Request.execute(method: 'delete',  url: url, headers: headers, params: params, timeout: timeout)
                 response = {
                     status: result.code,
                     response: JSON.parse(result.body)
