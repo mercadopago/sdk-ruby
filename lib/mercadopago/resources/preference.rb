@@ -1,10 +1,15 @@
 module Mercadopago
+    ##
+    #This class will allow you to charge your customers through our web form from any device in a simple, fast and secure way.
+    #[Click here for more infos](https://www.mercadopago.com.br/developers/en/guides/online-payments/checkout-pro/introduction)
+
     class Preference < MPBase
+
         def initialize(request_options, http_client)
             super(request_options, http_client)
         end
-
-        def get(preference_id, request_options:nil)
+     
+        def get(preference_id=nil, request_options:nil)
             _get(uri:"/checkout/preferences/#{preference_id}", request_options: request_options)
         end
 

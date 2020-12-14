@@ -13,6 +13,10 @@ module Mercadopago
         Card.new(self.request_options, self.http_client)
       end
 
+      def card_token()
+        CardToken.new(self.request_options, self.http_client)
+      end
+
       def customer()
         Customer.new(self.request_options, self.http_client)
       end
@@ -23,6 +27,10 @@ module Mercadopago
 
       def identification_type()
         IdentificationType.new(self.request_options, self.http_client)
+      end
+
+      def payment()
+        Payment.new(self.request_options, self.http_client)
       end
 
       def preference()

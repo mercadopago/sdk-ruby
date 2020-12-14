@@ -1,4 +1,7 @@
 module Mercadopago
+    ###
+    #Access to Identification Types
+    
     class IdentificationType < MPBase
         def initialize(request_options, http_client)
             super(request_options, http_client)

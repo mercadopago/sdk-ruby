@@ -1,4 +1,8 @@
 module Mercadopago
+
+    ###
+    #Access to Users
+    
     class User < MPBase
         def initialize(request_options, http_client)
             super(request_options, http_client)
