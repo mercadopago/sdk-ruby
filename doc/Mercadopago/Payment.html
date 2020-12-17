@@ -287,8 +287,8 @@
           <div class="method-source-code" id="update-source">
             <pre><span class="ruby-comment"># File lib/mercadopago/resources/payment.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>(<span class="ruby-identifier">payment_id</span>, <span class="ruby-identifier">payment_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param payment_object must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">payment_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
-    <span class="ruby-identifier">_put</span>(<span class="ruby-value">uri:</span><span class="ruby-node">&quot;/v1/payments/#{preference_id}&quot;</span>, <span class="ruby-value">data:</span><span class="ruby-identifier">payment_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-identifier">request_options</span>)
+     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param payment_object must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">payment_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+    <span class="ruby-identifier">_put</span>(<span class="ruby-value">uri:</span><span class="ruby-node">&quot;/v1/payments/#{payment_id}&quot;</span>, <span class="ruby-value">data:</span><span class="ruby-identifier">payment_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-identifier">request_options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

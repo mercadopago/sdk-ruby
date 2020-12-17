@@ -132,8 +132,19 @@
           <div class="method-source-code" id="test_method_get_id-source">
             <pre><span class="ruby-comment"># File tests/test_card_token.rb, line 7</span>
  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_get_id</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">card_token</span>().<span class="ruby-identifier">get</span>(<span class="ruby-identifier">card_token_id</span>=<span class="ruby-string">&quot;fbd3595d258f1624e84e4f1a995e0f8f&quot;</span>)
+    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&quot;</span>)
+    <span class="ruby-identifier">card_token_object</span> = {
+       <span class="ruby-value">&quot;card_number&quot;:</span> <span class="ruby-string">&quot;4235647728025682&quot;</span>,
+       <span class="ruby-value">&quot;expiration_year&quot;:</span> <span class="ruby-value">2025</span>,
+       <span class="ruby-value">&quot;expiration_month&quot;:</span> <span class="ruby-value">11</span>,
+       <span class="ruby-value">&quot;security_code&quot;:</span> <span class="ruby-string">&quot;123&quot;</span>,
+       <span class="ruby-value">&quot;cardholder&quot;:</span> {
+          <span class="ruby-value">&quot;name&quot;:</span> <span class="ruby-string">&quot;APRO&quot;</span>
+    
+       }
+    }
+    <span class="ruby-identifier">result_card_token</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">card_token</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">card_token_object</span>)
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">card_token</span>().<span class="ruby-identifier">get</span>(<span class="ruby-identifier">result_card_token</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>])
     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -165,21 +176,21 @@
 
           
           <div class="method-source-code" id="test_method_post-source">
-            <pre><span class="ruby-comment"># File tests/test_card_token.rb, line 13</span>
+            <pre><span class="ruby-comment"># File tests/test_card_token.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_post</span>
-   <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-   <span class="ruby-identifier">data</span> = {
-    <span class="ruby-value">&quot;card_number&quot;:</span> <span class="ruby-string">&quot;4235647728025682&quot;</span>,
-    <span class="ruby-value">&quot;expiration_year&quot;:</span> <span class="ruby-value">2025</span>,
-    <span class="ruby-value">&quot;expiration_month&quot;:</span> <span class="ruby-value">11</span>,
-    <span class="ruby-value">&quot;security_code&quot;:</span> <span class="ruby-string">&quot;123&quot;</span>,
-    <span class="ruby-value">&quot;cardholder&quot;:</span> {
+   <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&quot;</span>)
+   <span class="ruby-identifier">card_token_object</span> = {
+     <span class="ruby-value">&quot;card_number&quot;:</span> <span class="ruby-string">&quot;4235647728025682&quot;</span>,
+     <span class="ruby-value">&quot;expiration_year&quot;:</span> <span class="ruby-value">2025</span>,
+     <span class="ruby-value">&quot;expiration_month&quot;:</span> <span class="ruby-value">11</span>,
+     <span class="ruby-value">&quot;security_code&quot;:</span> <span class="ruby-string">&quot;123&quot;</span>,
+     <span class="ruby-value">&quot;cardholder&quot;:</span> {
         <span class="ruby-value">&quot;name&quot;:</span> <span class="ruby-string">&quot;APRO&quot;</span>
-
-    }
- }
-   <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">card_token</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">data</span>)
-   <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">201</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+  
+     }
+  }
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">card_token</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">card_token_object</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">201</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           

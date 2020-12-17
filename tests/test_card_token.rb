@@ -5,24 +5,35 @@ require 'minitest/autorun'
 class CardToken < Minitest::Test
      
    def test_method_get_id
-      sdk = Mercadopago::SDK.new(access_token="TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659")
-      result = sdk.card_token().get(card_token_id="fbd3595d258f1624e84e4f1a995e0f8f")
+      sdk = Mercadopago::SDK.new(access_token="APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966")
+      card_token_object = {
+         "card_number": "4235647728025682",
+         "expiration_year": 2025,
+         "expiration_month": 11,
+         "security_code": "123",
+         "cardholder": {
+            "name": "APRO"
+      
+         }
+      }
+      result_card_token = sdk.card_token().create(card_token_object)
+      result = sdk.card_token().get(result_card_token[:response]['id'])
       assert_equal 200, result[:status]
   end
 
     def test_method_post
-       sdk = Mercadopago::SDK.new(access_token="TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659")
-       data = {
-        "card_number": "4235647728025682",
-        "expiration_year": 2025,
-        "expiration_month": 11,
-        "security_code": "123",
-        "cardholder": {
+       sdk = Mercadopago::SDK.new(access_token="APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966")
+       card_token_object = {
+         "card_number": "4235647728025682",
+         "expiration_year": 2025,
+         "expiration_month": 11,
+         "security_code": "123",
+         "cardholder": {
             "name": "APRO"
-    
-        }
-     }
-       result = sdk.card_token().create(data)
-       assert_equal 201, result[:status]
+      
+         }
+      }
+      result = sdk.card_token().create(card_token_object)
+      assert_equal 201, result[:status]
     end
  end

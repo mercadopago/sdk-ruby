@@ -12,5 +12,6 @@ require_relative './mercadopago/resources/identification_type.rb'
 require_relative './mercadopago/resources/preference.rb'
 require_relative './mercadopago/resources/payment.rb'
 require_relative './mercadopago/resources/card_token.rb'
+require_relative './mercadopago/resources/refund.rb'
 
 require_relative './mercadopago/sdk.rb'

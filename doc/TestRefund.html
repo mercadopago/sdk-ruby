@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class TestPayment - RDoc Documentation</title>
+<title>class TestRefund - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -75,11 +75,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-test_method_get_id">#test_method_get_id</a>
-    
     <li ><a href="#method-i-test_method_post">#test_method_post</a>
-    
-    <li ><a href="#method-i-test_method_put">#test_method_put</a>
     
     <li ><a href="#method-i-test_method_search">#test_method_search</a>
     
@@ -89,9 +85,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-TestPayment">
-  <h1 id="class-TestPayment" class="class">
-    class TestPayment
+<main role="main" aria-labelledby="class-TestRefund">
+  <h1 id="class-TestRefund" class="class">
+    class TestRefund
   </h1>
 
   <section class="description">
@@ -115,41 +111,6 @@
        </header>
 
     
-      <div id="method-i-test_method_get_id" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">test_method_get_id</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="test_method_get_id-source">
-            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_get_id</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>().<span class="ruby-identifier">get</span>(<span class="ruby-identifier">payment_id</span>=<span class="ruby-value">1231872196</span>)
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-test_method_post" class="method-detail ">
         
         <div class="method-heading">
@@ -169,10 +130,11 @@
 
           
           <div class="method-source-code" id="test_method_post-source">
-            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_post</span> 
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&quot;</span>)
-    <span class="ruby-identifier">card_token_object</span> = {
+            <pre><span class="ruby-comment"># File tests/test_refund.rb, line 14</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_post</span>
+     
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&quot;</span>)
+  <span class="ruby-identifier">card_token_object</span> = {
         <span class="ruby-value">&quot;card_number&quot;:</span> <span class="ruby-string">&quot;4235647728025682&quot;</span>,
         <span class="ruby-value">&quot;expiration_year&quot;:</span> <span class="ruby-value">2025</span>,
         <span class="ruby-value">&quot;expiration_month&quot;:</span> <span class="ruby-value">11</span>,
@@ -182,7 +144,7 @@
         }
      }
     <span class="ruby-identifier">result_card_token</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">card_token</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">card_token_object</span>)
-   
+ 
     <span class="ruby-identifier">payment_object</span> = {
     <span class="ruby-value">&quot;token&quot;:</span> <span class="ruby-identifier">result_card_token</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>],
     <span class="ruby-value">&quot;installments&quot;:</span> <span class="ruby-value">1</span>,
@@ -235,47 +197,11 @@
         }
     }
 }
-  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">payment_object</span>)
+  <span class="ruby-identifier">result_payment</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">payment_object</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">refund</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">payment_id</span>=<span class="ruby-identifier">result_payment</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>])
   <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">201</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-test_method_put" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">test_method_put</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="test_method_put-source">
-            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_put</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-    <span class="ruby-identifier">data</span> = {
-        <span class="ruby-value">&quot;status&quot;:</span> <span class="ruby-string">&quot;approved&quot;</span>,
-    }
-    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>().<span class="ruby-identifier">update</span>(<span class="ruby-identifier">payment_id</span>=<span class="ruby-string">&quot;1231910402&quot;</span>, <span class="ruby-identifier">data</span>)
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">403</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
-<span class="ruby-keyword">end</span></pre>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&quot;approved&quot;</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;status&#39;</span>]
+  <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -305,10 +231,10 @@
 
           
           <div class="method-source-code" id="test_method_search-source">
-            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 7</span>
+            <pre><span class="ruby-comment"># File tests/test_refund.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_search</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-            <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>().<span class="ruby-identifier">search</span>({<span class="ruby-string">&quot;id&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">1231872196</span>})
+    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&quot;</span>)
+                <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">refund</span>().<span class="ruby-identifier">search</span>(<span class="ruby-identifier">id</span>=<span class="ruby-string">&quot;12678120979&quot;</span>)
     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>

@@ -27,8 +27,8 @@ module Mercadopago
         end
 
         def update(payment_id, payment_object, request_options:nil)
-            raise TypeError, 'Param payment_object must be a Hash' unless payment_object.is_a?(Hash)
-            _put(uri:"/v1/payments/#{preference_id}", data:payment_object, request_options:request_options)
+             raise TypeError, 'Param payment_object must be a Hash' unless payment_object.is_a?(Hash)
+            _put(uri:"/v1/payments/#{payment_id}", data:payment_object, request_options:request_options)
         end
 
     end

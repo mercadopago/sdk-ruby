@@ -93,6 +93,8 @@
     
     <li ><a href="#method-i-preference">#preference</a>
     
+    <li ><a href="#method-i-refund">#refund</a>
+    
     <li ><a href="#method-i-request_options">#request_options</a>
     
     <li ><a href="#method-i-request_options-3D">#request_options=</a>
@@ -227,7 +229,7 @@
 
           
           <div class="method-source-code" id="access_token-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">access_token=</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param access_token must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>)
   <span class="ruby-ivar">@access_token</span> = <span class="ruby-identifier">value</span>
@@ -360,7 +362,7 @@
 
           
           <div class="method-source-code" id="http_client-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 45</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">http_client=</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param http_client must be a implementation of HttpClient&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">HttpClient</span>)
   <span class="ruby-ivar">@http_client</span> = <span class="ruby-identifier">value</span>
@@ -474,6 +476,39 @@
       </div>
 
     
+      <div id="method-i-refund" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">refund</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="refund-source">
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">refund</span>()
+  <span class="ruby-constant">Refund</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-request_options" class="method-detail ">
         
         <div class="method-heading">
@@ -493,7 +528,7 @@
 
           
           <div class="method-source-code" id="request_options-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 55</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">request_options</span>
   <span class="ruby-ivar">@request_options</span>.<span class="ruby-identifier">access_token</span> = <span class="ruby-ivar">@access_token</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request_options</span>.<span class="ruby-identifier">access_token</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@request_options</span>
@@ -527,7 +562,7 @@
 
           
           <div class="method-source-code" id="request_options-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 50</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">request_options=</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param request_options must be a RequestOptions object&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">RequestOptions</span>)
   <span class="ruby-ivar">@request_options</span> = <span class="ruby-identifier">value</span>

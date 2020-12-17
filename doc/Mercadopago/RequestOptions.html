@@ -298,7 +298,7 @@
 
           
           <div class="method-source-code" id="access_token-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">access_token=</span>(<span class="ruby-identifier">value</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param access_token must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>)
     <span class="ruby-ivar">@access_token</span> = <span class="ruby-identifier">value</span>
@@ -332,7 +332,7 @@
 
           
           <div class="method-source-code" id="connection_timeout-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 50</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">connection_timeout=</span>(<span class="ruby-identifier">value</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param connection_timeout must be a Float&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Float</span>)
     <span class="ruby-ivar">@connection_timeout</span> = <span class="ruby-identifier">value</span>
@@ -366,7 +366,7 @@
 
           
           <div class="method-source-code" id="corporation_id-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 55</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">corporation_id=</span>(<span class="ruby-identifier">value</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param corporation_id must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>)
     <span class="ruby-ivar">@corporation_id</span> = <span class="ruby-identifier">value</span>
@@ -400,7 +400,7 @@
 
           
           <div class="method-source-code" id="custom_headers-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 45</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">custom_headers=</span>(<span class="ruby-identifier">value</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param custom_headers must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>)
     <span class="ruby-ivar">@custom_headers</span> = <span class="ruby-identifier">value</span>
@@ -440,7 +440,9 @@
         <span class="ruby-value">&#39;x-product-id&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">product_id</span>, 
         <span class="ruby-value">&#39;x-tracking-id&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">tracking_id</span>,
         <span class="ruby-value">&#39;User-Agent&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">user_agent</span>,
-        <span class="ruby-value">&#39;Accept&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">mime_json</span>}
+        <span class="ruby-value">&#39;Accept&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">mime_json</span>,
+        <span class="ruby-value">&#39;Content-Type&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">mime_json</span>}
+
 
     <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;x-corporation-id&#39;</span>] = <span class="ruby-ivar">@corporation_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@corporation_id</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;x-integrator-id&#39;</span>] = <span class="ruby-ivar">@integrator_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@integrator_id</span>.<span class="ruby-identifier">nil?</span>
@@ -479,7 +481,7 @@
 
           
           <div class="method-source-code" id="integrator_id-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 60</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">integrator_id=</span>(<span class="ruby-identifier">value</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param integrator_id must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>)
     <span class="ruby-ivar">@integrator_id</span> = <span class="ruby-identifier">value</span>
@@ -513,7 +515,7 @@
 
           
           <div class="method-source-code" id="max_retries-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 70</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_retries=</span>(<span class="ruby-identifier">value</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param max_retries must be a Integer&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>)
     <span class="ruby-ivar">@max_retries</span> = <span class="ruby-identifier">value</span>
@@ -547,7 +549,7 @@
 
           
           <div class="method-source-code" id="platform_id-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 65</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">platform_id=</span>(<span class="ruby-identifier">value</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param platform_id must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>)
     <span class="ruby-ivar">@platform_id</span> = <span class="ruby-identifier">value</span>
