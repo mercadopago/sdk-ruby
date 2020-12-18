@@ -29,6 +29,10 @@ module Mercadopago
         IdentificationType.new(self.request_options, self.http_client)
       end
 
+      def merchant_orden()
+        MerchantOrden.new(self.request_options, self.http_client)
+      end
+
       def payment()
         Payment.new(self.request_options, self.http_client)
       end

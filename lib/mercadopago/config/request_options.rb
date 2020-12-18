@@ -26,8 +26,7 @@ module Mercadopago
                 'x-product-id': @config.product_id, 
                 'x-tracking-id': @config.tracking_id,
                 'User-Agent': @config.user_agent,
-                'Accept': @config.mime_json,
-                'Content-Type': @config.mime_json}
+                'Accept': @config.mime_json}
 
 
             headers['x-corporation-id'] = @corporation_id unless @corporation_id.nil?
