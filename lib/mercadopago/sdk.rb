@@ -37,6 +37,11 @@ module Mercadopago
         Payment.new(self.request_options, self.http_client)
       end
 
+      def payment_methods()
+        PaymentMethods.new(self.request_options, self.http_client)
+      end
+
+
       def preference()
         Preference.new(self.request_options, self.http_client)
       end
