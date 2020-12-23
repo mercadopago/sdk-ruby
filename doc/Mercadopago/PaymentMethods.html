@@ -4,37 +4,37 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Mercadopago - RDoc Documentation</title>
+<title>class Mercadopago::PaymentMethods - RDoc Documentation</title>
 
 <script type="text/javascript">
-  var rdoc_rel_prefix = "./";
-  var index_rel_prefix = "./";
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
-<script src="./js/navigation.js" defer></script>
-<script src="./js/search.js" defer></script>
-<script src="./js/search_index.js" defer></script>
-<script src="./js/searcher.js" defer></script>
-<script src="./js/darkfish.js" defer></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
-<link href="./css/fonts.css" rel="stylesheet">
-<link href="./css/rdoc.css" rel="stylesheet">
-
-
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
 
 
-<body id="top" role="document" class="module">
+
+
+<body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
-    <a href="./index.html" rel="home">Home</a>
+    <a href="../index.html" rel="home">Home</a>
   </h2>
 
   <div id="table-of-contents-navigation">
-    <a href="./table_of_contents.html#pages">Pages</a>
-    <a href="./table_of_contents.html#classes">Classes</a>
-    <a href="./table_of_contents.html#methods">Methods</a>
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
   </div>
 </div>
 
@@ -59,7 +59,14 @@
 
   <div id="class-metadata">
     
-    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="MPBase.html">Mercadopago::MPBase</a>
+  
+</div>
+
     
     
     <!-- Method Quickref -->
@@ -70,19 +77,23 @@
     
     <li class="calls-super" ><a href="#method-c-new">::new</a>
     
+    <li ><a href="#method-i-get">#get</a>
+    
   </ul>
 </div>
 
   </div>
 </nav>
 
-<main role="main" aria-labelledby="module-Mercadopago">
-  <h1 id="module-Mercadopago" class="module">
-    module Mercadopago
+<main role="main" aria-labelledby="class-Mercadopago::PaymentMethods">
+  <h1 id="class-Mercadopago::PaymentMethods" class="class">
+    class Mercadopago::PaymentMethods
   </h1>
 
   <section class="description">
     
+<p>Access to <a href="Payment.html"><code>Payment</code></a> Methods</p>
+
   </section>
 
   
@@ -115,20 +126,61 @@
 
         <div class="method-description">
           
-          <p>Access to Advanced Payments Refunds</p>
+          
           
           
             <div class="method-calls-super">
               Calls superclass method
-              
+              <a href="MPBase.html#method-c-new"><code>Mercadopago::MPBase::new</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/resources/disbursement_refund.rb, line 6</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/resources/payment_methods.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
     <span class="ruby-keyword">super</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-get" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get</span><span
+            class="method-args">(request_options:nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get-source">
+            <pre><span class="ruby-comment"># File lib/mercadopago/resources/payment_methods.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
+    <span class="ruby-identifier">_get</span>(<span class="ruby-value">uri:</span><span class="ruby-string">&quot;/v1/payment_methods&quot;</span>, <span class="ruby-value">request_options:</span> <span class="ruby-identifier">request_options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

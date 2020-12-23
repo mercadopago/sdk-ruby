@@ -189,8 +189,8 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_check_headers</span>(<span class="ruby-identifier">request_options</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">extra_headers</span>=<span class="ruby-keyword">nil</span>)
     <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">get_headers</span>() <span class="ruby-operator">:</span> <span class="ruby-ivar">@request_options</span>.<span class="ruby-identifier">get_headers</span>()
     
-    <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">extra_headers</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">extra_headers</span>.<span class="ruby-identifier">nil?</span>
-
+    <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">extra_headers</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">extra_headers</span>.<span class="ruby-identifier">nil?</span>
+   
     <span class="ruby-identifier">headers</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

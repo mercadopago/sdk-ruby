@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Mercadopago - RDoc Documentation</title>
+<title>class TestPaymentMethods - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -23,7 +23,7 @@
 
 
 
-<body id="top" role="document" class="module">
+<body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
@@ -59,7 +59,14 @@
 
   <div id="class-metadata">
     
-    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Minitest::Test
+  
+</div>
+
     
     
     <!-- Method Quickref -->
@@ -68,7 +75,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-test_method_get">#test_method_get</a>
     
   </ul>
 </div>
@@ -76,9 +83,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="module-Mercadopago">
-  <h1 id="module-Mercadopago" class="module">
-    module Mercadopago
+<main role="main" aria-labelledby="class-TestPaymentMethods">
+  <h1 id="class-TestPaymentMethods" class="class">
+    class TestPaymentMethods
   </h1>
 
   <section class="description">
@@ -96,17 +103,17 @@
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Class Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-c-new" class="method-detail ">
+      <div id="method-i-test_method_get" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(request_options, http_client)</span>
+          <span class="method-name">test_method_get</span><span
+            class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -115,20 +122,17 @@
 
         <div class="method-description">
           
-          <p>Access to Advanced Payments Refunds</p>
           
           
-            <div class="method-calls-super">
-              Calls superclass method
-              
-            </div>
           
 
           
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/resources/disbursement_refund.rb, line 6</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
-    <span class="ruby-keyword">super</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
+          <div class="method-source-code" id="test_method_get-source">
+            <pre><span class="ruby-comment"># File tests/test_payment_methods.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_get</span>
+    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment_methods</span>.<span class="ruby-identifier">get</span>()
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           

@@ -9,6 +9,10 @@ module Mercadopago
         self.request_options = request_options.nil? ? RequestOptions.new(access_token:access_token) : request_options
       end
 
+      def advanced_payment()
+        AdvancedPayment.new(self.request_options, self.http_client)
+      end
+
       def card()
         Card.new(self.request_options, self.http_client)
       end
@@ -19,6 +23,10 @@ module Mercadopago
 
       def customer()
         Customer.new(self.request_options, self.http_client)
+      end
+
+      def disbursement_refund()
+        DisbursementRefund.new(self.request_options, self.http_client)
       end
 
       def user()
