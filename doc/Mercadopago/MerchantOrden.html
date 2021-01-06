@@ -75,8 +75,6 @@
 
   <ul class="link-list" role="directory">
     
-    <li class="calls-super" ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-create">#create</a>
     
     <li ><a href="#method-i-get">#get</a>
@@ -113,52 +111,6 @@
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(request_options, http_client)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-            <div class="method-calls-super">
-              Calls superclass method
-              <a href="MPBase.html#method-c-new"><code>Mercadopago::MPBase::new</code></a>
-            </div>
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/resources/merchant_orden.rb, line 7</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
-    <span class="ruby-keyword">super</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
@@ -169,7 +121,7 @@
         
         <div class="method-heading">
           <span class="method-name">create</span><span
-            class="method-args">(merchant_orders_object, request_options:nil)</span>
+            class="method-args">(merchant_orders_object, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -184,10 +136,11 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/resources/merchant_orden.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">merchant_orders_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param merchant_orders_object must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">merchant_orders_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
-    <span class="ruby-identifier">_post</span>(<span class="ruby-value">uri:</span><span class="ruby-string">&quot;/merchant_orders&quot;</span>, <span class="ruby-value">data:</span><span class="ruby-identifier">merchant_orders_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-identifier">request_options</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/resources/merchant_orden.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">merchant_orders_object</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param merchant_orders_object must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">merchant_orders_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+
+  <span class="ruby-identifier">_post</span>(<span class="ruby-value">uri:</span> <span class="ruby-string">&#39;/merchant_orders&#39;</span>, <span class="ruby-value">data:</span> <span class="ruby-identifier">merchant_orders_object</span>, <span class="ruby-value">request_options:</span> <span class="ruby-identifier">request_options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -203,7 +156,7 @@
         
         <div class="method-heading">
           <span class="method-name">get</span><span
-            class="method-args">(merchant_orders_id, request_options:nil)</span>
+            class="method-args">(merchant_orders_id, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -218,9 +171,9 @@
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/resources/merchant_orden.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">merchant_orders_id</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">_get</span>(<span class="ruby-value">uri:</span><span class="ruby-node">&quot;/merchant_orders/#{merchant_orders_id}&quot;</span>, <span class="ruby-value">request_options:</span> <span class="ruby-identifier">request_options</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/resources/merchant_orden.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">merchant_orders_id</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">_get</span>(<span class="ruby-value">uri:</span> <span class="ruby-node">&quot;/merchant_orders/#{merchant_orders_id}&quot;</span>, <span class="ruby-value">request_options:</span> <span class="ruby-identifier">request_options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -236,7 +189,7 @@
         
         <div class="method-heading">
           <span class="method-name">search</span><span
-            class="method-args">(filters=nil, request_options:nil)</span>
+            class="method-args">(filters = nil, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -251,10 +204,11 @@
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/resources/merchant_orden.rb, line 11</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">filters</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param filters must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">filters</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
-    <span class="ruby-identifier">_get</span>(<span class="ruby-value">uri:</span><span class="ruby-string">&quot;/merchant_orders/search&quot;</span>, <span class="ruby-value">filters:</span> <span class="ruby-identifier">filters</span>, <span class="ruby-value">request_options:</span> <span class="ruby-identifier">request_options</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/resources/merchant_orden.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">filters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param filters must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">filters</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+
+  <span class="ruby-identifier">_get</span>(<span class="ruby-value">uri:</span> <span class="ruby-string">&#39;/merchant_orders/search&#39;</span>, <span class="ruby-value">filters:</span> <span class="ruby-identifier">filters</span>, <span class="ruby-value">request_options:</span> <span class="ruby-identifier">request_options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -270,7 +224,7 @@
         
         <div class="method-heading">
           <span class="method-name">update</span><span
-            class="method-args">(merchant_orders_id, merchant_orders_object, request_options:nil)</span>
+            class="method-args">(merchant_orders_id, merchant_orders_object, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -285,10 +239,12 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/resources/merchant_orden.rb, line 25</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>(<span class="ruby-identifier">merchant_orders_id</span>, <span class="ruby-identifier">merchant_orders_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param merchant_orders_object must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">merchant_orders_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
-    <span class="ruby-identifier">_put</span>(<span class="ruby-value">uri:</span><span class="ruby-node">&quot;/merchant_orders/#{merchant_orders_id}&quot;</span>, <span class="ruby-value">data:</span><span class="ruby-identifier">merchant_orders_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-identifier">request_options</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/resources/merchant_orden.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>(<span class="ruby-identifier">merchant_orders_id</span>, <span class="ruby-identifier">merchant_orders_object</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param merchant_orders_object must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">merchant_orders_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+
+  <span class="ruby-identifier">_put</span>(<span class="ruby-value">uri:</span> <span class="ruby-node">&quot;/merchant_orders/#{merchant_orders_id}&quot;</span>, <span class="ruby-value">data:</span> <span class="ruby-identifier">merchant_orders_object</span>,
+       <span class="ruby-value">request_options:</span> <span class="ruby-identifier">request_options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

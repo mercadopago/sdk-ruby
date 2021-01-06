@@ -136,9 +136,9 @@
           <div class="method-source-code" id="test_method_get_id-source">
             <pre><span class="ruby-comment"># File tests/test_merchant_orden.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_get_id</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&quot;</span>)
-    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">merchant_orden</span>().<span class="ruby-identifier">get</span>(<span class="ruby-identifier">id</span>=<span class="ruby-string">&quot;2112122225&quot;</span>)
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&#39;</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">merchant_orden</span>.<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;2112122225&#39;</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -169,41 +169,40 @@
 
           
           <div class="method-source-code" id="test_method_post-source">
-            <pre><span class="ruby-comment"># File tests/test_merchant_orden.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_post</span> 
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&quot;</span>)
-    <span class="ruby-identifier">data</span> = {
-        <span class="ruby-value">&quot;items&quot;:</span> [
-            {
-            <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&quot;Dummy Item&quot;</span>,
-            <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&quot;Multicolor Item&quot;</span>,
-            <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
-            <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&quot;&quot;</span>,
-            <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">10.0</span>
-            }
-         ]
+            <pre><span class="ruby-comment"># File tests/test_merchant_orden.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_post</span>
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&#39;</span>)
+  <span class="ruby-identifier">data</span> = {
+    <span class="ruby-value">&quot;items&quot;:</span> [
+      {
+        <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&#39;Dummy Item&#39;</span>,
+        <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&#39;Multicolor Item&#39;</span>,
+        <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
+        <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&#39;&#39;</span>,
+        <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">10.0</span>
       }
-       <span class="ruby-identifier">result_prefence</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">data</span>)
-       <span class="ruby-identifier">merchant_orden_object</span> = {
-        <span class="ruby-value">&quot;preference_id&quot;:</span> <span class="ruby-identifier">result_prefence</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>],
-        <span class="ruby-value">&quot;site_id&quot;:</span> <span class="ruby-string">&quot;MLB&quot;</span>,
-        <span class="ruby-value">&quot;notification_url&quot;:</span> <span class="ruby-string">&quot;https://seller/notification&quot;</span>,
-        <span class="ruby-value">&quot;additional_info&quot;:</span> <span class="ruby-string">&quot;Aditional info&quot;</span>,
-        <span class="ruby-value">&quot;external_reference&quot;:</span> <span class="ruby-value">1</span>,
-        <span class="ruby-value">&quot;marketplace&quot;:</span> <span class="ruby-string">&quot;NONE&quot;</span>,
-        <span class="ruby-value">&quot;items&quot;:</span> [ { 
-                <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&quot;Test Update Success&quot;</span>,
-                <span class="ruby-value">&quot;id&quot;:</span> <span class="ruby-string">&quot;5678&quot;</span>,
-                <span class="ruby-value">&quot;picture_url&quot;:</span> <span class="ruby-string">&quot;http://product1.image.png&quot;</span>,
-                <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
-                <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&quot;Item 1&quot;</span>,
-                <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&quot;BRL&quot;</span>,
-                <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">20.5</span>
-        } ]
-      }
-       <span class="ruby-identifier">result_merchant_order</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">merchant_orden</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">merchant_orden_object</span>)
-       <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">201</span>, <span class="ruby-identifier">result_merchant_order</span>[<span class="ruby-value">:status</span>]
-
+    ]
+  }
+  <span class="ruby-identifier">result_prefence</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">merchant_orden_object</span> = {
+    <span class="ruby-value">&quot;preference_id&quot;:</span> <span class="ruby-identifier">result_prefence</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>],
+    <span class="ruby-value">&quot;site_id&quot;:</span> <span class="ruby-string">&#39;MLB&#39;</span>,
+    <span class="ruby-value">&quot;notification_url&quot;:</span> <span class="ruby-string">&#39;https://seller/notification&#39;</span>,
+    <span class="ruby-value">&quot;additional_info&quot;:</span> <span class="ruby-string">&#39;Aditional info&#39;</span>,
+    <span class="ruby-value">&quot;external_reference&quot;:</span> <span class="ruby-value">1</span>,
+    <span class="ruby-value">&quot;marketplace&quot;:</span> <span class="ruby-string">&#39;NONE&#39;</span>,
+    <span class="ruby-value">&quot;items&quot;:</span> [{
+      <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&#39;Test Update Success&#39;</span>,
+      <span class="ruby-value">&quot;id&quot;:</span> <span class="ruby-string">&#39;5678&#39;</span>,
+      <span class="ruby-value">&quot;picture_url&quot;:</span> <span class="ruby-string">&#39;http://product1.image.png&#39;</span>,
+      <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&#39;Item 1&#39;</span>,
+      <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&#39;BRL&#39;</span>,
+      <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">20.5</span>
+    }]
+  }
+  <span class="ruby-identifier">result_merchant_order</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">merchant_orden</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">merchant_orden_object</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">201</span>, <span class="ruby-identifier">result_merchant_order</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -236,40 +235,42 @@
           <div class="method-source-code" id="test_method_put-source">
             <pre><span class="ruby-comment"># File tests/test_merchant_orden.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_put</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&quot;</span>)
-    <span class="ruby-identifier">data</span> = {
-        <span class="ruby-value">&quot;items&quot;:</span> [
-            {
-            <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&quot;Dummy Item&quot;</span>,
-            <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&quot;Multicolor Item&quot;</span>,
-            <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
-            <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&quot;&quot;</span>,
-            <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">10.0</span>
-            }
-         ]
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&#39;</span>)
+  <span class="ruby-identifier">data</span> = {
+    <span class="ruby-value">&quot;items&quot;:</span> [
+      {
+        <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&#39;Dummy Item&#39;</span>,
+        <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&#39;Multicolor Item&#39;</span>,
+        <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
+        <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&#39;&#39;</span>,
+        <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">10.0</span>
       }
-       <span class="ruby-identifier">result_prefence</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">data</span>)
-       <span class="ruby-identifier">merchant_orden_object</span> = {
-        <span class="ruby-value">&quot;preference_id&quot;:</span> <span class="ruby-identifier">result_prefence</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>],
-        <span class="ruby-value">&quot;site_id&quot;:</span> <span class="ruby-string">&quot;MLB&quot;</span>,
-        <span class="ruby-value">&quot;notification_url&quot;:</span> <span class="ruby-string">&quot;https://seller/notification&quot;</span>,
-        <span class="ruby-value">&quot;additional_info&quot;:</span> <span class="ruby-string">&quot;Aditional info&quot;</span>,
-        <span class="ruby-value">&quot;external_reference&quot;:</span> <span class="ruby-value">1</span>,
-        <span class="ruby-value">&quot;marketplace&quot;:</span> <span class="ruby-string">&quot;NONE&quot;</span>,
-        <span class="ruby-value">&quot;items&quot;:</span> [ { 
-                <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&quot;Test Update Success&quot;</span>,
-                <span class="ruby-value">&quot;id&quot;:</span> <span class="ruby-string">&quot;5678&quot;</span>,
-                <span class="ruby-value">&quot;picture_url&quot;:</span> <span class="ruby-string">&quot;http://product1.image.png&quot;</span>,
-                <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
-                <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&quot;Item 1&quot;</span>,
-                <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&quot;BRL&quot;</span>,
-                <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">20.5</span>
-        } ]
+    ]
+  }
+  <span class="ruby-identifier">result_prefence</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">merchant_orden_object</span> = {
+    <span class="ruby-value">&quot;preference_id&quot;:</span> <span class="ruby-identifier">result_prefence</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>],
+    <span class="ruby-value">&quot;site_id&quot;:</span> <span class="ruby-string">&#39;MLB&#39;</span>,
+    <span class="ruby-value">&quot;notification_url&quot;:</span> <span class="ruby-string">&#39;https://seller/notification&#39;</span>,
+    <span class="ruby-value">&quot;additional_info&quot;:</span> <span class="ruby-string">&#39;Aditional info&#39;</span>,
+    <span class="ruby-value">&quot;external_reference&quot;:</span> <span class="ruby-value">1</span>,
+    <span class="ruby-value">&quot;marketplace&quot;:</span> <span class="ruby-string">&#39;NONE&#39;</span>,
+    <span class="ruby-value">&quot;items&quot;:</span> [
+      {
+        <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&#39;Test Update Success&#39;</span>,
+        <span class="ruby-value">&quot;id&quot;:</span> <span class="ruby-string">&#39;5678&#39;</span>,
+        <span class="ruby-value">&quot;picture_url&quot;:</span> <span class="ruby-string">&#39;http://product1.image.png&#39;</span>,
+        <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
+        <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&#39;Item 1&#39;</span>,
+        <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&#39;BRL&#39;</span>,
+        <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">20.5</span>
       }
-    <span class="ruby-identifier">result_merchant_order</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">merchant_orden</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">merchant_orden_object</span>)
-    <span class="ruby-identifier">merchant_order_update</span> = {<span class="ruby-value">&quot;additional_info&quot;:</span> <span class="ruby-string">&quot;Info 3&quot;</span>}
-    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">merchant_orden</span>().<span class="ruby-identifier">update</span>(<span class="ruby-identifier">result_merchant_order</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">merchant_order_update</span>)
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+    ]
+  }
+  <span class="ruby-identifier">result_merchant_order</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">merchant_orden</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">merchant_orden_object</span>)
+  <span class="ruby-identifier">merchant_order_update</span> = { <span class="ruby-value">&quot;additional_info&quot;:</span> <span class="ruby-string">&#39;Info 3&#39;</span> }
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">merchant_orden</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">result_merchant_order</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">merchant_order_update</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -300,11 +301,11 @@
 
           
           <div class="method-source-code" id="test_method_search-source">
-            <pre><span class="ruby-comment"># File tests/test_merchant_orden.rb, line 7</span>
+            <pre><span class="ruby-comment"># File tests/test_merchant_orden.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_search</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-            <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">merchant_orden</span>().<span class="ruby-identifier">search</span>({<span class="ruby-string">&quot;id&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">1231872196</span>})
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&#39;</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">merchant_orden</span>.<span class="ruby-identifier">search</span>({ <span class="ruby-string">&#39;id&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">123_187_219_6</span> })
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           

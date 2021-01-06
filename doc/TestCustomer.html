@@ -128,40 +128,40 @@
 
           
           <div class="method-source-code" id="test_all-source">
-            <pre><span class="ruby-comment"># File tests/test_customer.rb, line 7</span>
+            <pre><span class="ruby-comment"># File tests/test_customer.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_all</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-783169576377080-082620-395ee7f82e0d55b1db606c118686c1db-464842924&quot;</span>)
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;TEST-783169576377080-082620-395ee7f82e0d55b1db606c118686c1db-464842924&#39;</span>)
 
-    <span class="ruby-identifier">customer_object</span> = {
-        <span class="ruby-value">&quot;email&quot;:</span> <span class="ruby-string">&quot;test_payer_999922@testuser.com&quot;</span>,
-        <span class="ruby-value">&quot;first_name&quot;:</span> <span class="ruby-string">&quot;Rafa&quot;</span>,
-        <span class="ruby-value">&quot;last_name&quot;:</span> <span class="ruby-string">&quot;Williner&quot;</span>,
-        <span class="ruby-value">&quot;phone&quot;:</span> {
-            <span class="ruby-value">&quot;area_code&quot;:</span> <span class="ruby-string">&quot;03492&quot;</span>,
-            <span class="ruby-value">&quot;number&quot;:</span> <span class="ruby-string">&quot;432334&quot;</span>
-        },
-        <span class="ruby-value">&quot;identification&quot;:</span> {
-            <span class="ruby-value">&quot;type&quot;:</span> <span class="ruby-string">&quot;DNI&quot;</span>,
-            <span class="ruby-value">&quot;number&quot;:</span> <span class="ruby-string">&quot;29804555&quot;</span>
-        },
-        <span class="ruby-value">&quot;address&quot;:</span> {
-            <span class="ruby-value">&quot;zip_code&quot;:</span> <span class="ruby-string">&quot;2300&quot;</span>,
-            <span class="ruby-value">&quot;street_name&quot;:</span> <span class="ruby-string">&quot;some street&quot;</span>
-        },
-        <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&quot;customer description&quot;</span>
-    }
+  <span class="ruby-identifier">customer_object</span> = {
+    <span class="ruby-value">&quot;email&quot;:</span> <span class="ruby-string">&#39;test_payer_999922@testuser.com&#39;</span>,
+    <span class="ruby-value">&quot;first_name&quot;:</span> <span class="ruby-string">&#39;Rafa&#39;</span>,
+    <span class="ruby-value">&quot;last_name&quot;:</span> <span class="ruby-string">&#39;Williner&#39;</span>,
+    <span class="ruby-value">&quot;phone&quot;:</span> {
+      <span class="ruby-value">&quot;area_code&quot;:</span> <span class="ruby-string">&#39;03492&#39;</span>,
+      <span class="ruby-value">&quot;number&quot;:</span> <span class="ruby-string">&#39;432334&#39;</span>
+    },
+    <span class="ruby-value">&quot;identification&quot;:</span> {
+      <span class="ruby-value">&quot;type&quot;:</span> <span class="ruby-string">&#39;DNI&#39;</span>,
+      <span class="ruby-value">&quot;number&quot;:</span> <span class="ruby-string">&#39;29804555&#39;</span>
+    },
+    <span class="ruby-value">&quot;address&quot;:</span> {
+      <span class="ruby-value">&quot;zip_code&quot;:</span> <span class="ruby-string">&#39;2300&#39;</span>,
+      <span class="ruby-value">&quot;street_name&quot;:</span> <span class="ruby-string">&#39;some street&#39;</span>
+    },
+    <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&#39;customer description&#39;</span>
+  }
 
-    <span class="ruby-identifier">customer_saved</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">customer</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">customer_object</span>)
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">201</span>, <span class="ruby-identifier">customer_saved</span>[<span class="ruby-value">:status</span>]
-    
-            <span class="ruby-identifier">customer_update</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">customer</span>().<span class="ruby-identifier">update</span>(<span class="ruby-identifier">customer_saved</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&quot;id&quot;</span>], {<span class="ruby-value">&quot;last_name&quot;:</span> <span class="ruby-string">&quot;Payer&quot;</span>})
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">customer_update</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-identifier">customer_saved</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">customer</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">customer_object</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">201</span>, <span class="ruby-identifier">customer_saved</span>[<span class="ruby-value">:status</span>]
 
-    <span class="ruby-identifier">customer_updated</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">customer</span>().<span class="ruby-identifier">get</span>(<span class="ruby-identifier">customer_saved</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&quot;id&quot;</span>])
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&quot;Payer&quot;</span>, <span class="ruby-identifier">customer_updated</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&quot;last_name&quot;</span>]
+  <span class="ruby-identifier">customer_update</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">customer</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">customer_saved</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>], { <span class="ruby-value">&quot;last_name&quot;:</span> <span class="ruby-string">&#39;Payer&#39;</span> })
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">customer_update</span>[<span class="ruby-value">:status</span>]
 
-    <span class="ruby-identifier">customer_deleted</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">customer</span>().<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">customer_saved</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&quot;id&quot;</span>])
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">customer_deleted</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-identifier">customer_updated</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">customer</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">customer_saved</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&#39;Payer&#39;</span>, <span class="ruby-identifier">customer_updated</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;last_name&#39;</span>]
+
+  <span class="ruby-identifier">customer_deleted</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">customer</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">customer_saved</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">customer_deleted</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           

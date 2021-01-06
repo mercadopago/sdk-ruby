@@ -113,7 +113,7 @@
         
         <div class="method-heading">
           <span class="method-name">call</span><span
-            class="method-args">(env)</span>
+            class="method-args">(_env)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -128,13 +128,13 @@
 
           
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File examples/checkout-buttons/basic_preference/button.rb, line 8</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">env</span>)
-      <span class="ruby-identifier">mp</span> = <span class="ruby-constant">MercadoPago</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;CLIENT_ID&#39;</span>, <span class="ruby-string">&#39;CLIENT_SECRET&#39;</span>)
-      <span class="ruby-identifier">preferenceData</span> = {<span class="ruby-string">&quot;items&quot;</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&quot;title&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;testCreate&quot;</span>, <span class="ruby-string">&quot;quantity&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">1</span>, <span class="ruby-string">&quot;unit_price&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">10.2</span>, <span class="ruby-string">&quot;currency_id&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&quot;ARS&quot;</span>]}
-      <span class="ruby-identifier">preference</span> = <span class="ruby-identifier">mp</span>.<span class="ruby-identifier">create_preference</span>(<span class="ruby-identifier">preferenceData</span>)
-      
-      <span class="ruby-identifier">html</span> =  <span class="ruby-string">&#39;&lt;!doctype html&gt;
+            <pre><span class="ruby-comment"># File examples/checkout-buttons/basic_preference/button.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">_env</span>)
+  <span class="ruby-identifier">mp</span> = <span class="ruby-constant">MercadoPago</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;CLIENT_ID&#39;</span>, <span class="ruby-string">&#39;CLIENT_SECRET&#39;</span>)
+  <span class="ruby-identifier">preferenceData</span> = { <span class="ruby-string">&#39;items&#39;</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;title&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;testCreate&#39;</span>, <span class="ruby-string">&#39;quantity&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">1</span>, <span class="ruby-string">&#39;unit_price&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">10.2</span>, <span class="ruby-string">&#39;currency_id&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;ARS&#39;</span>] }
+  <span class="ruby-identifier">preference</span> = <span class="ruby-identifier">mp</span>.<span class="ruby-identifier">create_preference</span>(<span class="ruby-identifier">preferenceData</span>)
+
+  <span class="ruby-identifier">html</span> = <span class="ruby-string">&#39;&lt;!doctype html&gt;
                       &lt;html&gt;
                               &lt;head&gt;
                                       &lt;title&gt;MercadoPago SDK - Create Preference and Show Checkout Example&lt;/title&gt;
@@ -144,8 +144,8 @@
                               &lt;script type=&quot;text/javascript&quot; src=&quot;//resources.mlstatic.com/mptools/render.js&quot;&gt;&lt;/script&gt;
                       &lt;/body&gt;
                       &lt;/html&gt;&#39;</span>
-      
-      <span class="ruby-keyword">return</span> [<span class="ruby-value">200</span>, {<span class="ruby-string">&#39;Content-Type&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;text/html&#39;</span>}, [<span class="ruby-identifier">html</span>]]
+
+  [<span class="ruby-value">200</span>, { <span class="ruby-string">&#39;Content-Type&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;text/html&#39;</span> }, [<span class="ruby-identifier">html</span>]]
 <span class="ruby-keyword">end</span></pre>
           </div>
           

@@ -179,7 +179,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(access_token, http_client=nil, request_options=nil)</span>
+            class="method-args">(access_token, http_client = nil, request_options = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -194,11 +194,11 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 6</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-identifier">http_client</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">request_options</span>=<span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-identifier">http_client</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">request_options</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">access_token</span> = <span class="ruby-identifier">access_token</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span> = <span class="ruby-identifier">http_client</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">HttpClient</span>.<span class="ruby-identifier">new</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">http_client</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">RequestOptions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">access_token:</span><span class="ruby-identifier">access_token</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">request_options</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">RequestOptions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">access_token:</span> <span class="ruby-identifier">access_token</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">request_options</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -239,7 +239,8 @@
           <div class="method-source-code" id="access_token-3D-source">
             <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">access_token=</span>(<span class="ruby-identifier">value</span>)
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param access_token must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param access_token must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+
   <span class="ruby-ivar">@access_token</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -271,9 +272,9 @@
 
           
           <div class="method-source-code" id="advanced_payment-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">advanced_payment</span>()
-  <span class="ruby-constant">AdvancedPayment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">advanced_payment</span>
+  <span class="ruby-constant">AdvancedPayment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -304,9 +305,9 @@
 
           
           <div class="method-source-code" id="card-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">card</span>()
-  <span class="ruby-constant">Card</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">card</span>
+  <span class="ruby-constant">Card</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -337,9 +338,9 @@
 
           
           <div class="method-source-code" id="card_token-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">card_token</span>()
-  <span class="ruby-constant">CardToken</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">card_token</span>
+  <span class="ruby-constant">CardToken</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -370,9 +371,9 @@
 
           
           <div class="method-source-code" id="customer-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 24</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">customer</span>()
-  <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">customer</span>
+  <span class="ruby-constant">Customer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -403,9 +404,9 @@
 
           
           <div class="method-source-code" id="disbursement_refund-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 28</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">disbursement_refund</span>()
-  <span class="ruby-constant">DisbursementRefund</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">disbursement_refund</span>
+  <span class="ruby-constant">DisbursementRefund</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -436,9 +437,10 @@
 
           
           <div class="method-source-code" id="http_client-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 66</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">http_client=</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param http_client must be a implementation of HttpClient&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">HttpClient</span>)
+
   <span class="ruby-ivar">@http_client</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -470,9 +472,9 @@
 
           
           <div class="method-source-code" id="identification_type-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 36</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">identification_type</span>()
-  <span class="ruby-constant">IdentificationType</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">identification_type</span>
+  <span class="ruby-constant">IdentificationType</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -503,9 +505,9 @@
 
           
           <div class="method-source-code" id="merchant_orden-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merchant_orden</span>()
-  <span class="ruby-constant">MerchantOrden</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merchant_orden</span>
+  <span class="ruby-constant">MerchantOrden</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -536,9 +538,9 @@
 
           
           <div class="method-source-code" id="payment-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 44</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">payment</span>()
-  <span class="ruby-constant">Payment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">payment</span>
+  <span class="ruby-constant">Payment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -569,9 +571,9 @@
 
           
           <div class="method-source-code" id="payment_methods-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 48</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">payment_methods</span>()
-  <span class="ruby-constant">PaymentMethods</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">payment_methods</span>
+  <span class="ruby-constant">PaymentMethods</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -603,8 +605,8 @@
           
           <div class="method-source-code" id="preference-source">
             <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 53</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">preference</span>()
-  <span class="ruby-constant">Preference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">preference</span>
+  <span class="ruby-constant">Preference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -636,8 +638,8 @@
           
           <div class="method-source-code" id="refund-source">
             <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 57</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">refund</span>()
-  <span class="ruby-constant">Refund</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">refund</span>
+  <span class="ruby-constant">Refund</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -668,7 +670,7 @@
 
           
           <div class="method-source-code" id="request_options-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 76</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">request_options</span>
   <span class="ruby-ivar">@request_options</span>.<span class="ruby-identifier">access_token</span> = <span class="ruby-ivar">@access_token</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request_options</span>.<span class="ruby-identifier">access_token</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@request_options</span>
@@ -702,9 +704,10 @@
 
           
           <div class="method-source-code" id="request_options-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 71</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">request_options=</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param request_options must be a RequestOptions object&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">RequestOptions</span>)
+
   <span class="ruby-ivar">@request_options</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -736,9 +739,9 @@
 
           
           <div class="method-source-code" id="user-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 32</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">user</span>()
-  <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">request_options</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">http_client</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/sdk.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">user</span>
+  <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

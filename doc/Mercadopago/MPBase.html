@@ -102,6 +102,8 @@
 
   <section class="description">
     
+<p>Module Base</p>
+
   </section>
 
   
@@ -140,13 +142,16 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 3</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">request_options</span>, <span class="ruby-identifier">http_client</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param request_options must be a RequestOptions object&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">RequestOptions</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">RequestOptions</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>,
+          <span class="ruby-string">&#39;Param request_options must be a RequestOptions object&#39;</span>
+  <span class="ruby-keyword">end</span>
 
-    <span class="ruby-ivar">@request_options</span> = <span class="ruby-identifier">request_options</span>
-    <span class="ruby-ivar">@http_client</span> = <span class="ruby-identifier">http_client</span>
-    <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@request_options</span> = <span class="ruby-identifier">request_options</span>
+  <span class="ruby-ivar">@http_client</span> = <span class="ruby-identifier">http_client</span>
+  <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -170,7 +175,7 @@
         
         <div class="method-heading">
           <span class="method-name">_check_headers</span><span
-            class="method-args">(request_options=nil, extra_headers=nil)</span>
+            class="method-args">(request_options = nil, extra_headers = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -185,13 +190,13 @@
 
           
           <div class="method-source-code" id="_check_headers-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_check_headers</span>(<span class="ruby-identifier">request_options</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">extra_headers</span>=<span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">get_headers</span>() <span class="ruby-operator">:</span> <span class="ruby-ivar">@request_options</span>.<span class="ruby-identifier">get_headers</span>()
-    
-    <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">extra_headers</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">extra_headers</span>.<span class="ruby-identifier">nil?</span>
-   
-    <span class="ruby-identifier">headers</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_check_headers</span>(<span class="ruby-identifier">request_options</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">extra_headers</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">get_headers</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@request_options</span>.<span class="ruby-identifier">get_headers</span>
+
+  <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">extra_headers</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">extra_headers</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">headers</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -207,7 +212,7 @@
         
         <div class="method-heading">
           <span class="method-name">_check_request_options</span><span
-            class="method-args">(request_options=nil)</span>
+            class="method-args">(request_options = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -222,14 +227,17 @@
 
           
           <div class="method-source-code" id="_check_request_options-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 11</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_check_request_options</span>(<span class="ruby-identifier">request_options</span>=<span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">request_options</span> = <span class="ruby-ivar">@request_options</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param request_options must be a RequestOptions object&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">RequestOptions</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_check_request_options</span>(<span class="ruby-identifier">request_options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">request_options</span> = <span class="ruby-ivar">@request_options</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">RequestOptions</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>,
+          <span class="ruby-string">&#39;Param request_options must be a RequestOptions object&#39;</span>
+  <span class="ruby-keyword">end</span>
 
-    <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">access_token</span> = <span class="ruby-ivar">@request_options</span>.<span class="ruby-identifier">access_token</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">access_token</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">access_token</span> = <span class="ruby-ivar">@request_options</span>.<span class="ruby-identifier">access_token</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">access_token</span>.<span class="ruby-identifier">nil?</span>
 
-    <span class="ruby-identifier">request_options</span>
+  <span class="ruby-identifier">request_options</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -245,7 +253,7 @@
         
         <div class="method-heading">
           <span class="method-name">_delete</span><span
-            class="method-args">(uri:, params:nil, request_options:nil)</span>
+            class="method-args">(uri:, params: nil, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -260,14 +268,15 @@
 
           
           <div class="method-source-code" id="_delete-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 55</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_delete</span>(<span class="ruby-value">uri:</span>, <span class="ruby-value">params:</span><span class="ruby-keyword">nil</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Params must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) 
-    
-    <span class="ruby-identifier">request_options</span> = <span class="ruby-identifier">_check_request_options</span>(<span class="ruby-identifier">request_options</span>)
-    <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">_check_headers</span>(<span class="ruby-identifier">request_options</span>)
-    
-    <span class="ruby-ivar">@http_client</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">url</span>=<span class="ruby-ivar">@config</span>.<span class="ruby-identifier">api_base_url</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">headers</span>=<span class="ruby-identifier">headers</span>, <span class="ruby-identifier">params</span>=<span class="ruby-identifier">params</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">connection_timeout</span>, <span class="ruby-identifier">maxretries</span>=<span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">max_retries</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_delete</span>(<span class="ruby-value">uri:</span>, <span class="ruby-value">params:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Params must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+
+  <span class="ruby-identifier">request_options</span> = <span class="ruby-identifier">_check_request_options</span>(<span class="ruby-identifier">request_options</span>)
+  <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">_check_headers</span>(<span class="ruby-identifier">request_options</span>)
+
+  <span class="ruby-ivar">@http_client</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">url</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">api_base_url</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">params</span> = <span class="ruby-identifier">params</span>,
+                      <span class="ruby-identifier">timeout</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">connection_timeout</span>, <span class="ruby-identifier">maxretries</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">max_retries</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -283,7 +292,7 @@
         
         <div class="method-heading">
           <span class="method-name">_get</span><span
-            class="method-args">(uri:, filters:nil, request_options:nil)</span>
+            class="method-args">(uri:, filters: nil, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -298,14 +307,15 @@
 
           
           <div class="method-source-code" id="_get-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 28</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_get</span>(<span class="ruby-value">uri:</span>, <span class="ruby-value">filters:</span><span class="ruby-keyword">nil</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Filters must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">filters</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">filters</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
-    
-    <span class="ruby-identifier">request_options</span> = <span class="ruby-identifier">_check_request_options</span>(<span class="ruby-identifier">request_options</span>)
-    <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">_check_headers</span>(<span class="ruby-identifier">request_options</span>, {<span class="ruby-value">&#39;Content-type&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">mime_json</span>})
+            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_get</span>(<span class="ruby-value">uri:</span>, <span class="ruby-value">filters:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Filters must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">filters</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">filters</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
 
-    <span class="ruby-ivar">@http_client</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>=<span class="ruby-ivar">@config</span>.<span class="ruby-identifier">api_base_url</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">headers</span>=<span class="ruby-identifier">headers</span>, <span class="ruby-identifier">filters</span>=<span class="ruby-identifier">filters</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">connection_timeout</span>, <span class="ruby-identifier">maxretries</span>=<span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">max_retries</span>)
+  <span class="ruby-identifier">request_options</span> = <span class="ruby-identifier">_check_request_options</span>(<span class="ruby-identifier">request_options</span>)
+  <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">_check_headers</span>(<span class="ruby-identifier">request_options</span>, { <span class="ruby-value">&#39;Content-type&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">mime_json</span> })
+
+  <span class="ruby-ivar">@http_client</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">api_base_url</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">filters</span> = <span class="ruby-identifier">filters</span>,
+                   <span class="ruby-identifier">timeout</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">connection_timeout</span>, <span class="ruby-identifier">maxretries</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">max_retries</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -321,7 +331,7 @@
         
         <div class="method-heading">
           <span class="method-name">_post</span><span
-            class="method-args">(uri:, data:, params:nil, request_options:nil)</span>
+            class="method-args">(uri:, data:, params: nil, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -336,14 +346,15 @@
 
           
           <div class="method-source-code" id="_post-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_post</span>(<span class="ruby-value">uri:</span>, <span class="ruby-value">data:</span>, <span class="ruby-value">params:</span><span class="ruby-keyword">nil</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Params must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) 
-    
-    <span class="ruby-identifier">request_options</span> = <span class="ruby-identifier">_check_request_options</span>(<span class="ruby-identifier">request_options</span>)
-    <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">_check_headers</span>(<span class="ruby-identifier">request_options</span>, {<span class="ruby-value">&#39;Content-type&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">mime_json</span>})
-    
-    <span class="ruby-ivar">@http_client</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">url</span>=<span class="ruby-ivar">@config</span>.<span class="ruby-identifier">api_base_url</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">data</span>.<span class="ruby-identifier">to_json</span>, <span class="ruby-identifier">headers</span>=<span class="ruby-identifier">headers</span>,  <span class="ruby-identifier">params</span>=<span class="ruby-identifier">params</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">connection_timeout</span>, <span class="ruby-identifier">maxretries</span>=<span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">max_retries</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_post</span>(<span class="ruby-value">uri:</span>, <span class="ruby-value">data:</span>, <span class="ruby-value">params:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Params must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+
+  <span class="ruby-identifier">request_options</span> = <span class="ruby-identifier">_check_request_options</span>(<span class="ruby-identifier">request_options</span>)
+  <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">_check_headers</span>(<span class="ruby-identifier">request_options</span>, { <span class="ruby-value">&#39;Content-type&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">mime_json</span> })
+
+  <span class="ruby-ivar">@http_client</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">url</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">api_base_url</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">data</span>.<span class="ruby-identifier">to_json</span>, <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">params</span> = <span class="ruby-identifier">params</span>,
+                    <span class="ruby-identifier">timeout</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">connection_timeout</span>, <span class="ruby-identifier">maxretries</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">max_retries</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -359,7 +370,7 @@
         
         <div class="method-heading">
           <span class="method-name">_put</span><span
-            class="method-args">(uri:, data:, params:nil, request_options:nil)</span>
+            class="method-args">(uri:, data:, params: nil, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -374,14 +385,15 @@
 
           
           <div class="method-source-code" id="_put-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_put</span>(<span class="ruby-value">uri:</span>, <span class="ruby-value">data:</span>, <span class="ruby-value">params:</span><span class="ruby-keyword">nil</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Params must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) 
-    
-    <span class="ruby-identifier">request_options</span> = <span class="ruby-identifier">_check_request_options</span>(<span class="ruby-identifier">request_options</span>)
-    <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">_check_headers</span>(<span class="ruby-identifier">request_options</span>, {<span class="ruby-value">&#39;Content-type&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">mime_json</span>})
-    
-    <span class="ruby-ivar">@http_client</span>.<span class="ruby-identifier">put</span>(<span class="ruby-identifier">url</span>=<span class="ruby-ivar">@config</span>.<span class="ruby-identifier">api_base_url</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">data</span>.<span class="ruby-identifier">to_json</span>, <span class="ruby-identifier">headers</span>=<span class="ruby-identifier">headers</span>,  <span class="ruby-identifier">params</span>=<span class="ruby-identifier">params</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">connection_timeout</span>, <span class="ruby-identifier">maxretries</span>=<span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">max_retries</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/core/mp_base.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_put</span>(<span class="ruby-value">uri:</span>, <span class="ruby-value">data:</span>, <span class="ruby-value">params:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Params must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+
+  <span class="ruby-identifier">request_options</span> = <span class="ruby-identifier">_check_request_options</span>(<span class="ruby-identifier">request_options</span>)
+  <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">_check_headers</span>(<span class="ruby-identifier">request_options</span>, { <span class="ruby-value">&#39;Content-type&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">mime_json</span> })
+
+  <span class="ruby-ivar">@http_client</span>.<span class="ruby-identifier">put</span>(<span class="ruby-identifier">url</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">api_base_url</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">data</span>.<span class="ruby-identifier">to_json</span>, <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">params</span> = <span class="ruby-identifier">params</span>,
+                   <span class="ruby-identifier">timeout</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">connection_timeout</span>, <span class="ruby-identifier">maxretries</span> = <span class="ruby-identifier">request_options</span>.<span class="ruby-identifier">max_retries</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

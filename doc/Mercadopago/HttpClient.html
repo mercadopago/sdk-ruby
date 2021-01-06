@@ -119,7 +119,7 @@
         
         <div class="method-heading">
           <span class="method-name">delete</span><span
-            class="method-args">(url, headers, params=nil, timeout=nil, maxretries=nil)</span>
+            class="method-args">(url, headers, params = nil, timeout = nil, _maxretries = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -134,20 +134,19 @@
 
           
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/http/http_client.rb, line 54</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">params</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">maxretries</span>=<span class="ruby-keyword">nil</span>)
-    <span class="ruby-keyword">begin</span>
-        <span class="ruby-identifier">result</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-value">method:</span> <span class="ruby-string">&#39;delete&#39;</span>,  <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>, <span class="ruby-value">headers:</span> <span class="ruby-identifier">headers</span>, <span class="ruby-value">params:</span> <span class="ruby-identifier">params</span>, <span class="ruby-value">timeout:</span> <span class="ruby-identifier">timeout</span>)
-        <span class="ruby-identifier">response</span> = {
-            <span class="ruby-value">status:</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">code</span>,
-            <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
-        }
-    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">err</span>
-        <span class="ruby-identifier">response</span> = {
-            <span class="ruby-value">status:</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">http_code</span>,
-            <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">err</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
-        }
-    <span class="ruby-keyword">end</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/http/http_client.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">timeout</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">_maxretries</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-value">method:</span> <span class="ruby-string">&#39;delete&#39;</span>, <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>, <span class="ruby-value">headers:</span> <span class="ruby-identifier">headers</span>, <span class="ruby-value">params:</span> <span class="ruby-identifier">params</span>,
+                                       <span class="ruby-value">timeout:</span> <span class="ruby-identifier">timeout</span>)
+  <span class="ruby-identifier">response</span> = {
+    <span class="ruby-value">status:</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">code</span>,
+    <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
+  }
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">response</span> = {
+    <span class="ruby-value">status:</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">http_code</span>,
+    <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
+  }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -163,7 +162,7 @@
         
         <div class="method-heading">
           <span class="method-name">get</span><span
-            class="method-args">(url, headers, filters=nil, timeout=nil, maxretries=nil)</span>
+            class="method-args">(url, headers, filters = nil, timeout = nil, maxretries = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -178,23 +177,24 @@
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/http/http_client.rb, line 6</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">filters</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">maxretries</span>=<span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">try</span> = <span class="ruby-value">0</span>
-    <span class="ruby-keyword">begin</span>
-        <span class="ruby-identifier">result</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-value">method:</span> <span class="ruby-value">:get</span>,  <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>, <span class="ruby-value">params:</span> <span class="ruby-identifier">filters</span>, <span class="ruby-value">headers:</span> <span class="ruby-identifier">headers</span>, <span class="ruby-value">timeout:</span> <span class="ruby-identifier">timeout</span>)
-        <span class="ruby-identifier">response</span> = {
-            <span class="ruby-value">status:</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">code</span>,
-            <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
-        }
-    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">err</span>
-        <span class="ruby-identifier">try</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-        <span class="ruby-keyword">retry</span> <span class="ruby-keyword">if</span> [<span class="ruby-value">429</span>, <span class="ruby-value">500</span>, <span class="ruby-value">502</span>, <span class="ruby-value">503</span>, <span class="ruby-value">504</span>].<span class="ruby-identifier">include?</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">http_code</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">try</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">maxretries</span>
-        <span class="ruby-identifier">response</span> = {
-            <span class="ruby-value">status:</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">http_code</span>,
-            <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">err</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
-        }
-    <span class="ruby-keyword">end</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/http/http_client.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">filters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">timeout</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">maxretries</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">try</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-value">method:</span> <span class="ruby-value">:get</span>, <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>, <span class="ruby-value">params:</span> <span class="ruby-identifier">filters</span>, <span class="ruby-value">headers:</span> <span class="ruby-identifier">headers</span>,
+                                         <span class="ruby-value">timeout:</span> <span class="ruby-identifier">timeout</span>)
+    <span class="ruby-identifier">response</span> = {
+      <span class="ruby-value">status:</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">code</span>,
+      <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
+    }
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">try</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">retry</span> <span class="ruby-keyword">if</span> [<span class="ruby-value">429</span>, <span class="ruby-value">500</span>, <span class="ruby-value">502</span>, <span class="ruby-value">503</span>, <span class="ruby-value">504</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">http_code</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">try</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">maxretries</span>)
+    <span class="ruby-identifier">response</span> = {
+      <span class="ruby-value">status:</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">http_code</span>,
+      <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
+    }
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -210,7 +210,7 @@
         
         <div class="method-heading">
           <span class="method-name">post</span><span
-            class="method-args">(url, data, headers, params=nil, timeout=nil, maxretries=nil)</span>
+            class="method-args">(url, data, headers, params = nil, timeout = nil, _maxretries = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -225,20 +225,19 @@
 
           
           <div class="method-source-code" id="post-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/http/http_client.rb, line 24</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">params</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">maxretries</span>=<span class="ruby-keyword">nil</span>)
-    <span class="ruby-keyword">begin</span>
-        <span class="ruby-identifier">result</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-value">method:</span> <span class="ruby-value">:post</span>,  <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>, <span class="ruby-value">payload:</span> <span class="ruby-identifier">data</span>, <span class="ruby-value">headers:</span> <span class="ruby-identifier">headers</span>, <span class="ruby-value">params:</span> <span class="ruby-identifier">params</span>, <span class="ruby-value">timeout:</span> <span class="ruby-identifier">timeout</span>)
-        <span class="ruby-identifier">response</span> = {
-            <span class="ruby-value">status:</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">code</span>,
-            <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
-        }
-    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">err</span>
-        <span class="ruby-identifier">response</span> = {
-            <span class="ruby-value">status:</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">http_code</span>,
-            <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">err</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
-        }
-    <span class="ruby-keyword">end</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/http/http_client.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">timeout</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">_maxretries</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-value">method:</span> <span class="ruby-value">:post</span>, <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>, <span class="ruby-value">payload:</span> <span class="ruby-identifier">data</span>, <span class="ruby-value">headers:</span> <span class="ruby-identifier">headers</span>,
+                                       <span class="ruby-value">params:</span> <span class="ruby-identifier">params</span>, <span class="ruby-value">timeout:</span> <span class="ruby-identifier">timeout</span>)
+  <span class="ruby-identifier">response</span> = {
+    <span class="ruby-value">status:</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">code</span>,
+    <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
+  }
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">response</span> = {
+    <span class="ruby-value">status:</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">http_code</span>,
+    <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
+  }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -254,7 +253,7 @@
         
         <div class="method-heading">
           <span class="method-name">put</span><span
-            class="method-args">(url, data, headers, params=nil, timeout=nil, maxretries=nil)</span>
+            class="method-args">(url, data, headers, params = nil, timeout = nil, _maxretries = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -269,20 +268,19 @@
 
           
           <div class="method-source-code" id="put-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/http/http_client.rb, line 39</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">put</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">params</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">maxretries</span>=<span class="ruby-keyword">nil</span>)
-    <span class="ruby-keyword">begin</span>
-        <span class="ruby-identifier">result</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-value">method:</span> <span class="ruby-value">:put</span>,  <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>, <span class="ruby-value">payload:</span> <span class="ruby-identifier">data</span>, <span class="ruby-value">headers:</span> <span class="ruby-identifier">headers</span>, <span class="ruby-value">params:</span> <span class="ruby-identifier">params</span>, <span class="ruby-value">timeout:</span> <span class="ruby-identifier">timeout</span>)
-        <span class="ruby-identifier">response</span> = {
-            <span class="ruby-value">status:</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">code</span>,
-            <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
-        }
-    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">err</span>
-        <span class="ruby-identifier">response</span> = {
-            <span class="ruby-value">status:</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">http_code</span>,
-            <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">err</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
-        }
-    <span class="ruby-keyword">end</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/http/http_client.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">put</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">timeout</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">_maxretries</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-value">method:</span> <span class="ruby-value">:put</span>, <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>, <span class="ruby-value">payload:</span> <span class="ruby-identifier">data</span>, <span class="ruby-value">headers:</span> <span class="ruby-identifier">headers</span>,
+                                       <span class="ruby-value">params:</span> <span class="ruby-identifier">params</span>, <span class="ruby-value">timeout:</span> <span class="ruby-identifier">timeout</span>)
+  <span class="ruby-identifier">response</span> = {
+    <span class="ruby-value">status:</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">code</span>,
+    <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
+  }
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">response</span> = {
+    <span class="ruby-value">status:</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">http_code</span>,
+    <span class="ruby-value">response:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
+  }
 <span class="ruby-keyword">end</span></pre>
           </div>
           

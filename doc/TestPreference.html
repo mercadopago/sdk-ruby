@@ -134,11 +134,12 @@
 
           
           <div class="method-source-code" id="test_method_get-source">
-            <pre><span class="ruby-comment"># File tests/test_preference.rb, line 7</span>
+            <pre><span class="ruby-comment"># File tests/test_preference.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_get</span>
-   <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-            <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>().<span class="ruby-identifier">get</span>()
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&#39;</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>.<span class="ruby-identifier">get</span>
+
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -169,11 +170,12 @@
 
           
           <div class="method-source-code" id="test_method_get_id-source">
-            <pre><span class="ruby-comment"># File tests/test_preference.rb, line 13</span>
+            <pre><span class="ruby-comment"># File tests/test_preference.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_get_id</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>().<span class="ruby-identifier">get</span>(<span class="ruby-identifier">preference_id</span>=<span class="ruby-string">&quot;537031659-d710347b-7746-4025-b72b-e5be918b91ca&quot;</span>)
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&#39;</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>.<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;537031659-d710347b-7746-4025-b72b-e5be918b91ca&#39;</span>)
+
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -204,23 +206,22 @@
 
           
           <div class="method-source-code" id="test_method_post-source">
-            <pre><span class="ruby-comment"># File tests/test_preference.rb, line 19</span>
+            <pre><span class="ruby-comment"># File tests/test_preference.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_post</span>
-   <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-   <span class="ruby-identifier">data</span> = {
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&#39;</span>)
+  <span class="ruby-identifier">data</span> = {
     <span class="ruby-value">&quot;items&quot;:</span> [
-        {
-        <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&quot;Dummy Item&quot;</span>,
-        <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&quot;Multicolor Item&quot;</span>,
+      {
+        <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&#39;Dummy Item&#39;</span>,
+        <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&#39;Multicolor Item&#39;</span>,
         <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
-        <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&quot;&quot;</span>,
+        <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&#39;&#39;</span>,
         <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">10.0</span>
-        }
-     ]
+      }
+    ]
   }
-   <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">data</span>)
-   <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">201</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
-
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">201</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -251,24 +252,23 @@
 
           
           <div class="method-source-code" id="test_method_put-source">
-            <pre><span class="ruby-comment"># File tests/test_preference.rb, line 37</span>
+            <pre><span class="ruby-comment"># File tests/test_preference.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_put</span>
-   <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-   <span class="ruby-identifier">data</span> = {
-         <span class="ruby-value">&quot;items&quot;:</span> [
-            {
-            <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&quot;Camiseta Barcelona&quot;</span>,
-            <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&quot;Camiseta Oficial Barcelona&quot;</span>,
-            <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
-            <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&quot;&quot;</span>,
-            <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">10.0</span>
-            }
-        ]
-     }
-     <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>().<span class="ruby-identifier">update</span>(<span class="ruby-identifier">preference_id</span>=<span class="ruby-string">&quot;537031659-e4a79653-8638-490c-a4e5-c39f6f8d9874&quot;</span>, <span class="ruby-identifier">data</span>)
-     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
-
- <span class="ruby-keyword">end</span></pre>
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&#39;</span>)
+  <span class="ruby-identifier">data</span> = {
+    <span class="ruby-value">&quot;items&quot;:</span> [
+      {
+        <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&#39;Camiseta Barcelona&#39;</span>,
+        <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&#39;Camiseta Oficial Barcelona&#39;</span>,
+        <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
+        <span class="ruby-value">&quot;currency_id&quot;:</span> <span class="ruby-string">&#39;&#39;</span>,
+        <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">10.0</span>
+      }
+    ]
+  }
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">preference</span>.<span class="ruby-identifier">update</span>(<span class="ruby-string">&#39;537031659-e4a79653-8638-490c-a4e5-c39f6f8d9874&#39;</span>, <span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+<span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>

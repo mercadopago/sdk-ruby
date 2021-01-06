@@ -1,37 +1,35 @@
+# frozen_string_literal: true
+
 module Mercadopago
+  ###
+  # This class allows you to store customers data safely to improve the shopping experience.
 
-    ###
-    #This class allows you to store customers data safely to improve the shopping experience.
-    
-    #This will allow your customer to complete their purchases much faster and easily when used in conjunction with the Cards class.
-    #[Click here for more infos](https://mercadopago.com.br/developers/en/guides/online-payments/web-tokenize-checkout/customers-and-cards)
+  # This will allow your customer to complete their purchases much faster and easily when used in conjunction with the Cards class.
+  # [Click here for more infos](https://mercadopago.com.br/developers/en/guides/online-payments/web-tokenize-checkout/customers-and-cards)
 
-    class Customer < MPBase
-        def initialize(request_options, http_client)
-            super(request_options, http_client)
-        end
-
-        def search(filters=nil, request_options:nil)
-            _get(uri:"/v1/customers/search", filters: filters, request_options: request_options)
-        end
-
-        def get(customer_id=nil, request_options:nil)
-            _get(uri:"/v1/customers/#{customer_id}", request_options: request_options)
-        end
-
-        def create(customer_object, request_options:nil)
-            raise TypeError, 'Param customer_object must be a Hash' unless customer_object.is_a?(Hash)
-            _post(uri:"/v1/customers", data:customer_object, request_options:request_options)
-        end
-
-        def update(customer_id, customer_object, request_options:nil)
-            raise TypeError, 'Param customer_object must be a Hash' unless customer_object.is_a?(Hash)
-            _put(uri:"/v1/customers/#{customer_id}", data:customer_object, request_options:request_options)
-        end
-
-        def delete(customer_id, request_options:nil)
-            _delete(uri:"/v1/customers/#{customer_id}", request_options:request_options)
-        end
-
+  class Customer < MPBase
+    def search(filters = nil, request_options: nil)
+      _get(uri: '/v1/customers/search', filters: filters, request_options: request_options)
     end
+
+    def get(customer_id = nil, request_options: nil)
+      _get(uri: "/v1/customers/#{customer_id}", request_options: request_options)
+    end
+
+    def create(customer_object, request_options: nil)
+      raise TypeError, 'Param customer_object must be a Hash' unless customer_object.is_a?(Hash)
+
+      _post(uri: '/v1/customers', data: customer_object, request_options: request_options)
+    end
+
+    def update(customer_id, customer_object, request_options: nil)
+      raise TypeError, 'Param customer_object must be a Hash' unless customer_object.is_a?(Hash)
+
+      _put(uri: "/v1/customers/#{customer_id}", data: customer_object, request_options: request_options)
+    end
+
+    def delete(customer_id, request_options: nil)
+      _delete(uri: "/v1/customers/#{customer_id}", request_options: request_options)
+    end
+  end
 end

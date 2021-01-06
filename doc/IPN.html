@@ -113,7 +113,7 @@
         
         <div class="method-heading">
           <span class="method-name">call</span><span
-            class="method-args">(env)</span>
+            class="method-args">(_env)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -128,22 +128,22 @@
 
           
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File examples/instant-payment-notifications/receive-ipn.rb, line 7</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">env</span>)
-      <span class="ruby-identifier">mp</span> = <span class="ruby-constant">MercadoPago</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;CLIENT_ID&#39;</span>, <span class="ruby-string">&#39;CLIENT_SECRET&#39;</span>)
-      
-      <span class="ruby-comment"># Get the payment reported by the IPN. Glossary of attributes response in https://developers.mercadopago.com</span>
-      <span class="ruby-identifier">payment_info</span> = <span class="ruby-identifier">mp</span>.<span class="ruby-identifier">get_payment_info</span>(<span class="ruby-string">&#39;ID&#39;</span>);
+            <pre><span class="ruby-comment"># File examples/instant-payment-notifications/receive-ipn.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">_env</span>)
+  <span class="ruby-identifier">mp</span> = <span class="ruby-constant">MercadoPago</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;CLIENT_ID&#39;</span>, <span class="ruby-string">&#39;CLIENT_SECRET&#39;</span>)
 
-      <span class="ruby-identifier">html</span> = <span class="ruby-string">&quot;&quot;</span>
-      <span class="ruby-comment"># Show payment information</span>
-      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">payment_info</span>[<span class="ruby-string">&#39;status&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-value">200</span>)
-              <span class="ruby-identifier">html</span> = <span class="ruby-identifier">payment_info</span>[<span class="ruby-string">&#39;response&#39;</span>].<span class="ruby-identifier">inspect</span>
-      <span class="ruby-keyword">else</span>
-              <span class="ruby-identifier">html</span> = <span class="ruby-identifier">payment_info</span>[<span class="ruby-string">&#39;response&#39;</span>].<span class="ruby-identifier">inspect</span>
-      <span class="ruby-keyword">end</span>
-      
-      <span class="ruby-keyword">return</span> [<span class="ruby-value">200</span>, {<span class="ruby-string">&#39;Content-Type&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;text/html&#39;</span>}, [<span class="ruby-identifier">html</span>]]
+  <span class="ruby-comment"># Get the payment reported by the IPN. Glossary of attributes response in https://developers.mercadopago.com</span>
+  <span class="ruby-identifier">payment_info</span> = <span class="ruby-identifier">mp</span>.<span class="ruby-identifier">get_payment_info</span>(<span class="ruby-string">&#39;ID&#39;</span>)
+
+  <span class="ruby-identifier">html</span> = <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-comment"># Show payment information</span>
+  <span class="ruby-identifier">html</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">payment_info</span>[<span class="ruby-string">&#39;status&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-value">200</span>
+           <span class="ruby-identifier">payment_info</span>[<span class="ruby-string">&#39;response&#39;</span>].<span class="ruby-identifier">inspect</span>
+         <span class="ruby-keyword">else</span>
+           <span class="ruby-identifier">payment_info</span>[<span class="ruby-string">&#39;response&#39;</span>].<span class="ruby-identifier">inspect</span>
+         <span class="ruby-keyword">end</span>
+
+  [<span class="ruby-value">200</span>, { <span class="ruby-string">&#39;Content-Type&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;text/html&#39;</span> }, [<span class="ruby-identifier">html</span>]]
 <span class="ruby-keyword">end</span></pre>
           </div>
           

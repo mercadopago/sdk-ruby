@@ -1,15 +1,12 @@
+# frozen_string_literal: true
+
 module Mercadopago
+  ###
+  # Access to Users
 
-    ###
-    #Access to Users
-    
-    class User < MPBase
-        def initialize(request_options, http_client)
-            super(request_options, http_client)
-        end
-
-        def get(request_options:nil)
-            _get(uri:"/users/me", request_options:request_options)
-        end
+  class User < MPBase
+    def get(request_options: nil)
+      _get(uri: '/users/me', request_options: request_options)
     end
+  end
 end

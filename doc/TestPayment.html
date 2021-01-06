@@ -134,11 +134,12 @@
 
           
           <div class="method-source-code" id="test_method_get_id-source">
-            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 13</span>
+            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_get_id</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>().<span class="ruby-identifier">get</span>(<span class="ruby-identifier">payment_id</span>=<span class="ruby-value">1231872196</span>)
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&#39;</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value">1_231_872_196</span>)
+
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -169,73 +170,75 @@
 
           
           <div class="method-source-code" id="test_method_post-source">
-            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_post</span> 
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&quot;</span>)
-    <span class="ruby-identifier">card_token_object</span> = {
-        <span class="ruby-value">&quot;card_number&quot;:</span> <span class="ruby-string">&quot;4235647728025682&quot;</span>,
-        <span class="ruby-value">&quot;expiration_year&quot;:</span> <span class="ruby-value">2025</span>,
-        <span class="ruby-value">&quot;expiration_month&quot;:</span> <span class="ruby-value">11</span>,
-        <span class="ruby-value">&quot;security_code&quot;:</span> <span class="ruby-string">&quot;123&quot;</span>,
-        <span class="ruby-value">&quot;cardholder&quot;:</span> {
-           <span class="ruby-value">&quot;name&quot;:</span> <span class="ruby-string">&quot;APRO&quot;</span> 
-        }
-     }
-    <span class="ruby-identifier">result_card_token</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">card_token</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">card_token_object</span>)
-   
-    <span class="ruby-identifier">payment_object</span> = {
+            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_post</span>
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&#39;</span>)
+  <span class="ruby-identifier">card_token_object</span> = {
+    <span class="ruby-value">&quot;card_number&quot;:</span> <span class="ruby-string">&#39;4235647728025682&#39;</span>,
+    <span class="ruby-value">&quot;expiration_year&quot;:</span> <span class="ruby-value">2025</span>,
+    <span class="ruby-value">&quot;expiration_month&quot;:</span> <span class="ruby-value">11</span>,
+    <span class="ruby-value">&quot;security_code&quot;:</span> <span class="ruby-string">&#39;123&#39;</span>,
+    <span class="ruby-value">&quot;cardholder&quot;:</span> {
+      <span class="ruby-value">&quot;name&quot;:</span> <span class="ruby-string">&#39;APRO&#39;</span>
+    }
+  }
+  <span class="ruby-identifier">result_card_token</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">card_token</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">card_token_object</span>)
+
+  <span class="ruby-identifier">payment_object</span> = {
     <span class="ruby-value">&quot;token&quot;:</span> <span class="ruby-identifier">result_card_token</span>[<span class="ruby-value">:response</span>][<span class="ruby-string">&#39;id&#39;</span>],
     <span class="ruby-value">&quot;installments&quot;:</span> <span class="ruby-value">1</span>,
     <span class="ruby-value">&quot;transaction_amount&quot;:</span> <span class="ruby-value">58.80</span>,
-    <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&quot;Point Mini a maquininha que dá o dinheiro de suas vendas na hora&quot;</span>,
-    <span class="ruby-value">&quot;payment_method_id&quot;:</span> <span class="ruby-string">&quot;visa&quot;</span>,
+    <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&#39;Point Mini a maquininha que dá o dinheiro de suas vendas na hora&#39;</span>,
+    <span class="ruby-value">&quot;payment_method_id&quot;:</span> <span class="ruby-string">&#39;visa&#39;</span>,
     <span class="ruby-value">&quot;payer&quot;:</span> {
-        <span class="ruby-value">&quot;email&quot;:</span> <span class="ruby-string">&quot;test_user_123456@testuser.com&quot;</span>,
-        <span class="ruby-value">&quot;identification&quot;:</span> {
-            <span class="ruby-value">&quot;number&quot;:</span> <span class="ruby-string">&quot;19119119100&quot;</span>,
-            <span class="ruby-value">&quot;type&quot;:</span> <span class="ruby-string">&quot;CPF&quot;</span>
-        }
+      <span class="ruby-value">&quot;email&quot;:</span> <span class="ruby-string">&#39;test_user_123456@testuser.com&#39;</span>,
+      <span class="ruby-value">&quot;identification&quot;:</span> {
+        <span class="ruby-value">&quot;number&quot;:</span> <span class="ruby-string">&#39;19119119100&#39;</span>,
+        <span class="ruby-value">&quot;type&quot;:</span> <span class="ruby-string">&#39;CPF&#39;</span>
+      }
     },
-    <span class="ruby-value">&quot;notification_url&quot;:</span> <span class="ruby-string">&quot;https://www.suaurl.com/notificacoes/&quot;</span>,
+    <span class="ruby-value">&quot;notification_url&quot;:</span> <span class="ruby-string">&#39;https://www.suaurl.com/notificacoes/&#39;</span>,
     <span class="ruby-value">&quot;binary_mode&quot;:</span> <span class="ruby-keyword">false</span>,
-    <span class="ruby-value">&quot;external_reference&quot;:</span> <span class="ruby-string">&quot;MP0001&quot;</span>,
-    <span class="ruby-value">&quot;statement_descriptor&quot;:</span> <span class="ruby-string">&quot;MercadoPago&quot;</span>,
+    <span class="ruby-value">&quot;external_reference&quot;:</span> <span class="ruby-string">&#39;MP0001&#39;</span>,
+    <span class="ruby-value">&quot;statement_descriptor&quot;:</span> <span class="ruby-string">&#39;MercadoPago&#39;</span>,
     <span class="ruby-value">&quot;additional_info&quot;:</span> {
-        <span class="ruby-value">&quot;items&quot;:</span> [{
-            <span class="ruby-value">&quot;id&quot;:</span> <span class="ruby-string">&quot;PR0001&quot;</span>,
-            <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&quot;Point Mini&quot;</span>,
-            <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&quot;Producto Point para cobros con tarjetas mediante bluetooth&quot;</span>,
-            <span class="ruby-value">&quot;picture_url&quot;:</span> <span class="ruby-string">&quot;https://http2.mlstatic.com/resources/frontend/statics/growth-sellers-landings/device-mlb-point-i_medium@2x.png&quot;</span>,
-            <span class="ruby-value">&quot;category_id&quot;:</span> <span class="ruby-string">&quot;electronics&quot;</span>,
-            <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
-            <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">58.80</span>
-        }],
-        <span class="ruby-value">&quot;payer&quot;:</span> {
-            <span class="ruby-value">&quot;first_name&quot;:</span> <span class="ruby-string">&quot;Nome&quot;</span>,
-            <span class="ruby-value">&quot;last_name&quot;:</span> <span class="ruby-string">&quot;Sobrenome&quot;</span>,
-            <span class="ruby-value">&quot;address&quot;:</span> {
-                <span class="ruby-value">&quot;zip_code&quot;:</span> <span class="ruby-string">&quot;06233-200&quot;</span>,
-                <span class="ruby-value">&quot;street_name&quot;:</span> <span class="ruby-string">&quot;Av das Nacoes Unidas&quot;</span>,
-                <span class="ruby-value">&quot;street_number&quot;:</span> <span class="ruby-value">3003</span>
-            },
-            <span class="ruby-value">&quot;registration_date&quot;:</span> <span class="ruby-string">&quot;2019-01-01T12:01:01.000-03:00&quot;</span>,
-            <span class="ruby-value">&quot;phone&quot;:</span> {
-                <span class="ruby-value">&quot;area_code&quot;:</span> <span class="ruby-string">&quot;011&quot;</span>,
-                <span class="ruby-value">&quot;number&quot;:</span> <span class="ruby-string">&quot;987654321&quot;</span>
-            }
-        },
-        <span class="ruby-value">&quot;shipments&quot;:</span> {
-            <span class="ruby-value">&quot;receiver_address&quot;:</span> {
-                <span class="ruby-value">&quot;street_name&quot;:</span> <span class="ruby-string">&quot;Av das Nacoes Unidas&quot;</span>,
-                <span class="ruby-value">&quot;street_number&quot;:</span> <span class="ruby-value">3003</span>,
-                <span class="ruby-value">&quot;zip_code&quot;:</span> <span class="ruby-string">&quot;06233200&quot;</span>,
-                <span class="ruby-value">&quot;city_name&quot;:</span> <span class="ruby-string">&quot;Buzios&quot;</span>,
-                <span class="ruby-value">&quot;state_name&quot;:</span> <span class="ruby-string">&quot;Rio de Janeiro&quot;</span>
-            }
+      <span class="ruby-value">&quot;items&quot;:</span> [
+        {
+          <span class="ruby-value">&quot;id&quot;:</span> <span class="ruby-string">&#39;PR0001&#39;</span>,
+          <span class="ruby-value">&quot;title&quot;:</span> <span class="ruby-string">&#39;Point Mini&#39;</span>,
+          <span class="ruby-value">&quot;description&quot;:</span> <span class="ruby-string">&#39;Producto Point para cobros con tarjetas mediante bluetooth&#39;</span>,
+          <span class="ruby-value">&quot;picture_url&quot;:</span> <span class="ruby-string">&#39;https://http2.mlstatic.com/resources/frontend/statics/growth-sellers-landings/device-mlb-point-i_medium@2x.png&#39;</span>,
+          <span class="ruby-value">&quot;category_id&quot;:</span> <span class="ruby-string">&#39;electronics&#39;</span>,
+          <span class="ruby-value">&quot;quantity&quot;:</span> <span class="ruby-value">1</span>,
+          <span class="ruby-value">&quot;unit_price&quot;:</span> <span class="ruby-value">58.80</span>
         }
+      ],
+      <span class="ruby-value">&quot;payer&quot;:</span> {
+        <span class="ruby-value">&quot;first_name&quot;:</span> <span class="ruby-string">&#39;Nome&#39;</span>,
+        <span class="ruby-value">&quot;last_name&quot;:</span> <span class="ruby-string">&#39;Sobrenome&#39;</span>,
+        <span class="ruby-value">&quot;address&quot;:</span> {
+          <span class="ruby-value">&quot;zip_code&quot;:</span> <span class="ruby-string">&#39;06233-200&#39;</span>,
+          <span class="ruby-value">&quot;street_name&quot;:</span> <span class="ruby-string">&#39;Av das Nacoes Unidas&#39;</span>,
+          <span class="ruby-value">&quot;street_number&quot;:</span> <span class="ruby-value">3003</span>
+        },
+        <span class="ruby-value">&quot;registration_date&quot;:</span> <span class="ruby-string">&#39;2019-01-01T12:01:01.000-03:00&#39;</span>,
+        <span class="ruby-value">&quot;phone&quot;:</span> {
+          <span class="ruby-value">&quot;area_code&quot;:</span> <span class="ruby-string">&#39;011&#39;</span>,
+          <span class="ruby-value">&quot;number&quot;:</span> <span class="ruby-string">&#39;987654321&#39;</span>
+        }
+      },
+      <span class="ruby-value">&quot;shipments&quot;:</span> {
+        <span class="ruby-value">&quot;receiver_address&quot;:</span> {
+          <span class="ruby-value">&quot;street_name&quot;:</span> <span class="ruby-string">&#39;Av das Nacoes Unidas&#39;</span>,
+          <span class="ruby-value">&quot;street_number&quot;:</span> <span class="ruby-value">3003</span>,
+          <span class="ruby-value">&quot;zip_code&quot;:</span> <span class="ruby-string">&#39;06233200&#39;</span>,
+          <span class="ruby-value">&quot;city_name&quot;:</span> <span class="ruby-string">&#39;Buzios&#39;</span>,
+          <span class="ruby-value">&quot;state_name&quot;:</span> <span class="ruby-string">&#39;Rio de Janeiro&#39;</span>
+        }
+      }
     }
-}
-  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>().<span class="ruby-identifier">create</span>(<span class="ruby-identifier">payment_object</span>)
+  }
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">payment_object</span>)
   <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">201</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -267,14 +270,14 @@
 
           
           <div class="method-source-code" id="test_method_put-source">
-            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 88</span>
+            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_put</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-    <span class="ruby-identifier">data</span> = {
-        <span class="ruby-value">&quot;status&quot;:</span> <span class="ruby-string">&quot;approved&quot;</span>,
-    }
-    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>().<span class="ruby-identifier">update</span>(<span class="ruby-identifier">payment_id</span>=<span class="ruby-string">&quot;1231910402&quot;</span>, <span class="ruby-identifier">data</span>)
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">403</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&#39;</span>)
+  <span class="ruby-identifier">data</span> = {
+    <span class="ruby-value">&quot;status&quot;:</span> <span class="ruby-string">&#39;approved&#39;</span>
+  }
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>.<span class="ruby-identifier">update</span>(<span class="ruby-string">&#39;1231910402&#39;</span>, <span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">403</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -305,11 +308,12 @@
 
           
           <div class="method-source-code" id="test_method_search-source">
-            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 7</span>
+            <pre><span class="ruby-comment"># File tests/test_payment.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_search</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-            <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>().<span class="ruby-identifier">search</span>({<span class="ruby-string">&quot;id&quot;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">1231872196</span>})
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&#39;</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>.<span class="ruby-identifier">search</span>({ <span class="ruby-string">&#39;id&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">1_231_872_196</span> })
+
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           

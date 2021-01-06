@@ -96,6 +96,8 @@
 
   <section class="description">
     
+<p>Access to Advanced Payments Refunds</p>
+
   </section>
 
   
@@ -119,7 +121,7 @@
         
         <div class="method-heading">
           <span class="method-name">create</span><span
-            class="method-args">(advanced_payment_id, disbursement_id, amount, request_options:nil)</span>
+            class="method-args">(advanced_payment_id, disbursement_id, amount, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -134,13 +136,14 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/resources/disbursement_refund.rb, line 21</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">advanced_payment_id</span>, <span class="ruby-identifier">disbursement_id</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)        
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param advanced_payment_object must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">advanced_payment_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
-    <span class="ruby-identifier">disbursement_refund_object</span> = {<span class="ruby-value">&quot;amount&quot;:</span> <span class="ruby-identifier">amount</span>}
-    
-    <span class="ruby-identifier">_post</span>(<span class="ruby-identifier">uri</span>=<span class="ruby-node">&quot;/v1/advanced_payments/#{advanced_payment_id}/disbursements/#{disbursement_id}/refunds&quot;</span>, <span class="ruby-value">data:</span><span class="ruby-identifier">disbursement_refund_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-identifier">request_options</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/resources/disbursement_refund.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">advanced_payment_id</span>, <span class="ruby-identifier">disbursement_id</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param advanced_payment_object must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">advanced_payment_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
 
+  <span class="ruby-identifier">disbursement_refund_object</span> = { <span class="ruby-value">&quot;amount&quot;:</span> <span class="ruby-identifier">amount</span> }
+
+  <span class="ruby-identifier">_post</span>(<span class="ruby-identifier">uri</span> = <span class="ruby-node">&quot;/v1/advanced_payments/#{advanced_payment_id}/disbursements/#{disbursement_id}/refunds&quot;</span>,
+        <span class="ruby-value">data:</span> <span class="ruby-identifier">disbursement_refund_object</span>, <span class="ruby-value">request_options:</span> <span class="ruby-identifier">request_options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -156,7 +159,7 @@
         
         <div class="method-heading">
           <span class="method-name">create_all</span><span
-            class="method-args">(advanced_payment_id, disbursement_refund_object, request_options:nil)</span>
+            class="method-args">(advanced_payment_id, disbursement_refund_object, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -171,10 +174,15 @@
 
           
           <div class="method-source-code" id="create_all-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/resources/disbursement_refund.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_all</span>(<span class="ruby-identifier">advanced_payment_id</span>, <span class="ruby-identifier">disbursement_refund_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param disbursement_refund_object must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">disbursement_refund_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
-    <span class="ruby-identifier">_post</span>(<span class="ruby-identifier">uri</span>=<span class="ruby-node">&quot;/v1/advanced_payments/#{advanced_payment_id}/refunds&quot;</span>, <span class="ruby-value">data:</span><span class="ruby-identifier">disbursement_refund_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-identifier">request_options</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/resources/disbursement_refund.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_all</span>(<span class="ruby-identifier">advanced_payment_id</span>, <span class="ruby-identifier">disbursement_refund_object</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">disbursement_refund_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>,
+          <span class="ruby-string">&#39;Param disbursement_refund_object must be a Hash&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">_post</span>(<span class="ruby-identifier">uri</span> = <span class="ruby-node">&quot;/v1/advanced_payments/#{advanced_payment_id}/refunds&quot;</span>, <span class="ruby-value">data:</span> <span class="ruby-identifier">disbursement_refund_object</span>,
+                                                                      <span class="ruby-value">request_options:</span> <span class="ruby-identifier">request_options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -190,7 +198,7 @@
         
         <div class="method-heading">
           <span class="method-name">save</span><span
-            class="method-args">(advanced_payment_id, disbursement_id, disbursement_refund_object, request_options:nil)</span>
+            class="method-args">(advanced_payment_id, disbursement_id, disbursement_refund_object, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -205,10 +213,15 @@
 
           
           <div class="method-source-code" id="save-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/resources/disbursement_refund.rb, line 29</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>(<span class="ruby-identifier">advanced_payment_id</span>, <span class="ruby-identifier">disbursement_id</span>, <span class="ruby-identifier">disbursement_refund_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param disbursement_refund_object must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">advanced_payment_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
-    <span class="ruby-identifier">_post</span>(<span class="ruby-identifier">uri</span>=<span class="ruby-node">&quot;/v1/advanced_payments/#{advanced_payment_id}/disbursements/#{disbursement_id}/refunds&quot;</span>, <span class="ruby-value">data:</span><span class="ruby-identifier">disbursement_refund_object</span>, <span class="ruby-value">request_options:</span><span class="ruby-identifier">request_options</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/resources/disbursement_refund.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>(<span class="ruby-identifier">advanced_payment_id</span>, <span class="ruby-identifier">disbursement_id</span>, <span class="ruby-identifier">disbursement_refund_object</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">advanced_payment_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>,
+          <span class="ruby-string">&#39;Param disbursement_refund_object must be a Hash&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">_post</span>(<span class="ruby-identifier">uri</span> = <span class="ruby-node">&quot;/v1/advanced_payments/#{advanced_payment_id}/disbursements/#{disbursement_id}/refunds&quot;</span>,
+        <span class="ruby-value">data:</span> <span class="ruby-identifier">disbursement_refund_object</span>, <span class="ruby-value">request_options:</span> <span class="ruby-identifier">request_options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -224,7 +237,7 @@
         
         <div class="method-heading">
           <span class="method-name">search</span><span
-            class="method-args">(advanced_payment_id, request_options:nil)</span>
+            class="method-args">(advanced_payment_id, request_options: nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -239,9 +252,9 @@
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/resources/disbursement_refund.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">advanced_payment_id</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">_get</span>(<span class="ruby-value">uri:</span><span class="ruby-node">&quot;/v1/advanced_payments/#{advanced_payment_id}/refunds&quot;</span>, <span class="ruby-value">request_options:</span><span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File lib/mercadopago/resources/disbursement_refund.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">advanced_payment_id</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">_get</span>(<span class="ruby-value">uri:</span> <span class="ruby-node">&quot;/v1/advanced_payments/#{advanced_payment_id}/refunds&quot;</span>, <span class="ruby-value">request_options:</span> <span class="ruby-keyword">nil</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

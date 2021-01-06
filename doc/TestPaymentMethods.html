@@ -130,9 +130,9 @@
           <div class="method-source-code" id="test_method_get-source">
             <pre><span class="ruby-comment"># File tests/test_payment_methods.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_get</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&quot;</span>)
-    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment_methods</span>.<span class="ruby-identifier">get</span>()
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659&#39;</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment_methods</span>.<span class="ruby-identifier">get</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           

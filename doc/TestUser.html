@@ -90,6 +90,8 @@
 
   <section class="description">
     
+<p>Test User</p>
+
   </section>
 
   
@@ -128,16 +130,14 @@
 
           
           <div class="method-source-code" id="test_method_get-source">
-            <pre><span class="ruby-comment"># File tests/test_user.rb, line 6</span>
+            <pre><span class="ruby-comment"># File tests/test_user.rb, line 9</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_method_get</span>
-    <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">access_token</span>=<span class="ruby-string">&quot;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&quot;</span>)
-    <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">request_options</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">RequestOptions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">corporation_id:</span><span class="ruby-string">&quot;abc&quot;</span>)
-    <span class="ruby-comment">#simulando timeout:</span>
-            <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">user</span>().<span class="ruby-identifier">get</span>(<span class="ruby-value">request_options:</span><span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">RequestOptions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">connection_timeout:</span><span class="ruby-value">100.0</span>))
-    <span class="ruby-comment">#result = sdk.user().get()</span>
+  <span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966&#39;</span>)
+  <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">request_options</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">RequestOptions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">corporation_id:</span> <span class="ruby-string">&#39;abc&#39;</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">get</span>(<span class="ruby-value">request_options:</span> <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">RequestOptions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">connection_timeout:</span> <span class="ruby-value">100.0</span>))
 
-    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
-    <span class="ruby-keyword">end</span></pre>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">result</span>[<span class="ruby-value">:status</span>]
+<span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>

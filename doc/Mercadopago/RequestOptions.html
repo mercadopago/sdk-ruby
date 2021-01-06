@@ -243,23 +243,23 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 6</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">access_token:</span> <span class="ruby-keyword">nil</span>, 
-             <span class="ruby-value">connection_timeout:</span> <span class="ruby-value">60.0</span>, 
-             <span class="ruby-value">custom_headers:</span> <span class="ruby-keyword">nil</span>, 
-             <span class="ruby-value">corporation_id:</span> <span class="ruby-keyword">nil</span>, 
-             <span class="ruby-value">integrator_id:</span> <span class="ruby-keyword">nil</span>, 
-             <span class="ruby-value">platform_id:</span> <span class="ruby-keyword">nil</span>, 
-             <span class="ruby-value">max_retries:</span> <span class="ruby-value">3</span>)
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">access_token</span> = <span class="ruby-identifier">access_token</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">access_token</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">connection_timeout</span> = <span class="ruby-identifier">connection_timeout</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">custom_headers</span> = <span class="ruby-identifier">custom_headers</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">custom_headers</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">corporation_id</span> = <span class="ruby-identifier">corporation_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">corporation_id</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">integrator_id</span> = <span class="ruby-identifier">integrator_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">integrator_id</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">platform_id</span> = <span class="ruby-identifier">platform_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">platform_id</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">max_retries</span> = <span class="ruby-identifier">max_retries</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">access_token:</span> <span class="ruby-keyword">nil</span>,
+               <span class="ruby-value">connection_timeout:</span> <span class="ruby-value">60.0</span>,
+               <span class="ruby-value">custom_headers:</span> <span class="ruby-keyword">nil</span>,
+               <span class="ruby-value">corporation_id:</span> <span class="ruby-keyword">nil</span>,
+               <span class="ruby-value">integrator_id:</span> <span class="ruby-keyword">nil</span>,
+               <span class="ruby-value">platform_id:</span> <span class="ruby-keyword">nil</span>,
+               <span class="ruby-value">max_retries:</span> <span class="ruby-value">3</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">access_token</span> = <span class="ruby-identifier">access_token</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">access_token</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">connection_timeout</span> = <span class="ruby-identifier">connection_timeout</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">custom_headers</span> = <span class="ruby-identifier">custom_headers</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">custom_headers</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">corporation_id</span> = <span class="ruby-identifier">corporation_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">corporation_id</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">integrator_id</span> = <span class="ruby-identifier">integrator_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">integrator_id</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">platform_id</span> = <span class="ruby-identifier">platform_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">platform_id</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">max_retries</span> = <span class="ruby-identifier">max_retries</span>
 
-    <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -298,10 +298,11 @@
 
           
           <div class="method-source-code" id="access_token-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 41</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">access_token=</span>(<span class="ruby-identifier">value</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param access_token must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>)
-    <span class="ruby-ivar">@access_token</span> = <span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param access_token must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+
+  <span class="ruby-ivar">@access_token</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -332,10 +333,11 @@
 
           
           <div class="method-source-code" id="connection_timeout-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 51</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">connection_timeout=</span>(<span class="ruby-identifier">value</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param connection_timeout must be a Float&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Float</span>)
-    <span class="ruby-ivar">@connection_timeout</span> = <span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param connection_timeout must be a Float&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Float</span>)
+
+  <span class="ruby-ivar">@connection_timeout</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -366,10 +368,11 @@
 
           
           <div class="method-source-code" id="corporation_id-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 56</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">corporation_id=</span>(<span class="ruby-identifier">value</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param corporation_id must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>)
-    <span class="ruby-ivar">@corporation_id</span> = <span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param corporation_id must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+
+  <span class="ruby-ivar">@corporation_id</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -400,10 +403,11 @@
 
           
           <div class="method-source-code" id="custom_headers-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 46</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">custom_headers=</span>(<span class="ruby-identifier">value</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param custom_headers must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>)
-    <span class="ruby-ivar">@custom_headers</span> = <span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param custom_headers must be a Hash&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+
+  <span class="ruby-ivar">@custom_headers</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -434,22 +438,21 @@
 
           
           <div class="method-source-code" id="get_headers-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 24</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_headers</span>()
-    <span class="ruby-identifier">headers</span> = {<span class="ruby-value">&#39;Authorization&#39;:</span> <span class="ruby-string">&#39;Bearer &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@access_token</span>,
-        <span class="ruby-value">&#39;x-product-id&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">product_id</span>, 
-        <span class="ruby-value">&#39;x-tracking-id&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">tracking_id</span>,
-        <span class="ruby-value">&#39;User-Agent&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">user_agent</span>,
-        <span class="ruby-value">&#39;Accept&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">mime_json</span>}
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_headers</span>
+  <span class="ruby-identifier">headers</span> = { <span class="ruby-value">&#39;Authorization&#39;:</span> <span class="ruby-node">&quot;Bearer #{@access_token}&quot;</span>,
+              <span class="ruby-value">&#39;x-product-id&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">product_id</span>,
+              <span class="ruby-value">&#39;x-tracking-id&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">tracking_id</span>,
+              <span class="ruby-value">&#39;User-Agent&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">user_agent</span>,
+              <span class="ruby-value">&#39;Accept&#39;:</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">mime_json</span> }
 
+  <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;x-corporation-id&#39;</span>] = <span class="ruby-ivar">@corporation_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@corporation_id</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;x-integrator-id&#39;</span>] = <span class="ruby-ivar">@integrator_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@integrator_id</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;x-platform-id&#39;</span>] = <span class="ruby-ivar">@platform_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@platform_id</span>.<span class="ruby-identifier">nil?</span>
 
-    <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;x-corporation-id&#39;</span>] = <span class="ruby-ivar">@corporation_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@corporation_id</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;x-integrator-id&#39;</span>] = <span class="ruby-ivar">@integrator_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@integrator_id</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;x-platform-id&#39;</span>] = <span class="ruby-ivar">@platform_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@platform_id</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-ivar">@custom_headers</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@custom_headers</span>.<span class="ruby-identifier">nil?</span>
 
-    <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-ivar">@custom_headers</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@custom_headers</span>.<span class="ruby-identifier">nil?</span>
-
-    <span class="ruby-identifier">headers</span>
+  <span class="ruby-identifier">headers</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -480,10 +483,11 @@
 
           
           <div class="method-source-code" id="integrator_id-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 61</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">integrator_id=</span>(<span class="ruby-identifier">value</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param integrator_id must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>)
-    <span class="ruby-ivar">@integrator_id</span> = <span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param integrator_id must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+
+  <span class="ruby-ivar">@integrator_id</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -514,10 +518,11 @@
 
           
           <div class="method-source-code" id="max_retries-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 71</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_retries=</span>(<span class="ruby-identifier">value</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param max_retries must be a Integer&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>)
-    <span class="ruby-ivar">@max_retries</span> = <span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param max_retries must be a Integer&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>)
+
+  <span class="ruby-ivar">@max_retries</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -548,10 +553,11 @@
 
           
           <div class="method-source-code" id="platform_id-3D-source">
-            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 66</span>
+            <pre><span class="ruby-comment"># File lib/mercadopago/config/request_options.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">platform_id=</span>(<span class="ruby-identifier">value</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param platform_id must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>)
-    <span class="ruby-ivar">@platform_id</span> = <span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;Param platform_id must be a String&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+
+  <span class="ruby-ivar">@platform_id</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

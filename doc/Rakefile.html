@@ -79,6 +79,8 @@
 
 <main role="main" aria-label="Page Rakefile">
 
+<p># frozen_string_literal: true</p>
+
 <p>require &#39;rake/testtask&#39;</p>
 
 <p>Rake::TestTask.new do |t|</p>
@@ -90,7 +92,7 @@
 
 <p>end</p>
 
-<p>task :default =&gt; :test</p>
+<p>task default: :test</p>
 
 </main>
 
