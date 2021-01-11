@@ -2,12 +2,18 @@ GEM
   remote: https://rubygems.org/
   specs:
     minitest (5.14.2)
+    sorbet (0.5.6198)
+      sorbet-static (= 0.5.6198)
+    sorbet-runtime (0.5.6198)
+    sorbet-static (0.5.6198-universal-darwin-14)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   minitest
+  sorbet
+  sorbet-runtime
 
 BUNDLED WITH
    2.1.4
