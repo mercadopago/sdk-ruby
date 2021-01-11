@@ -1,3 +1,6 @@
+# typed: true
+# frozen_string_literal: true
+
 require_relative './test_card_token'
 require_relative './test_card'
 require_relative './test_identification_type'
