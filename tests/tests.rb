@@ -1,15 +1,12 @@
-# typed: true
-# frozen_string_literal: true
-
-require_relative '../lib/mercadopago'
-
-require 'minitest/autorun'
-
-class TestPreference < Minitest::Test
-  def test_method_get
-    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
-    result = sdk.preference.get
-
-    assert_equal 200, result[:status]
-  end
-end
+require_relative './mercadopago/resources/customer'
+require_relative './mercadopago/resources/card'
+require_relative './mercadopago/resources/user'
+require_relative './mercadopago/resources/identification_type'
+require_relative './mercadopago/resources/preference'
+require_relative './mercadopago/resources/payment'
+require_relative './mercadopago/resources/card_token'
+require_relative './mercadopago/resources/refund'
+require_relative './mercadopago/resources/merchant_orden'
+require_relative './mercadopago/resources/payment_methods'
+require_relative './mercadopago/resources/advanced_payment'
+require_relative './mercadopago/resources/disbursement_refund'
