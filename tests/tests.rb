@@ -1,12 +1,8 @@
-require_relative './mercadopago/resources/customer'
-require_relative './mercadopago/resources/card'
-require_relative './mercadopago/resources/user'
-require_relative './mercadopago/resources/identification_type'
-require_relative './mercadopago/resources/preference'
-require_relative './mercadopago/resources/payment'
-require_relative './mercadopago/resources/card_token'
-require_relative './mercadopago/resources/refund'
-require_relative './mercadopago/resources/merchant_orden'
-require_relative './mercadopago/resources/payment_methods'
-require_relative './mercadopago/resources/advanced_payment'
-require_relative './mercadopago/resources/disbursement_refund'
+require_relative './tests/resources/test_preference'
+
+
+class MercadoPagoTest < Minitest::Test
+  def test_all
+    test_preference.test_method_get
+  end
+end
