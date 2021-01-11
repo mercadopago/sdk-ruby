@@ -1,7 +1,7 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
+require_relative './lib/mercadopago'
 
 require 'minitest/autorun'
 

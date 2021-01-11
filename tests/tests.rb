@@ -1,8 +1,9 @@
-require_relative './tests/resources/test_preference'
-
-
-class MercadoPagoTest < Minitest::Test
-  def test_all
-    test_preference.test_method_get
-  end
-end
+require_relative './test_card_token'
+require_relative './test_card'
+require_relative './test_identification_type'
+require_relative './test_merchant_orden'
+require_relative './test_payment_methods'
+require_relative './test_payment'
+require_relative './test_preference'
+require_relative './test_refund'
+require_relative './test_user'
