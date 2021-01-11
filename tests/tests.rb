@@ -5,39 +5,52 @@ require_relative '../lib/mercadopago'
 
 require 'minitest/autorun'
 
-class TestCustomer < Minitest::Test
-  def test_all
-    sdk = Mercadopago::SDK.new('TEST-783169576377080-082620-395ee7f82e0d55b1db606c118686c1db-464842924')
+class TestPreference < Minitest::Test
+  def test_method_get
+    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
+    result = sdk.preference.get
 
-    customer_object = {
-      "email": 'test_payer_999922@testuser.com',
-      "first_name": 'Rafa',
-      "last_name": 'Williner',
-      "phone": {
-        "area_code": '03492',
-        "number": '432334'
-      },
-      "identification": {
-        "type": 'DNI',
-        "number": '29804555'
-      },
-      "address": {
-        "zip_code": '2300',
-        "street_name": 'some street'
-      },
-      "description": 'customer description'
+    assert_equal 200, result[:status]
+  end
+
+  def test_method_get_id
+    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
+    result = sdk.preference.get('537031659-d710347b-7746-4025-b72b-e5be918b91ca')
+
+    assert_equal 200, result[:status]
+  end
+
+  def test_method_post
+    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
+    data = {
+      "items": [
+        {
+          "title": 'Dummy Item',
+          "description": 'Multicolor Item',
+          "quantity": 1,
+          "currency_id": '',
+          "unit_price": 10.0
+        }
+      ]
     }
+    result = sdk.preference.create(data)
+    assert_equal 201, result[:status]
+  end
 
-    customer_saved = sdk.customer.create(customer_object)
-    assert_equal 201, customer_saved[:status]
-
-    customer_update = sdk.customer.update(customer_saved[:response]['id'], { "last_name": 'Payer' })
-    assert_equal 200, customer_update[:status]
-
-    customer_updated = sdk.customer.get(customer_saved[:response]['id'])
-    assert_equal 'Payer', customer_updated[:response]['last_name']
-
-    customer_deleted = sdk.customer.delete(customer_saved[:response]['id'])
-    assert_equal 200, customer_deleted[:status]
+  def test_method_put
+    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
+    data = {
+      "items": [
+        {
+          "title": 'Camiseta Barcelona',
+          "description": 'Camiseta Oficial Barcelona',
+          "quantity": 1,
+          "currency_id": '',
+          "unit_price": 10.0
+        }
+      ]
+    }
+    result = sdk.preference.update('537031659-e4a79653-8638-490c-a4e5-c39f6f8d9874', data)
+    assert_equal 200, result[:status]
   end
 end
