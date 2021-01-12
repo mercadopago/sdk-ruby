@@ -6,4 +6,5 @@ gem 'minitest'
 gem 'rake'
 gem 'rest-client'
 gem 'rubocop', require: false
-gem 'sorbet'
+gem 'sorbet', :group => :development
+gem 'sorbet-runtime'
