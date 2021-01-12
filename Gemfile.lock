@@ -38,6 +38,7 @@ GEM
     ruby-progressbar (1.11.0)
     sorbet (0.5.6198)
       sorbet-static (= 0.5.6198)
+    sorbet-runtime (0.5.6198)
     sorbet-static (0.5.6198-universal-darwin-19)
     unf (0.1.4)
       unf_ext
@@ -53,6 +54,7 @@ DEPENDENCIES
   rest-client
   rubocop
   sorbet
+  sorbet-runtime
 
 BUNDLED WITH
    2.1.4
