@@ -36,6 +36,9 @@ GEM
     rubocop-ast (1.4.0)
       parser (>= 2.7.1.5)
     ruby-progressbar (1.11.0)
+    sorbet (0.5.6198)
+      sorbet-static (= 0.5.6198)
+    sorbet-static (0.5.6198-universal-darwin-19)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
@@ -49,6 +52,7 @@ DEPENDENCIES
   rake
   rest-client
   rubocop
+  sorbet
 
 BUNDLED WITH
    2.1.4

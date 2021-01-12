@@ -6,3 +6,4 @@ gem 'minitest'
 gem 'rake'
 gem 'rest-client'
 gem 'rubocop', require: false
+gem 'sorbet'
