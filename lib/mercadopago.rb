@@ -200,7 +200,10 @@ class MercadoPago
 	end
 
 	def build_query(params)
-		URI.escape(params.collect { |k, v| "#{k}=#{v}" }.join('&'))
+		unless URI.respond_to? :encode_www_form
+			return URI.escape(params.collect { |k, v| "#{k}=#{v}" }.join('&'))
+		end
+		URI.encode_www_form(params)
 	end
 
 	private
