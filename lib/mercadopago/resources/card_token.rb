@@ -10,8 +10,10 @@ module Mercadopago
       _get(uri: "/v1/card_tokens/#{card_token_id}", request_options: request_options)
     end
 
-    def create(card_token_object, request_options: nil)
-      _post(uri: '/v1/card_tokens', data: card_token_object, request_options: request_options)
+    def create(card_token_data, request_options: nil)
+      raise TypeError, 'Param card_token_data must be a Hash' unless card_token_data.is_a?(Hash)
+
+      _post(uri: '/v1/card_tokens', data: card_token_data, request_options: request_options)
     end
   end
 end

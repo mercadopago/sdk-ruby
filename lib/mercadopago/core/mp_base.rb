@@ -40,40 +40,38 @@ module Mercadopago
       raise TypeError, 'Filters must be a Hash' unless filters.nil? || filters.is_a?(Hash)
 
       request_options = _check_request_options(request_options)
-      headers = _check_headers(request_options, { 'Content-type': @config.mime_json })
+      headers = _check_headers(request_options)
 
-      @http_client.get(url = @config.api_base_url + uri, headers = headers, filters = filters,
-                       timeout = request_options.connection_timeout, maxretries = request_options.max_retries)
+      @http_client.get(url: @config.api_base_url + uri, headers: headers, params: filters,
+                       timeout: request_options.connection_timeout, maxretries: request_options.max_retries)
     end
 
-    def _post(uri:, data:, params: nil, request_options: nil)
-      raise TypeError, 'Params must be a Hash' unless params.nil? || params.is_a?(Hash)
+    def _post(uri:, data:, request_options: nil)
+      raise TypeError, 'Data must be a Hash' unless data.nil? || data.is_a?(Hash)
 
       request_options = _check_request_options(request_options)
-      headers = _check_headers(request_options, { 'Content-type': @config.mime_json })
+      headers = _check_headers(request_options, { 'Content-Type': @config.mime_json })
 
-      @http_client.post(url = @config.api_base_url + uri, data.to_json, headers = headers, params = params,
-                        timeout = request_options.connection_timeout, maxretries = request_options.max_retries)
+      @http_client.post(url: @config.api_base_url + uri, data: data.to_json, headers: headers,
+                        timeout: request_options.connection_timeout)
     end
 
-    def _put(uri:, data:, params: nil, request_options: nil)
-      raise TypeError, 'Params must be a Hash' unless params.nil? || params.is_a?(Hash)
+    def _put(uri:, data:, request_options: nil)
+      raise TypeError, 'Data must be a Hash' unless data.nil? || data.is_a?(Hash)
 
       request_options = _check_request_options(request_options)
-      headers = _check_headers(request_options, { 'Content-type': @config.mime_json })
+      headers = _check_headers(request_options, { 'Content-Type': @config.mime_json })
 
-      @http_client.put(url = @config.api_base_url + uri, data.to_json, headers = headers, params = params,
-                       timeout = request_options.connection_timeout, maxretries = request_options.max_retries)
+      @http_client.put(url: @config.api_base_url + uri, data: data.to_json, headers: headers,
+                       timeout: request_options.connection_timeout)
     end
 
-    def _delete(uri:, params: nil, request_options: nil)
-      raise TypeError, 'Params must be a Hash' unless params.nil? || params.is_a?(Hash)
-
+    def _delete(uri:, request_options: nil)
       request_options = _check_request_options(request_options)
       headers = _check_headers(request_options)
 
-      @http_client.delete(url = @config.api_base_url + uri, headers = headers, params = params,
-                          timeout = request_options.connection_timeout, maxretries = request_options.max_retries)
+      @http_client.delete(url: @config.api_base_url + uri, headers: headers,
+                          timeout: request_options.connection_timeout)
     end
   end
 end

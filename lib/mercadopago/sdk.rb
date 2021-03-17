@@ -5,7 +5,7 @@ module Mercadopago
   class SDK
     attr_reader :access_token, :http_client
 
-    def initialize(access_token, http_client = nil, request_options = nil)
+    def initialize(access_token, http_client: nil, request_options: nil)
       self.access_token = access_token
       self.http_client = http_client.nil? ? HttpClient.new : http_client
       self.request_options = request_options.nil? ? RequestOptions.new(access_token: access_token) : request_options
@@ -39,8 +39,8 @@ module Mercadopago
       IdentificationType.new(request_options, http_client)
     end
 
-    def merchant_orden
-      MerchantOrden.new(request_options, http_client)
+    def merchant_order
+      MerchantOrder.new(request_options, http_client)
     end
 
     def payment

@@ -11,12 +11,14 @@ module Mercadopago
   # [Click here for more infos](https://www.mercadopago.com.br/developers/en/guides/manage-account/account/cancellations-and-refunds#bookmark_refunds)
 
   class Refund < MPBase
-    def search(payment_id, request_options: nil)
+    def list(payment_id, request_options: nil)
       _get(uri: "/v1/payments/#{payment_id}/refunds", request_options: request_options)
     end
 
-    def create(payment_id, payment_object = nil, request_options: nil)
-      _post(uri: "/v1/payments/#{payment_id}/refunds", data: payment_object, request_options: request_options)
+    def create(payment_id, refund_data: nil, request_options: nil)
+      raise TypeError, 'Param refund_data must be a Hash' unless refund_data.nil? || refund_data.is_a?(Hash)
+
+      _post(uri: "/v1/payments/#{payment_id}/refunds", data: refund_data, request_options: request_options)
     end
   end
 end

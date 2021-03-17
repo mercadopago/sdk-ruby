@@ -10,14 +10,22 @@ module Mercadopago
   # [Click here for more infos](https://www.mercadopago.com/developers/en/guides/online-payments/web-tokenize-checkout/customers-and-cards)
 
   class Card < MPBase
-    def get(customer_id:, card_id:, request_options: nil)
+    def get(customer_id, card_id, request_options: nil)
       _get(uri: "/v1/customers/#{customer_id}/cards/#{card_id}", request_options: request_options)
     end
 
-    def create(customer_id:, card_object:, request_options: nil)
-      raise TypeError, 'Param card_object must be a Hash' if card_object.nil? || !card_object.is_a?(Hash)
+    def create(customer_id, card_data, request_options: nil)
+      raise TypeError, 'Param card_data must be a Hash' if card_data.nil? || !card_data.is_a?(Hash)
 
-      _post(uri: "/v1/customers/#{customer_id}/cards/", data: card_object, request_options: request_options)
+      _post(uri: "/v1/customers/#{customer_id}/cards/", data: card_data, request_options: request_options)
+    end
+
+    def delete(customer_id, card_id, request_options: nil)
+      _delete(uri: "/v1/customers/#{customer_id}/cards/#{card_id}", request_options: request_options)
+    end
+
+    def list(customer_id, request_options: nil)
+      _get(uri: "/v1/customers/#{customer_id}/cards", request_options: request_options)
     end
   end
 end
