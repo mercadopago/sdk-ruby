@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>CONTRIBUTING - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-Contributing+to+the+Mercado+Pago+Ruby+SDK">Contributing to the Mercado Pago Ruby SDK</a>
+    <li><a href="#label-How+to+contribute">How to contribute</a>
+    <li><a href="#label-Coding+Guidance">Coding Guidance</a>
+    <li><a href="#label-Request+For+Change+-2F+Feature+Request">Request For Change / Feature Request</a>
+    <li><a href="#label-Bug+Reports">Bug Reports</a>
+    <li><a href="#label-Pull+Request">Pull Request</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    
+<div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+    <li><a href="./CODE_OF_CONDUCT_md.html">CODE_OF_CONDUCT</a>
+    <li><a href="./CODING_GUIDELINES_md.html">CODING_GUIDELINES</a>
+    <li><a href="./CONTRIBUTING_md.html">CONTRIBUTING</a>
+    <li><a href="./LICENSE_txt.html">LICENSE</a>
+    <li><a href="./README_md.html">README</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page CONTRIBUTING.md">
+
+<h1 id="label-Contributing+to+the+Mercado+Pago+Ruby+SDK">Contributing to the Mercado Pago Ruby SDK<span><a href="#label-Contributing+to+the+Mercado+Pago+Ruby+SDK">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Thank you for your interest in contributing to the Mercado Pago Ruby SDK!</p>
+
+<h2 id="label-How+to+contribute">How to contribute<span><a href="#label-How+to+contribute">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>In order to contribute to the Mercado Pago Ruby SDK effectively we provide guidelines to address common case for contributions. Presently we have guides for the following type of changes.</p>
+<ul><li>
+<p>Request For Change (RFC) / Feature Request: These are suggestions / requests for features the SDK currently does not have. The SDK team evaluates these requests for adequacy / relevance / capacity and overall architectural consistency.</p>
+</li><li>
+<p>Bug Reports: These are reports of non compliant behavior with the SDK specification and other blatantly wrong behavior of the Mercado Pago Ruby SDK.</p>
+</li></ul>
+
+<p>In addition to contributing in the form of Bug Reports and RFCs it is also possible to contribute directly in code with a Pull Request (PR). In the case of a Pull Request you should also indicate the nature of the Pull Request (Feature/Bug/etc.) to help the team asses the Pull Request. If you are enthusiastic about a particular Feature being added or a bug being fixed, a PR is often the quickest way to promote your change as the team does not have to allocate as much resources to process the contribution.</p>
+
+<p>In the case of PRs it is often best to consult with the SDK team before embarking on a PR, specially if it&#39;s a beefy one. Spending time on a PR that might later be rejected because major discrepancies with vision or competing contributions is an uncomfortable outcome for all involved people. Remember the SDK team with privilege overall consistency and progress over any one particular contribution.</p>
+
+<h2 id="label-Coding+Guidance">Coding Guidance<span><a href="#label-Coding+Guidance">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>All contributions <em>MUST</em> follow the <a href="CODING_GUIDELINES.md">Coding Guidelines</a>. Contributions that fail to follow this guidelines will be disregarded and told to make the required modifications to do so.</p>
+
+<h2 id="label-Request+For+Change+-2F+Feature+Request">Request For Change / Feature Request<span><a href="#label-Request+For+Change+-2F+Feature+Request">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Generally speaking an RFC is needed when you want to add a new feature or change an existing one in an incompatible way that might result in a major version bump to the toolkit.</p>
+
+<p>Though it seems a little bureaucratic, the process is in place in order to avoid frustration of a potential contributor by making the discussions take place before any code is written. Once the design and direction is fully agreed then the contributor can work peacefully knowing that their change will be committed.</p>
+
+<p>As of this moment all you need to do is create an issue and use the <a href=".github/ISSUE_TEMPLATE/feature_request.md">Feature Request Template</a>.</p>
+
+<p>Please prepend your issue title with <code>[RFC]</code> so that&#39;s easier to filter.</p>
+
+<h2 id="label-Bug+Reports">Bug Reports<span><a href="#label-Bug+Reports">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Bugs are a reality in software. We can&#39;t fix what we don&#39;t know about, so please report liberally. If you&#39;re not sure if something is a bug or not, feel free to file it anyway.</p>
+
+<p>Before reporting a bug, please search existing issues and pull requests, as it&#39;s possible that someone else has already reported your error. In the off case that you find your issue as fixed/closed, please add a reference to it on your new one.</p>
+
+<p>Your issue should contain a title and a clear description of the issue. You should also include as much relevant information as possible and a code sample that demonstrates the issue. The goal of a bug report is to make it easy for yourself - and others - to replicate the bug and develop a fix.</p>
+
+<p>Opening an issue is as easy as following <a href="https://github.com/mercadopago/sdk-dotnet/issues/new">this link</a> and filling out the given template.</p>
+
+<p>Bug reports may also be sent in the form of a <a href="#pull-request">pull request</a> containing a failing test.</p>
+
+<h2 id="label-Pull+Request">Pull Request<span><a href="#label-Pull+Request">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>First and foremost: Source code, documentation, commit messages, review comments, and any other kind of contribution must <em>MUST</em> follow the <a href="CODING_GUIDELINES.md">Coding Guidelines</a>.</p>
+
+<p>We use the “fork and pull” model <a href="https://help.github.com/articles/about-collaborative-development-models/">described here</a>, where contributors push changes to their personal fork and create pull requests to bring those changes into the source repository.</p>
+
+<p>Your basic steps to get going:</p>
+<ul><li>
+<p>Fork the corresponding toolkit repository and create a branch from master for the issue you are working on.</p>
+</li><li>
+<p>Commit as you go following our git conventions.</p>
+</li><li>
+<p>Include tests that cover all non-trivial code. The existing tests should provide a template on how to test the toolkit correctly.</p>
+</li><li>
+<p>Make sure all test passes.</p>
+</li><li>
+<p>All code changes are expected to comply with the formatting style.</p>
+</li><li>
+<p>Push your commits to GitHub and create a pull request against the corresponding toolkit component master branch.</p>
+</li></ul>
+
+<p>If taking to much time to deliver code, <strong>always</strong> <a href="https://git-scm.com/docs/git-rebase">rebase</a> towards <code>master</code> before asking for a review, and avoid reverse merge commits.</p>
+
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

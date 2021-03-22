@@ -1,0 +1,25 @@
+Mon, 22 Mar 2021 12:01:51 -0300
+CODE_OF_CONDUCT.md	Tue, 16 Mar 2021 08:22:05 -0300
+mercadopago-sdk-2.0.0.gem	Tue, 16 Mar 2021 08:26:19 -0300
+README.md	Mon, 22 Mar 2021 10:59:38 -0300
+CONTRIBUTING.md	Mon, 22 Mar 2021 10:28:39 -0300
+lib/mercadopago/core/mp_base.rb	Mon, 15 Mar 2021 14:37:53 -0300
+lib/mercadopago/config/request_options.rb	Wed, 17 Mar 2021 09:12:20 -0300
+lib/mercadopago/config/config.rb	Mon, 15 Mar 2021 09:05:43 -0300
+lib/mercadopago/resources/payment.rb	Wed, 17 Mar 2021 08:50:55 -0300
+lib/mercadopago/resources/refund.rb	Wed, 17 Mar 2021 08:52:40 -0300
+lib/mercadopago/resources/identification_type.rb	Mon, 15 Mar 2021 09:05:43 -0300
+lib/mercadopago/resources/merchant_order.rb	Wed, 17 Mar 2021 08:50:18 -0300
+lib/mercadopago/resources/customer.rb	Wed, 17 Mar 2021 08:49:34 -0300
+lib/mercadopago/resources/disbursement_refund.rb	Wed, 17 Mar 2021 08:41:31 -0300
+lib/mercadopago/resources/card.rb	Wed, 17 Mar 2021 08:49:08 -0300
+lib/mercadopago/resources/payment_methods.rb	Mon, 15 Mar 2021 09:05:43 -0300
+lib/mercadopago/resources/card_token.rb	Wed, 17 Mar 2021 08:48:21 -0300
+lib/mercadopago/resources/preference.rb	Wed, 17 Mar 2021 08:51:15 -0300
+lib/mercadopago/resources/user.rb	Mon, 15 Mar 2021 09:05:43 -0300
+lib/mercadopago/resources/advanced_payment.rb	Wed, 17 Mar 2021 09:28:02 -0300
+lib/mercadopago/http/http_client.rb	Wed, 17 Mar 2021 09:35:21 -0300
+lib/mercadopago/sdk.rb	Tue, 16 Mar 2021 16:47:42 -0300
+lib/mercadopago.rb	Tue, 16 Mar 2021 16:46:49 -0300
+LICENSE.txt	Tue, 16 Mar 2021 08:22:30 -0300
+CODING_GUIDELINES.md	Mon, 22 Mar 2021 10:32:48 -0300

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>README - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-Mercado+Pago+SDK+for+Ruby">Mercado Pago SDK for Ruby</a>
+    <li><a href="#label-F0-9F-92-A1+Requirements">💡 Requirements</a>
+    <li><a href="#label-F0-9F-93-B2+Installation">📲 Installation</a>
+    <li><a href="#label-F0-9F-8C-9F+Getting+Started">🌟 Getting Started</a>
+    <li><a href="#label-Simple+usage">Simple usage</a>
+    <li><a href="#label-Per-request+configuration">Per-request configuration</a>
+    <li><a href="#label-F0-9F-93-9A+Documentation">📚 Documentation</a>
+    <li><a href="#label-F0-9F-A4-9D+Contributing">🤝 Contributing</a>
+    <li><a href="#label-E2-9D-A4-EF-B8-8F+Support">❤️ Support</a>
+    <li><a href="#label-F0-9F-8F-BB+License">🏻 License</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    
+<div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+    <li><a href="./CODE_OF_CONDUCT_md.html">CODE_OF_CONDUCT</a>
+    <li><a href="./CODING_GUIDELINES_md.html">CODING_GUIDELINES</a>
+    <li><a href="./CONTRIBUTING_md.html">CONTRIBUTING</a>
+    <li><a href="./LICENSE_txt.html">LICENSE</a>
+    <li><a href="./README_md.html">README</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page README.md">
+
+<h1 id="label-Mercado+Pago+SDK+for+Ruby">Mercado Pago SDK for Ruby<span><a href="#label-Mercado+Pago+SDK+for+Ruby">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="https://rubygems.org/gems/mercadopago-sdk"><img src="https://img.shields.io/gem/v/mercadopago-sdk"></a> <a href="https://rubygems.org/gems/mercadopago-sdk"><img src="https://img.shields.io/gem/dt/mercadopago-sdk"></a> <a href="https://github.com/mercadopago/sdk-ruby"><img src="https://img.shields.io/apm/l/vim-mode"></a></p>
+
+<p>This library provides developers with a simple set of bindings to help you integrate Mercado Pago API to a website and start receiving payments.</p>
+
+<h2 id="label-F0-9F-92-A1+Requirements">💡 Requirements<span><a href="#label-F0-9F-92-A1+Requirements">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Ruby version <strong>2.3 or greater</strong>.</p>
+
+<h2 id="label-F0-9F-93-B2+Installation">📲 Installation<span><a href="#label-F0-9F-93-B2+Installation">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Run <code>gem install mercadopago-sdk</code></p>
+
+<h2 id="label-F0-9F-8C-9F+Getting+Started">🌟 Getting Started<span><a href="#label-F0-9F-8C-9F+Getting+Started">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>First time using Mercado Pago? Create your <a href="https://www.mercadopago.com">Mercado Pago account</a>.</p>
+
+<p>Copy your <code>Access Token</code> in the <a href="https://www.mercadopago.com/developers/panel/credentials">credentials panel</a> and replace the text <code>YOUR_ACCESS_TOKEN</code> with it.</p>
+
+<h3 id="label-Simple+usage">Simple usage<span><a href="#label-Simple+usage">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>To generate a <code>card token</code> read the <a href="https://www.mercadopago.com/developers/en/guides/online-payments/checkout-api/introduction">Checkout API</a> documentation.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;mercadopago&#39;</span>
+
+<span class="ruby-identifier">sdk</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">SDK</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;YOUR_ACCESS_TOKEN&#39;</span>)
+
+<span class="ruby-identifier">payment_data</span> = {
+  <span class="ruby-value">transaction_amount:</span> <span class="ruby-value">100</span>,
+  <span class="ruby-value">token:</span> <span class="ruby-string">&#39;CARD_TOKEN&#39;</span>,
+  <span class="ruby-value">description:</span> <span class="ruby-string">&#39;Payment description&#39;</span>,
+  <span class="ruby-value">payment_method_id:</span> <span class="ruby-string">&#39;visa&#39;</span>,
+  <span class="ruby-value">installments:</span> <span class="ruby-value">1</span>,
+  <span class="ruby-value">payer:</span> {
+    <span class="ruby-value">email:</span> <span class="ruby-string">&#39;test_user_123456@testuser.com&#39;</span>
+  }
+}
+<span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">payment_data</span>)
+<span class="ruby-identifier">payment</span> = <span class="ruby-identifier">result</span>[<span class="ruby-value">:response</span>]
+
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">payment</span>
+</pre>
+
+<h3 id="label-Per-request+configuration">Per-request configuration<span><a href="#label-Per-request+configuration">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>All methods that make API calls accept an optional <code>RequestOptions</code> object. This can be used to configure some special options of the request, such as changing credentials or custom headers.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;mercadopago&#39;</span>
+
+<span class="ruby-identifier">request_options</span> = <span class="ruby-constant">Mercadopago</span><span class="ruby-operator">::</span><span class="ruby-constant">RequestOptions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">access_token:</span> <span class="ruby-string">&#39;YOUR_ACCESS_TOKEN&#39;</span>)
+<span class="ruby-comment"># ...</span>
+
+<span class="ruby-identifier">result</span> = <span class="ruby-identifier">sdk</span>.<span class="ruby-identifier">payment</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">payment_data</span>, <span class="ruby-value">request_options:</span> <span class="ruby-identifier">request_options</span>)
+<span class="ruby-identifier">payment</span> = <span class="ruby-identifier">result</span>[<span class="ruby-value">:response</span>]
+</pre>
+
+<h2 id="label-F0-9F-93-9A+Documentation">📚 Documentation<span><a href="#label-F0-9F-93-9A+Documentation">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Visit our Dev Site for further information regarding:  - <a href="https://www.mercadopago.com/developers/en/reference">APIs</a>  - <a href="https://www.mercadopago.com/developers/en/guides/online-payments/checkout-pro/introduction">Checkout Pro</a>  - <a href="https://www.mercadopago.com/developers/en/guides/online-payments/checkout-api/introduction">Checkout API</a>  - <a href="https://www.mercadopago.com/developers/en/guides/online-payments/web-tokenize-checkout/introduction">Web Tokenize Checkout</a></p>
+
+<p>Check our official code reference to explore all available functionalities.</p>
+
+<h2 id="label-F0-9F-A4-9D+Contributing">🤝 Contributing<span><a href="#label-F0-9F-A4-9D+Contributing">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>All contributions are welcome, ranging from people wanting to triage issues, others wanting to write documentation, to people wanting to contribute code.</p>
+
+<p>Please read and follow our <a href="CONTRIBUTING.md">contribution guidelines</a>. Contributions not following this guidelines will be disregarded. The guidelines are in place to make all of our lives easier and make contribution a consistent process for everyone.</p>
+
+<h2 id="label-E2-9D-A4-EF-B8-8F+Support">❤️ Support<span><a href="#label-E2-9D-A4-EF-B8-8F+Support">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>If you require technical support, please contact our support team at <a href="https://developers.mercadopago.com">developers.mercadopago.com</a>.</p>
+
+<h2 id="label-F0-9F-8F-BB+License">🏻 License<span><a href="#label-F0-9F-8F-BB+License">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre>MIT license. Copyright (c) 2021 - Mercado Pago / Mercado Libre
+For more information, see the LICENSE file.</pre>
+
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
