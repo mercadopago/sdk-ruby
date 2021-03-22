@@ -52,9 +52,7 @@ All methods that make API calls accept an optional `RequestOptions` object. This
 ```ruby
 require 'mercadopago'
 
-sdk = Mercadopago::SDK.new('YOUR_ACCESS_TOKEN')
-
-request_options = Mercadopago::RequestOptions.new('YOUR_ACCESS_TOKEN')
+request_options = Mercadopago::RequestOptions.new(access_token: 'YOUR_ACCESS_TOKEN')
 # ...
 
 result = sdk.payment.create(payment_data, request_options: request_options)
