@@ -29,9 +29,9 @@ jobs:
         ruby-version: 2.6
     - name: Install dependencies
       run: bundle install
-    - name: Run tests
-      run: bundle exec rake
     - name: Rubocop
       run: rubocop
-    - name: Sorbet
-      run: srb tc
+    - name: Run tests
+      run: bundle exec rake
+#    - name: Sorbet
+#      run: srb tc
