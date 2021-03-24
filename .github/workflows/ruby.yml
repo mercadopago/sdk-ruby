@@ -33,5 +33,3 @@ jobs:
       run: rubocop
     - name: Run tests
       run: bundle exec rake
-#    - name: Sorbet
-#      run: srb tc
