@@ -9,9 +9,9 @@ name: Ruby
 
 on:
   push:
-    branches: [ gitactions ]
+    branches: [ master ]
   pull_request:
-    branches: [ gitactions ]
+    branches: [ master ]
 
 jobs:
   test:
@@ -29,5 +29,7 @@ jobs:
         ruby-version: 2.6
     - name: Install dependencies
       run: bundle install
+    - name: Rubocop
+      run: rubocop lib
     - name: Run tests
       run: bundle exec rake

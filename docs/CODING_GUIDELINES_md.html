@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>CODING_GUIDELINES - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-Coding+Guidelines">Coding Guidelines</a>
+    <li><a href="#label-Language+Guidelines">Language Guidelines</a>
+    <li><a href="#label-Code+Guidelines">Code Guidelines</a>
+    <li><a href="#label-Comment+Guidelines">Comment Guidelines</a>
+    <li><a href="#label-Branching+Guidelines">Branching Guidelines</a>
+    <li><a href="#label-Git+Guidelines">Git Guidelines</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    
+<div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+    <li><a href="./CODE_OF_CONDUCT_md.html">CODE_OF_CONDUCT</a>
+    <li><a href="./CODING_GUIDELINES_md.html">CODING_GUIDELINES</a>
+    <li><a href="./CONTRIBUTING_md.html">CONTRIBUTING</a>
+    <li><a href="./LICENSE_txt.html">LICENSE</a>
+    <li><a href="./README_md.html">README</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page CODING_GUIDELINES.md">
+
+<h1 id="label-Coding+Guidelines">Coding Guidelines<span><a href="#label-Coding+Guidelines">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>The Mercado Pago Ruby SDK is a collaborative effort from the start. The SDK team thinks that contributions from different developer will enrich it&#39;s feature set and make it more relevant to the community.</p>
+
+<p>However; absorbing all contributions as-is, while expedient, might lead to difficulties in maintenance of the codebase is left unchecked. Collaborative codebases often establish guidelines for contributors to ensure code remains maintainable over time. The effort to maintain the SDK is no different in this regard so a bit of guidance is in order.</p>
+
+<p>The purpose of this guide is to set a baseline for contributions. These guidelines are not intended to limit the tools at your disposal nor to rewire the way you think but rather to encourage good neighbor behavior.</p>
+
+<h2 id="label-Language+Guidelines">Language Guidelines<span><a href="#label-Language+Guidelines">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>We use <strong>english</strong> language. This is to be consistent everywhere, and to be considerate with developers that do not speak our native language.</p>
+
+<p>Therefore: source code, comments, documentation, commit messages, review comments, and any other kind of contribution <em>MUST</em> use english language.</p>
+
+<p>Typos are unavoidable, but try to reduce them by using a spellchecker. Most IDEs can be configured to run one automatically.</p>
+
+<h2 id="label-Code+Guidelines">Code Guidelines<span><a href="#label-Code+Guidelines">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p>Set your IDE to follow the <a href="https://editorconfig.org/">.editorconfig</a> in each repository.</p>
+</li><li>
+<p>Follow the <a href="https://github.com/rubocop/ruby-style-guide">RuboCop Ruby Style Guide</a>.</p>
+</li></ul>
+
+<p>Generally speaking, be conscious when contributing and try following the same style that the code in the SDK already has. If you have any doubts, just ask us!</p>
+
+<p>This rules will be enforced automatically when making a pull requests, and checks will fail if you do not follow them, resulting in your contribution being automatically rejected until fixed.</p>
+
+<h2 id="label-Comment+Guidelines">Comment Guidelines<span><a href="#label-Comment+Guidelines">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Comments in code are a hard thing to write, not because the words are difficult to produce but because it is hard to make relevant comments. Too much of it and people do not read comments (and it obfuscates code reading) and too little of it gives you no recourse but to read large portions of codebase to get insight as to what a feature/codeblock is doing. Both situations are undesirable and efforts should be made at all time to have a please comment reading experience</p>
+
+<p>As a general rule you would have to comment on decisions you made while coding that are not part of any specification.</p>
+
+<p>In particular you should always comment any decision that:</p>
+<ul><li>
+<p>Departs from common wisdom or convention (The <strong>why&#39;s</strong> are necessary).</p>
+</li><li>
+<p>Takes a significant amount of time to produce. A good rule of thumb here is that if you spent more than 1 hour thinking on how to produce a fragment of code that took 2 minutes of wrist time to write you should document your thinking to aid reader and allow for validation.</p>
+</li><li>
+<p>Need to preserve properties of the implementation. This is the case of performance sensitive portions of the codebase, goroutines synchronization, implementations of security primitives, congestion control algorithms, etc.</p>
+</li></ul>
+
+<p>As a general rule of what not to comment you should avoid:</p>
+<ul><li>
+<p>Commenting on structure of programs that is already part of a convention, specified or otherwise.</p>
+</li><li>
+<p>Having pedantic explanations of behavior that can be found by immediate examination of the surrounding code artifacts.</p>
+</li><li>
+<p>Commenting on behavior you cannot attest.</p>
+</li></ul>
+
+<h3 id="label-Branching+Guidelines">Branching Guidelines<span><a href="#label-Branching+Guidelines">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Currently <code>master</code> is our only long term branch, below a few suggestions of short term branches naming:</p>
+<ul><li>
+<p><code>hotfix/something-needs-fix</code>: Small routine patches in code to features already there.</p>
+</li><li>
+<p><code>feature/something-new</code>: A new feature or a change in a existent feature. Beware of breaking changes that would require a major version bump.</p>
+</li><li>
+<p><code>doc/improves-documentation-for-this-feature</code>: If you add or change documentation with no impact to the source code.</p>
+</li></ul>
+
+<h3 id="label-Git+Guidelines">Git Guidelines<span><a href="#label-Git+Guidelines">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>All commits <strong>SHOULD</strong> follow the <a href="https://chris.beams.io/posts/git-commit">seven rules of a great Git commit message</a>:</p>
+<ol><li>
+<p>Separate subject from body with a blank line.</p>
+</li><li>
+<p>Limit the subject line to 72 characters.</p>
+</li><li>
+<p>Capitalize the subject line.</p>
+</li><li>
+<p>Do not end the subject line with a period.</p>
+</li><li>
+<p>Use the imperative mood in the subject line.</p>
+</li><li>
+<p>Wrap the body at 72 characters.</p>
+</li><li>
+<p>Use the body to explain what and why vs. how.</p>
+</li></ol>
+
+<p>Commits such as “fix tests”, “now it&#39;s working” and many other common messages we find usually in code <strong>WON&#39;T</strong> be accepted.</p>
+
+<p>Ideally we would like to enforce these rules, but we are realistic and understand that it might be a big change for some people. So unless deviating heavily from what was stated we might accept your commits even if not following these rules perfectly.</p>
+
+<p>Please avoid taking to much time to deliver code, and always <a href="https://git-scm.com/docs/git-rebase">rebase</a> your code to avoid reverse merge commits.</p>
+
+<p>When reviewing, check if the PR adheres to <a href="https://github.com/rubocop/ruby-style-guide">RuboCop Ruby Style Guide</a>.</p>
+
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
