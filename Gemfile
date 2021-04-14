@@ -3,11 +3,10 @@
 source 'https://rubygems.org'
 
 gemspec
-
-gem 'rake'
+gem 'rake', '~>13.0'
 gem 'rest-client', '~>2.0'
 
-gemspec :development, :test do
+ group :development, :test do
   gem 'minitest'
   gem 'rubocop', require: false
 end
