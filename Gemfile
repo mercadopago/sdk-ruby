@@ -2,10 +2,12 @@
 
 source 'https://rubygems.org'
 
+gemspec
+
 gem 'rake'
 gem 'rest-client', '~>2.0'
 
-group :development, :test do
+gemspec :development, :test do
   gem 'minitest'
   gem 'rubocop', require: false
 end
