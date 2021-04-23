@@ -16,7 +16,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'json', '~>2.5'
   gem.add_dependency 'rest-client', '~>2.0'
-  gem.add_dependency 'rake', '~>13.0'
   gem.add_development_dependency 'pry', '~>0.14'
   gem.add_development_dependency 'rake'
 end
