@@ -2,7 +2,10 @@
 
 source 'https://rubygems.org'
 
-gem 'minitest'
-gem 'rake'
-gem 'rest-client'
-gem 'rubocop', require: false
+group :development, :test do
+  gem 'rake'
+  gem 'minitest'
+  gem 'rubocop', require: false
+end
+
+gemspec

@@ -34,7 +34,7 @@ class TestCard < Minitest::Test
     sleep(1)
 
     card_token_object = {
-      card_number: '4235647728025682',
+      card_number: '5031433215406351',
       expiration_year: 2025,
       expiration_month: 11,
       security_code: '123',
