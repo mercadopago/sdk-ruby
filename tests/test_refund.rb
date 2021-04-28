@@ -16,7 +16,7 @@ class TestRefund < Minitest::Test
   def test_method_post
     sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
     card_token_object = {
-      card_number: '4235647728025682',
+      card_number: '5031433215406351',
       expiration_year: 2025,
       expiration_month: 11,
       security_code: '123',
@@ -29,9 +29,9 @@ class TestRefund < Minitest::Test
     payment_object = {
       token: result_card_token[:response]['id'],
       installments: 1,
-      transaction_amount: 58.80,
+      transaction_amount: 10,
       description: 'Point Mini a maquininha que dá o dinheiro de suas vendas na hora',
-      payment_method_id: 'visa',
+      payment_method_id: 'master',
       payer: {
         email: 'test_user_123456@testuser.com',
         identification: {

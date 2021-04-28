@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name                  = 'mercadopago-sdk'
-  gem.version               = '2.0.1'
+  gem.version               = '2.0.2'
   gem.required_ruby_version = '>= 2.3.0'
   gem.author                = 'Mercado Pago'
   gem.description           = 'Mercado Pago Ruby SDK'
@@ -14,8 +14,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(tests)/})
   gem.require_paths = ['lib']
 
-  gem.add_dependency 'json'
-
-  gem.add_development_dependency 'pry'
-  gem.add_development_dependency 'rake'
+  gem.add_dependency 'json', '~>2.5'
+  gem.add_dependency 'rest-client', '~>2.1'
+  gem.add_development_dependency 'pry', '~>0.14'
+  gem.add_development_dependency 'rake', '~>13.0'
 end
