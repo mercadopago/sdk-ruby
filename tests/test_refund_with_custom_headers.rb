@@ -9,7 +9,7 @@ require 'securerandom'
 # TestRefund
 class TestRefund < Minitest::Test
   def test_method_post_with_custom_headers
-    sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
+    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
     card_token_object = {
       card_number: '5031433215406351',
       expiration_year: 2025,
@@ -89,7 +89,7 @@ class TestRefund < Minitest::Test
     assert_equal 201, result[:status]
     assert_equal 'approved', result[:response]['status']
 
-    # calling a request with an exists 'x-idempotency-key', the API should return 200,
+    # calling a request with an existing 'x-idempotency-key', the API should return 200,
     # instead of create other refund
     result = sdk.refund.create(payment_id, refund_data: refund_data, request_options: custom_request_options) 
     assert_equal 200, result[:status]
