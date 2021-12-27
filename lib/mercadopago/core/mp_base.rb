@@ -29,7 +29,7 @@ module Mercadopago
     end
 
     def _check_headers(request_options = nil, extra_headers = nil)
-      headers = request_options.nil? ? request_options.get_headers : @request_options.get_headers
+      headers = request_options.nil? ? @request_options.get_headers : request_options.get_headers
 
       headers.merge!(extra_headers) unless extra_headers.nil?
 
