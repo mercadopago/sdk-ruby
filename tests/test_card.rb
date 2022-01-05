@@ -22,7 +22,6 @@ class TestCard < Minitest::Test
         number: '29804555'
       },
       address: {
-        zip_code: '2300',
         street_name: 'some street'
       },
       description: 'customer description'

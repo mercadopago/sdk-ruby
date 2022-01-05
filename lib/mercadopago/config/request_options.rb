@@ -35,7 +35,7 @@ module Mercadopago
       headers['x-integrator-id'] = @integrator_id unless @integrator_id.nil?
       headers['x-platform-id'] = @platform_id unless @platform_id.nil?
 
-      headers.merge(@custom_headers) unless @custom_headers.nil?
+      headers.merge!(@custom_headers) unless @custom_headers.nil?
 
       headers
     end
