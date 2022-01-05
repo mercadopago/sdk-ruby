@@ -3,7 +3,7 @@
 
 module Mercadopago
   class Config
-    @@VERSION = '2.0.2'
+    @@VERSION = '2.0.3'
     @@USER_AGENT = "MercadoPago Ruby SDK v#{@@VERSION}"
     @@PRODUCT_ID = 'bc32a7vtrpp001u8nhjg'
     @@TRACKING_ID =  "plataform: ?,type:SDK#{@@VERSION},so;"
