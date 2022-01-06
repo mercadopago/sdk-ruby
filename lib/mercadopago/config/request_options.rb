@@ -1,8 +1,6 @@
 # typed: true
 # frozen_string_literal: true
 
-require 'uuid'
-
 module Mercadopago
   class RequestOptions
     attr_reader :access_token, :connection_timeout, :custom_headers, :corporation_id, :integrator_id,
@@ -27,12 +25,10 @@ module Mercadopago
     end
 
     def get_headers
-      uuid = UUID.new
-
       headers = { 'Authorization': "Bearer #{@access_token}",
                   'x-product-id' => @config.product_id,
                   'x-tracking-id' => @config.tracking_id,
-                  'x-idempotency-key' => uuid.generate,
+                  'x-idempotency-key' => SecureRandom.uuid,
                   'User-Agent' => @config.user_agent,
                   'Accept': @config.mime_json }
 
