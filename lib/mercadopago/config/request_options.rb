@@ -28,6 +28,7 @@ module Mercadopago
       headers = { 'Authorization': "Bearer #{@access_token}",
                   'x-product-id' => @config.product_id,
                   'x-tracking-id' => @config.tracking_id,
+                  'x-idempotency-key' => SecureRandom.uuid,
                   'User-Agent' => @config.user_agent,
                   'Accept': @config.mime_json }
 
