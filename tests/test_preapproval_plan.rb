@@ -23,7 +23,7 @@ class TestPreapprovalPlan < Minitest::Test
   def test_method_post
     sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
 
-    preapproval_plan_object = {
+    preapproval_plan_data = {
       reason: 'Yoga classes',
       auto_recurring: {
         frequency: 1,
@@ -49,7 +49,7 @@ class TestPreapprovalPlan < Minitest::Test
       back_url: 'https://www.yoursite.com'
     }
     
-    result = sdk.preapproval_plan.create(preapproval_plan_object)
+    result = sdk.preapproval_plan.create(preapproval_plan_data)
     assert_equal 201, result[:status]
   end
 
