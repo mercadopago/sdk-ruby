@@ -5,7 +5,7 @@ require_relative '../lib/mercadopago'
 
 require 'minitest/autorun'
 
-class TestPreapprovalPlan < Minitest::Test
+class TestPreapproval < Minitest::Test
   def test_method_search
     sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
     result = sdk.preapproval.search(filters: { id: '2c938084884df89301884fecf62e012a' })
