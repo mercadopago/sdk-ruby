@@ -59,6 +59,10 @@ module Mercadopago
       Refund.new(request_options, http_client)
     end
 
+    def preapproval
+      Preapproval.new(request_options, http_client)
+    end
+
     def access_token=(value)
       raise TypeError, 'Param access_token must be a String' unless value.is_a?(String)
 
