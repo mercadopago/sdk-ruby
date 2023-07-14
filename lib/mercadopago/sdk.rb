@@ -62,7 +62,7 @@ module Mercadopago
     def preapproval
       Preapproval.new(request_options, http_client)
     end
-    
+
     def preapproval_plan
       PreapprovalPlan.new(request_options, http_client)
     end
