@@ -14,7 +14,7 @@ Gemspec/RequiredRubyVersion:
     - 'mercadopago.gemspec'
 
 # Offense count: 8
-Lint/SelfAssignment:
+Style/SelfAssignment:
   Exclude:
     - 'lib/mercadopago/core/mp_base.rb'
 
