@@ -62,8 +62,8 @@ payment = result[:response]
 ## 📚 Documentation 
 
 Visit our Dev Site for further information regarding:
- - [Developer Docs](https://www.mercadopago.com.br/developers/en/docs)
- - [Checkout Bricks](https://www.mercadopago.com.br/developers/en/docs/checkout-bricks/landing)
+ - [Developer Docs](https://www.mercadopago.com/developers/en/docs)
+ - [Checkout Bricks](https://www.mercadopago.com/developers/en/docs/checkout-bricks/landing)
  - [Checkout Pro](https://www.mercadopago.com/developers/en/guides/online-payments/checkout-pro/introduction)
  - [Checkout API](https://www.mercadopago.com/developers/en/guides/online-payments/checkout-api/introduction)
 
