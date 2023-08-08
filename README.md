@@ -18,7 +18,7 @@ Run ```gem install mercadopago-sdk```
 
 First time using Mercado Pago? Create your [Mercado Pago account](https://www.mercadopago.com).
 
-Copy your `Access Token` in the [credentials panel](https://www.mercadopago.com.br/developers/panel/app) and replace the text `YOUR_ACCESS_TOKEN` with it.
+Copy your `Access Token` in the [credentials panel](https://www.mercadopago.com/developers/panel/app) and replace the text `YOUR_ACCESS_TOKEN` with it.
 
 ### Simple usage
 
