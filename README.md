@@ -2,7 +2,7 @@
 
 [![Gem](https://img.shields.io/gem/v/mercadopago-sdk)](https://rubygems.org/gems/mercadopago-sdk)
 [![Gem](https://img.shields.io/gem/dt/mercadopago-sdk)](https://rubygems.org/gems/mercadopago-sdk)
-[![APM](https://img.shields.io/apm/l/vim-mode)](https://github.com/mercadopago/sdk-ruby)
+![GitHub](https://img.shields.io/github/license/mercadopago/sdk-ruby)
 
 This library provides developers with a simple set of bindings to help you integrate Mercado Pago API to a website and start receiving payments.
 
@@ -18,7 +18,7 @@ Run ```gem install mercadopago-sdk```
 
 First time using Mercado Pago? Create your [Mercado Pago account](https://www.mercadopago.com).
 
-Copy your `Access Token` in the [credentials panel](https://www.mercadopago.com/developers/panel/credentials) and replace the text `YOUR_ACCESS_TOKEN` with it.
+Copy your `Access Token` in the [credentials panel](https://www.mercadopago.com/developers/panel/app) and replace the text `YOUR_ACCESS_TOKEN` with it.
 
 ### Simple usage
 
@@ -62,10 +62,10 @@ payment = result[:response]
 ## 📚 Documentation 
 
 Visit our Dev Site for further information regarding:
- - [APIs](https://www.mercadopago.com/developers/en/reference)
+ - [Developer Docs](https://www.mercadopago.com/developers/en/docs)
+ - [Checkout Bricks](https://www.mercadopago.com/developers/en/docs/checkout-bricks/landing)
  - [Checkout Pro](https://www.mercadopago.com/developers/en/guides/online-payments/checkout-pro/introduction)
  - [Checkout API](https://www.mercadopago.com/developers/en/guides/online-payments/checkout-api/introduction)
- - [Web Tokenize Checkout](https://www.mercadopago.com/developers/en/guides/online-payments/web-tokenize-checkout/introduction)
 
 Check our official code reference to explore all available functionalities.
 
