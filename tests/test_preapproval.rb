@@ -19,7 +19,7 @@ class TestPreapproval < Minitest::Test
   end
 
   def test_method_search
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+    sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
 
     create_response = create_preapproval(sdk)
     assert_equal 201, create_response[:status]
@@ -29,7 +29,7 @@ class TestPreapproval < Minitest::Test
   end
 
   def test_method_get_id
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+    sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
 
     create_response = create_preapproval(sdk)
     assert_equal 201, create_response[:status]
@@ -39,14 +39,14 @@ class TestPreapproval < Minitest::Test
   end
 
   def test_method_post
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+    sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
 
     result = create_preapproval(sdk)
     assert_equal 201, result[:status]
   end
 
   def test_method_put
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+    sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
 
     create_response = create_preapproval(sdk)
     assert_equal 201, create_response[:status]
@@ -80,7 +80,7 @@ class TestPreapproval < Minitest::Test
         frequency: 1,
         frequency_type: 'months',
         start_date: '2023-06-02T13:07:14.260Z',
-        end_date: "2023-07-20T15:59:52.581Z",
+        end_date: "2025-11-20T15:59:52.581Z",
         transaction_amount: 10,
         currency_id: 'BRL'
       },

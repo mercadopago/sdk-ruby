@@ -91,7 +91,7 @@ class TestRefund < Minitest::Test
 
     # calling a request with an existing 'x-idempotency-key', the API should return 200,
     # instead of create other refund
-    result = sdk.refund.create(payment_id, refund_data: refund_data, request_options: custom_request_options) 
+    result = sdk.refund.create(payment_id, refund_data: refund_data, request_options: custom_request_options)
     assert_equal 200, result[:status]
   end
 end

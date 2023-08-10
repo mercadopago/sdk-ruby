@@ -35,7 +35,7 @@ class TestPreapprovalPlan < Minitest::Test
   end
 
   def test_method_search
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
     result = sdk.preapproval_plan.create(@preapproval_plan_data)
     assert_equal 201, result[:status]
 
@@ -44,7 +44,7 @@ class TestPreapprovalPlan < Minitest::Test
   end
 
   def test_method_get_id
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
 
     result = sdk.preapproval_plan.create(@preapproval_plan_data)
     assert_equal 201, result[:status]
@@ -54,14 +54,14 @@ class TestPreapprovalPlan < Minitest::Test
   end
 
   def test_method_post
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    
+    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
+
     result = sdk.preapproval_plan.create(@preapproval_plan_data)
     assert_equal 201, result[:status]
   end
 
   def test_method_put
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
 
     update_data = {
       reason: 'Pilates classes',

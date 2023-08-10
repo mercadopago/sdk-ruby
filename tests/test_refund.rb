@@ -14,7 +14,7 @@ class TestRefund < Minitest::Test
   end
 
   def test_method_post
-    sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
+    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
     card_token_object = {
       card_number: '5031433215406351',
       expiration_year: 2025,
