@@ -3,10 +3,10 @@
 
 module Mercadopago
   class Config
-    @@VERSION = '2.1.0'
+    @@VERSION = '2.2.1'
     @@USER_AGENT = "MercadoPago Ruby SDK v#{@@VERSION}"
     @@PRODUCT_ID = 'bc32a7vtrpp001u8nhjg'
-    @@TRACKING_ID =  "plataform: ?,type:SDK#{@@VERSION},so;"
+    @@TRACKING_ID =  "platform:#{RUBY_VERSION},type:SDK#{@@VERSION},so;"
     @@API_BASE_URL = 'https://api.mercadopago.com'
     @@MIME_JSON = 'application/json'
     @@MIME_FORM = 'application/x-www-form-urlencoded'
