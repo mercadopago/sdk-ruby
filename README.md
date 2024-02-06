@@ -35,17 +35,18 @@ custom_headers = {
 
 custom_request_options = Mercadopago::RequestOptions.new(custom_headers: custom_headers)
 
-payment_request = {
-  transaction_amount: 100, 
-  token: 'CARD_TOKEN', 
-  installments: 1, 
-  payer: { 
-    type: 'customer', 
-    id: '123456789-jxOV430go9fx2e'
+payment_data = {
+  transaction_amount: 100,
+  token: 'CARD_TOKEN',
+  description: 'Payment description',
+  payment_method_id: 'visa',
+  installments: 1,
+  payer: {
+    email: 'test_user_123456@testuser.com'
   }
 }
-payment_response = sdk.payment.create(payment_request, custom_request_options)
-payment = payment_response[:response]
+result = sdk.payment.create(payment_data, custom_request_options)
+payment = result[:response]
 
 puts payment
 ```
