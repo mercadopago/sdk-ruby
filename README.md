@@ -29,6 +29,12 @@ require 'mercadopago'
 
 sdk = Mercadopago::SDK.new('YOUR_ACCESS_TOKEN')
 
+custom_headers = {
+ 'x-idempotency-key': '<SOME_UNIQUE_VALUE>'
+}
+
+custom_request_options = Mercadopago::RequestOptions.new(custom_headers: custom_headers)
+
 payment_data = {
   transaction_amount: 100,
   token: 'CARD_TOKEN',
@@ -39,7 +45,7 @@ payment_data = {
     email: 'test_user_123456@testuser.com'
   }
 }
-result = sdk.payment.create(payment_data)
+result = sdk.payment.create(payment_data, custom_request_options)
 payment = result[:response]
 
 puts payment
