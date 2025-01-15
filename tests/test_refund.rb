@@ -7,14 +7,8 @@ require 'minitest/autorun'
 ##
 # TestRefund
 class TestRefund < Minitest::Test
-  def test_method_list
-    sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
-    result = sdk.refund.list(12_678_120_979)
-    assert_equal 200, result[:status]
-  end
-
-  def test_method_post
-    sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
+  def test_refund_post_and_list
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
     card_token_object = {
       card_number: '5031433215406351',
       expiration_year: 2025,
@@ -25,64 +19,26 @@ class TestRefund < Minitest::Test
       }
     }
     result_card_token = sdk.card_token.create(card_token_object)
-
     payment_object = {
-      token: result_card_token[:response]['id'],
+      transaction_amount: 110,
       installments: 1,
-      transaction_amount: 10,
-      description: 'Point Mini a maquininha que dá o dinheiro de suas vendas na hora',
+      capture: true,
+      description: 'Payment test',
       payment_method_id: 'master',
+      token: result_card_token[:response]['id'],
       payer: {
-        email: 'test_user_123456@testuser.com',
-        identification: {
-          number: '19119119100',
-          type: 'CPF'
-        }
-      },
-      notification_url: 'https://www.suaurl.com/notificacoes/',
-      binary_mode: false,
-      external_reference: 'MP0001',
-      statement_descriptor: 'MercadoPago',
-      additional_info: {
-        items: [
-          {
-            id: 'PR0001',
-            title: 'Point Mini',
-            description: 'Producto Point para cobros con tarjetas mediante bluetooth',
-            picture_url: 'https://http2.mlstatic.com/resources/frontend/statics/growth-sellers-landings/device-mlb-point-i_medium@2x.png',
-            category_id: 'electronics',
-            quantity: 1,
-            unit_price: 58.80
-          }
-        ],
-        payer: {
-          first_name: 'Nome',
-          last_name: 'Sobrenome',
-          address: {
-            zip_code: '06233-200',
-            street_name: 'Av das Nacoes Unidas',
-            street_number: 3003
-          },
-          registration_date: '2019-01-01T12:01:01.000-03:00',
-          phone: {
-            area_code: '011',
-            number: '987654321'
-          }
-        },
-        shipments: {
-          receiver_address: {
-            street_name: 'Av das Nacoes Unidas',
-            street_number: 3003,
-            zip_code: '06233200',
-            city_name: 'Buzios',
-            state_name: 'Rio de Janeiro'
-          }
-        }
+        email: 'test_user_246340119@testuser.com'
       }
     }
     result_payment = sdk.payment.create(payment_object)
-    result = sdk.refund.create(result_payment[:response]['id'])
-    assert_equal 201, result[:status]
-    assert_equal 'approved', result[:response]['status']
+    sleep(1)
+
+    result_refund = sdk.refund.create(result_payment[:response]['id'])
+    assert_equal 201, result_refund[:status]
+    assert_equal 'approved', result_refund[:response]['status']
+
+    sleep(1)
+    result_list = sdk.refund.list(result_refund[:response]['payment_id'])
+    assert_equal 200, result_list[:status]
   end
 end

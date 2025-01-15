@@ -7,7 +7,7 @@ require 'minitest/autorun'
 
 class TestCard < Minitest::Test
   def test_all
-    sdk = Mercadopago::SDK.new('TEST-783169576377080-082620-395ee7f82e0d55b1db606c118686c1db-464842924')
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
 
     customer_object = {
       email: 'test_payer_999944@testuser.com',

@@ -7,7 +7,7 @@ require 'minitest/autorun'
 
 class TestCustomer < Minitest::Test
   def test_all
-    sdk = Mercadopago::SDK.new('TEST-783169576377080-082620-395ee7f82e0d55b1db606c118686c1db-464842924')
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
 
     customer_object = {
       email: 'test_payer_999922@testuser.com',
@@ -22,8 +22,9 @@ class TestCustomer < Minitest::Test
         number: '29804555'
       },
       address: {
-        zip_code: '2300',
-        street_name: 'some street'
+        zip_code: '26515069',
+        street_name: 'some street',
+        street_number: 123
       },
       description: 'customer description'
     }
