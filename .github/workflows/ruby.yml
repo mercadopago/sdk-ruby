@@ -33,4 +33,4 @@ jobs:
     - name: Run tests
       run: bundle exec rake
       env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN_V2 }}
