@@ -54,38 +54,27 @@ class TestPreapproval < Minitest::Test
     update_data = {
       reason: 'Yoga classes',
       external_reference: 'YG-12345',
-      payer_email: 'test_user@testuser.com',
       auto_recurring: {
-        frequency: 2,
-        frequency_type: 'months',
         transaction_amount: 15,
-        currency_id: 'BRL'
       },
-      back_url: 'https://www.mercadopago.com.ar',
-      status: 'authorized'
+      back_url: 'https://www.mercadopago.com.ar'
     }
     result = sdk.preapproval.update(create_response[:response]['id'], update_data)
     assert_equal 200, result[:status]
   end
 
   def create_preapproval(sdk)
-    result_card_token = sdk.card_token.create(@card_token_object)
-
     preapproval_data = {
       reason: 'Yoga classes',
       external_reference: 'YG-1234',
-      payer_email: 'test_user@testuser.com',
-      card_token_id: result_card_token[:response]['id'],
+      payer_email: 'test_user_28355466@testuser.com',
       auto_recurring: {
         frequency: 1,
         frequency_type: 'months',
-        start_date: '2023-06-02T13:07:14.260Z',
-        end_date: "2023-07-20T15:59:52.581Z",
-        transaction_amount: 10,
+        transaction_amount: 100,
         currency_id: 'BRL'
       },
-      back_url: 'https://www.mercadopago.com.ar',
-      status: 'authorized'
+      back_url: 'https://www.mercadopago.com.br',
     }
 
     sdk.preapproval.create(preapproval_data)

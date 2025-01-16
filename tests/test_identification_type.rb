@@ -7,7 +7,7 @@ require 'minitest/autorun'
 
 class TestIdentificationType < Minitest::Test
   def test_method_get
-    sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
     sdk.request_options = Mercadopago::RequestOptions.new(corporation_id: 'abc')
     result = sdk.identification_type.get
 
