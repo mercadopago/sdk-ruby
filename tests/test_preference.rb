@@ -7,14 +7,25 @@ require 'minitest/autorun'
 
 class TestPreference < Minitest::Test
   def test_method_get_id
-    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
-    result = sdk.preference.get('537031659-d710347b-7746-4025-b72b-e5be918b91ca')
-
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+    data = {
+      items: [
+        {
+          title: 'Dummy Item',
+          description: 'Multicolor Item',
+          quantity: 1,
+          currency_id: '',
+          unit_price: 10.0
+        }
+      ]
+    }
+    preference = sdk.preference.create(data)
+    result = sdk.preference.get(preference[:response]['id'])
     assert_equal 200, result[:status]
   end
 
   def test_method_post
-    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
     data = {
       items: [
         {
@@ -31,19 +42,32 @@ class TestPreference < Minitest::Test
   end
 
   def test_method_put
-    sdk = Mercadopago::SDK.new('TEST-6130770563612470-121314-d27bbd7363e64c3853f058251cf8fc6e-537031659')
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+
     data = {
       items: [
         {
-          title: 'Camiseta Barcelona',
-          description: 'Camiseta Oficial Barcelona',
+          title: 'Dummy Item',
+          description: 'Multicolor Item',
           quantity: 1,
           currency_id: '',
           unit_price: 10.0
         }
       ]
     }
-    result = sdk.preference.update('537031659-e4a79653-8638-490c-a4e5-c39f6f8d9874', data)
+    preference = sdk.preference.create(data)
+
+    preferenceUpdate = {
+      items: [
+        {
+          title: 'Camiseta Barcelona',
+          description: 'Camiseta Oficial Barcelona',
+          quantity: 2,
+          unit_price: 10.0
+        }
+      ]
+    }
+    result = sdk.preference.update(preference[:response]['id'], preferenceUpdate)
     assert_equal 200, result[:status]
   end
 end
