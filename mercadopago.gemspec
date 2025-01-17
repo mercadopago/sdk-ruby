@@ -2,8 +2,8 @@
 
 Gem::Specification.new do |gem|
   gem.name                  = 'mercadopago-sdk'
-  gem.version               = '2.2.1'
-  gem.required_ruby_version = '>= 2.3.0'
+  gem.version               = '2.3.0'
+  gem.required_ruby_version = '>= 3.1.6'
   gem.author                = 'Mercado Pago'
   gem.description           = 'Mercado Pago Ruby SDK'
   gem.summary               = 'Mercado Pago Ruby SDK'
