@@ -11,6 +11,7 @@ require_relative './test_preference'
 require_relative './test_user'
 require_relative './test_preapproval'
 require_relative './test_preapproval_plan'
+require_relative './test_order'
 
 # TODO Uncomment the following lines when adjusting the tests and refund service
 # require_relative './test_refund_with_custom_headers'
