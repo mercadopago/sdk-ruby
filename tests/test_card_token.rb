@@ -7,7 +7,7 @@ require 'minitest/autorun'
 
 class CardToken < Minitest::Test
   def test_method_get_id
-    sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
     card_token_object = {
       card_number: '5031433215406351',
       expiration_year: 2025,
@@ -23,7 +23,7 @@ class CardToken < Minitest::Test
   end
 
   def test_method_post
-    sdk = Mercadopago::SDK.new('APP_USR-558881221729581-091712-44fdc612e60e3e638775d8b4003edd51-471763966')
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
     card_token_object = {
       card_number: '5031433215406351',
       expiration_year: 2025,
