@@ -1,0 +1,45 @@
+name: Release SDK - Publish Gem
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      id-token: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Validate gemspec
+        run: gem build mercadopago.gemspec
+
+      - name: Build gem
+        shell: bash
+        run: gem build *.gemspec
+
+      - name: Configure RubyGems Credentials
+        uses: rubygems/configure-rubygems-credentials@main
+        with:
+          role-to-assume: ${{ secrets.RUBYGEMS_API_KEY }}
+
+      - name: Publish gem to rubygems.org
+        shell: bash
+        run: gem push *.gem
+
+      - name: Wait for release to propagate
+        run: |
+          gem install rubygems-await
