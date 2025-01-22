@@ -5,19 +5,38 @@ on:
     types: [created]
 
 jobs:
-  push:
-    name: Push gem to RubyGems.org
+  release:
     runs-on: ubuntu-latest
 
-    permissions:
-      id-token: write
-      contents: write
-
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Ruby
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
 
-      - uses: rubygems/release-gem@v1
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Validate gemspec
+        run: gem build mercadopago.gemspec
+
+      - name: Build gem
+        shell: bash
+        run: gem build *.gemspec
+
+      - name: Configure RubyGems Credentials
+        uses: rubygems/configure-rubygems-credentials@v1.0.0
+        with:
+          api-token: ${{ secrets.RUBYGEMS_API_TOKEN }}
+
+      - name: Publish gem to rubygems.org
+        shell: bash
+        run: gem push *.gem
+
+      - name: Wait for release to propagate
+        run: |
+          gem install rubygems-await
+
