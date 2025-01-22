@@ -30,7 +30,7 @@ jobs:
       - name: Configure RubyGems Credentials
         uses: rubygems/configure-rubygems-credentials@v1.0.0
         with:
-          api-token: ${{ secrets.RUBYGEMS_API_TOKEN }}
+          api-token: ${{ secrets.RUBYGEMS_API_KEY }}
 
       - name: Publish gem to rubygems.org
         shell: bash
