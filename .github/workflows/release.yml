@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: write
       id-token: write
-
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,7 +34,7 @@ jobs:
       - name: Configure RubyGems Credentials
         uses: rubygems/configure-rubygems-credentials@main
         with:
-          audience: rubygems
+          role-to-assume: ${{ secrets.RUBYGEMS_API_KEY }}
 
       - name: Publish gem to rubygems.org
         shell: bash
@@ -43,4 +43,3 @@ jobs:
       - name: Wait for release to propagate
         run: |
           gem install rubygems-await
-
