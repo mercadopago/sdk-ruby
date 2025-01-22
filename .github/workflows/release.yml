@@ -8,6 +8,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      id-token: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,9 +32,10 @@ jobs:
         run: gem build *.gemspec
 
       - name: Configure RubyGems Credentials
-        uses: rubygems/configure-rubygems-credentials@v1.0.0
+        uses: rubygems/configure-rubygems-credentials@main
         with:
-          api-token: ${{ secrets.RUBYGEMS_API_KEY }}
+          role-to-assume: 3
+          audience: rubygems
 
       - name: Publish gem to rubygems.org
         shell: bash
