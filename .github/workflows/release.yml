@@ -1,36 +1,23 @@
-name: Release SDK
+name: Release SDK - Publish Gem
 
 on:
   release:
     types: [created]
 
 jobs:
-  release:
+  push:
+    name: Push gem to RubyGems.org
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    permissions:
+      id-token: write
+      contents: write
 
-      - name: Setup Ruby
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
 
-      - name: Install dependencies
-        run: bundle install
-
-      - name: Validate gemspec
-        run: gem build mercadopago.gemspec
-          
-      - name: Login to RubyGems
-        run: gem signin --api-key ${{ secrets.RUBYGEMS_API_KEY }}
-
-      - name: Build and Push Gem
-        env:
-          RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-        run: |
-          gem build mercadopago.gemspec
-          gem_file=$(ls mercadopago-*.gem)
-          echo "Publishing $gem_file..."
-          gem push "$gem_file"
+      - uses: rubygems/release-gem@v1
