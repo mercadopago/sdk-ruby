@@ -34,7 +34,6 @@ jobs:
       - name: Configure RubyGems Credentials
         uses: rubygems/configure-rubygems-credentials@main
         with:
-          role-to-assume: 3
           audience: rubygems
 
       - name: Publish gem to rubygems.org
