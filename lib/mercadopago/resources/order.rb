@@ -15,5 +15,14 @@ module Mercadopago
 
       _post(uri: '/v1/orders', data: order_data, request_options: request_options)
     end
+
+    def get(order_id, request_options: nil)
+      _get(uri: "/v1/orders/#{order_id}", request_options: request_options)
+    end
+
+    def process(order_id, request_options: nil)
+      _post(uri: "/v1/orders/#{order_id}/process", data: nil,request_options: request_options)
+    end
+
   end
 end

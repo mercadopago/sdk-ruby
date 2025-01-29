@@ -71,6 +71,11 @@ module Mercadopago
       Order.new(request_options, http_client)
     end
 
+    def order_transaction
+      OrderTransaction.new(request_options, http_client)
+    end
+
+
     def access_token=(value)
       raise TypeError, 'Param access_token must be a String' unless value.is_a?(String)
 
