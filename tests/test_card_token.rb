@@ -10,7 +10,7 @@ class CardToken < Minitest::Test
     sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
     card_token_object = {
       card_number: '5031433215406351',
-      expiration_year: 2025,
+      expiration_year: 2030,
       expiration_month: 11,
       security_code: '123',
       cardholder: {
@@ -26,7 +26,7 @@ class CardToken < Minitest::Test
     sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
     card_token_object = {
       card_number: '5031433215406351',
-      expiration_year: 2025,
+      expiration_year: 2030,
       expiration_month: 11,
       security_code: '123',
       cardholder: {

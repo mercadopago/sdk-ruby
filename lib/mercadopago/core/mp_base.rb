@@ -51,9 +51,9 @@ module Mercadopago
 
       request_options = _check_request_options(request_options)
       headers = _check_headers(request_options, { 'Content-Type': @config.mime_json })
+      payload = data&.to_json
 
-      @http_client.post(url: @config.api_base_url + uri, data: data.to_json, headers: headers,
-                        timeout: request_options.connection_timeout)
+      @http_client.post(url: @config.api_base_url + uri, data: payload, headers: headers, timeout: request_options.connection_timeout)
     end
 
     def _put(uri:, data:, request_options: nil)
