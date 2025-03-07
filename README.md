@@ -45,7 +45,7 @@ payment_data = {
     email: 'test_user_123456@testuser.com'
   }
 }
-result = sdk.payment.create(payment_data, custom_request_options)
+result = sdk.payment.create(payment_data, request_options: custom_request_options)
 payment = result[:response]
 
 puts payment
