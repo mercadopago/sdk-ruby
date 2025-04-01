@@ -22,5 +22,7 @@ require_relative './mercadopago/resources/advanced_payment'
 require_relative './mercadopago/resources/disbursement_refund'
 require_relative './mercadopago/resources/preapproval'
 require_relative './mercadopago/resources/preapproval_plan'
+require_relative './mercadopago/resources/order'
+require_relative './mercadopago/resources/order_transaction'
 
 require_relative './mercadopago/sdk'

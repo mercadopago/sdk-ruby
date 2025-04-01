@@ -35,20 +35,42 @@ custom_headers = {
 
 custom_request_options = Mercadopago::RequestOptions.new(custom_headers: custom_headers)
 
-payment_data = {
-  transaction_amount: 100,
-  token: 'CARD_TOKEN',
-  description: 'Payment description',
-  payment_method_id: 'visa',
-  installments: 1,
+order_data = {
+  type: 'online',
+  total_amount: '1000.00',
+  external_reference: 'ext_ref_1234',
+  capture_mode: 'automatic',
+  transactions: {
+    payments: [
+      {
+        amount: '1000.00',
+        payment_method: {
+          id: 'master',
+          type: 'credit_card',
+          token: '<CARD_TOKEN>',
+          installments: 1,
+          statement_descriptor: 'Store name'
+        }
+      }
+    ]
+  },
+  processing_mode: 'automatic',
+  description: 'some description',
   payer: {
-    email: 'test_user_123456@testuser.com'
+    email: '<PAYER_EMAIL>',
+    first_name: 'John',
+    last_name: 'Doe',
+    identification: {
+      type: 'CPF',
+      number: '00000000000'
+    }
   }
 }
-result = sdk.payment.create(payment_data, custom_request_options)
-payment = result[:response]
 
-puts payment
+result = sdk.order.create(order_data, custom_request_options)
+order = result[:response]
+
+puts order
 ```
 
 ### Per-request configuration

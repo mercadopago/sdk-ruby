@@ -10,7 +10,7 @@ class TestCustomer < Minitest::Test
     sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
 
     customer_object = {
-      email: 'test_payer_999922@testuser.com',
+      email: 'test_payer_9999SAE@testuser.com',
       first_name: 'Rafa',
       last_name: 'Williner',
       phone: {

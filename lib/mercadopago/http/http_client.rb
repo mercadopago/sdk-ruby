@@ -62,7 +62,7 @@ module Mercadopago
       result = RestClient::Request.execute(method: 'delete', url: url, headers: headers, timeout: timeout)
       {
         status: result.code,
-        response: JSON.parse(result.body)
+        response: result.body.is_a?(String) && !result.body.strip.empty? ? JSON.parse(result.body) : nil
       }
     rescue RestClient::Exception => e
       {
