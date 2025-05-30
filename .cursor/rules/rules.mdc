@@ -1,0 +1,276 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Mercado Pago Ruby SDK - Cursor Rules
+
+## Visão Geral do Projeto
+Este é o SDK oficial do Mercado Pago para Ruby, uma biblioteca de processamento de pagamentos que segue as melhores práticas Ruby e convenções da comunidade. O SDK é distribuído como uma gem Ruby e segue uma arquitetura modular com clara separação de responsabilidades.
+
+## Estrutura e Organização do Projeto
+
+### Estrutura de Diretórios Principal
+```
+lib/
+├── mercadopago.rb                  # Ponto de entrada principal
+├── mercadopago/                    # Código fonte principal
+    ├── client/                     # Clientes de API
+    │   ├── base_client.rb         # Cliente base abstrato
+    │   └── {resource}_client.rb   # Clientes específicos
+    ├── resources/                  # Modelos de recursos
+    │   ├── base_resource.rb       # Classe base de recurso
+    │   └── {resource}.rb          # Classes de recurso específicas
+    ├── config/                     # Configurações
+    ├── errors/                     # Classes de erro personalizadas
+    └── utils/                      # Utilitários compartilhados
+tests/                             # Testes automatizados
+examples/                          # Exemplos de uso
+docs/                             # Documentação
+```
+
+## Convenções de Nomenclatura
+
+### Classes e Módulos
+- **Clientes**: `MercadoPago::{Resource}Client` (ex: `PaymentClient`, `OrderClient`)
+- **Recursos**: `MercadoPago::{Resource}` (ex: `Payment`, `Order`)
+- **Configuração**: `MercadoPago::Config`
+- **Erros**: `MercadoPago::{Type}Error` (ex: `ValidationError`, `ApiError`)
+
+### Métodos e Variáveis
+- Usar **snake_case** para nomes de métodos e variáveis
+- Métodos predicados devem terminar com `?` (ex: `valid?`, `processed?`)
+- Métodos destrutivos devem terminar com `!` (ex: `save!`, `process!`)
+- Variáveis de instância começam com `@`
+- Constantes em **SCREAMING_SNAKE_CASE**
+
+### Arquivos e Diretórios
+- Arquivos em **snake_case.rb**
+- Um arquivo por classe/módulo
+- Nomes de arquivo devem corresponder à classe/módulo definido
+- Testes em `_test.rb` ou `_spec.rb`
+
+## Padrões de Código
+
+### Estilo Ruby
+- Seguir o [Ruby Style Guide](https://rubystyle.guide/)
+- Usar RuboCop para garantir consistência
+- Indentação de 2 espaços (sem tabs)
+- Linhas com máximo de 100 caracteres
+- Usar aspas simples para strings literais
+- Usar aspas duplas para strings interpoladas
+
+### Padrões de Cliente
+```ruby
+module MercadoPago
+  class PaymentClient < BaseClient
+    def create(payment_data, options = {})
+      post('/v1/payments', payment_data, options)
+    end
+
+    def get(payment_id, options = {})
+      get("/v1/payments/#{payment_id}", options)
+    end
+  end
+end
+```
+
+### Padrões de Recurso
+```ruby
+module MercadoPago
+  class Payment < BaseResource
+    attr_accessor :id, :status, :description
+    
+    def processed?
+      status == 'processed'
+    end
+
+    def process!
+      # Lógica de processamento
+    end
+  end
+end
+```
+
+## Práticas de Desenvolvimento
+
+### Geral
+- Seguir princípios SOLID
+- Usar composição sobre herança
+- Manter métodos pequenos e focados
+- Evitar efeitos colaterais
+- Usar injeção de dependência quando apropriado
+
+### Tratamento de Erros
+- Usar exceções para fluxos excepcionais
+- Criar hierarquia de exceções personalizada
+- Incluir mensagens de erro descritivas
+- Capturar e logar erros apropriadamente
+
+```ruby
+module MercadoPago
+  class ApiError < StandardError
+    attr_reader :status_code, :error_details
+
+    def initialize(message, status_code = nil, error_details = {})
+      super(message)
+      @status_code = status_code
+      @error_details = error_details
+    end
+  end
+end
+```
+
+### Logging
+- Usar logger padrão Ruby
+- Níveis de log apropriados (debug, info, warn, error)
+- Estruturar mensagens de log
+- Evitar logging de dados sensíveis
+
+## Testes
+
+### Estrutura de Testes
+- Usar RSpec como framework de teste
+- Organizar testes espelhando a estrutura do código
+- Usar factories para dados de teste
+- Implementar testes unitários e de integração
+
+### Padrões de Teste
+```ruby
+RSpec.describe MercadoPago::PaymentClient do
+  let(:client) { described_class.new }
+  let(:payment_data) { build(:payment_data) }
+
+  describe '#create' do
+    context 'with valid data' do
+      it 'creates a new payment' do
+        result = client.create(payment_data)
+        expect(result).to be_success
+      end
+    end
+  end
+end
+```
+
+### Cobertura de Testes
+- Manter alta cobertura de código
+- Testar casos de sucesso e erro
+- Usar mocks e stubs apropriadamente
+- Incluir testes de regressão
+
+## Documentação
+
+### Código
+- Usar RDoc/YARD para documentação de código
+- Documentar todos os métodos públicos
+- Incluir exemplos de uso
+- Manter README atualizado
+
+### Exemplos
+```ruby
+# @param payment_data [Hash] Os dados do pagamento
+# @option payment_data [Float] :amount O valor do pagamento
+# @option payment_data [String] :currency A moeda do pagamento
+# @return [Payment] O pagamento criado
+def create_payment(payment_data)
+  # Implementação
+end
+```
+
+## Gerenciamento de Dependências
+
+### Gemfile
+- Especificar versões exatas ou ranges seguros
+- Agrupar gems por ambiente/propósito
+- Manter Gemfile.lock no controle de versão
+- Atualizar dependências regularmente
+
+### Compatibilidade
+- Suportar múltiplas versões Ruby
+- Testar com diferentes versões de dependências
+- Documentar requisitos de versão
+- Seguir Semantic Versioning
+
+## Segurança
+
+### Práticas
+- Validar todas as entradas
+- Escapar saídas apropriadamente
+- Usar HTTPS para comunicações
+- Seguir práticas seguras de autenticação
+
+### Dados Sensíveis
+- Nunca commitar credenciais
+- Usar variáveis de ambiente
+- Mascarar dados sensíveis em logs
+- Implementar sanitização de dados
+
+## Performance
+
+### Otimizações
+- Usar cache quando apropriado
+- Minimizar chamadas de rede
+- Implementar retry com backoff
+- Monitorar uso de memória
+
+### Concorrência
+- Usar threads de forma segura
+- Implementar locks quando necessário
+- Evitar race conditions
+- Considerar paralelismo quando apropriado
+
+## Controle de Versão
+
+### Git
+- Commits atômicos e focados
+- Mensagens de commit descritivas
+- Usar branches para features/fixes
+- Seguir Git Flow ou similar
+
+### Releases
+- Versionar seguindo SemVer
+- Manter CHANGELOG atualizado
+- Taggear releases
+- Documentar breaking changes
+
+## Qualidade de Código
+
+### Ferramentas
+- RuboCop para estilo
+- SimpleCov para cobertura
+- RSpec para testes
+- YARD para documentação
+
+### Processos
+- Code review obrigatório
+- CI/CD automatizado
+- Testes antes de merge
+- Análise estática de código
+
+## Internacionalização
+
+### i18n
+- Usar gem i18n
+- Externalizar strings
+- Suportar múltiplos idiomas
+- Formatar datas/números apropriadamente
+
+### Localização
+- Adaptar para diferentes regiões
+- Considerar fusos horários
+- Formatar moedas corretamente
+- Suportar diferentes encodings
+
+## Manutenção
+
+### Práticas
+- Refatorar regularmente
+- Remover código morto
+- Atualizar dependências
+- Manter documentação atualizada
+
+### Monitoramento
+- Implementar health checks
+- Logar métricas importantes
+- Monitorar erros
+- Acompanhar performance 
