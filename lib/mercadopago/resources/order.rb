@@ -40,5 +40,9 @@ module Mercadopago
       _post(uri: "/v1/orders/#{order_id}/capture", data: nil, request_options: request_options)
     end
 
+    def search(filters: nil, request_options: nil)
+      _get(uri: '/v1/orders', params: filters, request_options: request_options)
+    end
+
   end
 end
