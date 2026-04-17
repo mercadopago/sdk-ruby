@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mercadopago-sdk (2.3.0)
+    mercadopago-sdk (2.4.1)
       json (~> 2.5)
       rest-client (~> 2.1)
 
