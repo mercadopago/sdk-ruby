@@ -8,13 +8,14 @@ module Mercadopago
   # The seller's account must hold enough funds to cover the refund;
   # otherwise the API returns a 400 Bad Request.
   #
-  # @see https://www.mercadopago.com/developers/en/reference/chargebacks/_payments_id_refunds/post
+  # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/create-refund/post
   class Refund < MPBase
     # Lists all refunds for a given payment.
     #
     # @param payment_id [Integer, String] MercadoPago payment ID
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with an array of refunds
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/get-refunds/get
     def list(payment_id, request_options: nil)
       _get(uri: "/v1/payments/#{payment_id}/refunds", request_options: request_options)
     end
@@ -29,6 +30,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the created refund
     # @raise [TypeError] if +refund_data+ is not a Hash
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/create-refund/post
     def create(payment_id, refund_data: nil, request_options: nil)
       raise TypeError, 'Param refund_data must be a Hash' unless refund_data.nil? || refund_data.is_a?(Hash)
 

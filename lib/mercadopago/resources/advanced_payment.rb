@@ -9,7 +9,7 @@ module Mercadopago
   # disbursement. Supports authorization/capture flows, cancellation,
   # and release-date adjustments.
   #
-  # @see https://www.mercadopago.com/developers/en/reference/advanced_payments/_advanced_payments/post
+  # @see https://www.mercadopago.com/developers/en/reference (advanced_payments section not found in current reference)
   class AdvancedPayment < MPBase
     # Searches advanced payments matching the given filters.
     #

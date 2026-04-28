@@ -8,7 +8,7 @@ module Mercadopago
   # to re-use previously tokenised card data. A card is always
   # associated with a customer ID.
   #
-  # @see https://www.mercadopago.com/developers/en/reference/cards/_customers_customer_id_cards/post
+  # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/save-card/post
   class Card < MPBase
     # Retrieves a specific card saved for a customer.
     #
@@ -16,6 +16,7 @@ module Mercadopago
     # @param card_id [String] saved card ID
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with card details
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/get-card/get
     def get(customer_id, card_id, request_options: nil)
       _get(uri: "/v1/customers/#{customer_id}/cards/#{card_id}", request_options: request_options)
     end
@@ -27,6 +28,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the created card
     # @raise [TypeError] if +card_data+ is nil or not a Hash
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/save-card/post
     def create(customer_id, card_data, request_options: nil)
       raise TypeError, 'Param card_data must be a Hash' if card_data.nil? || !card_data.is_a?(Hash)
 
@@ -39,6 +41,7 @@ module Mercadopago
     # @param card_id [String] saved card ID
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/delete-card/delete
     def delete(customer_id, card_id, request_options: nil)
       _delete(uri: "/v1/customers/#{customer_id}/cards/#{card_id}", request_options: request_options)
     end
@@ -48,6 +51,7 @@ module Mercadopago
     # @param customer_id [String] MercadoPago customer ID
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with an array of cards
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/get-customer-cards/get
     def list(customer_id, request_options: nil)
       _get(uri: "/v1/customers/#{customer_id}/cards", request_options: request_options)
     end

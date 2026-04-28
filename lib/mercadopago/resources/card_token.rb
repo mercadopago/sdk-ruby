@@ -8,7 +8,7 @@ module Mercadopago
   # sensitive card details when creating a payment or saving a card
   # to a {Customer}. This keeps PCI-sensitive data off your servers.
   #
-  # @see https://www.mercadopago.com/developers/en/reference/card_tokens/_card_tokens/post
+  # @see https://www.mercadopago.com/developers/en/reference
   class CardToken < MPBase
     # Retrieves an existing card token's metadata.
     #

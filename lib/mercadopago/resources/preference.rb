@@ -8,13 +8,14 @@ module Mercadopago
   # payment configuration for a Checkout Pro session. The API returns
   # an +init_point+ URL that redirects the buyer to the hosted checkout.
   #
-  # @see https://www.mercadopago.com/developers/en/reference/preferences/_checkout_preferences/post
+  # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-pro/preferences/create-preference/post
   class Preference < MPBase
     # Retrieves an existing preference.
     #
     # @param preference_id [String] preference ID
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with preference details
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-pro/preferences/get-preference/get
     def get(preference_id, request_options: nil)
       _get(uri: "/checkout/preferences/#{preference_id}", request_options: request_options)
     end
@@ -25,6 +26,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the created preference (includes +init_point+)
     # @raise [TypeError] if +preference_data+ is not a Hash
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-pro/preferences/create-preference/post
     def create(preference_data, request_options: nil)
       raise TypeError, 'Param preference_data must be a Hash' unless preference_data.is_a?(Hash)
 
@@ -38,6 +40,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the updated preference
     # @raise [TypeError] if +preference_data+ is not a Hash
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-pro/preferences/update-preference/put
     def update(preference_id, preference_data, request_options: nil)
       raise TypeError, 'Param preference_data must be a Hash' unless preference_data.is_a?(Hash)
 

@@ -7,7 +7,7 @@ module Mercadopago
   # Useful for validating the access token and obtaining the seller's
   # account details (ID, email, site, country, etc.).
   #
-  # @see https://www.mercadopago.com/developers/en/reference/users/_users_me/get
+  # @see https://www.mercadopago.com/developers/en/reference (users section not found in current reference)
   class User < MPBase
     # Returns the authenticated user's profile.
     #

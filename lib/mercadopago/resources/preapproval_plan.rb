@@ -8,7 +8,7 @@ module Mercadopago
   # currency) that one or more {Preapproval} subscriptions can
   # reference. Create a plan once, then associate subscribers to it.
   #
-  # @see https://www.mercadopago.com/developers/en/reference/subscriptions/_preapproval_plan/post
+  # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/create-preapproval-plan/post
   class PreapprovalPlan < MPBase
     # Searches subscription plans matching the given filters.
     #
@@ -16,6 +16,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with search results
     # @raise [TypeError] if +filters+ is not a Hash
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/search-preapproval-plan/get
     def search(filters: nil, request_options: nil)
       raise TypeError, 'Param filters must be a Hash' unless filters.nil? || filters.is_a?(Hash)
 
@@ -27,6 +28,7 @@ module Mercadopago
     # @param preapproval_plan_id [String] plan ID
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with plan details
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/get-preapproval-plan/get
     def get(preapproval_plan_id, request_options: nil)
       _get(uri: "/preapproval_plan/#{preapproval_plan_id}", request_options: request_options)
     end
@@ -37,6 +39,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the created plan
     # @raise [TypeError] if +preapproval_plan_data+ is not a Hash
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/create-preapproval-plan/post
     def create(preapproval_plan_data, request_options: nil)
       raise TypeError, 'Param preapproval_plan_data must be a Hash' unless preapproval_plan_data.is_a?(Hash)
 
@@ -50,6 +53,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the updated plan
     # @raise [TypeError] if +preapproval_plan_data+ is not a Hash
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/update-preapproval-plan/put
     def update(preapproval_plan_id, preapproval_plan_data, request_options: nil)
       raise TypeError, 'Param preapproval_plan_data must be a Hash' unless preapproval_plan_data.is_a?(Hash)
 
