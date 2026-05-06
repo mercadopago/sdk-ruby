@@ -1,0 +1,23 @@
+lib/mercadopago/http/http_client.rb
+  s_3db28d0d1288e5::t_41c24c0df7aaed 4,9-10,13-17,20,25,29,33-58
+Gemfile.lock
+  ai_agent 5,13-19,22,24-28,33,54-57,70
+mercadopago.gemspec
+  s_3db28d0d1288e5::t_4a36e28993507a 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "8cc7453635ef9a327ce70282e8ca9da86275e69e",
+  "prompts": {},
+  "sessions": {
+    "s_3db28d0d1288e5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1efe60b6-79c1-4907-9782-0020c13d78b6",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
