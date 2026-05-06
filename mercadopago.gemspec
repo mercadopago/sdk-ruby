@@ -14,8 +14,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(tests)/})
   gem.require_paths = ['lib']
 
+  gem.add_dependency 'faraday', '~>2.0'
   gem.add_dependency 'json', '~>2.5'
-  gem.add_dependency 'rest-client', '~>2.1'
   gem.add_development_dependency 'pry', '~>0.14'
   gem.add_development_dependency 'rake', '~>13.0'
 end
