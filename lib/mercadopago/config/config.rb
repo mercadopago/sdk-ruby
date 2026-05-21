@@ -9,7 +9,7 @@ module Mercadopago
   # there is no need to instantiate this class directly.
   class Config
     # Current SDK version following SemVer.
-    @@VERSION = '2.4.1'
+    @@VERSION = '3.0.0'
 
     # User-Agent string sent with every HTTP request for server-side tracking.
     @@USER_AGENT = "MercadoPago Ruby SDK v#{@@VERSION}"
@@ -29,7 +29,7 @@ module Mercadopago
     # MIME type used for form-encoded request bodies.
     @@MIME_FORM = 'application/x-www-form-urlencoded'
 
-    # @return [String] current SDK version (e.g. "2.4.1")
+    # @return [String] current SDK version (e.g. "3.0.0")
     def version
       @@VERSION
     end
