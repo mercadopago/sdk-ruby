@@ -1,0 +1,21 @@
+Gemfile.lock
+  ai_agent 23,60
+Gemfile
+  s_01fa74bc3a2c3f::t_27086a5c0f2a66 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "dd8521a4700ab689b4330f1e46fc1287553e8b60",
+  "prompts": {},
+  "sessions": {
+    "s_01fa74bc3a2c3f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b278cd00-7971-4f76-bbd2-7af562aae23e",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
