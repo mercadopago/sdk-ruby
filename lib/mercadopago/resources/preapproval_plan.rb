@@ -2,31 +2,58 @@
 # frozen_string_literal: true
 
 module Mercadopago
-  ###
-  # This class provides the methods to access the API
-  # that will allow you to create your own plan of subscription experience on your website.
-
-  # From basic to advanced configurations, you control the whole experience.
-
-  # [Click here for more infos](https://www.mercadopago.com.ar/developers/es/reference/subscriptions/_preapproval_plan/post)
-
+  # Manages subscription plan templates (preapproval plans).
+  #
+  # A plan defines the recurring billing terms (frequency, amount,
+  # currency) that one or more {Preapproval} subscriptions can
+  # reference. Create a plan once, then associate subscribers to it.
+  #
+  # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/create-preapproval-plan/post
   class PreapprovalPlan < MPBase
+    # Searches subscription plans matching the given filters.
+    #
+    # @param filters [Hash, nil] query parameters
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with search results
+    # @raise [TypeError] if +filters+ is not a Hash
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/search-preapproval-plan/get
     def search(filters: nil, request_options: nil)
       raise TypeError, 'Param filters must be a Hash' unless filters.nil? || filters.is_a?(Hash)
 
       _get(uri: '/preapproval_plan/search', filters: filters, request_options: request_options)
     end
 
+    # Retrieves a single subscription plan by ID.
+    #
+    # @param preapproval_plan_id [String] plan ID
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with plan details
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/get-preapproval-plan/get
     def get(preapproval_plan_id, request_options: nil)
       _get(uri: "/preapproval_plan/#{preapproval_plan_id}", request_options: request_options)
     end
 
+    # Creates a new subscription plan.
+    #
+    # @param preapproval_plan_data [Hash] plan attributes (reason, auto_recurring, back_url, etc.)
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the created plan
+    # @raise [TypeError] if +preapproval_plan_data+ is not a Hash
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/create-preapproval-plan/post
     def create(preapproval_plan_data, request_options: nil)
       raise TypeError, 'Param preapproval_plan_data must be a Hash' unless preapproval_plan_data.is_a?(Hash)
 
       _post(uri: '/preapproval_plan/', data: preapproval_plan_data, request_options: request_options)
     end
 
+    # Updates an existing subscription plan.
+    #
+    # @param preapproval_plan_id [String] plan ID
+    # @param preapproval_plan_data [Hash] fields to update
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the updated plan
+    # @raise [TypeError] if +preapproval_plan_data+ is not a Hash
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/update-preapproval-plan/put
     def update(preapproval_plan_id, preapproval_plan_data, request_options: nil)
       raise TypeError, 'Param preapproval_plan_data must be a Hash' unless preapproval_plan_data.is_a?(Hash)
 
