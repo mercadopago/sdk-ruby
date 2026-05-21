@@ -2,19 +2,35 @@
 # frozen_string_literal: true
 
 module Mercadopago
-  ###
-  # This class will allow you to refund payments created through the Payments class.
-  # You can refund a payment within 180 days after it was approved.
-
-  # You must have sufficient funds in your account in order to successfully refund the payment amount. Otherwise, you will get a 400 Bad Request error.
-
-  # [Click here for more infos](https://www.mercadopago.com.br/developers/en/guides/manage-account/account/cancellations-and-refunds#bookmark_refunds)
-
+  # Issues full or partial refunds on approved payments.
+  #
+  # Refunds can be created within 180 days of payment approval.
+  # The seller's account must hold enough funds to cover the refund;
+  # otherwise the API returns a 400 Bad Request.
+  #
+  # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/create-refund/post
   class Refund < MPBase
+    # Lists all refunds for a given payment.
+    #
+    # @param payment_id [Integer, String] MercadoPago payment ID
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with an array of refunds
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/get-refunds/get
     def list(payment_id, request_options: nil)
       _get(uri: "/v1/payments/#{payment_id}/refunds", request_options: request_options)
     end
 
+    # Creates a full or partial refund on a payment.
+    #
+    # Omit +refund_data+ for a full refund, or pass +{ amount: 10.0 }+
+    # for a partial refund.
+    #
+    # @param payment_id [Integer, String] MercadoPago payment ID
+    # @param refund_data [Hash, nil] optional refund attributes (e.g. +{ amount: 10.0 }+)
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the created refund
+    # @raise [TypeError] if +refund_data+ is not a Hash
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/create-refund/post
     def create(payment_id, refund_data: nil, request_options: nil)
       raise TypeError, 'Param refund_data must be a Hash' unless refund_data.nil? || refund_data.is_a?(Hash)
 
