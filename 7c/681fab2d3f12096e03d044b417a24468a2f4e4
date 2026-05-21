@@ -1,0 +1,23 @@
+.ruby-version
+  s_97ea7bfa3b20e5::t_a60f9b984798ad 1
+.github/workflows/ci.yml
+  s_97ea7bfa3b20e5::t_4e9c4293c41dac 33
+mercadopago.gemspec
+  s_97ea7bfa3b20e5::t_4382b47ec54ddf 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "7c681fab2d3f12096e03d044b417a24468a2f4e4",
+  "prompts": {},
+  "sessions": {
+    "s_97ea7bfa3b20e5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9103f395-d8f6-4ada-8164-daea4c0656f6",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
