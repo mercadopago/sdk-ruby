@@ -55,6 +55,9 @@ GEM
 PLATFORMS
   ruby
 
+RUBY VERSION
+   ruby 3.4.3p0
+
 DEPENDENCIES
   mercadopago-sdk!
   minitest (~> 5.0)
