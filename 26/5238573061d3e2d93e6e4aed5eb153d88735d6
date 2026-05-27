@@ -1,0 +1,11 @@
+lib/mercadopago/sdk.rb
+  ai_agent 41-45,121-130,136-138
+lib/mercadopago.rb
+  ai_agent 31,46-47,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "265238573061d3e2d93e6e4aed5eb153d88735d6",
+  "prompts": {}
+}
