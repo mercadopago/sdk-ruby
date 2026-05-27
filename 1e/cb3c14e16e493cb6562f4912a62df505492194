@@ -1,0 +1,25 @@
+tests/test_chargeback.rb
+  s_ca33c7d96b2139::t_4f57bcd21297f3 1-19
+tests/test_point.rb
+  s_ca33c7d96b2139::t_e0a30e41ee7342 1-24
+tests/test_oauth.rb
+  s_ca33c7d96b2139::t_77ef753ad38368 1-30
+tests/test_invoice.rb
+  s_ca33c7d96b2139::t_f221b35695841d 1-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "1ecb3c14e16e493cb6562f4912a62df505492194",
+  "prompts": {},
+  "sessions": {
+    "s_ca33c7d96b2139": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "31d8d73a-8320-4e75-89be-a5971fd08efd",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
