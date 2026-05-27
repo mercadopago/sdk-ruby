@@ -1,0 +1,11 @@
+mercadopago.gemspec
+  ai_agent 5
+CHANGELOG.md
+  ai_agent 1-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "3b4b30431cecf87703bd1302e8608c53f60e0b16",
+  "prompts": {}
+}
