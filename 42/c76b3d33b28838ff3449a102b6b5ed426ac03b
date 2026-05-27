@@ -1,0 +1,20 @@
+.github/dependabot.yml
+  s_0590c80567cf7a::t_068cae10c7c0d0 25-26
+  s_0590c80567cf7a::t_a7ed577b2e499f 1-24,27-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "42c76b3d33b28838ff3449a102b6b5ed426ac03b",
+  "prompts": {},
+  "sessions": {
+    "s_0590c80567cf7a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "55918395-0343-419e-a085-13daadb925f8",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
