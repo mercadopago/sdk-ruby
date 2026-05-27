@@ -28,6 +28,7 @@ require_relative './mercadopago/config/config'
 require_relative './mercadopago/config/request_options'
 
 # --- API Resources ---
+require_relative './mercadopago/resources/chargeback'
 require_relative './mercadopago/resources/customer'
 require_relative './mercadopago/resources/card'
 require_relative './mercadopago/resources/user'
@@ -42,8 +43,11 @@ require_relative './mercadopago/resources/advanced_payment'
 require_relative './mercadopago/resources/disbursement_refund'
 require_relative './mercadopago/resources/preapproval'
 require_relative './mercadopago/resources/preapproval_plan'
+require_relative './mercadopago/resources/invoice'
+require_relative './mercadopago/resources/oauth'
 require_relative './mercadopago/resources/order'
 require_relative './mercadopago/resources/order_transaction'
+require_relative './mercadopago/resources/point'
 
 # --- Entry point ---
 require_relative './mercadopago/sdk'
