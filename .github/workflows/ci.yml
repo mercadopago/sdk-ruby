@@ -39,3 +39,9 @@ jobs:
       run: bundle exec rake
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN_V2 }}
+
+    - name: Install bundler-audit
+      run: gem install bundler-audit
+
+    - name: Dependency audit
+      run: bundle-audit check --update
