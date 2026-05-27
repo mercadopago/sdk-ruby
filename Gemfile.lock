@@ -20,7 +20,7 @@ GEM
     language_server-protocol (3.17.0.3)
     logger (1.7.0)
     method_source (1.0.0)
-    minitest (5.25.5)
+    minitest (5.27.0)
     net-http (0.9.1)
       uri (>= 0.11.1)
     parallel (1.26.3)
@@ -57,7 +57,7 @@ PLATFORMS
 
 DEPENDENCIES
   mercadopago-sdk!
-  minitest (~> 5.0)
+  minitest (~> 5.27)
   pry (~> 0.14)
   rake
   rubocop (~> 1.70)
