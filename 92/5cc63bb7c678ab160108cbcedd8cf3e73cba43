@@ -1,0 +1,19 @@
+lib/mercadopago/resources/order.rb
+  s_9d868b010fbbae::t_5d7661409c12de 12-57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "925cc63bb7c678ab160108cbcedd8cf3e73cba43",
+  "prompts": {},
+  "sessions": {
+    "s_9d868b010fbbae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfad13d2-c7f9-4497-aca9-b81634739146",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
