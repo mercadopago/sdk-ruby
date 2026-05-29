@@ -9,6 +9,52 @@ module Mercadopago
   # Use {OrderTransaction} to manage individual transactions within
   # an order.
   #
+  # == Automatic Payments (AP) — supported Hash keys for +stored_credential+
+  #
+  #   {
+  #     payment_initiator:    String,   # "cardholder" | "merchant"
+  #     reason:               String,   # "recurring" | "installment" | "unscheduled"
+  #     store_payment_method: Boolean,
+  #     first_payment:        Boolean,
+  #     prev_transaction_ref: String    # ID of the previous transaction in the series.
+  #                                     # Required from the second charge onwards.
+  #   }
+  #
+  # == Supported Hash keys for +automatic_payments+
+  #
+  #   {
+  #     payment_profile_id: String,   # Stored payment profile ID.
+  #     retries:            Integer,  # Max retry attempts on failure.
+  #     schedule_date:      String,   # ISO 8601 scheduled charge date.
+  #     due_date:           String    # ISO 8601 payment due date.
+  #   }
+  #
+  # == Supported Hash keys for +subscription_data+
+  #
+  #   {
+  #     invoice_id:   String,  # ID of the invoice being paid.
+  #     billing_date: String,  # ISO 8601 billing date.
+  #     subscription_sequence: {
+  #       number: Integer,     # Current payment number (1-based).
+  #       total:  Integer      # Total payments in the plan.
+  #     },
+  #     invoice_period: {
+  #       type:   String,      # "monthly" | "daily" | "yearly".
+  #       period: Integer      # Number of period units.
+  #     }
+  #   }
+  #
+  # == Supported Hash keys for +integration_data+ (root of order request)
+  #
+  #   {
+  #     integrator_id:  String,  # Certified integrator ID.
+  #     platform_id:    String,  # Platform ID assigned by MercadoPago.
+  #     corporation_id: String,  # Corporation ID for multi-account setups.
+  #     sponsor: {
+  #       id: String             # MercadoPago user ID of the sponsor.
+  #     }
+  #   }
+  #
   # @see https://www.mercadopago.com/developers/en/docs/checkout-api/landing
   class Order < MPBase
     # Creates a new order.
