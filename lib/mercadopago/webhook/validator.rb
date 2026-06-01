@@ -70,7 +70,7 @@ module Mercadopago
     #
     # **QR Code notifications are not signed** by MercadoPago — do not call this
     # validator for those events; they will always fail signature verification.
-    class Validator # rubocop:disable Metrics/ClassLength
+    class Validator
       DEFAULT_SUPPORTED_VERSIONS = %w[v1].freeze
       private_constant :DEFAULT_SUPPORTED_VERSIONS
 
@@ -184,31 +184,31 @@ module Mercadopago
       end
       private_class_method :parse_and_validate_header
 
-      def self.validate_ts_and_hashes!(ts, hashes, x_request_id)
-        raise_error!(SignatureFailureReason::MALFORMED_SIGNATURE_HEADER, x_request_id) if ts.nil? && hashes.empty?
-        raise_error!(SignatureFailureReason::MISSING_TIMESTAMP, x_request_id) if ts.nil?
-        return if ts.match?(/\A\d+\z/)
+      def self.validate_ts_and_hashes!(timestamp, hashes, x_request_id)
+        raise_error!(SignatureFailureReason::MALFORMED_SIGNATURE_HEADER, x_request_id) if timestamp.nil? && hashes.empty?
+        raise_error!(SignatureFailureReason::MISSING_TIMESTAMP, x_request_id) if timestamp.nil?
+        return if timestamp.match?(/\A\d+\z/)
 
-        raise_error!(SignatureFailureReason::MALFORMED_SIGNATURE_HEADER, x_request_id, timestamp: ts)
+        raise_error!(SignatureFailureReason::MALFORMED_SIGNATURE_HEADER, x_request_id, timestamp: timestamp)
       end
       private_class_method :validate_ts_and_hashes!
 
-      def self.verify_signature!(data_id, x_request_id, ts, secret, received_hash)
-        manifest = build_manifest(data_id, x_request_id, ts)
+      def self.verify_signature!(data_id, x_request_id, timestamp, secret, received_hash)
+        manifest = build_manifest(data_id, x_request_id, timestamp)
         computed = OpenSSL::HMAC.hexdigest('SHA256', secret, manifest)
         return if constant_time_equal(computed, received_hash)
 
-        raise_error!(SignatureFailureReason::SIGNATURE_MISMATCH, x_request_id, timestamp: ts)
+        raise_error!(SignatureFailureReason::SIGNATURE_MISMATCH, x_request_id, timestamp: timestamp)
       end
       private_class_method :verify_signature!
 
-      def self.check_tolerance!(ts, x_request_id, tolerance_seconds, now_proc)
+      def self.check_tolerance!(timestamp, x_request_id, tolerance_seconds, now_proc)
         return if tolerance_seconds.nil?
 
-        drift_ms = (now_proc.call - ts.to_i).abs
+        drift_ms = (now_proc.call - timestamp.to_i).abs
         return unless drift_ms > tolerance_seconds * 1000
 
-        raise_error!(SignatureFailureReason::TIMESTAMP_OUT_OF_TOLERANCE, x_request_id, timestamp: ts)
+        raise_error!(SignatureFailureReason::TIMESTAMP_OUT_OF_TOLERANCE, x_request_id, timestamp: timestamp)
       end
       private_class_method :check_tolerance!
 
