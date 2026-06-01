@@ -38,7 +38,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the processed order
     def process(order_id, request_options: nil)
-      _post(uri: "/v1/orders/#{order_id}/process", data: nil,request_options: request_options)
+      _post(uri: "/v1/orders/#{order_id}/process", data: nil, request_options: request_options)
     end
 
     # Refunds an order (full or partial).
@@ -52,9 +52,7 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the refund result
     # @raise [TypeError] if +refund_data+ is provided but is not a Hash
     def refund(order_id, refund_data: nil, request_options: nil)
-      unless refund_data.nil?
-        raise TypeError, 'Param refund_data must be a Hash' unless refund_data.is_a?(Hash)
-      end
+      raise TypeError, 'Param refund_data must be a Hash' unless refund_data.nil? || refund_data.is_a?(Hash)
 
       _post(uri: "/v1/orders/#{order_id}/refund", data: refund_data, request_options: request_options)
     end
@@ -85,6 +83,5 @@ module Mercadopago
     def search(filters: nil, request_options: nil)
       _get(uri: '/v1/orders', params: filters, request_options: request_options)
     end
-
   end
 end
