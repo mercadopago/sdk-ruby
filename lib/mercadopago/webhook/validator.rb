@@ -104,78 +104,12 @@ module Mercadopago
         x_signature = normalize(x_signature)
         x_request_id = normalize(x_request_id)
         data_id = normalize(data_id)
-        versions = supported_versions && !supported_versions.empty? ? supported_versions : DEFAULT_SUPPORTED_VERSIONS
+        versions = resolve_versions(supported_versions)
         now_proc = now || -> { (Time.now.to_f * 1000).to_i }
 
-        if x_signature.nil?
-          raise InvalidWebhookSignatureError.new(
-            SignatureFailureReason::MISSING_SIGNATURE_HEADER,
-            request_id: x_request_id
-          )
-        end
-
-        ts, hashes = parse_signature_header(x_signature)
-
-        if ts.nil? && hashes.empty?
-          raise InvalidWebhookSignatureError.new(
-            SignatureFailureReason::MALFORMED_SIGNATURE_HEADER,
-            request_id: x_request_id
-          )
-        end
-
-        if ts.nil?
-          raise InvalidWebhookSignatureError.new(
-            SignatureFailureReason::MISSING_TIMESTAMP,
-            request_id: x_request_id
-          )
-        end
-
-        unless ts.match?(/\A\d+\z/)
-          raise InvalidWebhookSignatureError.new(
-            SignatureFailureReason::MALFORMED_SIGNATURE_HEADER,
-            request_id: x_request_id,
-            timestamp: ts
-          )
-        end
-
-        received_hash = nil
-        versions.each do |v|
-          if hashes.key?(v)
-            received_hash = hashes[v]
-            break
-          end
-        end
-
-        if received_hash.nil?
-          raise InvalidWebhookSignatureError.new(
-            SignatureFailureReason::MISSING_HASH,
-            request_id: x_request_id,
-            timestamp: ts
-          )
-        end
-
-        manifest = build_manifest(data_id, x_request_id, ts)
-        computed = OpenSSL::HMAC.hexdigest('SHA256', secret, manifest)
-
-        unless constant_time_equal(computed, received_hash)
-          raise InvalidWebhookSignatureError.new(
-            SignatureFailureReason::SIGNATURE_MISMATCH,
-            request_id: x_request_id,
-            timestamp: ts
-          )
-        end
-
-        unless tolerance_seconds.nil?
-          drift_ms = (now_proc.call - ts.to_i).abs
-          if drift_ms > tolerance_seconds * 1000
-            raise InvalidWebhookSignatureError.new(
-              SignatureFailureReason::TIMESTAMP_OUT_OF_TOLERANCE,
-              request_id: x_request_id,
-              timestamp: ts
-            )
-          end
-        end
-
+        ts, received_hash = parse_and_validate_header(x_signature, x_request_id, versions)
+        verify_signature!(data_id, x_request_id, ts, secret, received_hash)
+        check_tolerance!(ts, x_request_id, tolerance_seconds, now_proc)
         nil
       end
 
@@ -193,13 +127,10 @@ module Mercadopago
         hashes = {}
         ts = nil
         header.split(',').each do |part|
-          key, value = part.split('=', 2)
-          next if key.nil? || value.nil?
+          key, value = part.split('=', 2).map(&:strip)
+          next if key.to_s.empty? || value.to_s.empty?
 
-          key = key.strip.downcase
-          value = value.strip
-          next if key.empty? || value.empty?
-
+          key = key.downcase
           if key == 'ts'
             ts = value
           elsif key.match?(VERSION_KEY_REGEX)
@@ -224,14 +155,67 @@ module Mercadopago
       private_class_method :constant_time_equal
 
       # Builds the HMAC manifest, omitting empty pairs per the documented rule.
-      def self.build_manifest(data_id, request_id, ts)
+      def self.build_manifest(data_id, request_id, timestamp)
         parts = []
         parts << "id:#{data_id.downcase}" unless data_id.nil?
         parts << "request-id:#{request_id}" unless request_id.nil?
-        parts << "ts:#{ts}"
+        parts << "ts:#{timestamp}"
         "#{parts.join(';')};"
       end
       private_class_method :build_manifest
+
+      def self.resolve_versions(supported_versions)
+        return DEFAULT_SUPPORTED_VERSIONS if supported_versions.nil? || supported_versions.empty?
+
+        supported_versions
+      end
+      private_class_method :resolve_versions
+
+      def self.parse_and_validate_header(x_signature, x_request_id, versions)
+        raise_error!(SignatureFailureReason::MISSING_SIGNATURE_HEADER, x_request_id) if x_signature.nil?
+
+        ts, hashes = parse_signature_header(x_signature)
+        validate_ts_and_hashes!(ts, hashes, x_request_id)
+
+        received_hash = hashes[versions.find { |v| hashes.key?(v) }]
+        raise_error!(SignatureFailureReason::MISSING_HASH, x_request_id, timestamp: ts) if received_hash.nil?
+
+        [ts, received_hash]
+      end
+      private_class_method :parse_and_validate_header
+
+      def self.validate_ts_and_hashes!(timestamp, hashes, x_request_id)
+        raise_error!(SignatureFailureReason::MALFORMED_SIGNATURE_HEADER, x_request_id) if timestamp.nil? && hashes.empty?
+        raise_error!(SignatureFailureReason::MISSING_TIMESTAMP, x_request_id) if timestamp.nil?
+        return if timestamp.match?(/\A\d+\z/)
+
+        raise_error!(SignatureFailureReason::MALFORMED_SIGNATURE_HEADER, x_request_id, timestamp: timestamp)
+      end
+      private_class_method :validate_ts_and_hashes!
+
+      def self.verify_signature!(data_id, x_request_id, timestamp, secret, received_hash)
+        manifest = build_manifest(data_id, x_request_id, timestamp)
+        computed = OpenSSL::HMAC.hexdigest('SHA256', secret, manifest)
+        return if constant_time_equal(computed, received_hash)
+
+        raise_error!(SignatureFailureReason::SIGNATURE_MISMATCH, x_request_id, timestamp: timestamp)
+      end
+      private_class_method :verify_signature!
+
+      def self.check_tolerance!(timestamp, x_request_id, tolerance_seconds, now_proc)
+        return if tolerance_seconds.nil?
+
+        drift_ms = (now_proc.call - timestamp.to_i).abs
+        return unless drift_ms > tolerance_seconds * 1000
+
+        raise_error!(SignatureFailureReason::TIMESTAMP_OUT_OF_TOLERANCE, x_request_id, timestamp: timestamp)
+      end
+      private_class_method :check_tolerance!
+
+      def self.raise_error!(reason, request_id, timestamp: nil)
+        raise InvalidWebhookSignatureError.new(reason, request_id: request_id, timestamp: timestamp)
+      end
+      private_class_method :raise_error!
     end
   end
 end

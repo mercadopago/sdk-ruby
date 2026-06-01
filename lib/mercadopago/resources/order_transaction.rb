@@ -1,4 +1,3 @@
-
 # typed: true
 # frozen_string_literal: true
 
@@ -47,6 +46,5 @@ module Mercadopago
     def delete(order_id, transaction_id, request_options: nil)
       _delete(uri: "/v1/orders/#{order_id}/transactions/#{transaction_id}", request_options: request_options)
     end
-
   end
 end

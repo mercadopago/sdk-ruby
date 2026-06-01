@@ -16,7 +16,6 @@ module Mercadopago
   # replace it via +SDK.new(token, http_client: MyClient.new)+ to
   # inject a custom transport (e.g. for testing or logging).
   class HttpClient
-    
     RETRYABLE_STATUSES = [429, 500, 502, 503, 504].freeze
 
     # Performs an HTTP GET request with automatic retry on transient errors.

@@ -38,6 +38,11 @@ module Mercadopago
       self.request_options = request_options.nil? ? RequestOptions.new(access_token: access_token) : request_options
     end
 
+    # @return [Chargeback] resource for retrieving and searching payment disputes
+    def chargeback
+      Chargeback.new(request_options, http_client)
+    end
+
     # @return [AdvancedPayment] resource for split-payment operations (marketplace)
     def advanced_payment
       AdvancedPayment.new(request_options, http_client)
@@ -113,9 +118,24 @@ module Mercadopago
       Order.new(request_options, http_client)
     end
 
+    # @return [Invoice] resource for retrieving subscription billing invoices
+    def invoice
+      Invoice.new(request_options, http_client)
+    end
+
+    # @return [OAuth] resource for the OAuth 2.0 authorization code flow
+    def oauth
+      OAuth.new(request_options, http_client)
+    end
+
     # @return [OrderTransaction] resource for managing transactions within an order
     def order_transaction
       OrderTransaction.new(request_options, http_client)
+    end
+
+    # @return [Point] resource for in-person payments via Point devices
+    def point
+      Point.new(request_options, http_client)
     end
 
     # @param value [String] OAuth access token
