@@ -19,6 +19,9 @@ jobs:
       - name: Install dependencies
         run: bundle install
 
+      - name: Configure git safe directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Build gem
         run: gem build *.gemspec
 
