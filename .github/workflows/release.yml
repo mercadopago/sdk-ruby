@@ -7,27 +7,19 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    container: ruby:3.4
 
     permissions:
       contents: write
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
+        uses: actions/checkout@v6
 
       - name: Install dependencies
         run: bundle install
 
-      - name: Validate gemspec
-        run: gem build mercadopago.gemspec
-
       - name: Build gem
-        shell: bash
         run: gem build *.gemspec
 
       - name: Publish gem to rubygems.org
@@ -36,5 +28,4 @@ jobs:
         run: gem push *.gem
 
       - name: Wait for release to propagate
-        run: |
-          gem install rubygems-await
+        run: gem install rubygems-await
