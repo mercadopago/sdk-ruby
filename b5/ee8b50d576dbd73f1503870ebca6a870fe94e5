@@ -1,0 +1,14 @@
+lib/mercadopago/config/config.rb
+  h_04a99bed328080 12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "b5ee8b50d576dbd73f1503870ebca6a870fe94e5",
+  "prompts": {},
+  "humans": {
+    "h_04a99bed328080": {
+      "author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
