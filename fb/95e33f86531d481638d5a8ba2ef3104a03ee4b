@@ -1,0 +1,22 @@
+lib/mercadopago/webhook/validator.rb
+  s_a6671ef7b995ca::t_092b36a1932dc2 196-197,201
+  s_a6671ef7b995ca::t_08cb60911c7f49 205,208,211
+  s_a6671ef7b995ca::t_459cdb78b89c9e 187-190,192
+  s_a6671ef7b995ca::t_c38179dd4390e1 73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "fb95e33f86531d481638d5a8ba2ef3104a03ee4b",
+  "prompts": {},
+  "sessions": {
+    "s_a6671ef7b995ca": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "964bc3f8-39ca-4d8a-b251-759d5d228de1",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
