@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mercadopago-sdk (3.0.1)
+    mercadopago-sdk (3.1.0)
       faraday (~> 2.0)
       json (~> 2.5)
 
@@ -16,7 +16,7 @@ GEM
       logger
     faraday-net_http (3.4.3)
       net-http (~> 0.5)
-    json (2.19.5)
+    json (2.19.8)
     language_server-protocol (3.17.0.3)
     logger (1.7.0)
     method_source (1.0.0)
