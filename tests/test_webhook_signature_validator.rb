@@ -19,7 +19,7 @@ class TestWebhookSignatureValidator < Minitest::Test
 
   def compute_hash(data_id, request_id, ts, secret)
     parts = []
-    parts << "id:#{data_id.downcase}" if data_id && !data_id.empty?
+    parts << "id:#{data_id}" if data_id && !data_id.empty?
     parts << "request-id:#{request_id}" if request_id && !request_id.empty?
     parts << "ts:#{ts}"
     manifest = "#{parts.join(';')};"
@@ -40,8 +40,9 @@ class TestWebhookSignatureValidator < Minitest::Test
   end
 
   # case 2
-  def test_uppercase_dataid_is_lowercased
-    Validator.validate(build_header(valid_hash), REQUEST_ID, DATA_ID_RAW, SECRET)
+  def test_uppercase_dataid_is_preserved
+    upper_hash = compute_hash(DATA_ID_RAW, REQUEST_ID, TS, SECRET)
+    Validator.validate(build_header(upper_hash), REQUEST_ID, DATA_ID_RAW, SECRET)
   end
 
   # case 3
