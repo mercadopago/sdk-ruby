@@ -1,0 +1,24 @@
+tests/test_order.rb
+  s_c7b67a9870e2a8::t_98c19af1ed84c5 9-52,54-64,310-390
+  s_c7b67a9870e2a8::t_fd48e1b5b46c4a 53
+examples/order/create_checkout_pro.rb
+  s_c7b67a9870e2a8::t_636320ae52d8dd 1-119
+lib/mercadopago/resources/order.rb
+  s_c7b67a9870e2a8::t_d33deca283c315 72-89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "9d46a33768fd1d9e840aeefe6f02dd5830a4525d",
+  "prompts": {},
+  "sessions": {
+    "s_c7b67a9870e2a8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef728-ef43-7330-a6e6-650cfc2b80b7",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
