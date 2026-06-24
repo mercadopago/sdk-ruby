@@ -157,7 +157,7 @@ module Mercadopago
       # Builds the HMAC manifest, omitting empty pairs per the documented rule.
       def self.build_manifest(data_id, request_id, timestamp)
         parts = []
-        parts << "id:#{data_id.downcase}" unless data_id.nil?
+        parts << "id:#{data_id}" unless data_id.nil?
         parts << "request-id:#{request_id}" unless request_id.nil?
         parts << "ts:#{timestamp}"
         "#{parts.join(';')};"
