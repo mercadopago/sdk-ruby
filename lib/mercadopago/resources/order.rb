@@ -69,6 +69,24 @@ module Mercadopago
       _post(uri: '/v1/orders', data: order_data, request_options: request_options)
     end
 
+    # Creates a Checkout Pro order.
+    #
+    # Checkout Pro orders use the Online Payments Orders API and return a
+    # +checkout_url+ in the response. Redirect the payer to that URL to
+    # continue the Checkout Pro flow.
+    #
+    # @param order_data [Hash] Checkout Pro order attributes
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the created order
+    # @raise [TypeError] if +order_data+ is not a Hash
+    def create_checkout_pro(order_data, request_options: nil)
+      raise TypeError, 'Param order_data must be a Hash' unless order_data.is_a?(Hash)
+
+      checkout_pro_data = order_data.merge(type: 'online', processing_mode: 'manual')
+
+      _post(uri: '/v1/orders', data: checkout_pro_data, request_options: request_options)
+    end
+
     # Retrieves a single order by ID.
     #
     # @param order_id [String] order ID
