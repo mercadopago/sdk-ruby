@@ -1,0 +1,23 @@
+CHANGELOG.md
+  s_c7b67a9870e2a8::t_8710c116752c02 8-16
+mercadopago.gemspec
+  s_c7b67a9870e2a8::t_8710c116752c02 5
+lib/mercadopago/config/config.rb
+  s_c7b67a9870e2a8::t_8710c116752c02 12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "a486cd78c4449d30b50b1b65cdfd46bf7093744a",
+  "prompts": {},
+  "sessions": {
+    "s_c7b67a9870e2a8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef728-ef43-7330-a6e6-650cfc2b80b7",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
