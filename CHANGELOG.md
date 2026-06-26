@@ -9,10 +9,15 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- **Orders Checkout Pro**: creation helper for Checkout Pro orders
-  (`sdk.order.create_checkout_pro`) using the Orders API online flow.
-  Returns the created order response with the `checkout_url` to redirect
-  buyers to Checkout Pro.
+- **Orders**: helper for creating Checkout Pro orders
+  (`sdk.order.create_checkout_pro`). The helper defaults the required
+  Checkout Pro fields when omitted, validates conflicting values, and
+  returns the created order response with the `checkout_url`.
+
+### Fixed
+
+- **Request options**: custom headers now replace generated headers
+  case-insensitively, avoiding duplicate idempotency headers.
 
 ## [3.1.0] - 2026-05-27
 

@@ -7,7 +7,7 @@ require 'minitest/autorun'
 
 class TestOrder < Minitest::Test
   class CaptureHttpClient < Mercadopago::HttpClient
-    attr_reader :last_post
+    attr_reader :last_get, :last_post
 
     def post(url:, data:, headers:, timeout: nil)
       @last_post = {
@@ -27,6 +27,25 @@ class TestOrder < Minitest::Test
         }
       }
     end
+
+    def get(url:, headers:, params: nil, timeout: nil, maxretries: nil)
+      @last_get = {
+        url: url,
+        headers: headers,
+        params: params,
+        timeout: timeout,
+        maxretries: maxretries
+      }
+
+      {
+        status: 200,
+        response: {
+          'id' => 'ORD123',
+          'checkout_url' => 'https://www.mercadopago.com/checkout/v1/redirect?order_id=ORD123',
+          'client_token' => 'CLIENT_TOKEN'
+        }
+      }
+    end
   end
 
   def test_create_checkout_pro_order
@@ -35,10 +54,7 @@ class TestOrder < Minitest::Test
     request_options = Mercadopago::RequestOptions.new(
       custom_headers: { 'X-Idempotency-Key': 'checkout-pro-key' }
     )
-    order_request = create_checkout_pro_order_request.merge(
-      type: 'wrong',
-      processing_mode: 'automatic'
-    )
+    order_request = create_checkout_pro_order_request
 
     result = sdk.order.create_checkout_pro(order_request, request_options: request_options)
     payload = JSON.parse(http_client.last_post[:data])
@@ -51,8 +67,21 @@ class TestOrder < Minitest::Test
     assert_equal 'https://example.com/success', payload['config']['online']['success_url']
     assert_equal ['ticket'], payload['config']['payment_method']['not_allowed_types']
     assert_equal 'checkout-pro-key', http_client.last_post[:headers]['X-Idempotency-Key']
+    refute http_client.last_post[:headers].key?('x-idempotency-key')
     assert_equal 'https://www.mercadopago.com/checkout/v1/redirect?order_id=ORD123',
                  result[:response]['checkout_url']
+  end
+
+  def test_create_checkout_pro_order_rejects_incompatible_fields
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'] || 'ACCESS_TOKEN')
+
+    assert_raises(ArgumentError) do
+      sdk.order.create_checkout_pro(create_checkout_pro_order_request.merge(type: 'wrong'))
+    end
+
+    assert_raises(ArgumentError) do
+      sdk.order.create_checkout_pro(create_checkout_pro_order_request.merge(processing_mode: 'automatic'))
+    end
   end
 
   def test_create_checkout_pro_order_requires_hash
@@ -61,6 +90,46 @@ class TestOrder < Minitest::Test
     assert_raises(TypeError) do
       sdk.order.create_checkout_pro('invalid')
     end
+  end
+
+  def test_get_order_preserves_redirect_fields
+    http_client = CaptureHttpClient.new
+    sdk = Mercadopago::SDK.new('ACCESS_TOKEN', http_client: http_client)
+
+    result = sdk.order.get('ORD123')
+
+    assert_equal 200, result[:status]
+    assert_equal 'https://api.mercadopago.com/v1/orders/ORD123', http_client.last_get[:url]
+    assert_equal 'https://www.mercadopago.com/checkout/v1/redirect?order_id=ORD123',
+                 result[:response]['checkout_url']
+    assert_equal 'CLIENT_TOKEN', result[:response]['client_token']
+  end
+
+  def test_cancel_order_accepts_request_options
+    http_client = CaptureHttpClient.new
+    sdk = Mercadopago::SDK.new('ACCESS_TOKEN', http_client: http_client)
+    request_options = Mercadopago::RequestOptions.new(custom_headers: { 'X-Idempotency-Key': 'cancel-key' })
+
+    result = sdk.order.cancel('ORD123', request_options: request_options)
+
+    assert_equal 201, result[:status]
+    assert_equal 'https://api.mercadopago.com/v1/orders/ORD123/cancel', http_client.last_post[:url]
+    assert_equal 'cancel-key', http_client.last_post[:headers]['X-Idempotency-Key']
+    refute http_client.last_post[:headers].key?('x-idempotency-key')
+  end
+
+  def test_refund_order_accepts_request_options
+    http_client = CaptureHttpClient.new
+    sdk = Mercadopago::SDK.new('ACCESS_TOKEN', http_client: http_client)
+    request_options = Mercadopago::RequestOptions.new(custom_headers: { 'X-Idempotency-Key': 'refund-key' })
+
+    result = sdk.order.refund('ORD123', refund_data: { amount: '25.00' }, request_options: request_options)
+
+    assert_equal 201, result[:status]
+    assert_equal 'https://api.mercadopago.com/v1/orders/ORD123/refund', http_client.last_post[:url]
+    assert_equal({ 'amount' => '25.00' }, JSON.parse(http_client.last_post[:data]))
+    assert_equal 'refund-key', http_client.last_post[:headers]['X-Idempotency-Key']
+    refute http_client.last_post[:headers].key?('x-idempotency-key')
   end
 
   def test_create_order

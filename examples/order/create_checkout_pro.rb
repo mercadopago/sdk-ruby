@@ -109,8 +109,9 @@ def create_checkout_pro_order(sdk)
   result = sdk.order.create_checkout_pro(request, request_options: custom_request_options)
   order = result[:response]
 
-  puts order
-  puts "Redirect buyer to: #{order['checkout_url']}"
+  puts "Order id: #{order['id']}"
+  puts "Status: #{order['status']}"
+  puts "Redirect buyer to Checkout Pro: #{order['checkout_url']}"
 
 rescue StandardError => e
   puts e.message
