@@ -1,0 +1,30 @@
+examples/order/create_checkout_pro.rb
+  s_c7b67a9870e2a8::t_f650db38318401 112-113
+  s_c7b67a9870e2a8::t_aad538e9f8ba0d 114
+lib/mercadopago/resources/order.rb
+  s_c7b67a9870e2a8::t_aad538e9f8ba0d 74-77
+  s_c7b67a9870e2a8::t_cfd2a38b84e87e 83,87-93,158-166
+tests/test_order.rb
+  s_c7b67a9870e2a8::t_998dd4711ed6df 10,30-48,57,70,75-86,95-132
+CHANGELOG.md
+  s_c7b67a9870e2a8::t_aad538e9f8ba0d 12,14
+  s_c7b67a9870e2a8::t_e1b17918e0d06e 13,15-20
+lib/mercadopago/config/request_options.rb
+  s_c7b67a9870e2a8::t_92de504f64d441 80,140-148
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "f03c8d65c243ca49a8a878052037e2cfa1175ab7",
+  "prompts": {},
+  "sessions": {
+    "s_c7b67a9870e2a8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef728-ef43-7330-a6e6-650cfc2b80b7",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
