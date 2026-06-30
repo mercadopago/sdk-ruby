@@ -77,9 +77,7 @@ module Mercadopago
       headers['x-integrator-id'] = @integrator_id unless @integrator_id.nil?
       headers['x-platform-id'] = @platform_id unless @platform_id.nil?
 
-      headers = merge_custom_headers(headers)
-
-      headers
+      merge_custom_headers(headers)
     end
 
     # @param value [String, nil] OAuth access token

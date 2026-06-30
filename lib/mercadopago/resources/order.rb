@@ -88,9 +88,7 @@ module Mercadopago
       validate_checkout_pro_field(order_data, :processing_mode, 'manual')
       checkout_pro_data = order_data.dup
       checkout_pro_data[:type] = 'online' unless checkout_pro_data.key?(:type) || checkout_pro_data.key?('type')
-      unless checkout_pro_data.key?(:processing_mode) || checkout_pro_data.key?('processing_mode')
-        checkout_pro_data[:processing_mode] = 'manual'
-      end
+      checkout_pro_data[:processing_mode] = 'manual' unless checkout_pro_data.key?(:processing_mode) || checkout_pro_data.key?('processing_mode')
 
       _post(uri: '/v1/orders', data: checkout_pro_data, request_options: request_options)
     end
