@@ -1,0 +1,21 @@
+lib/mercadopago/resources/order.rb
+  s_47ca9e01b7ba32::t_5b1a12ee1efbd0 91
+lib/mercadopago/config/request_options.rb
+  s_47ca9e01b7ba32::t_e8dc9e19d2bf1b 80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "f9f80497d5b096b7cca30451a9243344c782bed3",
+  "prompts": {},
+  "sessions": {
+    "s_47ca9e01b7ba32": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "30ca28cd-3006-4457-a3cc-7097fcbfa939",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
