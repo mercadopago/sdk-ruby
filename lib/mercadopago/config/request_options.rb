@@ -77,9 +77,7 @@ module Mercadopago
       headers['x-integrator-id'] = @integrator_id unless @integrator_id.nil?
       headers['x-platform-id'] = @platform_id unless @platform_id.nil?
 
-      headers.merge!(@custom_headers) unless @custom_headers.nil?
-
-      headers
+      merge_custom_headers(headers)
     end
 
     # @param value [String, nil] OAuth access token
@@ -136,6 +134,16 @@ module Mercadopago
       raise TypeError, 'Param max_retries must be a Integer' unless value.is_a?(Integer)
 
       @max_retries = value
+    end
+
+    private
+
+    def merge_custom_headers(headers)
+      return headers if @custom_headers.nil?
+
+      custom_header_names = @custom_headers.keys.map { |key| key.to_s.downcase }
+      headers.reject! { |key, _value| custom_header_names.include?(key.to_s.downcase) }
+      headers.merge!(@custom_headers)
     end
   end
 end

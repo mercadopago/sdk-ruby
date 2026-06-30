@@ -69,6 +69,30 @@ module Mercadopago
       _post(uri: '/v1/orders', data: order_data, request_options: request_options)
     end
 
+    # Creates a Checkout Pro order.
+    #
+    # This is a convenience wrapper over +create+ that applies the Checkout Pro
+    # Orders API defaults: +type+ +"online"+ and +processing_mode+ +"manual"+
+    # when omitted. If those fields are provided, they must already match the
+    # Checkout Pro flow.
+    #
+    # @param order_data [Hash] Checkout Pro order attributes
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the created order
+    # @raise [TypeError] if +order_data+ is not a Hash
+    # @raise [ArgumentError] if +type+ or +processing_mode+ are incompatible
+    def create_checkout_pro(order_data, request_options: nil)
+      raise TypeError, 'Param order_data must be a Hash' unless order_data.is_a?(Hash)
+
+      validate_checkout_pro_field(order_data, :type, 'online')
+      validate_checkout_pro_field(order_data, :processing_mode, 'manual')
+      checkout_pro_data = order_data.dup
+      checkout_pro_data[:type] = 'online' unless checkout_pro_data.key?(:type) || checkout_pro_data.key?('type')
+      checkout_pro_data[:processing_mode] = 'manual' unless checkout_pro_data.key?(:processing_mode) || checkout_pro_data.key?('processing_mode')
+
+      _post(uri: '/v1/orders', data: checkout_pro_data, request_options: request_options)
+    end
+
     # Retrieves a single order by ID.
     #
     # @param order_id [String] order ID
@@ -128,6 +152,16 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with search results
     def search(filters: nil, request_options: nil)
       _get(uri: '/v1/orders', params: filters, request_options: request_options)
+    end
+
+    private
+
+    def validate_checkout_pro_field(order_data, field, expected_value)
+      value = order_data[field]
+      value = order_data[field.to_s] if value.nil? && order_data.key?(field.to_s)
+      return if value.nil? || value == expected_value
+
+      raise ArgumentError, "Param #{field} must be #{expected_value}"
     end
   end
 end

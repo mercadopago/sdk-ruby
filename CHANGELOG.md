@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 This project follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0-beta.1] - 2026-06-24
+
+### Added
+
+- **Orders**: helper for creating Checkout Pro orders
+  (`sdk.order.create_checkout_pro`). The helper defaults the required
+  Checkout Pro fields when omitted, validates conflicting values, and
+  returns the created order response with the `checkout_url`.
+
+### Fixed
+
+- **Request options**: custom headers now replace generated headers
+  case-insensitively, avoiding duplicate idempotency headers.
+
 ## [3.1.0] - 2026-05-27
 
 ### Added
