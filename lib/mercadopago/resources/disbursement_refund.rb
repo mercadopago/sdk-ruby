@@ -14,7 +14,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with an array of refunds
     def list(advanced_payment_id, request_options: nil)
-      _get(uri: "/v1/advanced_payments/#{advanced_payment_id}/refunds", request_options: nil)
+      _get(uri: "/v1/advanced_payments/#{_path_param(advanced_payment_id)}/refunds", request_options: nil)
     end
 
     # Refunds all disbursements of an advanced payment at once.
@@ -23,7 +23,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with refund details
     def create_all(advanced_payment_id, request_options: nil)
-      _post(uri: "/v1/advanced_payments/#{advanced_payment_id}/refunds", request_options: request_options)
+      _post(uri: "/v1/advanced_payments/#{_path_param(advanced_payment_id)}/refunds", request_options: request_options)
     end
 
     # Refunds a single disbursement (full or partial).
@@ -39,7 +39,7 @@ module Mercadopago
     def create(advanced_payment_id, disbursement_id, amount: nil, request_options: nil)
       disbursement_refund_data = amount.nil? ? nil : { amount: amount }
 
-      _post(uri: "/v1/advanced_payments/#{advanced_payment_id}/disbursements/#{disbursement_id}/refunds",
+      _post(uri: "/v1/advanced_payments/#{_path_param(advanced_payment_id)}/disbursements/#{_path_param(disbursement_id)}/refunds",
             data: disbursement_refund_data, request_options: request_options)
     end
   end

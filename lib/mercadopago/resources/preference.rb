@@ -17,7 +17,7 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with preference details
     # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-pro/preferences/get-preference/get
     def get(preference_id, request_options: nil)
-      _get(uri: "/checkout/preferences/#{preference_id}", request_options: request_options)
+      _get(uri: "/checkout/preferences/#{_path_param(preference_id)}", request_options: request_options)
     end
 
     # Creates a new Checkout Pro preference.
@@ -44,7 +44,7 @@ module Mercadopago
     def update(preference_id, preference_data, request_options: nil)
       raise TypeError, 'Param preference_data must be a Hash' unless preference_data.is_a?(Hash)
 
-      _put(uri: "/checkout/preferences/#{preference_id}", data: preference_data, request_options: request_options)
+      _put(uri: "/checkout/preferences/#{_path_param(preference_id)}", data: preference_data, request_options: request_options)
     end
   end
 end

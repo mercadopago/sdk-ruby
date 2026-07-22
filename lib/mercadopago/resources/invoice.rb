@@ -19,7 +19,7 @@ module Mercadopago
     #   including +:status+, +:transaction_amount+, +:preapproval_id+, and +:payment+ details
     # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/get-authorized-payment/get
     def get(invoice_id, request_options: nil)
-      _get(uri: "/authorized_payments/#{invoice_id}", request_options: request_options)
+      _get(uri: "/authorized_payments/#{_path_param(invoice_id)}", request_options: request_options)
     end
 
     # Searches invoices matching the given filters.

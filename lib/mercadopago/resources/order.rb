@@ -99,7 +99,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with order details
     def get(order_id, request_options: nil)
-      _get(uri: "/v1/orders/#{order_id}", request_options: request_options)
+      _get(uri: "/v1/orders/#{_path_param(order_id)}", request_options: request_options)
     end
 
     # Processes (confirms) an order, triggering payment execution.
@@ -108,7 +108,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the processed order
     def process(order_id, request_options: nil)
-      _post(uri: "/v1/orders/#{order_id}/process", data: nil, request_options: request_options)
+      _post(uri: "/v1/orders/#{_path_param(order_id)}/process", data: nil, request_options: request_options)
     end
 
     # Refunds an order (full or partial).
@@ -124,7 +124,7 @@ module Mercadopago
     def refund(order_id, refund_data: nil, request_options: nil)
       raise TypeError, 'Param refund_data must be a Hash' unless refund_data.nil? || refund_data.is_a?(Hash)
 
-      _post(uri: "/v1/orders/#{order_id}/refund", data: refund_data, request_options: request_options)
+      _post(uri: "/v1/orders/#{_path_param(order_id)}/refund", data: refund_data, request_options: request_options)
     end
 
     # Cancels an order that has not yet been captured.
@@ -133,7 +133,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the cancelled order
     def cancel(order_id, request_options: nil)
-      _post(uri: "/v1/orders/#{order_id}/cancel", data: nil, request_options: request_options)
+      _post(uri: "/v1/orders/#{_path_param(order_id)}/cancel", data: nil, request_options: request_options)
     end
 
     # Captures a previously authorized order.
@@ -142,7 +142,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the captured order
     def capture(order_id, request_options: nil)
-      _post(uri: "/v1/orders/#{order_id}/capture", data: nil, request_options: request_options)
+      _post(uri: "/v1/orders/#{_path_param(order_id)}/capture", data: nil, request_options: request_options)
     end
 
     # Searches orders matching the given filters.

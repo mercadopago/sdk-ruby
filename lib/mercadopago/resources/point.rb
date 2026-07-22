@@ -43,7 +43,7 @@ module Mercadopago
       raise TypeError, 'Param payment_intent_data must be a Hash' unless payment_intent_data.is_a?(Hash)
 
       _post(
-        uri: "/point/integration-api/devices/#{device_id}/payment-intents",
+        uri: "/point/integration-api/devices/#{_path_param(device_id)}/payment-intents",
         data: payment_intent_data,
         request_options: request_options
       )
@@ -61,7 +61,7 @@ module Mercadopago
     # @see https://www.mercadopago.com/developers/en/reference/in-person-payments/point/orders/get-order/get
     def get(payment_intent_id, request_options: nil)
       _get(
-        uri: "/point/integration-api/payment-intents/#{payment_intent_id}",
+        uri: "/point/integration-api/payment-intents/#{_path_param(payment_intent_id)}",
         request_options: request_options
       )
     end
@@ -78,7 +78,7 @@ module Mercadopago
     # @see https://www.mercadopago.com/developers/en/reference/in-person-payments/point/orders/cancel-order/post
     def cancel(device_id, payment_intent_id, request_options: nil)
       _delete(
-        uri: "/point/integration-api/devices/#{device_id}/payment-intents/#{payment_intent_id}",
+        uri: "/point/integration-api/devices/#{_path_param(device_id)}/payment-intents/#{_path_param(payment_intent_id)}",
         request_options: request_options
       )
     end

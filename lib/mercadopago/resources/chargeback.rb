@@ -17,7 +17,7 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the full chargeback object
     # @see https://www.mercadopago.com.br/developers/en/reference/chargebacks/
     def get(chargeback_id, request_options: nil)
-      _get(uri: "/v1/chargebacks/#{chargeback_id}", request_options: request_options)
+      _get(uri: "/v1/chargebacks/#{_path_param(chargeback_id)}", request_options: request_options)
     end
 
     # Searches chargebacks matching the given filters.

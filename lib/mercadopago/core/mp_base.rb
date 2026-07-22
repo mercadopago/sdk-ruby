@@ -1,6 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
+require 'cgi'
+
 module Mercadopago
   # Abstract base class for every API resource (Payment, Customer, Order, etc.).
   #
@@ -59,6 +61,11 @@ module Mercadopago
       headers.merge!(extra_headers) unless extra_headers.nil?
 
       headers
+    end
+
+    # Encodes a dynamic URL path segment before interpolation.
+    def _path_param(value)
+      CGI.escape(value.to_s).gsub('+', '%20')
     end
 
     # Performs a GET request against the MercadoPago API.

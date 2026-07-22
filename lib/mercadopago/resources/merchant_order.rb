@@ -30,7 +30,7 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with order details
     # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-pro/merchant_orders/get-merchant-order/get
     def get(merchant_order_id, request_options: nil)
-      _get(uri: "/merchant_orders/#{merchant_order_id}", request_options: request_options)
+      _get(uri: "/merchant_orders/#{_path_param(merchant_order_id)}", request_options: request_options)
     end
 
     # Creates a new merchant order.
@@ -57,7 +57,7 @@ module Mercadopago
     def update(merchant_order_id, merchant_order_data, request_options: nil)
       raise TypeError, 'Param merchant_orders_object must be a Hash' unless merchant_order_data.is_a?(Hash)
 
-      _put(uri: "/merchant_orders/#{merchant_order_id}", data: merchant_order_data,
+      _put(uri: "/merchant_orders/#{_path_param(merchant_order_id)}", data: merchant_order_data,
            request_options: request_options)
     end
   end

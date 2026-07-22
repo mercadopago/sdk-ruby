@@ -26,7 +26,7 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with customer details
     # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/customers/get-customer/get
     def get(customer_id, request_options: nil)
-      _get(uri: "/v1/customers/#{customer_id}", request_options: request_options)
+      _get(uri: "/v1/customers/#{_path_param(customer_id)}", request_options: request_options)
     end
 
     # Creates a new customer.
@@ -53,7 +53,7 @@ module Mercadopago
     def update(customer_id, customer_data, request_options: nil)
       raise TypeError, 'Param customer_data must be a Hash' unless customer_data.is_a?(Hash)
 
-      _put(uri: "/v1/customers/#{customer_id}", data: customer_data, request_options: request_options)
+      _put(uri: "/v1/customers/#{_path_param(customer_id)}", data: customer_data, request_options: request_options)
     end
 
     # Deletes a customer permanently.
@@ -62,7 +62,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+
     def delete(customer_id, request_options: nil)
-      _delete(uri: "/v1/customers/#{customer_id}", request_options: request_options)
+      _delete(uri: "/v1/customers/#{_path_param(customer_id)}", request_options: request_options)
     end
   end
 end
