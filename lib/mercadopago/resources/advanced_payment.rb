@@ -29,7 +29,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with payment details
     def get(advanced_payment_id, request_options: nil)
-      _get(uri: "/v1/advanced_payments/#{advanced_payment_id}", request_options: request_options)
+      _get(uri: "/v1/advanced_payments/#{_path_param(advanced_payment_id)}", request_options: request_options)
     end
 
     # Creates a new advanced payment with split disbursements.
@@ -54,7 +54,7 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the captured payment
     def capture(advanced_payment_id, request_options: nil)
       capture_data = { capture: true }
-      _put(uri: "/v1/advanced_payments/#{advanced_payment_id}", data: capture_data, request_options: request_options)
+      _put(uri: "/v1/advanced_payments/#{_path_param(advanced_payment_id)}", data: capture_data, request_options: request_options)
     end
 
     # Updates an existing advanced payment.
@@ -67,7 +67,7 @@ module Mercadopago
     def update(advanced_payment_id, advanced_payment_data, request_options: nil)
       raise TypeError, 'Param advanced_payment_data must be a Hash' unless advanced_payment_data.is_a?(Hash)
 
-      _put(uri: "/v1/advanced_payments/#{advanced_payment_id}", data: advanced_payment_data,
+      _put(uri: "/v1/advanced_payments/#{_path_param(advanced_payment_id)}", data: advanced_payment_data,
            request_options: request_options)
     end
 
@@ -78,7 +78,7 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the cancelled payment
     def cancel(advanced_payment_id, request_options: nil)
       cancel_data = { status: 'cancelled' }
-      _put(uri: "/v1/advanced_payments/#{advanced_payment_id}", data: cancel_data, request_options: request_options)
+      _put(uri: "/v1/advanced_payments/#{_path_param(advanced_payment_id)}", data: cancel_data, request_options: request_options)
     end
 
     # Changes the money release date for an advanced payment's disbursements.
@@ -89,7 +89,7 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+
     def update_release_date(advanced_payment_id, release_date, request_options: nil)
       disbursement_data = { money_release_date: release_date.strftime('%Y-%m-%d %H:%M:%S.%f') }
-      _post(uri: "/v1/advanced_payments/#{advanced_payment_id}/disburses", data: disbursement_data,
+      _post(uri: "/v1/advanced_payments/#{_path_param(advanced_payment_id)}/disburses", data: disbursement_data,
             request_options: request_options)
     end
   end

@@ -31,7 +31,7 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with subscription details
     # @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/get-preapproval/get
     def get(preapproval_id, request_options: nil)
-      _get(uri: "/preapproval/#{preapproval_id}", request_options: request_options)
+      _get(uri: "/preapproval/#{_path_param(preapproval_id)}", request_options: request_options)
     end
 
     # Creates a new subscription.
@@ -58,7 +58,7 @@ module Mercadopago
     def update(preapproval_id, preapproval_data, request_options: nil)
       raise TypeError, 'Param preapproval_data must be a Hash' unless preapproval_data.is_a?(Hash)
 
-      _put(uri: "/preapproval/#{preapproval_id}", data: preapproval_data, request_options: request_options)
+      _put(uri: "/preapproval/#{_path_param(preapproval_id)}", data: preapproval_data, request_options: request_options)
     end
   end
 end

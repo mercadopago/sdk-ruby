@@ -17,7 +17,7 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with an array of refunds
     # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/get-refunds/get
     def list(payment_id, request_options: nil)
-      _get(uri: "/v1/payments/#{payment_id}/refunds", request_options: request_options)
+      _get(uri: "/v1/payments/#{_path_param(payment_id)}/refunds", request_options: request_options)
     end
 
     # Creates a full or partial refund on a payment.
@@ -34,7 +34,7 @@ module Mercadopago
     def create(payment_id, refund_data: nil, request_options: nil)
       raise TypeError, 'Param refund_data must be a Hash' unless refund_data.nil? || refund_data.is_a?(Hash)
 
-      _post(uri: "/v1/payments/#{payment_id}/refunds", data: refund_data, request_options: request_options)
+      _post(uri: "/v1/payments/#{_path_param(payment_id)}/refunds", data: refund_data, request_options: request_options)
     end
   end
 end

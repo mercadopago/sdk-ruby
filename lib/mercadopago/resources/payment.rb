@@ -29,7 +29,7 @@ module Mercadopago
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with payment details
     # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/get-payment/get
     def get(payment_id, request_options: nil)
-      _get(uri: "/v1/payments/#{payment_id}", request_options: request_options)
+      _get(uri: "/v1/payments/#{_path_param(payment_id)}", request_options: request_options)
     end
 
     # Creates a new payment.
@@ -56,7 +56,7 @@ module Mercadopago
     def update(payment_id, payment_data, request_options: nil)
       raise TypeError, 'Param payment_data must be a Hash' unless payment_data.is_a?(Hash)
 
-      _put(uri: "/v1/payments/#{payment_id}", data: payment_data, request_options: request_options)
+      _put(uri: "/v1/payments/#{_path_param(payment_id)}", data: payment_data, request_options: request_options)
     end
   end
 end

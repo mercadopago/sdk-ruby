@@ -16,7 +16,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with token details
     def get(card_token_id, request_options: nil)
-      _get(uri: "/v1/card_tokens/#{card_token_id}", request_options: request_options)
+      _get(uri: "/v1/card_tokens/#{_path_param(card_token_id)}", request_options: request_options)
     end
 
     # Creates a new card token from raw card data.
