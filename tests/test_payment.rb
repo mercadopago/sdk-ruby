@@ -60,15 +60,27 @@ class TestPayment < Minitest::Test
           phone: {
             area_code: '011',
             number: '987654321'
+          },
+          authentication_type: 'WEB',
+          is_prime_user: false,
+          is_first_purchase_online: false,
+          last_purchase: '2024-01-01T00:00:00Z',
+          identification: {
+            type: 'CPF',
+            number: '19119119100'
           }
         },
         shipments: {
+          express_shipment: false,
+          local_pickup: false,
           receiver_address: {
             street_name: 'Av das Nacoes Unidas',
             street_number: 3003,
             zip_code: '06233200',
             city_name: 'Buzios',
-            state_name: 'Rio de Janeiro'
+            state_name: 'Rio de Janeiro',
+            floor: '3',
+            apartment: 'B'
           }
         }
       }
@@ -136,15 +148,27 @@ class TestPayment < Minitest::Test
           phone: {
             area_code: '011',
             number: '987654321'
+          },
+          authentication_type: 'WEB',
+          is_prime_user: false,
+          is_first_purchase_online: false,
+          last_purchase: '2024-01-01T00:00:00Z',
+          identification: {
+            type: 'CPF',
+            number: '19119119100'
           }
         },
         shipments: {
+          express_shipment: false,
+          local_pickup: false,
           receiver_address: {
             street_name: 'Av das Nacoes Unidas',
             street_number: 3003,
             zip_code: '06233200',
             city_name: 'Buzios',
-            state_name: 'Rio de Janeiro'
+            state_name: 'Rio de Janeiro',
+            floor: '3',
+            apartment: 'B'
           }
         }
       }
@@ -208,15 +232,27 @@ class TestPayment < Minitest::Test
           phone: {
             area_code: '011',
             number: '987654321'
+          },
+          authentication_type: 'WEB',
+          is_prime_user: false,
+          is_first_purchase_online: false,
+          last_purchase: '2024-01-01T00:00:00Z',
+          identification: {
+            type: 'CPF',
+            number: '19119119100'
           }
         },
         shipments: {
+          express_shipment: false,
+          local_pickup: false,
           receiver_address: {
             street_name: 'Av das Nacoes Unidas',
             street_number: 3003,
             zip_code: '06233200',
             city_name: 'Buzios',
-            state_name: 'Rio de Janeiro'
+            state_name: 'Rio de Janeiro',
+            floor: '3',
+            apartment: 'B'
           }
         }
       }
