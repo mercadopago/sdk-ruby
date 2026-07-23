@@ -59,12 +59,20 @@ module Mercadopago
   class Order < MPBase
     # Creates a new order.
     #
-    # @param order_data [Hash] order attributes (type, total_amount, transactions, etc.)
+    # Accepts either a plain +Hash+ (the existing dynamic path) or a typed
+    # {Order::Request::CreateRequest} object (opt-in, DD-1). When a Request
+    # object is passed it is normalized to a Hash via +to_hash+ before
+    # serialization; the rest of the flow is identical, so the JSON sent to
+    # the API is the same regardless of the path used.
+    #
+    # @param order_data [Hash, Order::Request::CreateRequest] order attributes
+    #   (type, total_amount, transactions, etc.) as a Hash, or a typed Request
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the created order
-    # @raise [TypeError] if +order_data+ is not a Hash
+    # @raise [TypeError] if +order_data+ is neither a Hash nor convertible via +to_hash+
     def create(order_data, request_options: nil)
-      raise TypeError, 'Param order_data must be a Hash' unless order_data.is_a?(Hash)
+      order_data = order_data.to_hash if order_data.respond_to?(:to_hash) && !order_data.is_a?(Hash)
+      raise TypeError, 'Param order_data must be a Hash or a Request object' unless order_data.is_a?(Hash)
 
       _post(uri: '/v1/orders', data: order_data, request_options: request_options)
     end

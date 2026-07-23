@@ -46,6 +46,7 @@ require_relative './mercadopago/resources/preapproval_plan'
 require_relative './mercadopago/resources/invoice'
 require_relative './mercadopago/resources/oauth'
 require_relative './mercadopago/resources/order'
+require_relative './mercadopago/resources/order/request'
 require_relative './mercadopago/resources/order_transaction'
 require_relative './mercadopago/resources/point'
 

@@ -70,15 +70,5 @@ DEPENDENCIES
   rake
   rubocop (~> 1.88)
 
-RUBY VERSION
-   ruby 3.4.3p0
-
-DEPENDENCIES
-  mercadopago-sdk!
-  minitest (~> 5.0)
-  pry (~> 0.14)
-  rake
-  rubocop (~> 1.70)
-
 BUNDLED WITH
    2.5.23
