@@ -34,7 +34,8 @@ module Mercadopago
     def update(order_id, transaction_id, order_transaction_data, request_options: nil)
       raise TypeError, 'Param order_transaction_data must be a Hash' unless order_transaction_data.is_a?(Hash)
 
-      _put(uri: "/v1/orders/#{_path_param(order_id)}/transactions/#{_path_param(transaction_id)}", data: order_transaction_data, request_options: request_options)
+      _put(uri: "/v1/orders/#{_path_param(order_id)}/transactions/#{_path_param(transaction_id)}",
+           data: order_transaction_data, request_options: request_options)
     end
 
     # Removes a transaction from an order.
