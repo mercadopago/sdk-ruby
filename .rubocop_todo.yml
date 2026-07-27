@@ -48,8 +48,14 @@ Metrics/MethodLength:
 
 # Offense count: 3
 # Configuration parameters: CountKeywordArgs, MaxOptionalParameters.
+Metrics/ModuleLength:
+  Exclude:
+    - 'lib/mercadopago/resources/order/request.rb'
+
 Metrics/ParameterLists:
   Max: 7
+  Exclude:
+    - 'lib/mercadopago/resources/order/request.rb'
 
 # Offense count: 1
 Naming/AccessorMethodName:
