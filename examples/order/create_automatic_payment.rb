@@ -64,7 +64,7 @@ def create_recurring_charge(sdk,
                              customer_id:,
                              payment_profile_id:,
                              payer_email:,
-                             prev_transaction_ref:,
+                             previous_transaction_reference:,
                              sequence_number:)
   request = {
     type: 'online',
@@ -89,7 +89,7 @@ def create_recurring_charge(sdk,
             payment_initiator: 'merchant',
             reason: 'recurring',
             first_payment: false,
-            prev_transaction_ref: prev_transaction_ref
+            previous_transaction_reference: previous_transaction_reference
           },
           subscription_data: {
             invoice_id: "INV-00#{sequence_number}",
@@ -148,7 +148,7 @@ if first_result
       customer_id: customer_id,
       payment_profile_id: payment_profile_id,
       payer_email: payer_email,
-      prev_transaction_ref: first_payment_id,
+      previous_transaction_reference: first_payment_id,
       sequence_number: 2
     )
 

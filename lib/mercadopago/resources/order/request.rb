@@ -180,13 +180,13 @@ module Mercadopago
         :reason,
         :store_payment_method,
         :first_payment,
-        :prev_transaction_ref
+        :previous_transaction_reference
       ) do
         include HashConversion
 
         def initialize(
           payment_initiator: nil, reason: nil, store_payment_method: nil,
-          first_payment: nil, prev_transaction_ref: nil
+          first_payment: nil, previous_transaction_reference: nil
         )
           super
         end

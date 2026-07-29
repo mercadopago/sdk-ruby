@@ -202,7 +202,7 @@ class TestOrderRequest < Minitest::Test
             ),
             stored_credential: Request::StoredCredentialRequest.new(
               payment_initiator: 'merchant', reason: 'recurring',
-              store_payment_method: true, first_payment: false, prev_transaction_ref: 'PREV_TX_1'
+              store_payment_method: true, first_payment: false, previous_transaction_reference: 'PREV_TX_1'
             ),
             subscription_data: Request::SubscriptionDataRequest.new(
               invoice_id: 'INV_1', billing_date: '2026-08-01',
@@ -240,7 +240,7 @@ class TestOrderRequest < Minitest::Test
     assert_equal 'recurring', sc['reason']
     assert_equal true, sc['store_payment_method']
     assert_equal false, sc['first_payment']
-    assert_equal 'PREV_TX_1', sc['prev_transaction_ref']
+    assert_equal 'PREV_TX_1', sc['previous_transaction_reference']
 
     sub = payment['subscription_data']
     assert_equal 'INV_1', sub['invoice_id']
