@@ -46,5 +46,18 @@ module Mercadopago
 
       _put(uri: "/checkout/preferences/#{_path_param(preference_id)}", data: preference_data, request_options: request_options)
     end
+
+    # Searches preferences matching the given filters.
+    #
+    # @param filters [Hash, nil] query parameters (e.g. +{ external_reference: "ref" }+)
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with paging and results
+    def search(filters: nil, request_options: nil)
+      _get(
+        uri: '/checkout/preferences/search',
+        filters: filters,
+        request_options: request_options
+      )
+    end
   end
 end
