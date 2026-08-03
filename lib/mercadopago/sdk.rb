@@ -108,6 +108,11 @@ module Mercadopago
       Preapproval.new(request_options, http_client)
     end
 
+    # @return [Subscription] resource for managing plan-based recurring subscriptions
+    def subscription
+      Subscription.new(request_options, http_client)
+    end
+
     # @return [PreapprovalPlan] resource for managing subscription plan templates
     def preapproval_plan
       PreapprovalPlan.new(request_options, http_client)

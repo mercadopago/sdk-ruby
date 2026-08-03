@@ -20,6 +20,20 @@ module Mercadopago
       _get(uri: "/v1/payments/#{_path_param(payment_id)}/refunds", request_options: request_options)
     end
 
+    # Retrieves a single refund by ID.
+    #
+    # @param payment_id [Integer, String] MercadoPago payment ID
+    # @param refund_id [Integer, String] refund ID
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the refund details
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/get-refund/get
+    def get(payment_id, refund_id, request_options: nil)
+      _get(
+        uri: "/v1/payments/#{_path_param(payment_id)}/refunds/#{_path_param(refund_id)}",
+        request_options: request_options
+      )
+    end
+
     # Creates a full or partial refund on a payment.
     #
     # Omit +refund_data+ for a full refund, or pass +{ amount: 10.0 }+

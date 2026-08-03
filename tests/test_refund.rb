@@ -40,5 +40,9 @@ class TestRefund < Minitest::Test
     sleep(1)
     result_list = sdk.refund.list(result_refund[:response]['payment_id'])
     assert_equal 200, result_list[:status]
+
+    result_get = sdk.refund.get(result_refund[:response]['payment_id'], result_refund[:response]['id'])
+    assert_equal 200, result_get[:status]
+    assert_equal result_refund[:response]['id'], result_get[:response]['id']
   end
 end

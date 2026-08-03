@@ -59,6 +59,22 @@ module Mercadopago
       _put(uri: "/v1/payments/#{_path_param(payment_id)}", data: payment_data, request_options: request_options)
     end
 
+    # Captures a previously authorized payment.
+    #
+    # @param payment_id [Integer, String] MercadoPago payment ID
+    # @param amount [Numeric, nil] amount to capture; omit to capture the full authorized amount
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the updated payment
+    def capture(payment_id, amount: nil, request_options: nil)
+      payload = { capture: true }
+      payload[:transaction_amount] = amount unless amount.nil?
+      _put(
+        uri: "/v1/payments/#{payment_id}",
+        data: payload,
+        request_options: request_options
+      )
+    end
+
     # Lazily yields every payment matching the search criteria across all pages.
     # @param filters [Hash, nil] search filters (limit/offset managed automatically)
     # @param request_options [RequestOptions, nil] per-call configuration override

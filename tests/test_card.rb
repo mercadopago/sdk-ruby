@@ -65,6 +65,14 @@ class TestCard < Minitest::Test
       assert_equal 200, card_get[:status]
       sleep(1)
 
+      card_update_object = {
+        expiration_year: 2031
+      }
+
+      card_updated = sdk.card.update(customer_id, card_saved[:response]['id'], card_update_object)
+      assert_equal 200, card_updated[:status]
+      sleep(1)
+
       card_deleted = sdk.card.delete(customer_id, card_saved[:response]['id'])
       assert_equal 200, card_deleted[:status]
       sleep(1)
