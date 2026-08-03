@@ -17,15 +17,22 @@
 # @see https://www.mercadopago.com/developers MercadoPago Developer Docs
 module Mercadopago; end
 
+# --- Configuration (loaded first, errors need DEFAULT_RETRY_ON) ---
+require_relative './mercadopago/config/config'
+require_relative './mercadopago/config/request_options'
+
+# --- Errors ---
+require_relative './mercadopago/errors/exceptions'
+require_relative './mercadopago/errors/response'
+
+# --- Pagination ---
+require_relative './mercadopago/pagination/iterator'
+
 # --- HTTP layer ---
 require_relative './mercadopago/http/http_client'
 
 # --- Core ---
 require_relative './mercadopago/core/mp_base'
-
-# --- Configuration ---
-require_relative './mercadopago/config/config'
-require_relative './mercadopago/config/request_options'
 
 # --- API Resources ---
 require_relative './mercadopago/resources/chargeback'
