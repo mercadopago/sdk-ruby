@@ -35,6 +35,22 @@ module Mercadopago
       _post(uri: "/v1/customers/#{_path_param(customer_id)}/cards/", data: card_data, request_options: request_options)
     end
 
+    # Updates a saved card for a customer.
+    #
+    # @param customer_id [String] MercadoPago customer ID
+    # @param card_id [String] saved card ID
+    # @param card_data [Hash] card attributes to update
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Hash{Symbol => Object}] +:status+ and +:response+ with the updated card
+    # @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/update-card/put
+    def update(customer_id, card_id, card_data, request_options: nil)
+      _put(
+        uri: "/v1/customers/#{_path_param(customer_id)}/cards/#{_path_param(card_id)}",
+        data: card_data,
+        request_options: request_options
+      )
+    end
+
     # Deletes a saved card from a customer.
     #
     # @param customer_id [String] MercadoPago customer ID
