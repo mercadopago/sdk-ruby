@@ -1,22 +1,9 @@
 inherit_from: .rubocop_todo.yml
 
-Metrics/AbcSize:
-  Max: 32
-
-  Metrics/CyclomaticComplexity:
-    Max: 18
-
-    Metrics/ParameterLists:
-      Max: 12
-
-      Metrics/PerceivedComplexity:
-        Max: 18
-
-        Style/ExplicitBlockArgument:
-          Enabled: false
-
-          Style/NumericPredicate:
-            Enabled: false
-
-            Style/TrivialAccessors:
-              Enabled: false
+Metrics/AbcSize: {Max: 32}
+Metrics/CyclomaticComplexity: {Max: 18}
+Metrics/ParameterLists: {Max: 12}
+Metrics/PerceivedComplexity: {Max: 18}
+Style/ExplicitBlockArgument: {Enabled: false}
+Style/NumericPredicate: {Enabled: false}
+Style/TrivialAccessors: {Enabled: false}
