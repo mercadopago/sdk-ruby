@@ -41,6 +41,13 @@ class TestPreference < Minitest::Test
     assert_equal 201, result[:status]
   end
 
+  def test_method_search
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+    result = sdk.preference.search(filters: { external_reference: 'ref123' })
+    assert_equal 200, result[:status]
+    assert result[:response].key?('results')
+  end
+
   def test_method_put
     sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
 

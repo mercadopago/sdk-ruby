@@ -269,4 +269,16 @@ class TestPayment < Minitest::Test
     result = sdk.payment.update(1_231_910_402, data)
     assert_equal 403, result[:status]
   end
+
+  def test_method_capture
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+    result = sdk.payment.capture(1_231_910_402)
+    assert_equal 403, result[:status]
+  end
+
+  def test_method_capture_partial
+    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+    result = sdk.payment.capture(1_231_910_402, amount: 50.0)
+    assert_equal 403, result[:status]
+  end
 end
