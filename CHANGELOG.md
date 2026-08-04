@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 This project follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] - 2026-08-04
+
+### Added
+
+- **SDK ergonomics**: typed exceptions, configurable retry, and auto-pagination ([#162](https://github.com/mercadopago/sdk-ruby/pull/162))
+  - `MercadoPago::ApiError` now has 12 specific subtypes per HTTP status code
+  - Request options gain optional `max_retries`, `retry_on`, `initial_delay_ms`, `max_delay_ms` and `on_retry` callback
+  - New auto-pagination support on search endpoints
+- **Missing API methods** — `disbursement_refund.list`, `advanced_payment.update`, `customer_card.update`, `payment.update` ([#161](https://github.com/mercadopago/sdk-ruby/pull/161))
+- **CREDENTIAL_ON_FILE messaging fields** on Payment types ([#158](https://github.com/mercadopago/sdk-ruby/pull/158)): `first_transaction`, `storage`, `transaction_initiator`, `reference`
+
+### Fixed
+
+- Webhook `tolerance_seconds` unit mismatch — `ts` header value compared in seconds against a millisecond clock ([#163](https://github.com/mercadopago/sdk-ruby/pull/163))
+- `constant_time_equals` error on multibyte v1 hash ([#163](https://github.com/mercadopago/sdk-ruby/pull/163))
+
+### Dependencies
+
+- Bump `json` gem ([#159](https://github.com/mercadopago/sdk-ruby/pull/159))
+- Bump `actions/cache` to `v6.1.0` ([#160](https://github.com/mercadopago/sdk-ruby/pull/160))
+- Bump `actions/checkout` to `v7.0.1` ([#157](https://github.com/mercadopago/sdk-ruby/pull/157))
+
 ## [3.2.0] - 2026-06-30
 
 ### Added
