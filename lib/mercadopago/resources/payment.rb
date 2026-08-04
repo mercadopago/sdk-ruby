@@ -74,5 +74,17 @@ module Mercadopago
         request_options: request_options
       )
     end
+
+    # Lazily yields every payment matching the search criteria across all pages.
+    # @param filters [Hash, nil] search filters (limit/offset managed automatically)
+    # @param request_options [RequestOptions, nil] per-call configuration override
+    # @return [Mercadopago::Pagination::Iterator] lazy enumerator of payment objects
+    def search_auto_paging_iter(filters: nil, request_options: nil)
+      Mercadopago::Pagination::Iterator.new(
+        method(:search),
+        filters: filters,
+        request_options: request_options
+      )
+    end
   end
 end

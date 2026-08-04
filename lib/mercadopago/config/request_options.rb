@@ -13,6 +13,9 @@ module Mercadopago
   #   opts = Mercadopago::RequestOptions.new(access_token: token, connection_timeout: 120.0)
   #   sdk.payment.get(123, request_options: opts)
   class RequestOptions
+    DEFAULT_RETRY_ON  = [429, 500, 502, 503, 504].freeze
+    DEFAULT_MAX_DELAY = 30_000
+
     # @!attribute [r] access_token
     #   @return [String, nil] OAuth access token used for Bearer authentication
     # @!attribute [r] connection_timeout
@@ -27,8 +30,18 @@ module Mercadopago
     #   @return [String, nil] MercadoPago platform identifier (x-platform-id header)
     # @!attribute [r] max_retries
     #   @return [Integer] maximum automatic retries on transient HTTP errors (default: 3)
+    # @!attribute [r] initial_delay_ms
+    #   @return [Integer, nil] initial backoff delay in ms (nil = SDK default)
+    # @!attribute [r] max_delay_ms
+    #   @return [Integer] maximum backoff delay cap in ms (default: 30_000)
+    # @!attribute [r] jitter
+    #   @return [Boolean] add random jitter to retry delay using SecureRandom
+    # @!attribute [r] retry_on
+    #   @return [Array<Integer>, nil] HTTP status codes to retry (nil = DEFAULT_RETRY_ON)
+    # @!attribute [r] on_retry
+    #   @return [Proc, nil] callback(attempt, error) invoked before each retry
     attr_reader :access_token, :connection_timeout, :custom_headers, :corporation_id, :integrator_id,
-                :platform_id, :max_retries
+                :platform_id, :max_retries, :initial_delay_ms, :max_delay_ms, :jitter, :retry_on, :on_retry
 
     # Builds a new request configuration.
     #
@@ -39,6 +52,11 @@ module Mercadopago
     # @param integrator_id [String, nil] integrator identifier for certified partners
     # @param platform_id [String, nil] platform identifier for marketplace integrations
     # @param max_retries [Integer] retry limit for transient failures (429, 5xx)
+    # @param initial_delay_ms [Integer, nil] initial backoff delay in ms
+    # @param max_delay_ms [Integer] maximum backoff delay cap in ms
+    # @param jitter [Boolean] add SecureRandom jitter to retry delay
+    # @param retry_on [Array<Integer>, nil] HTTP status codes to retry
+    # @param on_retry [Proc, nil] callback invoked before each retry
     # @raise [TypeError] if any parameter is not the expected type
     def initialize(access_token: nil,
                    connection_timeout: 60.0,
@@ -46,7 +64,12 @@ module Mercadopago
                    corporation_id: nil,
                    integrator_id: nil,
                    platform_id: nil,
-                   max_retries: 3)
+                   max_retries: 3,
+                   initial_delay_ms: nil,
+                   max_delay_ms: DEFAULT_MAX_DELAY,
+                   jitter: false,
+                   retry_on: nil,
+                   on_retry: nil)
       self.access_token = access_token
       self.connection_timeout = connection_timeout
       self.custom_headers = custom_headers
@@ -54,6 +77,11 @@ module Mercadopago
       self.integrator_id = integrator_id
       self.platform_id = platform_id
       self.max_retries = max_retries
+      @initial_delay_ms = initial_delay_ms
+      @max_delay_ms     = max_delay_ms
+      @jitter           = jitter
+      @retry_on         = retry_on
+      @on_retry         = on_retry
 
       @config = Config.new
     end

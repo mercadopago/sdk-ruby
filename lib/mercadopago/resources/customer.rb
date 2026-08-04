@@ -64,5 +64,10 @@ module Mercadopago
     def delete(customer_id, request_options: nil)
       _delete(uri: "/v1/customers/#{_path_param(customer_id)}", request_options: request_options)
     end
+
+    # Lazily yields every customer matching the search criteria across all pages.
+    def search_auto_paging_iter(filters: nil, request_options: nil)
+      Mercadopago::Pagination::Iterator.new(method(:search), filters: filters, request_options: request_options)
+    end
   end
 end

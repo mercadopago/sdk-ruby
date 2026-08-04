@@ -3,81 +3,69 @@
 
 require 'faraday'
 require 'json'
+require 'securerandom'
 
 module Mercadopago
-  # Low-level HTTP transport layer built on top of RestClient.
-  #
-  # Provides the four standard HTTP verbs (GET, POST, PUT, DELETE) and
-  # normalises every response into a +{ status:, response: }+ hash.
-  # GET requests include automatic retry with a 1-second back-off for
-  # transient errors (429, 500, 502, 503, 504).
-  #
-  # This class is used internally by {MPBase}. You can subclass or
-  # replace it via +SDK.new(token, http_client: MyClient.new)+ to
-  # inject a custom transport (e.g. for testing or logging).
+  # Low-level HTTP transport layer built on top of Faraday.
   class HttpClient
-    RETRYABLE_STATUSES = [429, 500, 502, 503, 504].freeze
+    RETRYABLE_STATUSES  = RequestOptions::DEFAULT_RETRY_ON.freeze
+    DEFAULT_INITIAL_MS  = 1000
+    DEFAULT_MAX_DELAY_MS = RequestOptions::DEFAULT_MAX_DELAY
 
-    # Performs an HTTP GET request with automatic retry on transient errors.
-    #
-    # Retries up to +maxretries+ times with a 1-second sleep between
-    # attempts when the server responds with 429 or 5xx status codes.
-    #
-    # @param url [String] fully qualified URL
-    # @param headers [Hash] HTTP headers (query params can be nested under +:params+)
-    # @param params [Hash, nil] query-string parameters appended to the URL
-    # @param timeout [Float, nil] request timeout in seconds
-    # @param maxretries [Integer, nil] maximum number of retry attempts
-    # @return [Hash{Symbol => Object}] +:status+ (Integer HTTP code) and +:response+ (parsed JSON body)
-    def get(url:, headers:, params: nil, timeout: nil, maxretries: nil)
-      try = 0
-      max = maxretries.to_i
-
-      loop do
-        response = execute(:get, url, headers: headers, params: params, timeout: timeout)
-        return build_result(response) unless RETRYABLE_STATUSES.include?(response.status) && try < max - 1
-
-        try += 1
-        sleep(1)
-      end
+    # GET with configurable retry + exponential backoff + jitter
+    def get(url:, headers:, params: nil, timeout: nil, maxretries: nil,
+            retry_on: nil, initial_delay_ms: nil, max_delay_ms: nil,
+            jitter: false, on_retry: nil)
+      with_retry(url: url, method: :get, headers: headers, params: params,
+                 timeout: timeout, maxretries: maxretries, retry_on: retry_on,
+                 initial_delay_ms: initial_delay_ms, max_delay_ms: max_delay_ms,
+                 jitter: jitter, on_retry: on_retry)
     end
 
-    # Performs an HTTP POST request.
-    #
-    # @param url [String] fully qualified URL
-    # @param data [String, nil] JSON-encoded request body
-    # @param headers [Hash] HTTP headers (should include Content-Type)
-    # @param timeout [Float, nil] request timeout in seconds
-    # @return [Hash{Symbol => Object}] +:status+ and +:response+ (parsed JSON body)
     def post(url:, data:, headers:, timeout: nil)
       build_result(execute(:post, url, headers: headers, body: data, timeout: timeout))
     end
 
-    # Performs an HTTP PUT request.
-    #
-    # @param url [String] fully qualified URL
-    # @param data [String, nil] JSON-encoded request body
-    # @param headers [Hash] HTTP headers (should include Content-Type)
-    # @param timeout [Float, nil] request timeout in seconds
-    # @return [Hash{Symbol => Object}] +:status+ and +:response+ (parsed JSON body)
     def put(url:, data:, headers:, timeout: nil)
       build_result(execute(:put, url, headers: headers, body: data, timeout: timeout))
     end
 
-    # Performs an HTTP DELETE request.
-    #
-    # Returns +nil+ as the response body when the server sends an empty body,
-    # which is common for successful deletions (204-style responses).
-    #
-    # @param url [String] fully qualified URL
-    # @param headers [Hash] HTTP headers
-    # @param timeout [Float, nil] request timeout in seconds
-    # @return [Hash{Symbol => Object}] +:status+ and +:response+ (parsed JSON body or nil)
     def delete(url:, headers:, timeout: nil)
       build_result(execute(:delete, url, headers: headers, timeout: timeout), allow_empty: true)
     end
 
     private
+
+    def with_retry(url:, method:, headers:, params: nil, body: nil, timeout: nil,
+                   maxretries: nil, retry_on: nil, initial_delay_ms: nil,
+                   max_delay_ms: nil, jitter: false, on_retry: nil)
+      effective_retry_on   = retry_on || RETRYABLE_STATUSES
+      effective_max        = (maxretries || 0).to_i
+      effective_initial_ms = (initial_delay_ms || DEFAULT_INITIAL_MS).to_i
+      effective_max_delay  = (max_delay_ms || DEFAULT_MAX_DELAY_MS).to_i
+
+      attempt = 0
+      loop do
+        response = execute(method, url, headers: headers, params: params, body: body, timeout: timeout)
+        result   = build_result(response)
+
+        return result unless effective_retry_on.include?(response.status) && attempt < effective_max
+
+        on_retry&.call(attempt + 1, nil)
+
+        delay_ms = compute_delay(attempt, effective_initial_ms, effective_max_delay, jitter)
+        sleep(delay_ms / 1000.0)
+        attempt += 1
+      end
+    end
+
+    def compute_delay(attempt, initial_ms, max_delay_ms, use_jitter)
+      exponential = [initial_ms * (2**attempt), max_delay_ms].min
+      return exponential unless use_jitter && exponential > 0
+
+      # Use SecureRandom — NEVER rand() for security-relevant randomness
+      SecureRandom.random_number(exponential + 1)
+    end
 
     def execute(method, url, headers:, params: nil, body: nil, timeout: nil)
       conn = Faraday.new(request: timeout ? { timeout: timeout } : {})
@@ -89,7 +77,7 @@ module Mercadopago
     end
 
     def build_result(response, allow_empty: false)
-      body = response.body
+      body   = response.body
       parsed = if allow_empty && (body.nil? || body.to_s.strip.empty?)
                  nil
                else

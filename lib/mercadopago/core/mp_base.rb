@@ -81,8 +81,16 @@ module Mercadopago
       request_options = _check_request_options(request_options)
       headers = _check_headers(request_options)
 
-      @http_client.get(url: @config.api_base_url + uri, headers: headers, params: filters,
-                       timeout: request_options.connection_timeout, maxretries: request_options.max_retries)
+      MPResponse.new(
+        @http_client.get(url: @config.api_base_url + uri, headers: headers, params: filters,
+                         timeout: request_options.connection_timeout,
+                         maxretries: request_options.max_retries,
+                         retry_on: request_options.retry_on,
+                         initial_delay_ms: request_options.initial_delay_ms,
+                         max_delay_ms: request_options.max_delay_ms,
+                         jitter: request_options.jitter,
+                         on_retry: request_options.on_retry)
+      )
     end
 
     # Performs a POST request against the MercadoPago API.
@@ -101,7 +109,10 @@ module Mercadopago
       headers = _check_headers(request_options, { 'Content-Type': @config.mime_json })
       payload = data&.to_json
 
-      @http_client.post(url: @config.api_base_url + uri, data: payload, headers: headers, timeout: request_options.connection_timeout)
+      MPResponse.new(
+        @http_client.post(url: @config.api_base_url + uri, data: payload, headers: headers,
+                          timeout: request_options.connection_timeout)
+      )
     end
 
     # Performs a PUT request against the MercadoPago API.
@@ -119,8 +130,10 @@ module Mercadopago
       request_options = _check_request_options(request_options)
       headers = _check_headers(request_options, { 'Content-Type': @config.mime_json })
 
-      @http_client.put(url: @config.api_base_url + uri, data: data.to_json, headers: headers,
-                       timeout: request_options.connection_timeout)
+      MPResponse.new(
+        @http_client.put(url: @config.api_base_url + uri, data: data.to_json, headers: headers,
+                         timeout: request_options.connection_timeout)
+      )
     end
 
     # Performs a DELETE request against the MercadoPago API.
@@ -132,8 +145,10 @@ module Mercadopago
       request_options = _check_request_options(request_options)
       headers = _check_headers(request_options)
 
-      @http_client.delete(url: @config.api_base_url + uri, headers: headers,
-                          timeout: request_options.connection_timeout)
+      MPResponse.new(
+        @http_client.delete(url: @config.api_base_url + uri, headers: headers,
+                            timeout: request_options.connection_timeout)
+      )
     end
   end
 end

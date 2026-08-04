@@ -60,5 +60,10 @@ module Mercadopago
 
       _put(uri: "/preapproval/#{_path_param(preapproval_id)}", data: preapproval_data, request_options: request_options)
     end
+
+    # Lazily yields every preapproval matching the search criteria across all pages.
+    def search_auto_paging_iter(filters: nil, request_options: nil)
+      Mercadopago::Pagination::Iterator.new(method(:search), filters: filters, request_options: request_options)
+    end
   end
 end
