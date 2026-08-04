@@ -34,7 +34,7 @@ module Mercadopago
 
         loop do
           page_filters = @filters.merge(limit: @limit, offset: offset)
-          result       = @search_fn.call(page_filters, @request_options)
+          result       = @search_fn.call(filters: page_filters, request_options: @request_options)
           body         = extract_body(result)
           items        = extract_items(body)
           total        = extract_total(body)

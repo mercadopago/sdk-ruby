@@ -98,7 +98,7 @@ class TestErgonomia < Minitest::Test
 
   def test_pagination_yields_all_items
     call_count = 0
-    search_fn = lambda do |filters, _opts|
+    search_fn = lambda do |filters:, request_options: nil|
       call_count += 1
       offset = (filters[:offset] || 0).to_i
       if offset < 2
@@ -112,7 +112,7 @@ class TestErgonomia < Minitest::Test
   end
 
   def test_pagination_stops_on_empty_results
-    search_fn = lambda { |_f, _o| { status: 200, response: { 'results' => [], 'paging' => { 'total' => 0 } } } }
+    search_fn = lambda { |filters:, request_options: nil| { status: 200, response: { 'results' => [], 'paging' => { 'total' => 0 } } } }
     assert_equal [], Mercadopago::Pagination::Iterator.new(search_fn).to_a
   end
 
