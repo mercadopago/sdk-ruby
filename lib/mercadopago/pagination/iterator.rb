@@ -36,17 +36,26 @@ module Mercadopago
           page_filters = @filters.merge(limit: @limit, offset: offset)
           result = @search_fn.call(page_filters, @request_options)
 
-          body    = result.is_a?(Hash) ? (result[:response] || result['response'] || {}) : {}
-          results = (body.is_a?(Hash) ? (body['results'] || body[:results]) : nil) || []
-          paging  = (body.is_a?(Hash) ? (body['paging']  || body[:paging])  : nil) || {}
-          total   = (paging['total'] || paging[:total] || 0).to_i
+          body = result.is_a?(Hash) ? (result[:response] || result['response'] || {}) : {}
+          body = {} unless body.is_a?(Hash)
 
-          break if results.empty?
+          # Support different response key conventions:
+          # - "results"  → payments, customers, preapprovals, preferences, etc.
+          # - "data"     → Orders v2 API
+          # - "elements" → some Order patterns (Pattern B)
+          items = (body['results'] || body[:results] ||
+                   body['data']    || body[:data]    ||
+                   body['elements']|| body[:elements] || [])
+          paging = (body['paging'] || body[:paging] || {})
+          # Orders v2 returns total as string ("181"); other APIs as integer
+          total  = (paging['total'] || paging[:total] || 0).to_i
 
-          results.each { |item| yield item }
+          break if items.empty?
 
-          offset += results.size
-          break if offset >= total
+          items.each { |item| yield item }
+
+          offset += items.size
+          break if total.positive? && offset >= total
         end
       end
     end
