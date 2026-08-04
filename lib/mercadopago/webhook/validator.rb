@@ -205,7 +205,7 @@ module Mercadopago
       def self.check_tolerance!(timestamp, x_request_id, tolerance_seconds, now_proc)
         return if tolerance_seconds.nil?
 
-        ts_ms = timestamp.to_i * 1000  # ts is in seconds, convert to ms
+        ts_ms = timestamp.to_i * 1000 # ts is in seconds, convert to ms
         drift_ms = (now_proc.call - ts_ms).abs
         return unless drift_ms > tolerance_seconds * 1000
 
