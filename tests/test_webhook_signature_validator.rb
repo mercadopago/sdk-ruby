@@ -91,7 +91,7 @@ class TestWebhookSignatureValidator < Minitest::Test
 
   # case 8
   def test_outside_tolerance_raises
-    stale_ts = ((Time.now.to_f * 1000).to_i - 30 * 60 * 1000).to_s
+    stale_ts = (Time.now.to_i - 30 * 60).to_s  # 30 minutes ago in seconds
     h = compute_hash(DATA_ID_LOWER, REQUEST_ID, stale_ts, SECRET)
     err = assert_raises(Error) do
       Validator.validate(build_header(h, stale_ts), REQUEST_ID, DATA_ID_LOWER, SECRET,
@@ -101,7 +101,7 @@ class TestWebhookSignatureValidator < Minitest::Test
   end
 
   def test_within_tolerance_passes
-    current = (Time.now.to_f * 1000).to_i.to_s
+    current = Time.now.to_i.to_s  # seconds, matching real MercadoPago header format
     h = compute_hash(DATA_ID_LOWER, REQUEST_ID, current, SECRET)
     Validator.validate(build_header(h, current), REQUEST_ID, DATA_ID_LOWER, SECRET,
                        tolerance_seconds: 300)
@@ -149,5 +149,13 @@ class TestWebhookSignatureValidator < Minitest::Test
     assert_raises(ArgumentError) do
       Validator.validate(build_header(valid_hash), REQUEST_ID, DATA_ID_LOWER, '')
     end
+  end
+
+  # case 13 — regression for seconds vs milliseconds unit mismatch in check_tolerance!
+  def test_seconds_timestamp_within_tolerance_passes
+    ts = Time.now.to_i.to_s  # Unix timestamp in seconds, as MercadoPago sends it
+    h = compute_hash(DATA_ID_LOWER, REQUEST_ID, ts, SECRET)
+    Validator.validate(build_header(h, ts), REQUEST_ID, DATA_ID_LOWER, SECRET,
+                       tolerance_seconds: 3600)
   end
 end

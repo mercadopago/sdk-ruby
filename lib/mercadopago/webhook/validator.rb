@@ -205,7 +205,8 @@ module Mercadopago
       def self.check_tolerance!(timestamp, x_request_id, tolerance_seconds, now_proc)
         return if tolerance_seconds.nil?
 
-        drift_ms = (now_proc.call - timestamp.to_i).abs
+        ts_ms = timestamp.to_i * 1000 # ts is in seconds, convert to ms
+        drift_ms = (now_proc.call - ts_ms).abs
         return unless drift_ms > tolerance_seconds * 1000
 
         raise_error!(SignatureFailureReason::TIMESTAMP_OUT_OF_TOLERANCE, x_request_id, timestamp: timestamp)
