@@ -34,21 +34,10 @@ module Mercadopago
 
         loop do
           page_filters = @filters.merge(limit: @limit, offset: offset)
-          result = @search_fn.call(page_filters, @request_options)
-
-          body = result.is_a?(Hash) ? (result[:response] || result['response'] || {}) : {}
-          body = {} unless body.is_a?(Hash)
-
-          # Support different response key conventions:
-          # - "results"  → payments, customers, preapprovals, preferences, etc.
-          # - "data"     → Orders v2 API
-          # - "elements" → some Order patterns (Pattern B)
-          items = (body['results'] || body[:results] ||
-                   body['data']    || body[:data]    ||
-                   body['elements']|| body[:elements] || [])
-          paging = (body['paging'] || body[:paging] || {})
-          # Orders v2 returns total as string ("181"); other APIs as integer
-          total  = (paging['total'] || paging[:total] || 0).to_i
+          result       = @search_fn.call(page_filters, @request_options)
+          body         = extract_body(result)
+          items        = extract_items(body)
+          total        = extract_total(body)
 
           break if items.empty?
 
@@ -57,6 +46,29 @@ module Mercadopago
           offset += items.size
           break if total.positive? && offset >= total
         end
+      end
+
+      private
+
+      def extract_body(result)
+        body = result.is_a?(Hash) ? result[:response] || result['response'] : nil
+        body.is_a?(Hash) ? body : {}
+      end
+
+      # Support different response key conventions:
+      # - "results"  → payments, customers, preapprovals, preferences, etc.
+      # - "data"     → Orders v2 API
+      # - "elements" → some Order patterns (Pattern B)
+      def extract_items(body)
+        body['results'] || body[:results] ||
+          body['data']  || body[:data]    ||
+          body['elements'] || body[:elements] || []
+      end
+
+      # Orders v2 returns total as string ("181"); other APIs return integer.
+      def extract_total(body)
+        paging = body['paging'] || body[:paging] || {}
+        (paging['total'] || paging[:total] || 0).to_i
       end
     end
   end
