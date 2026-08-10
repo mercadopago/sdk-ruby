@@ -15,11 +15,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby-version: ["3.2", "3.3", "3.4"]
+        ruby-version: ["3.3", "3.4"]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
+
+      - name: Configure git safe directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Install dependencies
         run: bundle install
