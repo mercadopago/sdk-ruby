@@ -23,7 +23,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with refund details
     def create_all(advanced_payment_id, request_options: nil)
-      _post(uri: "/v1/advanced_payments/#{_path_param(advanced_payment_id)}/refunds", request_options: request_options)
+      _post(uri: "/v1/advanced_payments/#{_path_param(advanced_payment_id)}/refunds", data: nil, request_options: request_options)
     end
 
     # Refunds a single disbursement (full or partial).
