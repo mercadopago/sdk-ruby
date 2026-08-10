@@ -2,7 +2,7 @@ name: Release SDK - Publish Gem
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   release:
