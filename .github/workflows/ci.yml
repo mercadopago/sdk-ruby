@@ -10,6 +10,7 @@ jobs:
   test:
     name: Test on Ruby ${{ matrix.ruby-version }}
     runs-on: ubuntu-latest
+    container: ruby:${{ matrix.ruby-version }}
 
     strategy:
       fail-fast: false
@@ -20,11 +21,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
 
-      - name: Setup Ruby ${{ matrix.ruby-version }}
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true
+      - name: Install dependencies
+        run: bundle install
 
       - name: Lint with Rubocop
         run: bundle exec rubocop lib
