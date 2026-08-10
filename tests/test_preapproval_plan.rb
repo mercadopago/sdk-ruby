@@ -1,98 +1,39 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
+require_relative 'base_client_test'
 
-require 'minitest/autorun'
-
-class TestPreapprovalPlan < Minitest::Test
-  def setup
-    @preapproval_plan_data = {
-      reason: 'Yoga classes',
-      auto_recurring: {
-        frequency: 1,
-        frequency_type: 'months',
-        repetitions: 12,
-        billing_day: 10,
-        billing_day_proportional: true,
-        free_trial: {
-          frequency: 1,
-          frequency_type: 'months'
-        },
-        transaction_amount: 10,
-        currency_id: 'BRL'
-      },
-      payment_methods_allowed: {
-        payment_types: [
-          {}
-        ],
-        payment_methods: [
-          {}
-        ]
-      },
-      back_url: 'https://www.yoursite.com'
-    }
-  end
-
-  def test_method_search
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    result = sdk.preapproval_plan.create(@preapproval_plan_data)
-    assert_equal 201, result[:status]
-
-    result = sdk.preapproval_plan.search(filters: { id: result[:response]['id'] })
+class TestPreapprovalPlan < BaseClientTest
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 'PLAN-001', 'status' => 'active' } })
+    result = @sdk.preapproval_plan.get('PLAN-001')
     assert_equal 200, result[:status]
+    assert_equal 'PLAN-001', result[:response]['id']
+    assert_equal :get, @mock_http.last_call
   end
 
-  def test_method_get_id
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    result = sdk.preapproval_plan.create(@preapproval_plan_data)
+  def test_create
+    mock_response({ status: 201, response: { 'id' => 'PLAN-002', 'status' => 'active' } })
+    result = @sdk.preapproval_plan.create({ reason: 'Monthly subscription', auto_recurring: { frequency: 1,
+                                                                                               frequency_type: 'months', transaction_amount: 10.0, currency_id: 'BRL' } })
     assert_equal 201, result[:status]
+    assert_equal 'PLAN-002', result[:response]['id']
+    assert_equal :post, @mock_http.last_call
+  end
 
-    result = sdk.preapproval_plan.get(result[:response]['id'])
+  def test_update
+    mock_response({ status: 200, response: { 'id' => 'PLAN-001', 'status' => 'inactive' } })
+    result = @sdk.preapproval_plan.update('PLAN-001', { status: 'inactive' })
     assert_equal 200, result[:status]
+    assert_equal 'inactive', result[:response]['status']
+    assert_equal :put, @mock_http.last_call
   end
 
-  def test_method_post
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    
-    result = sdk.preapproval_plan.create(@preapproval_plan_data)
-    assert_equal 201, result[:status]
-  end
-
-  def test_method_put
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    update_data = {
-      reason: 'Pilates classes',
-      auto_recurring: {
-        frequency: 1,
-        frequency_type: 'months',
-        repetitions: 20,
-        billing_day: 15,
-        billing_day_proportional: true,
-        free_trial: {
-          frequency: 1,
-          frequency_type: 'months'
-        },
-        transaction_amount: 10,
-        currency_id: 'BRL'
-      },
-      payment_methods_allowed: {
-        payment_types: [
-          {}
-        ],
-        payment_methods: [
-          {}
-        ]
-      },
-      back_url: 'https://www.yoursite.com'
-    }
-
-    result = sdk.preapproval_plan.create(@preapproval_plan_data)
-    assert_equal 201, result[:status]
-
-    result = sdk.preapproval_plan.update(result[:response]['id'], update_data)
+  def test_search
+    mock_response({ status: 200, response: { 'paging' => { 'total' => 1 }, 'results' => [{ 'id' => 'PLAN-001' }] } })
+    result = @sdk.preapproval_plan.search(filters: { status: 'active' })
     assert_equal 200, result[:status]
+    assert_equal 1, result[:response]['paging']['total']
+    assert_equal :get, @mock_http.last_call
   end
 end

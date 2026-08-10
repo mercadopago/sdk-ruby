@@ -1,24 +1,39 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
+require_relative 'base_client_test'
 
-require 'minitest/autorun'
-
-class TestPoint < Minitest::Test
-  def test_get_devices_returns_valid_status
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    result = sdk.point.get_devices
-    assert_includes [200, 400, 401, 403, 404], result[:status]
+class TestPoint < BaseClientTest
+  def test_get_devices
+    mock_response({ status: 200, response: { 'devices' => [{ 'id' => 'DEVICE-001', 'status' => 'AVAILABLE' }] } })
+    result = @sdk.point.get_devices
+    assert_equal 200, result[:status]
+    assert_equal 1, result[:response]['devices'].size
+    assert_equal 'DEVICE-001', result[:response]['devices'].first['id']
+    assert_equal :get, @mock_http.last_call
   end
 
-  def test_create_raises_on_non_hash
-    sdk = Mercadopago::SDK.new('TEST_TOKEN')
-    assert_raises(TypeError) { sdk.point.create('device_123', 'not_a_hash') }
+  def test_create
+    mock_response({ status: 201, response: { 'id' => 'PI-001', 'state' => 'OPEN', 'device_id' => 'DEVICE-001' } })
+    result = @sdk.point.create('DEVICE-001', { amount: 100, description: 'Test payment', payment: { installments: 1 } })
+    assert_equal 201, result[:status]
+    assert_equal 'PI-001', result[:response]['id']
+    assert_equal :post, @mock_http.last_call
   end
 
-  def test_get_devices_raises_on_non_hash_filters
-    sdk = Mercadopago::SDK.new('TEST_TOKEN')
-    assert_raises(TypeError) { sdk.point.get_devices(filters: 'not_a_hash') }
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 'PI-001', 'state' => 'FINISHED' } })
+    result = @sdk.point.get('PI-001')
+    assert_equal 200, result[:status]
+    assert_equal 'PI-001', result[:response]['id']
+    assert_equal 'FINISHED', result[:response]['state']
+    assert_equal :get, @mock_http.last_call
+  end
+
+  def test_cancel
+    mock_response({ status: 200, response: { 'id' => 'PI-001', 'state' => 'CANCELLED' } })
+    result = @sdk.point.cancel('DEVICE-001', 'PI-001')
+    assert_equal 200, result[:status]
+    assert_equal :delete, @mock_http.last_call
   end
 end

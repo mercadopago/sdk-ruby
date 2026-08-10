@@ -1,39 +1,28 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
+require_relative 'base_client_test'
 
-require 'minitest/autorun'
-
-class CardToken < Minitest::Test
-  def test_method_get_id
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    card_token_object = {
-      card_number: '5031433215406351',
-      expiration_year: 2030,
-      expiration_month: 11,
-      security_code: '123',
-      cardholder: {
-        name: 'APRO'
-      }
-    }
-    result_card_token = sdk.card_token.create(card_token_object)
-    result = sdk.card_token.get(result_card_token[:response]['id'])
+class TestCardToken < BaseClientTest
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 'tok_abc123', 'last_four_digits' => '6351' } })
+    result = @sdk.card_token.get('tok_abc123')
     assert_equal 200, result[:status]
+    assert_equal 'tok_abc123', result[:response]['id']
+    assert_equal :get, @mock_http.last_call
   end
 
-  def test_method_post
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    card_token_object = {
-      card_number: '5031433215406351',
-      expiration_year: 2030,
-      expiration_month: 11,
-      security_code: '123',
-      cardholder: {
-        name: 'APRO'
-      }
-    }
-    result = sdk.card_token.create(card_token_object)
+  def test_create
+    mock_response({ status: 201, response: { 'id' => 'tok_new456', 'last_four_digits' => '6351' } })
+    result = @sdk.card_token.create({
+                                      card_number: '5031433215406351',
+                                      expiration_year: 2030,
+                                      expiration_month: 11,
+                                      security_code: '123',
+                                      cardholder: { name: 'APRO' }
+                                    })
     assert_equal 201, result[:status]
+    assert_equal 'tok_new456', result[:response]['id']
+    assert_equal :post, @mock_http.last_call
   end
 end

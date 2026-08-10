@@ -1,284 +1,61 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
+require_relative 'base_client_test'
 
-require 'minitest/autorun'
-
-class TestPayment < Minitest::Test
-  def test_method_search
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    card_token_object = {
-      card_number: '5031433215406351',
-      expiration_year: 2030,
-      expiration_month: 11,
-      security_code: '123',
-      cardholder: {
-        name: 'APRO'
-      }
-    }
-    result_card_token = sdk.card_token.create(card_token_object)
-
-    payment_object = {
-      token: result_card_token[:response]['id'],
-      installments: 1,
-      transaction_amount: 58.80,
-      description: 'Point Mini a maquininha que dá o dinheiro de suas vendas na hora',
-      payment_method_id: 'master',
-      payer: {
-        email: 'test_user_123456@testuser.com',
-        identification: {
-          number: '19119119100',
-          type: 'CPF'
-        }
-      },
-      notification_url: 'https://www.suaurl.com/notificacoes/',
-      binary_mode: false,
-      external_reference: 'MP0001',
-      statement_descriptor: 'MercadoPago',
-      additional_info: {
-        items: [
-          {
-            id: 'PR0001',
-            title: 'Point Mini',
-            description: 'Producto Point para cobros con tarjetas mediante bluetooth',
-            picture_url: 'https://http2.mlstatic.com/resources/frontend/statics/growth-sellers-landings/device-mlb-point-i_medium@2x.png',
-            category_id: 'electronics',
-            quantity: 1,
-            unit_price: 58.80
-          }
-        ],
-        payer: {
-          first_name: 'Nome',
-          last_name: 'Sobrenome',
-          address: {
-            zip_code: '06233-200',
-            street_name: 'Av das Nacoes Unidas',
-            street_number: 3003
-          },
-          registration_date: '2019-01-01T12:01:01.000-03:00',
-          phone: {
-            area_code: '011',
-            number: '987654321'
-          },
-          authentication_type: 'WEB',
-          is_prime_user: false,
-          is_first_purchase_online: false,
-          last_purchase: '2024-01-01T00:00:00Z',
-          identification: {
-            type: 'CPF',
-            number: '19119119100'
-          }
-        },
-        shipments: {
-          express_shipment: false,
-          local_pickup: false,
-          receiver_address: {
-            street_name: 'Av das Nacoes Unidas',
-            street_number: 3003,
-            zip_code: '06233200',
-            city_name: 'Buzios',
-            state_name: 'Rio de Janeiro',
-            floor: '3',
-            apartment: 'B'
-          }
-        }
-      }
-    }
-    payment = sdk.payment.create(payment_object)
-
-    result = sdk.payment.search(filters: { id: payment[:response]['id'] })
-   
+class TestPayment < BaseClientTest
+  def test_search
+    mock_response({ status: 200, response: { 'paging' => { 'total' => 1 }, 'results' => [{ 'id' => 123 }] } })
+    result = @sdk.payment.search(filters: { id: 123 })
+    assert_equal 200, result[:status]
     assert_equal 1, result[:response]['paging']['total']
-    assert_equal 200, result[:status]
+    assert_equal :get, @mock_http.last_call
   end
 
-  def test_method_get_id
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    card_token_object = {
-      card_number: '5031433215406351',
-      expiration_year: 2030,
-      expiration_month: 11,
-      security_code: '123',
-      cardholder: {
-        name: 'APRO'
-      }
-    }
-    result_card_token = sdk.card_token.create(card_token_object)
-
-    payment_object = {
-      token: result_card_token[:response]['id'],
-      installments: 1,
-      transaction_amount: 58.80,
-      description: 'Point Mini a maquininha que dá o dinheiro de suas vendas na hora',
-      payment_method_id: 'master',
-      payer: {
-        email: 'test_user_123456@testuser.com',
-        identification: {
-          number: '19119119100',
-          type: 'CPF'
-        }
-      },
-      notification_url: 'https://www.suaurl.com/notificacoes/',
-      binary_mode: false,
-      external_reference: 'MP0001',
-      statement_descriptor: 'MercadoPago',
-      additional_info: {
-        items: [
-          {
-            id: 'PR0001',
-            title: 'Point Mini',
-            description: 'Producto Point para cobros con tarjetas mediante bluetooth',
-            picture_url: 'https://http2.mlstatic.com/resources/frontend/statics/growth-sellers-landings/device-mlb-point-i_medium@2x.png',
-            category_id: 'electronics',
-            quantity: 1,
-            unit_price: 58.80
-          }
-        ],
-        payer: {
-          first_name: 'Nome',
-          last_name: 'Sobrenome',
-          address: {
-            zip_code: '06233-200',
-            street_name: 'Av das Nacoes Unidas',
-            street_number: 3003
-          },
-          registration_date: '2019-01-01T12:01:01.000-03:00',
-          phone: {
-            area_code: '011',
-            number: '987654321'
-          },
-          authentication_type: 'WEB',
-          is_prime_user: false,
-          is_first_purchase_online: false,
-          last_purchase: '2024-01-01T00:00:00Z',
-          identification: {
-            type: 'CPF',
-            number: '19119119100'
-          }
-        },
-        shipments: {
-          express_shipment: false,
-          local_pickup: false,
-          receiver_address: {
-            street_name: 'Av das Nacoes Unidas',
-            street_number: 3003,
-            zip_code: '06233200',
-            city_name: 'Buzios',
-            state_name: 'Rio de Janeiro',
-            floor: '3',
-            apartment: 'B'
-          }
-        }
-      }
-    }
-    payment = sdk.payment.create(payment_object)
-    result = sdk.payment.get(payment[:response]['id'])
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 123, 'status' => 'approved' } })
+    result = @sdk.payment.get(123)
     assert_equal 200, result[:status]
+    assert_equal 123, result[:response]['id']
+    assert_equal 'approved', result[:response]['status']
+    assert_equal :get, @mock_http.last_call
   end
 
-  def test_method_post
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    card_token_object = {
-      card_number: '5031433215406351',
-      expiration_year: 2030,
-      expiration_month: 11,
-      security_code: '123',
-      cardholder: {
-        name: 'APRO'
-      }
-    }
-    result_card_token = sdk.card_token.create(card_token_object)
-
-    payment_object = {
-      token: result_card_token[:response]['id'],
-      installments: 1,
-      transaction_amount: 58.80,
-      description: 'Point Mini a maquininha que dá o dinheiro de suas vendas na hora',
-      payment_method_id: 'master',
-      payer: {
-        email: 'test_user_123456@testuser.com',
-        identification: {
-          number: '19119119100',
-          type: 'CPF'
-        }
-      },
-      notification_url: 'https://www.suaurl.com/notificacoes/',
-      binary_mode: false,
-      external_reference: 'MP0001',
-      statement_descriptor: 'MercadoPago',
-      additional_info: {
-        items: [
-          {
-            id: 'PR0001',
-            title: 'Point Mini',
-            description: 'Producto Point para cobros con tarjetas mediante bluetooth',
-            picture_url: 'https://http2.mlstatic.com/resources/frontend/statics/growth-sellers-landings/device-mlb-point-i_medium@2x.png',
-            category_id: 'electronics',
-            quantity: 1,
-            unit_price: 58.80
-          }
-        ],
-        payer: {
-          first_name: 'Nome',
-          last_name: 'Sobrenome',
-          address: {
-            zip_code: '06233-200',
-            street_name: 'Av das Nacoes Unidas',
-            street_number: 3003
-          },
-          registration_date: '2019-01-01T12:01:01.000-03:00',
-          phone: {
-            area_code: '011',
-            number: '987654321'
-          },
-          authentication_type: 'WEB',
-          is_prime_user: false,
-          is_first_purchase_online: false,
-          last_purchase: '2024-01-01T00:00:00Z',
-          identification: {
-            type: 'CPF',
-            number: '19119119100'
-          }
-        },
-        shipments: {
-          express_shipment: false,
-          local_pickup: false,
-          receiver_address: {
-            street_name: 'Av das Nacoes Unidas',
-            street_number: 3003,
-            zip_code: '06233200',
-            city_name: 'Buzios',
-            state_name: 'Rio de Janeiro',
-            floor: '3',
-            apartment: 'B'
-          }
-        }
-      }
-    }
-    result = sdk.payment.create(payment_object)
+  def test_create
+    mock_response({ status: 201, response: { 'id' => 456, 'status' => 'pending' } })
+    result = @sdk.payment.create({ transaction_amount: 100.0, token: 'abc123', payment_method_id: 'visa',
+                                   installments: 1, payer: { email: 'test@test.com' } })
     assert_equal 201, result[:status]
+    assert_equal 456, result[:response]['id']
+    assert_equal :post, @mock_http.last_call
   end
 
-  def test_method_put
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    data = {
-      status: 'approved'
-    }
-    result = sdk.payment.update(1_231_910_402, data)
-    assert_equal 403, result[:status]
+  def test_update
+    mock_response({ status: 200, response: { 'id' => 123, 'status' => 'cancelled' } })
+    result = @sdk.payment.update(123, { status: 'cancelled' })
+    assert_equal 200, result[:status]
+    assert_equal 123, result[:response]['id']
+    assert_equal :put, @mock_http.last_call
   end
 
-  def test_method_capture
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    result = sdk.payment.capture(1_231_910_402)
-    assert_equal 403, result[:status]
+  def test_capture
+    mock_response({ status: 200, response: { 'id' => 123, 'captured' => true } })
+    result = @sdk.payment.capture(123)
+    assert_equal 200, result[:status]
+    assert_equal true, result[:response]['captured']
+    assert_equal :put, @mock_http.last_call
   end
 
-  def test_method_capture_partial
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    result = sdk.payment.capture(1_231_910_402, amount: 50.0)
-    assert_equal 403, result[:status]
+  def test_capture_with_amount
+    mock_response({ status: 200, response: { 'id' => 123, 'transaction_amount' => 50.0, 'captured' => true } })
+    result = @sdk.payment.capture(123, amount: 50.0)
+    assert_equal 200, result[:status]
+    assert_equal 50.0, result[:response]['transaction_amount']
+    assert_equal :put, @mock_http.last_call
+  end
+
+  def test_search_auto_paging_iter_returns_iterator
+    iterator = @sdk.payment.search_auto_paging_iter(filters: { status: 'approved' })
+    assert_respond_to iterator, :each
   end
 end
