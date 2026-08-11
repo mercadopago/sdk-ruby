@@ -1,86 +1,45 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
+require_relative 'base_client_test'
 
-require 'minitest/autorun'
+class TestCard < BaseClientTest
+  def test_list
+    mock_response({ status: 200, response: [{ 'id' => 'CARD-1' }, { 'id' => 'CARD-2' }] })
+    result = @sdk.card.list('CUST-123')
+    assert_equal 200, result[:status]
+    assert_equal 2, result[:response].size
+    assert_equal :get, @mock_http.last_call
+  end
 
-class TestCard < Minitest::Test
-  def test_all
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 'CARD-1', 'last_four_digits' => '4321' } })
+    result = @sdk.card.get('CUST-123', 'CARD-1')
+    assert_equal 200, result[:status]
+    assert_equal 'CARD-1', result[:response]['id']
+    assert_equal :get, @mock_http.last_call
+  end
 
-    customer_object = {
-      email: 'test_payer_999944@testuser.com',
-      first_name: 'Rafa',
-      last_name: 'Williner',
-      phone: {
-        area_code: '03492',
-        number: '432334'
-      },
-      identification: {
-        type: 'DNI',
-        number: '29804555'
-      },
-      address: {
-        street_name: 'some street'
-      },
-      description: 'customer description'
-    }
+  def test_create
+    mock_response({ status: 201, response: { 'id' => 'CARD-99', 'last_four_digits' => '1234' } })
+    result = @sdk.card.create('CUST-123', { token: 'tok_abc123' })
+    assert_equal 201, result[:status]
+    assert_equal 'CARD-99', result[:response]['id']
+    assert_equal :post, @mock_http.last_call
+  end
 
-    customer_saved = sdk.customer.create(customer_object)
-    assert_equal 201, customer_saved[:status]
-    customer_id = customer_saved[:response]['id']
-    sleep(1)
+  def test_update
+    mock_response({ status: 200, response: { 'id' => 'CARD-1', 'expiration_year' => 2030 } })
+    result = @sdk.card.update('CUST-123', 'CARD-1', { expiration_year: 2030 })
+    assert_equal 200, result[:status]
+    assert_equal 2030, result[:response]['expiration_year']
+    assert_equal :put, @mock_http.last_call
+  end
 
-    card_token_object = {
-      card_number: '5031433215406351',
-      expiration_year: 2030,
-      expiration_month: 11,
-      security_code: '123',
-      cardholder: {
-        name: 'APRO'
-      }
-    }
-
-    begin
-      card_token = sdk.card_token.create(card_token_object)
-
-      card_object = {
-        token: card_token[:response]['id']
-      }
-
-      card_saved = sdk.card.create(customer_id, card_object)
-      assert !card_saved.nil?
-      assert !card_saved[:response].nil?
-      assert !card_saved[:response]['id'].nil?
-      sleep(1)
-
-      cards = sdk.card.list(customer_id)
-      assert !cards.nil?
-      assert !cards[:response].nil?
-      assert !cards[:response].empty?
-      sleep(1)
-
-      card_get = sdk.card.get(customer_id, card_saved[:response]['id'])
-      assert_equal 200, card_get[:status]
-      sleep(1)
-
-      card_update_object = {
-        expiration_year: 2031
-      }
-
-      card_updated = sdk.card.update(customer_id, card_saved[:response]['id'], card_update_object)
-      assert_equal 200, card_updated[:status]
-      sleep(1)
-
-      card_deleted = sdk.card.delete(customer_id, card_saved[:response]['id'])
-      assert_equal 200, card_deleted[:status]
-      sleep(1)
-    ensure
-      if customer_saved.key?(:response) && customer_saved[:response].key?('id')
-        customer_deleted = sdk.customer.delete(customer_saved[:response]['id'])
-        assert_equal 200, customer_deleted[:status]
-      end
-    end
+  def test_delete
+    mock_response({ status: 200, response: { 'id' => 'CARD-1' } })
+    result = @sdk.card.delete('CUST-123', 'CARD-1')
+    assert_equal 200, result[:status]
+    assert_equal :delete, @mock_http.last_call
   end
 end

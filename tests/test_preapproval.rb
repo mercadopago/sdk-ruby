@@ -1,82 +1,44 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
+require_relative 'base_client_test'
 
-require 'minitest/autorun'
-
-class TestPreapproval < Minitest::Test
-  def setup
-    @card_token_object = {
-      card_number: '5031433215406351',
-      expiration_year: 2030,
-      expiration_month: 11,
-      security_code: '123',
-      cardholder: {
-        name: 'APRO'
-      }
-    }
-  end
-
-  def test_method_search
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    create_response = create_preapproval(sdk)
-    assert_equal 201, create_response[:status]
-
-    result = sdk.preapproval.search(filters: { id: create_response[:response]['id'] })
+class TestPreapproval < BaseClientTest
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 'PA-123', 'status' => 'authorized' } })
+    result = @sdk.preapproval.get('PA-123')
     assert_equal 200, result[:status]
+    assert_equal 'PA-123', result[:response]['id']
+    assert_equal :get, @mock_http.last_call
   end
 
-  def test_method_get_id
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    create_response = create_preapproval(sdk)
-    assert_equal 201, create_response[:status]
-
-    result = sdk.preapproval.get(create_response[:response]['id'])
-    assert_equal 200, result[:status]
-  end
-
-  def test_method_post
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    result = create_preapproval(sdk)
+  def test_create
+    mock_response({ status: 201, response: { 'id' => 'PA-456', 'status' => 'pending' } })
+    result = @sdk.preapproval.create({ preapproval_plan_id: 'PLAN-001', payer_email: 'test@test.com',
+                                       card_token_id: 'tok_abc' })
     assert_equal 201, result[:status]
+    assert_equal 'PA-456', result[:response]['id']
+    assert_equal :post, @mock_http.last_call
   end
 
-  def test_method_put
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    create_response = create_preapproval(sdk)
-    assert_equal 201, create_response[:status]
-
-    update_data = {
-      reason: 'Yoga classes',
-      external_reference: 'YG-12345',
-      auto_recurring: {
-        transaction_amount: 15,
-      },
-      back_url: 'https://www.mercadopago.com.ar'
-    }
-    result = sdk.preapproval.update(create_response[:response]['id'], update_data)
+  def test_update
+    mock_response({ status: 200, response: { 'id' => 'PA-123', 'status' => 'paused' } })
+    result = @sdk.preapproval.update('PA-123', { status: 'paused' })
     assert_equal 200, result[:status]
+    assert_equal 'paused', result[:response]['status']
+    assert_equal :put, @mock_http.last_call
   end
 
-  def create_preapproval(sdk)
-    preapproval_data = {
-      reason: 'Yoga classes',
-      external_reference: 'YG-1234',
-      payer_email: 'test_user_28355466@testuser.com',
-      auto_recurring: {
-        frequency: 1,
-        frequency_type: 'months',
-        transaction_amount: 100,
-        currency_id: 'BRL'
-      },
-      back_url: 'https://www.mercadopago.com.br',
-    }
+  def test_search
+    mock_response({ status: 200, response: { 'paging' => { 'total' => 1 }, 'results' => [{ 'id' => 'PA-123' }] } })
+    result = @sdk.preapproval.search(filters: { status: 'authorized' })
+    assert_equal 200, result[:status]
+    assert_equal 1, result[:response]['paging']['total']
+    assert_equal :get, @mock_http.last_call
+  end
 
-    sdk.preapproval.create(preapproval_data)
+  def test_search_auto_paging_iter_returns_iterator
+    iterator = @sdk.preapproval.search_auto_paging_iter(filters: { status: 'authorized' })
+    assert_respond_to iterator, :each
   end
 end

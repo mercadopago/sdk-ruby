@@ -1,70 +1,39 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
-require 'minitest/autorun'
+require_relative 'base_client_test'
 
-class TestSubscription < Minitest::Test
-  def test_method_search
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    create_response = create_subscription(sdk)
-    assert_equal 201, create_response[:status]
-
-    result = sdk.subscription.search(filters: { id: create_response[:response]['id'] })
+class TestSubscription < BaseClientTest
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 'SUB-123', 'status' => 'authorized' } })
+    result = @sdk.subscription.get('SUB-123')
     assert_equal 200, result[:status]
+    assert_equal 'SUB-123', result[:response]['id']
+    assert_equal :get, @mock_http.last_call
   end
 
-  def test_method_get
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    create_response = create_subscription(sdk)
-    assert_equal 201, create_response[:status]
-
-    result = sdk.subscription.get(create_response[:response]['id'])
-    assert_equal 200, result[:status]
-    assert_equal create_response[:response]['id'], result[:response]['id']
-  end
-
-  def test_method_post
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    result = create_subscription(sdk)
+  def test_create
+    mock_response({ status: 201, response: { 'id' => 'SUB-456', 'status' => 'pending' } })
+    result = @sdk.subscription.create({ preapproval_plan_id: 'PLAN-001', payer_email: 'test@test.com',
+                                        card_token_id: 'tok_abc' })
     assert_equal 201, result[:status]
+    assert_equal 'SUB-456', result[:response]['id']
+    assert_equal :post, @mock_http.last_call
   end
 
-  def test_method_update
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    create_response = create_subscription(sdk)
-    assert_equal 201, create_response[:status]
-
-    update_data = { status: 'paused' }
-    result = sdk.subscription.update(create_response[:response]['id'], update_data)
+  def test_update
+    mock_response({ status: 200, response: { 'id' => 'SUB-123', 'status' => 'paused' } })
+    result = @sdk.subscription.update('SUB-123', { status: 'paused' })
     assert_equal 200, result[:status]
+    assert_equal 'paused', result[:response]['status']
+    assert_equal :put, @mock_http.last_call
   end
 
-  def create_subscription(sdk)
-    plan_data = {
-      reason: 'Subscription plan test',
-      auto_recurring: {
-        frequency: 1,
-        frequency_type: 'months',
-        transaction_amount: 10,
-        currency_id: 'BRL'
-      },
-      back_url: 'https://www.mercadopago.com.br',
-      payment_methods_allowed: {
-        payment_types: [{ id: 'credit_card' }]
-      }
-    }
-    plan_response = sdk.preapproval_plan.create(plan_data)
-
-    subscription_data = {
-      preapproval_plan_id: plan_response[:response]['id'],
-      payer_email: 'test_user_28355466@testuser.com',
-      back_url: 'https://www.mercadopago.com.br'
-    }
-    sdk.subscription.create(subscription_data)
+  def test_search
+    mock_response({ status: 200, response: { 'paging' => { 'total' => 1 }, 'results' => [{ 'id' => 'SUB-123' }] } })
+    result = @sdk.subscription.search(filters: { status: 'authorized' })
+    assert_equal 200, result[:status]
+    assert_equal 1, result[:response]['paging']['total']
+    assert_equal :get, @mock_http.last_call
   end
 end

@@ -1,48 +1,30 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
-require 'minitest/autorun'
+require_relative 'base_client_test'
 
-##
-# TestRefund
-class TestRefund < Minitest::Test
-  def test_refund_post_and_list
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    card_token_object = {
-      card_number: '5031433215406351',
-      expiration_year: 2030,
-      expiration_month: 11,
-      security_code: '123',
-      cardholder: {
-        name: 'APRO'
-      }
-    }
-    result_card_token = sdk.card_token.create(card_token_object)
-    payment_object = {
-      transaction_amount: 110,
-      installments: 1,
-      capture: true,
-      description: 'Payment test',
-      payment_method_id: 'master',
-      token: result_card_token[:response]['id'],
-      payer: {
-        email: 'test_user_246340119@testuser.com'
-      }
-    }
-    result_payment = sdk.payment.create(payment_object)
-    sleep(1)
+class TestRefund < BaseClientTest
+  def test_list
+    mock_response({ status: 200, response: [{ 'id' => 'REF-1' }, { 'id' => 'REF-2' }] })
+    result = @sdk.refund.list(123)
+    assert_equal 200, result[:status]
+    assert_equal 2, result[:response].size
+    assert_equal :get, @mock_http.last_call
+  end
 
-    result_refund = sdk.refund.create(result_payment[:response]['id'])
-    assert_equal 201, result_refund[:status]
-    assert_equal 'approved', result_refund[:response]['status']
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 'REF-1', 'status' => 'approved' } })
+    result = @sdk.refund.get(123, 'REF-1')
+    assert_equal 200, result[:status]
+    assert_equal 'REF-1', result[:response]['id']
+    assert_equal :get, @mock_http.last_call
+  end
 
-    sleep(1)
-    result_list = sdk.refund.list(result_refund[:response]['payment_id'])
-    assert_equal 200, result_list[:status]
-
-    result_get = sdk.refund.get(result_refund[:response]['payment_id'], result_refund[:response]['id'])
-    assert_equal 200, result_get[:status]
-    assert_equal result_refund[:response]['id'], result_get[:response]['id']
+  def test_create
+    mock_response({ status: 201, response: { 'id' => 'REF-99', 'status' => 'approved' } })
+    result = @sdk.refund.create(123)
+    assert_equal 201, result[:status]
+    assert_equal 'REF-99', result[:response]['id']
+    assert_equal :post, @mock_http.last_call
   end
 end

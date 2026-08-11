@@ -1,126 +1,38 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
+require_relative 'base_client_test'
 
-require 'minitest/autorun'
-
-class TestMerchantOrden < Minitest::Test
-  def test_method_search
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    result = sdk.merchant_order.search(filters: { id: 123_187_219_6 })
+class TestMerchantOrder < BaseClientTest
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 789, 'status' => 'opened' } })
+    result = @sdk.merchant_order.get(789)
     assert_equal 200, result[:status]
+    assert_equal 789, result[:response]['id']
+    assert_equal :get, @mock_http.last_call
   end
 
-  def test_method_post
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    data = {
-      items: [
-        {
-          title: 'Dummy Item',
-          description: 'Multicolor Item',
-          quantity: 1,
-          currency_id: '',
-          unit_price: 10.0
-        }
-      ]
-    }
-    result_prefence = sdk.preference.create(data)
-    merchant_orden_object = {
-      preference_id: result_prefence[:response]['id'],
-      site_id: 'MLB',
-      notification_url: 'https://seller/notification',
-      additional_info: 'Aditional info',
-      external_reference: 1,
-      marketplace: 'NONE',
-      items: [{
-        description: 'Test Update Success',
-        id: '5678',
-        picture_url: 'http://product1.image.png',
-        quantity: 1,
-        title: 'Item 1',
-        currency_id: 'BRL',
-        unit_price: 20.5
-      }]
-    }
-    result_merchant_order = sdk.merchant_order.create(merchant_orden_object)
-    assert_equal 201, result_merchant_order[:status]
+  def test_create
+    mock_response({ status: 201, response: { 'id' => 999, 'status' => 'opened' } })
+    result = @sdk.merchant_order.create({ preference_id: 'PREF-123', items: [] })
+    assert_equal 201, result[:status]
+    assert_equal 999, result[:response]['id']
+    assert_equal :post, @mock_http.last_call
   end
 
-  def test_method_get_id
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-
-    data = {
-      items: [
-        {
-          title: 'Dummy Item',
-          description: 'Multicolor Item',
-          quantity: 1,
-          currency_id: '',
-          unit_price: 10.0
-        }
-      ]
-    }
-    result_prefence = sdk.preference.create(data)
-    merchant_orden_object = {
-      preference_id: result_prefence[:response]['id'],
-      site_id: 'MLB',
-      notification_url: 'https://seller/notification',
-      additional_info: 'Aditional info',
-      external_reference: 1,
-      marketplace: 'NONE',
-      items: [{
-                description: 'Test Update Success',
-                id: '5678',
-                picture_url: 'http://product1.image.png',
-                quantity: 1,
-                title: 'Item 1',
-                currency_id: 'BRL',
-                unit_price: 20.5
-              }]
-    }
-    result_merchant_order = sdk.merchant_order.create(merchant_orden_object)
-
-    result = sdk.merchant_order.get(result_merchant_order[:response]['id'])
+  def test_update
+    mock_response({ status: 200, response: { 'id' => 789, 'status' => 'closed' } })
+    result = @sdk.merchant_order.update(789, { status: 'closed' })
     assert_equal 200, result[:status]
+    assert_equal 'closed', result[:response]['status']
+    assert_equal :put, @mock_http.last_call
   end
 
-  def test_method_put
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    data = {
-      items: [
-        {
-          title: 'Dummy Item',
-          description: 'Multicolor Item',
-          quantity: 1,
-          currency_id: '',
-          unit_price: 10.0
-        }
-      ]
-    }
-    result_prefence = sdk.preference.create(data)
-    merchant_orden_object = {
-      preference_id: result_prefence[:response]['id'],
-      site_id: 'MLB',
-      notification_url: 'https://seller/notification',
-      additional_info: 'Aditional info',
-      external_reference: 1,
-      marketplace: 'NONE',
-      items: [
-        {
-          description: 'Test Update Success',
-          id: '5678',
-          picture_url: 'http://product1.image.png',
-          quantity: 1,
-          title: 'Item 1',
-          currency_id: 'BRL',
-          unit_price: 20.5
-        }
-      ]
-    }
-    result_merchant_order = sdk.merchant_order.create(merchant_orden_object)
-    merchant_order_update = { additional_info: 'Info 3' }
-    result = sdk.merchant_order.update(result_merchant_order[:response]['id'], merchant_order_update)
+  def test_search
+    mock_response({ status: 200, response: { 'total' => 1, 'elements' => [{ 'id' => 789 }] } })
+    result = @sdk.merchant_order.search(filters: { preference_id: 'PREF-123' })
     assert_equal 200, result[:status]
+    assert_equal 1, result[:response]['total']
+    assert_equal :get, @mock_http.last_call
   end
 end

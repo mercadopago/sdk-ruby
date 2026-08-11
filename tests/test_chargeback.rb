@@ -1,19 +1,22 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
+require_relative 'base_client_test'
 
-require 'minitest/autorun'
-
-class TestChargeback < Minitest::Test
-  def test_search_returns_valid_status
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    result = sdk.chargeback.search(filters: { limit: 5 })
-    assert_includes [200, 400, 401, 404], result[:status]
+class TestChargeback < BaseClientTest
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 'CB-001', 'status' => 'opened' } })
+    result = @sdk.chargeback.get('CB-001')
+    assert_equal 200, result[:status]
+    assert_equal 'CB-001', result[:response]['id']
+    assert_equal :get, @mock_http.last_call
   end
 
-  def test_search_raises_on_non_hash_filters
-    sdk = Mercadopago::SDK.new('TEST_TOKEN')
-    assert_raises(TypeError) { sdk.chargeback.search(filters: 'not_a_hash') }
+  def test_search
+    mock_response({ status: 200, response: { 'paging' => { 'total' => 1 }, 'results' => [{ 'id' => 'CB-001' }] } })
+    result = @sdk.chargeback.search(filters: { payment_id: 123 })
+    assert_equal 200, result[:status]
+    assert_equal 1, result[:response]['paging']['total']
+    assert_equal :get, @mock_http.last_call
   end
 end

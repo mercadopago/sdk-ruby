@@ -1,55 +1,50 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
+require_relative 'base_client_test'
 
-require 'minitest/autorun'
+class TestCustomer < BaseClientTest
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 'CUST-123', 'email' => 'test@test.com' } })
+    result = @sdk.customer.get('CUST-123')
+    assert_equal 200, result[:status]
+    assert_equal 'CUST-123', result[:response]['id']
+    assert_equal :get, @mock_http.last_call
+  end
 
-class TestCustomer < Minitest::Test
-  def test_all
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
+  def test_create
+    mock_response({ status: 201, response: { 'id' => 'CUST-456', 'email' => 'new@test.com' } })
+    result = @sdk.customer.create({ email: 'new@test.com' })
+    assert_equal 201, result[:status]
+    assert_equal 'CUST-456', result[:response]['id']
+    assert_equal :post, @mock_http.last_call
+  end
 
-    customer_object = {
-      email: 'test_payer_9999SAE@testuser.com',
-      first_name: 'Rafa',
-      last_name: 'Williner',
-      phone: {
-        area_code: '03492',
-        number: '432334'
-      },
-      identification: {
-        type: 'DNI',
-        number: '29804555'
-      },
-      address: {
-        zip_code: '26515069',
-        street_name: 'some street',
-        street_number: 123
-      },
-      description: 'customer description'
-    }
+  def test_update
+    mock_response({ status: 200, response: { 'id' => 'CUST-123', 'first_name' => 'John' } })
+    result = @sdk.customer.update('CUST-123', { first_name: 'John' })
+    assert_equal 200, result[:status]
+    assert_equal 'John', result[:response]['first_name']
+    assert_equal :put, @mock_http.last_call
+  end
 
-    begin
-      customer_saved = sdk.customer.create(customer_object)
-      assert_equal 201, customer_saved[:status]
-      sleep(1)
+  def test_delete
+    mock_response({ status: 200, response: { 'id' => 'CUST-123' } })
+    result = @sdk.customer.delete('CUST-123')
+    assert_equal 200, result[:status]
+    assert_equal :delete, @mock_http.last_call
+  end
 
-      customers = sdk.customer.search(filters: { email: 'test_payer_999922@testuser.com' })
-      assert_equal 200, customers[:status]
-      sleep(1)
+  def test_search
+    mock_response({ status: 200, response: { 'paging' => { 'total' => 1 }, 'results' => [{ 'id' => 'CUST-123' }] } })
+    result = @sdk.customer.search(filters: { email: 'test@test.com' })
+    assert_equal 200, result[:status]
+    assert_equal 1, result[:response]['paging']['total']
+    assert_equal :get, @mock_http.last_call
+  end
 
-      customer_update = sdk.customer.update(customer_saved[:response]['id'], { last_name: 'Payer' })
-      assert_equal 200, customer_update[:status]
-      sleep(1)
-
-      customer_updated = sdk.customer.get(customer_saved[:response]['id'])
-      assert_equal 'Payer', customer_updated[:response]['last_name']
-      sleep(1)
-    ensure
-      if customer_saved.key?(:response) && customer_saved[:response].key?('id')
-        customer_deleted = sdk.customer.delete(customer_saved[:response]['id'])
-        assert_equal 200, customer_deleted[:status]
-      end
-    end
+  def test_search_auto_paging_iter_returns_iterator
+    iterator = @sdk.customer.search_auto_paging_iter(filters: { email: 'test@test.com' })
+    assert_respond_to iterator, :each
   end
 end

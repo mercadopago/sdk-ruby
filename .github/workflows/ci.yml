@@ -1,43 +1,45 @@
-name: Ruby
+name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: ["master"]
   pull_request:
-    branches: [ master ]
+    branches: ["master"]
 
 jobs:
   test:
+    name: Test on Ruby ${{ matrix.ruby-version }}
     runs-on: ubuntu-latest
-    container: ruby:3.4
+    container: ruby:${{ matrix.ruby-version }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version: ["3.3", "3.4"]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      with:
-        ref: ${{ github.event.pull_request.head.ref }}
-        repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
 
-    - name: Cache gems
-      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
+      - name: Configure git safe directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-    - name: Install dependencies
-      run: |
-        bundle config set --local path vendor/bundle
-        bundle install
+      - name: Install dependencies
+        run: bundle install
 
-    - name: Rubocop
-      run: bundle exec rubocop lib
+      - name: Lint with Rubocop
+        run: bundle exec rubocop lib
 
-    # Integration tests disabled: they require a valid MercadoPago ACCESS_TOKEN
-    # that is not available in the CI environment. To run them locally:
-    #   ACCESS_TOKEN=<your_token> bundle exec rake
-    # - name: Run tests
-    #   run: bundle exec rake
-    #   env:
-    #     ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN_V2 }}
+      - name: Run unit tests
+        run: bundle exec rake test
+
+      - name: Dependency audit
+        run: |
+          gem install bundler-audit --no-document
+          bundle-audit check --update
+
+      - name: Dependency review
+        if: github.event_name == 'pull_request'
+        uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v4
+        with:
+          fail-on-severity: high

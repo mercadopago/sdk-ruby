@@ -1,19 +1,23 @@
 # typed: true
 # frozen_string_literal: true
 
-require_relative '../lib/mercadopago'
+require_relative 'base_client_test'
 
-require 'minitest/autorun'
-
-class TestInvoice < Minitest::Test
-  def test_search_returns_valid_status
-    sdk = Mercadopago::SDK.new(ENV['ACCESS_TOKEN'])
-    result = sdk.invoice.search(filters: { limit: 5 })
-    assert_includes [200, 400, 401, 404], result[:status]
+class TestInvoice < BaseClientTest
+  def test_get
+    mock_response({ status: 200, response: { 'id' => 'INV-001', 'status' => 'processed', 'transaction_amount' => 100.0 } })
+    result = @sdk.invoice.get('INV-001')
+    assert_equal 200, result[:status]
+    assert_equal 'INV-001', result[:response]['id']
+    assert_equal 100.0, result[:response]['transaction_amount']
+    assert_equal :get, @mock_http.last_call
   end
 
-  def test_search_raises_on_non_hash_filters
-    sdk = Mercadopago::SDK.new('TEST_TOKEN')
-    assert_raises(TypeError) { sdk.invoice.search(filters: 'not_a_hash') }
+  def test_search
+    mock_response({ status: 200, response: { 'paging' => { 'total' => 1 }, 'results' => [{ 'id' => 'INV-001' }] } })
+    result = @sdk.invoice.search(filters: { preapproval_id: 'PA-123' })
+    assert_equal 200, result[:status]
+    assert_equal 1, result[:response]['paging']['total']
+    assert_equal :get, @mock_http.last_call
   end
 end

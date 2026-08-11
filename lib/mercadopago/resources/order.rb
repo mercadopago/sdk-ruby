@@ -159,7 +159,7 @@ module Mercadopago
     # @param request_options [RequestOptions, nil] per-call configuration override
     # @return [Hash{Symbol => Object}] +:status+ and +:response+ with search results
     def search(filters: nil, request_options: nil)
-      _get(uri: '/v1/orders', params: filters, request_options: request_options)
+      _get(uri: '/v1/orders', filters: filters, request_options: request_options)
     end
 
     private
