@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 This project follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.0] - 2026-08-11
+
+### Added
+- **Automatic Payments example**: two-step recurring flow ([#156](https://github.com/mercadopago/sdk-ruby/pull/156))
+- **Pagination**: support `data` key for Orders v2 API and string paging totals ([#156](https://github.com/mercadopago/sdk-ruby/pull/156))
+
+### Fixed
+- **Stored credential**: rename `prev_transaction_ref` to `previous_transaction_reference` ([#156](https://github.com/mercadopago/sdk-ruby/pull/156))
+- **`Iterator#call`**: use keyword args for Ruby 4.0 strict kwarg separation ([#156](https://github.com/mercadopago/sdk-ruby/pull/156))
+
+### CI
+- Standardize CI/CD workflows ([#166](https://github.com/mercadopago/sdk-ruby/pull/166))
+- Migrate tests to mock-based unit tests ([#166](https://github.com/mercadopago/sdk-ruby/pull/166))
+- Fix SDK bugs discovered during mock test migration ([#166](https://github.com/mercadopago/sdk-ruby/pull/166))
+- Fix Ruby CI: drop 3.2 matrix (gemspec requires >=3.3), add `safe.directory` ([#166](https://github.com/mercadopago/sdk-ruby/pull/166))
+
 ## [3.3.0] - 2026-08-04
 
 ### Added
