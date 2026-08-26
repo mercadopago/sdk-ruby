@@ -165,11 +165,12 @@ module Mercadopago
         :payment_profile_id,
         :schedule_date,
         :due_date,
-        :retries
+        :retries,
+        :subscription
       ) do
         include HashConversion
 
-        def initialize(payment_profile_id: nil, schedule_date: nil, due_date: nil, retries: nil)
+        def initialize(payment_profile_id: nil, schedule_date: nil, due_date: nil, retries: nil, subscription: nil)
           super
         end
       end
