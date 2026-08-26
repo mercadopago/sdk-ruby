@@ -16,11 +16,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.4'
-          bundler-cache: true
+      - name: Install dependencies and build gem
+        run: |
+          ruby -e 'abort "Ruby 3.3 or newer is required" if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("3.3")'
+          bundle install
+          gem build mercadopago.gemspec
 
-      - name: Publish gem to rubygems.org
-        uses: rubygems/release-gem@v1
+      - name: Publish gem to rubygems.org with OIDC
+        env:
+          RUBYGEMS_OIDC_AUDIENCE: rubygems.org
+        run: |
+          set -euo pipefail
+
+          oidc_response=$(curl --fail-with-body --silent --show-error \
+            -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${RUBYGEMS_OIDC_AUDIENCE}")
+          oidc_token=$(jq --raw-output '.value' <<< "${oidc_response}")
+
+          token_response=$(curl --fail-with-body --silent --show-error \
+            -X POST https://rubygems.org/api/v1/oidc/trusted_publisher/exchange_token \
+            -H 'Content-Type: application/json' \
+            -H 'Accept: application/json' \
+            --data "$(jq --null-input --arg jwt "${oidc_token}" '{jwt: $jwt}')")
+          api_key=$(jq --raw-output '.rubygems_api_key' <<< "${token_response}")
+
+          echo "::add-mask::${api_key}"
+          GEM_HOST_API_KEY="${api_key}" gem push mercadopago-*.gem
