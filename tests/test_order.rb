@@ -82,4 +82,15 @@ class TestOrder < BaseClientTest
       @sdk.order.create_checkout_pro({ processing_mode: 'automatic', total_amount: '100.00' })
     end
   end
+
+  def test_automatic_payments_subscription_serializes
+    subscription = {
+      id: 'subscription-1',
+      sequence: { number: 1, total: 12 },
+      invoice: { id: 'invoice-1', billing_date: '2026-08-26', period: { interval: 1, type: 'month' } }
+    }
+    request = Mercadopago::Order::Request::AutomaticPaymentsRequest.new(subscription: subscription)
+
+    assert_equal subscription, request.to_hash[:subscription]
+  end
 end
