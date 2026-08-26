@@ -21,6 +21,20 @@ class TestPayment < BaseClientTest
     assert_equal :get, @mock_http.last_call
   end
 
+  def test_get_preserves_expanded_gateway_network_data
+    mock_response({ status: 200, response: {
+      'expanded' => { 'gateway' => { 'reference' => {
+        'network_data' => { 'transaction_id' => 'ABC123', 'transaction_link_id' => '550e8400' }
+      } } }
+    } })
+
+    result = @sdk.payment.get(123)
+    network_data = result[:response]['expanded']['gateway']['reference']['network_data']
+
+    assert_equal 'ABC123', network_data['transaction_id']
+    assert_equal '550e8400', network_data['transaction_link_id']
+  end
+
   def test_create
     mock_response({ status: 201, response: { 'id' => 456, 'status' => 'pending' } })
     result = @sdk.payment.create({ transaction_amount: 100.0, token: 'abc123', payment_method_id: 'visa',
