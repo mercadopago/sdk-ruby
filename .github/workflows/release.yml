@@ -7,6 +7,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    container:
+      image: ruby:3.3
 
     permissions:
       contents: read
@@ -18,7 +20,8 @@ jobs:
 
       - name: Install dependencies and build gem
         run: |
-          ruby -e 'abort "Ruby 3.3 or newer is required" if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("3.3")'
+          apt-get update
+          apt-get install --yes --no-install-recommends curl jq
           bundle install
           gem build mercadopago.gemspec
 
