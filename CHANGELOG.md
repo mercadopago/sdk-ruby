@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 This project follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.5.0] - 2026-08-27
+
+### Added
+- **Automatic payments**: support `automatic_payments.subscription` and expanded gateway network data.
+
+### CI
+- Publish to RubyGems through GitHub OIDC trusted publishing.
+
 ## [3.4.0] - 2026-08-11
 
 ### Added
