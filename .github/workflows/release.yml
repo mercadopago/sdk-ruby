@@ -26,6 +26,7 @@ jobs:
           gem build mercadopago.gemspec
 
       - name: Publish gem to rubygems.org with OIDC
+        shell: bash
         env:
           RUBYGEMS_OIDC_AUDIENCE: rubygems.org
         run: |
