@@ -68,9 +68,9 @@ def create_cit_payment(sdk)
   payment = result[:response]
   puts "CIT payment created. ID: #{payment['id']}, status: #{payment['status']}"
   payment['id'] # return payment ID to use as reference in subsequent MITs
-rescue MercadoPago::MPApiException => e
-  puts "Status code: #{e.api_response.status_code}"
-  puts "Content: #{e.api_response.content}"
+rescue Mercadopago::MercadoPagoError => e
+  puts "Status code: #{e.status_code}"
+  puts "Error: #{e.error}; causes: #{e.causes}"
 rescue StandardError => e
   puts e.message
 end
@@ -126,9 +126,9 @@ def create_mit_payment(sdk, cit_payment_id)
   result = sdk.payment.create(request, request_options: custom_request_options)
   payment = result[:response]
   puts "MIT payment created. ID: #{payment['id']}, status: #{payment['status']}"
-rescue MercadoPago::MPApiException => e
-  puts "Status code: #{e.api_response.status_code}"
-  puts "Content: #{e.api_response.content}"
+rescue Mercadopago::MercadoPagoError => e
+  puts "Status code: #{e.status_code}"
+  puts "Error: #{e.error}; causes: #{e.causes}"
 rescue StandardError => e
   puts e.message
 end
@@ -180,9 +180,9 @@ def create_ucof_cit_payment(sdk)
   result = sdk.payment.create(request, request_options: custom_request_options)
   payment = result[:response]
   puts "UCOF-CIT payment created. ID: #{payment['id']}, status: #{payment['status']}"
-rescue MercadoPago::MPApiException => e
-  puts "Status code: #{e.api_response.status_code}"
-  puts "Content: #{e.api_response.content}"
+rescue Mercadopago::MercadoPagoError => e
+  puts "Status code: #{e.status_code}"
+  puts "Error: #{e.error}; causes: #{e.causes}"
 rescue StandardError => e
   puts e.message
 end

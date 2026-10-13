@@ -1,16 +1,29 @@
-# Mercado Pago SDK for Ruby
+<div align="center">
+  <img src="assets/mercado-pago.svg" alt="Mercado Pago" width="120" />
+  <h1>Mercado Pago SDK for Ruby</h1>
+  <p><strong>The official Mercado Pago SDK for Ruby applications.</strong></p>
+  <p>Integrate Mercado Pago APIs into your Ruby application and start receiving payments.</p>
+  <p>
+    <a href="https://github.com/mercadopago/sdk-ruby/actions/workflows/ci.yml"><img src="assets/badges/ci.svg" alt="CI workflow" /></a>
+    <a href="#installation"><img src="assets/badges/package.svg" alt="Ruby package" /></a>
+    <img src="assets/badges/runtime.svg" alt="Ruby 3.3 or later" />
+    <a href="LICENSE.txt"><img src="assets/badges/license.svg" alt="MIT license" /></a>
+  </p>
+  <p>
+    <a href="#installation">Installation</a> ·
+    <a href="#getting-started">Getting started</a> ·
+    <a href="#documentation">Documentation</a> ·
+    <a href="#contributing">Contributing</a>
+  </p>
+</div>
 
-[![Gem](https://img.shields.io/gem/v/mercadopago-sdk)](https://rubygems.org/gems/mercadopago-sdk)
-[![Gem](https://img.shields.io/gem/dt/mercadopago-sdk)](https://rubygems.org/gems/mercadopago-sdk)
-![GitHub](https://img.shields.io/github/license/mercadopago/sdk-ruby)
-
-This library provides developers with a simple set of bindings to help you integrate Mercado Pago API to a website and start receiving payments.
+---
 
 ## 💡 Requirements
 
-Ruby version **2.3 or greater**.
+Ruby version **3.3 or greater**.
 
-## 📲 Installation 
+## 📲 Installation
 
 Run ```gem install mercadopago-sdk```
 
@@ -87,15 +100,11 @@ result = sdk.payment.create(payment_data, request_options: request_options)
 payment = result[:response]
 ```
 
-## 📚 Documentation 
+## 📚 Documentation
 
-Visit our Dev Site for further information regarding:
- - [Developer Docs](https://www.mercadopago.com/developers/en/docs)
- - [Checkout Bricks](https://www.mercadopago.com/developers/en/docs/checkout-bricks/landing)
- - [Checkout Pro](https://www.mercadopago.com/developers/en/guides/online-payments/checkout-pro/introduction)
- - [Checkout API](https://www.mercadopago.com/developers/en/guides/online-payments/checkout-api/introduction)
-
-Check our official code reference to explore all available functionalities.
+- [SDK guides](docs/guides/README.md): request options, errors, webhooks, and production guidance.
+- [Examples](examples/README.md): integration flows supported by this SDK.
+- [API reference](https://www.mercadopago.com/developers/en/reference): request fields and response schemas.
 
 ## 🤝 Contributing
 
