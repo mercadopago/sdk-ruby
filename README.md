@@ -4,8 +4,8 @@
   <p><strong>The official Mercado Pago SDK for Ruby applications.</strong></p>
   <p>Integrate Mercado Pago APIs into your Ruby application and start receiving payments.</p>
   <p>
-    <a href="https://github.com/mercadopago/sdk-ruby/actions/workflows/ci.yml"><img src="assets/badges/ci.svg" alt="CI workflow" /></a>
-    <a href="#installation"><img src="assets/badges/package.svg" alt="Ruby package" /></a>
+    <a href="https://github.com/mercadopago/sdk-ruby/actions/workflows/ci.yml"><img src="https://github.com/mercadopago/sdk-ruby/actions/workflows/ci.yml/badge.svg?branch=master" alt="CI status" /></a>
+    <a href="#installation"><img src="assets/badges/package.svg" alt="RubyGems package version" /></a>
     <img src="assets/badges/runtime.svg" alt="Ruby 3.3 or later" />
     <a href="LICENSE.txt"><img src="assets/badges/license.svg" alt="MIT license" /></a>
   </p>
