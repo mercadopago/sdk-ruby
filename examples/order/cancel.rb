@@ -19,9 +19,9 @@ def cancel_order(sdk)
   puts result[:status]
   puts order['id']
 
-rescue MercadoPago::MPApiException => e
-  puts "Status code: #{e.api_response.status_code}"
-  puts "Content: #{e.api_response.content}"
+rescue Mercadopago::MercadoPagoError => e
+  puts "Status code: #{e.status_code}"
+  puts "Error: #{e.error}; causes: #{e.causes}"
 rescue StandardError => e
   puts e.message
 end

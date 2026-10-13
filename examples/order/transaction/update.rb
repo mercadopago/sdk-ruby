@@ -20,9 +20,9 @@ def update_order_transaction(sdk)
   result = sdk.order_transaction.update('<ORDER_ID>', '<TRANSACTION_ID>', request, request_options: custom_request_options)
   order = result[:response]
   puts order
-rescue MercadoPago::MPApiException => e
-  puts "Status code: #{e.api_response.status_code}"
-  puts "Content: #{e.api_response.content}"
+rescue Mercadopago::MercadoPagoError => e
+  puts "Status code: #{e.status_code}"
+  puts "Error: #{e.error}; causes: #{e.causes}"
 rescue StandardError => e
   puts e.message
 end
