@@ -12,9 +12,9 @@ def delete_order_transaction(sdk)
   # Send Request
   result = sdk.order_transaction.delete('<ORDER_ID>', '<TRANSACTION_ID>', request_options: custom_request_options)
   puts result[:status]
-rescue MercadoPago::MPApiException => e
-  puts "Status code: #{e.api_response.status_code}"
-  puts "Content: #{e.api_response.content}"
+rescue Mercadopago::MercadoPagoError => e
+  puts "Status code: #{e.status_code}"
+  puts "Error: #{e.error}; causes: #{e.causes}"
 rescue StandardError => e
   puts e.message
 end

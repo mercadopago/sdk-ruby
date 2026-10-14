@@ -1,0 +1,31 @@
+# Mercado Pago SDK for Ruby
+
+Official server-side Ruby SDK for Mercado Pago APIs.
+
+## Start here
+- [README](README.md)
+- [Documentation index](docs/guides/README.md)
+- [Examples](examples/README.md)
+
+## Recommended integration path
+- [Orders-first examples](examples/README.md#orders-first)
+- [Request options and write retry limitations](docs/guides/request-options.md)
+- [Error handling](docs/guides/error-handling.md)
+
+## Operational guides
+- [Request options and retries](docs/guides/request-options.md)
+- [Error handling](docs/guides/error-handling.md)
+- [Automatic pagination](docs/guides/pagination.md)
+- [Webhook validation](docs/guides/webhooks.md)
+- [Troubleshooting](docs/guides/troubleshooting.md)
+
+## Supported examples
+- [Orders](examples/order/)
+- [Checkout Pro preferences](examples/preference/)
+- [OAuth](examples/oauth/)
+- [Automatic payments](examples/payment/)
+
+## Canonical sources
+- [Installation](README.md#installation)
+- [Mercado Pago API reference](https://www.mercadopago.com/developers/en/reference)
+- [Source repository](https://github.com/mercadopago/sdk-ruby)
