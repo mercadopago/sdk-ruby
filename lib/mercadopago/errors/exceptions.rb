@@ -37,7 +37,7 @@ module Mercadopago
       super(error_value)
       @status_code = status_code
       @error       = error_value
-      @causes      = body['cause']  || body[:cause]  || []
+      @causes      = body['cause'] || body[:cause] || []
       @request_id  = request_id
     end
   end
