@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 module Mercadopago
   # Base exception for all MercadoPago API errors.
   #
@@ -8,7 +10,7 @@ module Mercadopago
   # per HTTP status code.
   #
   # @attr_reader [Integer] status_code HTTP status code (e.g. 400, 401, 500)
-  # @attr_reader [String]  error       Machine-readable error code from the API body
+  # @attr_reader [String]  error       API message or serialized response body
   # @attr_reader [Array]   causes      List of detailed cause hashes from the API body
   # @attr_reader [String, nil] request_id x-request-id header for support diagnostics
   class MercadoPagoError < StandardError
@@ -19,9 +21,22 @@ module Mercadopago
     # @param request_id [String, nil] value of the x-request-id response header
     def initialize(status_code, response_body = nil, request_id = nil)
       body = (response_body.is_a?(Hash) ? response_body : {})
-      super(body['message'] || body[:message] || body['error'] || body[:error] || 'MercadoPago API error')
+      message = body['message'] || body[:message]
+      error_value = if message.is_a?(String) && !message.strip.empty?
+                      message
+                    else
+                      begin
+                        serialized_body = JSON.generate(body)
+                        serialized_body unless serialized_body.empty? || serialized_body == '{}'
+                      rescue JSON::GeneratorError, TypeError
+                        nil
+                      end
+                    end
+      error_value ||= "HTTP #{status_code || 0}"
+
+      super(error_value)
       @status_code = status_code
-      @error       = body['error']  || body[:error]  || ''
+      @error       = error_value
       @causes      = body['cause']  || body[:cause]  || []
       @request_id  = request_id
     end
