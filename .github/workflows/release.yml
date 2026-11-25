@@ -23,9 +23,7 @@ jobs:
           apt-get update
           apt-get install --yes --no-install-recommends curl jq
           bundle install
-          gem build mercadopago.gemspec
-          gem install ./mercadopago-sdk-*.gem
-          ruby -e "require 'mercadopago'"
+          bash scripts/verify-gem.sh
 
       - name: Publish gem to rubygems.org with OIDC
         shell: bash
@@ -47,4 +45,5 @@ jobs:
           api_key=$(jq --raw-output '.rubygems_api_key' <<< "${token_response}")
 
           echo "::add-mask::${api_key}"
-          GEM_HOST_API_KEY="${api_key}" gem push mercadopago-*.gem
+          version=$(ruby -e 'puts Gem::Specification.load("mercadopago.gemspec").version')
+          GEM_HOST_API_KEY="${api_key}" gem push "mercadopago-sdk-${version}.gem"
