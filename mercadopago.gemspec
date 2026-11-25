@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.homepage              = 'http://github.com/mercadopago/sdk-ruby'
   gem.license               = 'MIT'
 
-  gem.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
+  gem.files         = Dir['lib/**/*'].select { |path| File.file?(path) } + %w[LICENSE.txt README.md CHANGELOG.md]
   gem.test_files    = gem.files.grep(%r{^(tests)/})
   gem.require_paths = ['lib']
 

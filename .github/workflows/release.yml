@@ -24,6 +24,8 @@ jobs:
           apt-get install --yes --no-install-recommends curl jq
           bundle install
           gem build mercadopago.gemspec
+          gem install ./mercadopago-sdk-*.gem
+          ruby -e "require 'mercadopago'"
 
       - name: Publish gem to rubygems.org with OIDC
         shell: bash
