@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name                  = 'mercadopago-sdk'
-  gem.version               = '3.5.1'
+  gem.version               = '3.5.2'
   gem.required_ruby_version = '>= 3.3.0'
   gem.author                = 'Mercado Pago'
   gem.description           = 'Mercado Pago Ruby SDK'
@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.homepage              = 'http://github.com/mercadopago/sdk-ruby'
   gem.license               = 'MIT'
 
-  gem.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
+  gem.files         = Dir['lib/**/*'].select { |path| File.file?(path) } + %w[LICENSE.txt README.md CHANGELOG.md]
   gem.test_files    = gem.files.grep(%r{^(tests)/})
   gem.require_paths = ['lib']
 

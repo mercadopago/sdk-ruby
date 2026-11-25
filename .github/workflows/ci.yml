@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: bundle install
 
+      - name: Verify packaged gem
+        run: bash scripts/verify-gem.sh
+
       - name: Lint with Rubocop
         run: bundle exec rubocop lib
 
