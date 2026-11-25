@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mercadopago-sdk (3.5.1)
+    mercadopago-sdk (3.5.2)
       faraday (~> 2.0)
       json (~> 2.5)
 
